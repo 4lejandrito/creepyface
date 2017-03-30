@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Face from './Face';
-import _ from 'underscore';
+import times from 'lodash.times';
 import './index.css';
 
 function creepyFace(element, pictures) {
@@ -14,7 +14,7 @@ if (rootElement) {
     creepyFace(rootElement, {
         default: '/img/noe.jpg',
         hover: '/img/crazynoe.jpg',
-        move: _(8).times(i => `/img/noe${i + 1}.jpg`)
+        move: times(8, i => `/img/noe${i + 1}.jpg`)
     });
 } else {
     window.creepyFace = creepyFace;

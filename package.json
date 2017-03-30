@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.9.5",
-    "underscore": "^1.8.3"
+    "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "lodash.throttle": "^4.1.1",
+    "lodash.times": "^4.3.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

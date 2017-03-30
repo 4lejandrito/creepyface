@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'underscore';
+import throttle from 'lodash.throttle';
 
 export default class Face extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class Face extends React.Component {
         var angle = this.getAngle(this.rotate(v, Math.PI / this.getChunks()));
         return Math.floor(this.getChunks() * angle / 360);
     }
-    lookAt = _.throttle((x, y, target) => {
+    lookAt = throttle((x, y, target) => {
         var node = this.refs[this.state.picture],
             {hover, move} = this.props.pictures,
             hovers = (x > node.offsetLeft && x < (node.offsetLeft + node.clientWidth))
