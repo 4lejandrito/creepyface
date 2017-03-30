@@ -39,9 +39,6 @@ export default class Face extends React.Component {
     lookAt = throttle((x, y, target) => {
         var node = this.refs[this.state.picture],
             {hover, move} = this.props.pictures,
-            hovers = (x > node.offsetLeft && x < (node.offsetLeft + node.clientWidth))
-                    &&
-                    (y > node.offsetTop && y < (node.offsetTop + node.clientHeight)),
             center = {
                 x: node.offsetLeft + node.clientWidth / 2,
                 y: node.offsetTop + node.clientHeight / 2
@@ -50,7 +47,7 @@ export default class Face extends React.Component {
                 y: y - center.y
             };
 
-        if (hovers && hover) {
+        if (target === node && hover) {
             this.setState({picture: hover});
         } else {
             this.setState({
@@ -65,7 +62,7 @@ export default class Face extends React.Component {
     }
     componentDidMount() {
         document.addEventListener('mousemove', this.lookAtMouse);
-        document.addEventListener('touchmove', this.lookAtFinger);
+        document.addEventListener('touchmove', this.lookAtFinger, true);
     }
     componentWillUnmount() {
         document.removeEventListener('mousemove', this.lookAtMouse);
