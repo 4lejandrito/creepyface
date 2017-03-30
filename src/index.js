@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Face from './Face';
-import _ from 'underscore';
+import times from 'lodash.times';
 import './index.css';
 
 function creepyFace(element, pictures) {
