@@ -11,16 +11,6 @@ function creepyFace(element, pictures) {
 let rootElement = document.getElementById('creepyface');
 
 if (rootElement) {
-
-    // 'img/me/e.jpg',
-    // 'img/me/se.jpg',
-    // 'img/me/s.jpg',
-    // 'img/me/sw.jpg',
-    // 'img/me/w.jpg',
-    // 'img/me/nw.jpg',
-    // 'img/me/n.jpg',
-    // 'img/me/ne.jpg'
-
     creepyFace(rootElement, {
         default: '/img/serious.jpg',
         hover: '/img/crazy.jpg',
