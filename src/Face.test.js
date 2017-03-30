@@ -4,5 +4,8 @@ import Face from './Face';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Face />, div);
+  ReactDOM.render(<Face pictures={{
+      default: 'defaultPicture',
+      move: []
+  }}/>, div);
 });
