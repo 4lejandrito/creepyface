@@ -5,11 +5,27 @@ html, body {
   height: 100%;
 }
 
-#creepyface {
-    height: 100%;
-    width: 30%;
-    margin: auto;
+#creepyface, .picture {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: row;
+}
+
+#creepyface {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+.picture {
+    width: 30vw;
+    height: 30vw;
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+img {
+    height: 100%;
 }
