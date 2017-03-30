@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import _ from 'underscore';
 
 export default class Face extends React.Component {
@@ -37,37 +36,40 @@ export default class Face extends React.Component {
         var angle = this.getAngle(this.rotate(v, Math.PI / this.getChunks()));
         return Math.floor(this.getChunks() * angle / 360);
     }
-    lookAt(x, y, target) {
+    lookAt = _.throttle((x, y, target) => {
         var node = this.refs[this.state.picture],
-            offset = $(node).offset(),
             {hover, move} = this.props.pictures,
+            hovers = (x > node.offsetLeft && x < (node.offsetLeft + node.clientWidth))
+                    &&
+                    (y > node.offsetTop && y < (node.offsetTop + node.clientHeight)),
             center = {
-                x: offset.left + node.clientWidth / 2,
-                y: offset.top + node.clientHeight / 2
+                x: node.offsetLeft + node.clientWidth / 2,
+                y: node.offsetTop + node.clientHeight / 2
             }, v = {
                 x: x - center.x,
                 y: y - center.y
             };
 
-        if (hover && target === node) {
+        if (hovers && hover) {
             this.setState({picture: hover});
         } else {
             this.setState({
                 picture: move[this.getNumber(v)]
             })
         }
+    }, 100)
+    lookAtMouse = event => this.lookAt(event.pageX, event.pageY, event.target)
+    lookAtFinger = event => {
+        var touch = event.changedTouches[0];
+        this.lookAt(touch.pageX, touch.pageY, event.target);
     }
     componentDidMount() {
-        $('body').mousemove(_.throttle((event) => {
-            this.lookAt(event.pageX, event.pageY, event.target);
-        }, 100));
-        $('body').on('touchmove', _.throttle((event) => {
-            var touch = event.originalEvent.changedTouches[0];
-            this.lookAt(touch.pageX, touch.pageY, event.target);
-        }, 100));
+        document.addEventListener('mousemove', this.lookAtMouse);
+        document.addEventListener('touchmove', this.lookAtFinger);
     }
     componentWillUnmount() {
-        $('body').off('mousemove touchmove');
+        document.removeEventListener('mousemove', this.lookAtMouse);
+        document.removeEventListener('touchmove', this.lookAtFinger);
     }
     render() {
         return <div className="picture">
