@@ -10,20 +10,7 @@ const production = process.env.NODE_ENV === 'production';
 
 const compilePlugins = [
     postcss({extensions: ['.css']}),
-    babel({
-        babelrc: false,
-        exclude: 'node_modules/**',
-        presets: [
-            [
-                'es2015', {
-                    modules: false
-                }
-            ],
-            'stage-0',
-            'react'
-        ],
-        plugins: ['external-helpers']
-    })
+    babel({exclude: ["node_modules/**"]})
 ];
 
 export default[
