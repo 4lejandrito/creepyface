@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Face from './Face.jsx';
 import times from 'lodash.times';
-import './index.css';
 
 export default function creepyFace(element, pictures) {
     ReactDOM.render(<Face pictures={pictures}/>, element);
