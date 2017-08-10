@@ -4,7 +4,7 @@ import Face from './Face.jsx';
 import times from 'lodash.times';
 import './index.css';
 
-function creepyFace(element, pictures) {
+export default function creepyFace(element, pictures) {
     ReactDOM.render(<Face pictures={pictures}/>, element);
 }
 
@@ -18,6 +18,4 @@ if (rootElement) {
           'e', 'se', 's', 'sw', 'w', 'nw', 'n', 'ne'
         ].map(p => `/img/${p}.jpg`)
     });
-} else {
-    window.creepyFace = creepyFace;
 }
