@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Face from './Face';
+import Face from './Face.jsx';
 import times from 'lodash.times';
 import './index.css';
 
