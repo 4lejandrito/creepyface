@@ -18,6 +18,7 @@ export default[
         entry : 'src/index.js',
         dest : pkg.browser,
         format : 'umd',
+        moduleName: 'creepyFace',
         plugins : compilePlugins.concat([
             resolve(),
             commonjs(),

@@ -4,7 +4,7 @@ import Face from './Face.jsx';
 import times from 'lodash.times';
 import './index.css';
 
-function creepyFace(element, pictures) {
+export default function creepyFace(element, pictures) {
     ReactDOM.render(<Face pictures={pictures}/>, element);
 }
 
@@ -16,6 +16,4 @@ if (rootElement) {
         hover: '/img/crazynoe.jpg',
         move: times(8, i => `/img/noe${i + 1}.jpg`)
     });
-} else {
-    window.creepyFace = creepyFace;
 }
