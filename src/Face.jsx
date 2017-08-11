@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import stream from './stream';
+import transform from './transform';
+import mousePoints from './streams/mouse';
+import fingerPoints from './streams/finger';
+import combined from './streams/combined';
 
 export default class Face extends React.Component {
     constructor(props) {
@@ -17,15 +20,21 @@ export default class Face extends React.Component {
         };
     }
     componentDidMount() {
-        let {pictures} = this.state;
-        let cancel = stream(
-            () => this.refs[this.state.picture],
-            () => this.props.pictures
-        ).subscribe(picture => this.setState({picture}));
-        this.setState({cancel});
+        let points = combined([mousePoints, fingerPoints]);
+
+        let subscription = points.subscribe(point => {
+            this.setState({
+                picture: transform(
+                    point,
+                    this.refs[this.state.picture],
+                    this.props.pictures
+                )
+            });
+        })
+        this.setState({subscription});
     }
     componentWillUnmount() {
-        this.state.cancel();
+        this.state.subscription.unsubscribe();
     }
     render() {
         return <div className="picture">
