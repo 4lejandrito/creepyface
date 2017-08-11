@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import angles from './angles';
+import stream from './stream';
 
 export default class Face extends React.Component {
     constructor(props) {
@@ -16,18 +16,12 @@ export default class Face extends React.Component {
             pictures
         };
     }
-    getNumber(angle) {
-        return Math.floor(this.props.pictures.move.length * angle / 360);
-    }
     componentDidMount() {
-        let cancel = angles(ReactDOM.findDOMNode(this)).subscribe(angle => {
-            let {hover, move} = this.props.pictures;
-            console.log(`${this.getNumber(angle)}: ${move[this.getNumber(angle)]}`);
-            this.setState({
-                picture: angle === -1 ? hover : move[this.getNumber(angle)]
-            })
-        });
-
+        let {pictures} = this.state;
+        let cancel = stream(
+            () => this.refs[this.state.picture],
+            () => this.props.pictures.move.length
+        ).subscribe(i => this.setState({picture: pictures[i]}));
         this.setState({cancel});
     }
     componentWillUnmount() {
