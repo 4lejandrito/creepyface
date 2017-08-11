@@ -1,7 +1,3 @@
-import mousePoints from './streams/mouse';
-import fingerPoints from './streams/finger';
-import combined from './streams/combined';
-
 function rotate(v, deg) {
     return {
         x: v.x * Math.cos(deg) - v.y * Math.sin(deg),
@@ -23,25 +19,21 @@ function getAngle(node, x, y, chunks) {
     return angle * 180 / Math.PI;
 }
 
-export default function transform(getNode, getPictures, points = combined([mousePoints, fingerPoints])) {
-    return points.map(
-        ({x, y, target, source}) => {
-            let {move, hover} = getPictures(),
-                chunks = move.length,
-                node = getNode(),
-                angle = getAngle(node, x, y, chunks),
-                number = Math.floor((angle / 360) * chunks),
-                picture = (node === target && hover) ? hover : move[number];
+export default function transform(point, node, pictures) {
+    let {x, y, target, source} = point,
+        {move, hover} = pictures,
+        chunks = move.length,
+        angle = getAngle(node, x, y, chunks),
+        number = Math.floor((angle / 360) * chunks),
+        picture = (node === target && hover) ? hover : move[number];
 
-            if (!picture) {
-                picture = getPictures().default;
-            }
+    if (!picture) {
+        picture = pictures.default;
+    }
 
-            if (process.env.NODE_ENV !== 'production') {
-                console.log(`${source} => ${x}, ${y} => ${angle} => ${number} => ${picture}`);
-            }
+    if (process.env.NODE_ENV !== 'production') {
+        console.log(`${source} => ${x}, ${y} => ${angle} => ${number} => ${picture}`);
+    }
 
-            return picture;
-        }
-    );
+    return picture;
 }

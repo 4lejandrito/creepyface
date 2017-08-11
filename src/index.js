@@ -1,12 +1,13 @@
 import transform from './transform';
 import preload from './preload';
+import mousePoints from './streams/mouse';
+import fingerPoints from './streams/finger';
+import combined from './streams/combined';
 
-export default function creepyFace(element, pictures) {
+export default function creepyFace(element, pictures, points = combined([mousePoints, fingerPoints])) {
     return preload(pictures, element).then(imgs => (
-        transform(
-            () => element,
-            () => pictures
-        ).subscribe(src => {
+        points.subscribe(point => {
+            let src = transform(point, element, pictures);
             element.parentElement.replaceChild(imgs[src], element);
             element = imgs[src];
         })
