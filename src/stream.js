@@ -21,21 +21,21 @@ function getAngle(node, x, y, chunks) {
     return angle * 180 / Math.PI;
 }
 
-function getNumber(angle, chunks, node, target) {
-    return node === target ? chunks : Math.floor((angle / 360) * chunks);
-}
-
-export default function stream(getNode, getChunks) {
+export default function stream(getNode, getPictures) {
     return points().map(
         ({x, y, target}) => {
-            let chunks = getChunks(),
+            let {move, hover} = getPictures(),
+                chunks = move.length,
                 node = getNode(),
                 angle = getAngle(node, x, y, chunks),
-                number = getNumber(angle, chunks, node, target);
+                number = Math.floor((angle / 360) * chunks),
+                picture = (node === target && hover) ? hover : move[number];
 
-            console.log(`(${x}, ${y}) = ${angle} = ${number}`)
+            if (process.env.NODE_ENV !== 'production') {
+                console.log(`(${x}, ${y}) = ${angle} = ${number} = ${picture}`);
+            }
 
-            return number;
+            return picture;
         }
     );
 }
