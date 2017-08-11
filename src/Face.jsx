@@ -1,5 +1,6 @@
 import React from 'react';
-import throttle from 'lodash.throttle';
+import ReactDOM from 'react-dom';
+import angles from './angles';
 
 export default class Face extends React.Component {
     constructor(props) {
@@ -15,58 +16,22 @@ export default class Face extends React.Component {
             pictures
         };
     }
-    rotate(v, deg) {
-        return {
-            x: v.x * Math.cos(deg) - v.y * Math.sin(deg),
-            y: v.x * Math.sin(deg) + v.y * Math.cos(deg)
-        };
-    }
-    getChunks() {
-        return this.props.pictures.move.length;
-    }
-    getAngle(v) {
-        var angle = Math.atan2(v.y, v.x);
-        if (angle < 0) angle += 2 * Math.PI;
-        return angle * 180 / Math.PI;
-    }
-    getLength(v) {
-        return Math.sqrt(v.x * v.x + v.y * v.y);
-    }
-    getNumber(v) {
-        var angle = this.getAngle(this.rotate(v, Math.PI / this.getChunks()));
-        return Math.floor(this.getChunks() * angle / 360);
-    }
-    lookAt = throttle((x, y, target) => {
-        var node = this.refs[this.state.picture],
-            {hover, move} = this.props.pictures,
-            center = {
-                x: node.offsetLeft + node.clientWidth / 2,
-                y: node.offsetTop + node.clientHeight / 2
-            }, v = {
-                x: x - center.x,
-                y: y - center.y
-            };
-
-        if (target === node && hover) {
-            this.setState({picture: hover});
-        } else {
-            this.setState({
-                picture: move[this.getNumber(v)]
-            })
-        }
-    }, 100)
-    lookAtMouse = event => this.lookAt(event.pageX, event.pageY, event.target)
-    lookAtFinger = event => {
-        var touch = event.changedTouches[0];
-        this.lookAt(touch.pageX, touch.pageY, event.target);
+    getNumber(angle) {
+        return Math.floor(this.props.pictures.move.length * angle / 360);
     }
     componentDidMount() {
-        document.addEventListener('mousemove', this.lookAtMouse);
-        document.addEventListener('touchmove', this.lookAtFinger, true);
+        let cancel = angles(ReactDOM.findDOMNode(this)).subscribe(angle => {
+            let {hover, move} = this.props.pictures;
+            console.log(`${this.getNumber(angle)}: ${move[this.getNumber(angle)]}`);
+            this.setState({
+                picture: angle === -1 ? hover : move[this.getNumber(angle)]
+            })
+        });
+
+        this.setState({cancel});
     }
     componentWillUnmount() {
-        document.removeEventListener('mousemove', this.lookAtMouse);
-        document.removeEventListener('touchmove', this.lookAtFinger);
+        this.state.cancel();
     }
     render() {
         return <div className="picture">

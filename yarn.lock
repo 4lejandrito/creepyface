@@ -4036,3 +4036,7 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
+zen-observable:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.5.2.tgz#845a1cfda804a13419ec8ec12343e1f4c45cd07a"
+
