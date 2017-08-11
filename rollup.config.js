@@ -6,7 +6,9 @@ import replace from 'rollup-plugin-replace';
 import pkg from './package.json';
 
 const production = process.env.NODE_ENV === 'production';
-const babelPlugin = babel({exclude: ["node_modules/**"]});
+const babelPlugin = babel({
+    exclude: ['node_modules/!(zen-observable)/**']
+});
 
 export default[
     {
