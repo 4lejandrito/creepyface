@@ -1,9 +1,9 @@
-import stream from './stream';
+import transform from './transform';
 import preload from './preload';
 
 export default function creepyFace(element, pictures) {
     return preload(pictures, element).then(imgs => (
-        stream(
+        transform(
             () => element,
             () => pictures
         ).subscribe(src => {
