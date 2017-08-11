@@ -1,10 +1,16 @@
 import stream from './stream';
+import preload from './preload';
 
 export default function creepyFace(element, pictures) {
-    return stream(
-        () => element,
-        () => pictures
-    ).subscribe(picture => element.setAttribute('src', picture));
+    return preload(pictures, element).then(imgs => (
+        stream(
+            () => element,
+            () => pictures
+        ).subscribe(src => {
+            element.parentElement.replaceChild(imgs[src], element);
+            element = imgs[src];
+        })
+    ));
 }
 
 function getPictureData(element) {
