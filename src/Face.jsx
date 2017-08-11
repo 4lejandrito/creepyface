@@ -20,8 +20,8 @@ export default class Face extends React.Component {
         let {pictures} = this.state;
         let cancel = stream(
             () => this.refs[this.state.picture],
-            () => this.props.pictures.move.length
-        ).subscribe(i => this.setState({picture: pictures[i]}));
+            () => this.props.pictures
+        ).subscribe(picture => this.setState({picture}));
         this.setState({cancel});
     }
     componentWillUnmount() {
