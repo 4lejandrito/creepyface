@@ -7,9 +7,5 @@ export default function preload(pictures, element) {
                 img.src = src;
             })
         )
-    ).then(pairs => {
-        let uris = {};
-        pairs.forEach(pair => uris[pair[0]] = pair[1]);
-        return uris;
-    });
+    );
 }
