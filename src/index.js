@@ -1,20 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Face from './Face.jsx';
-import times from 'lodash.times';
+import stream from './stream';
 
 export default function creepyFace(element, pictures) {
-    ReactDOM.render(<Face pictures={pictures}/>, element);
+    return stream(
+        () => element,
+        () => pictures
+    ).subscribe(picture => element.setAttribute('src', picture));
 }
 
-let rootElement = document.getElementById('creepyface');
-
-if (rootElement) {
-    creepyFace(rootElement, {
-        default: '/img/serious.jpg',
-        hover: '/img/crazy.jpg',
-        move: [
-          'e', 'se', 's', 'sw', 'w', 'nw', 'n', 'ne'
-        ].map(p => `/img/${p}.jpg`)
-    });
+function getPictureData(element) {
+    return {
+        default: element.getAttribute('src'),
+        hover: element.dataset.hover,
+        move: element.dataset.move.split(',')
+    };
 }
+
+document.querySelectorAll('[data-creepyFace]').forEach(node => (
+    creepyFace(node, getPictureData(node))
+));
