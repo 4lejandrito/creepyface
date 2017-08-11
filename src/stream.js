@@ -31,6 +31,10 @@ export default function stream(getNode, getPictures) {
                 number = Math.floor((angle / 360) * chunks),
                 picture = (node === target && hover) ? hover : move[number];
 
+            if (!picture) {
+                picture = getPictures().default;
+            }
+
             if (process.env.NODE_ENV !== 'production') {
                 console.log(`(${x}, ${y}) = ${angle} = ${number} = ${picture}`);
             }
