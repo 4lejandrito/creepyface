@@ -15,13 +15,15 @@ export default function creepyFace(element, pictures, points = defaultPoints) {
 }
 
 function getPictureData(element) {
+    let move = element.getAttribute('data-src-move');
+
     return {
         default: element.getAttribute('src'),
-        hover: element.dataset.hover,
-        move: element.dataset.move.split(',')
+        hover: element.getAttribute('data-src-hover'),
+        move: move ? move.split(',') : []
     };
 }
 
-document.querySelectorAll('[data-creepyFace]').forEach(node => (
+document.querySelectorAll('[data-creepy]').forEach(node => (
     creepyFace(node, getPictureData(node))
 ));

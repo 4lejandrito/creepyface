@@ -1,6 +1,9 @@
 export default function preload(pictures) {
+    let srcs = pictures.move.slice();
+    if (pictures.default) srcs.push(pictures.default);
+    if (pictures.hover) srcs.push(pictures.hover);
     return Promise.all(
-        [pictures.default, pictures.hover].concat(pictures.move).map(
+        srcs.map(
             src => new Promise((resolve, reject) => {
                 let img = new Image();
                 img.onload = () => resolve({[src]: img});
