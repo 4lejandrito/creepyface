@@ -7,6 +7,7 @@ import combined from './streams/combined';
 const defaultPoints = combined([mousePoints, fingerPoints]);
 
 export default function creepyFace(element, pictures, points = defaultPoints) {
+    if (!pictures) pictures = getPictureData(element);
     return preload(pictures).then(imgs => (
         points.subscribe(point => {
             element.src = imgs[transform(point, element, pictures)].src;
@@ -25,5 +26,5 @@ function getPictureData(element) {
 }
 
 document.querySelectorAll('[data-creepy]').forEach(node => (
-    creepyFace(node, getPictureData(node))
+    creepyFace(node)
 ));
