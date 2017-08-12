@@ -3,7 +3,7 @@ import point from './util/point';
 
 let random = x => Math.floor(Math.random() * x);
 
-export default new Observable(observer => {
+export default (every = 200) => new Observable(observer => {
     let interval = setInterval(() => (
         observer.next(
             point(
@@ -13,6 +13,6 @@ export default new Observable(observer => {
                 'random'
             )
         )
-    ), 200);
+    ), every);
     return () => clearInterval(interval);
 });
