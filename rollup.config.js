@@ -18,7 +18,7 @@ export default[
         moduleName: 'creepyFace',
         plugins : [
             babelPlugin,
-            resolve(),
+            resolve({browser: true}),
             commonjs(),
             replace({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
