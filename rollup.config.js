@@ -25,7 +25,7 @@ export default[
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
             }),
             production && uglify(),
-            !production && browsersync({server: "./dist"})
+            !production && browsersync({server: "dist", files: ['dist']})
         ]
     }, {
         entry : 'src/index.js',
