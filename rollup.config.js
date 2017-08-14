@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import replace from 'rollup-plugin-replace';
 import pkg from './package.json';
+import browsersync from 'rollup-plugin-browsersync';
 
 const production = process.env.NODE_ENV === 'production';
 const babelPlugin = babel({
@@ -23,7 +24,8 @@ export default[
             replace({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
             }),
-            production && uglify()
+            production && uglify(),
+            !production && browsersync({server: "./dist"})
         ]
     }, {
         entry : 'src/index.js',
