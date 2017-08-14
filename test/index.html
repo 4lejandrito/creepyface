@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creepy Face</title>
+    <style media="screen">
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        body, #wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        #wrapper {
+            width: 20vw;
+            overflow: hidden;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+        <img
+            data-creepy
+            src="img/serious.jpg"
+            data-src-hover="img/crazy.jpg"
+            data-src-move="img/e.jpg,img/se.jpg,img/s.jpg,img/sw.jpg,img/w.jpg,img/nw.jpg,img/n.jpg,img/ne.jpg"/>
+    </div>
+    <script type="text/javascript" src="creepyface.umd.js"></script>
+  </body>
+</html>

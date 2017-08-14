@@ -10,6 +10,7 @@ const production = process.env.NODE_ENV === 'production';
 const babelPlugin = babel({
     exclude: ['node_modules/!(zen-observable)/**']
 });
+const folders = ['test', 'dist'];
 
 export default[
     {
@@ -25,7 +26,7 @@ export default[
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
             }),
             production && uglify(),
-            !production && browsersync({server: "dist", files: ['dist']})
+            !production && browsersync({server: folders, files: folders})
         ]
     }, {
         entry : 'src/index.js',
