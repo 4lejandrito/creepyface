@@ -1,5 +1,4 @@
-export function rotate(v, deg) {
-    let rad = deg * Math.PI / 180;
+export function rotate(v, rad) {
     return [
         v[0] * Math.cos(rad) - v[1] * Math.sin(rad),
         v[0] * Math.sin(rad) + v[1] * Math.cos(rad)
@@ -9,7 +8,7 @@ export function rotate(v, deg) {
 export function getAngle(v) {
     let angle = Math.atan2(v[1], v[0]);
     if (angle < 0) angle += 2 * Math.PI;
-    return angle * 180 / Math.PI;
+    return angle;
 }
 
 export let rand = x => Math.floor(Math.random() * x);
