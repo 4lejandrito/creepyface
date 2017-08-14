@@ -7,8 +7,7 @@ export default (every = 200) => new Observable(observer => {
     let interval = setInterval(() => (
         observer.next(
             point(
-                random(window.innerWidth),
-                random(window.innerHeight),
+                [random(window.innerWidth), random(window.innerHeight)],
                 window,
                 'random'
             )
