@@ -15,7 +15,7 @@
     "jest": "^20.0.4",
     "rollup": "^0.47.2",
     "rollup-plugin-babel": "^3.0.1",
-    "rollup-plugin-browsersync": "^0.1.0",
+    "rollup-plugin-browsersync": "^0.2.2",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
