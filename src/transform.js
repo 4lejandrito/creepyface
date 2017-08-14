@@ -20,7 +20,8 @@ function getAngle(node, x, y, chunks) {
 }
 
 export default function transform(point, node, pictures) {
-    let {x, y, target, source} = point,
+    let {target, source, coords} = point,
+        [x, y] = coords,
         {move, hover} = pictures,
         chunks = move.length,
         angle = getAngle(node, x, y, chunks),

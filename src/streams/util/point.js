@@ -1,3 +1,3 @@
-export default function point(x, y, target, source) {
-    return {x, y, target, source};
+export default function point(p, target, source) {
+    return {coords: p, target, source};
 }
