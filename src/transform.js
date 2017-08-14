@@ -9,8 +9,8 @@ export default function transform(point, node, pictures) {
     let {target, source, coords} = point,
         {move, hover} = pictures,
         chunks = move.length,
-        angle = getAngle(rotate(diff(coords, center(node)), 180 / chunks)),
-        number = Math.floor((angle / 360) * chunks),
+        angle = getAngle(rotate(diff(coords, center(node)), Math.PI / chunks)),
+        number = Math.floor((angle / (2 * Math.PI)) * chunks),
         picture = (node === target && hover) ? hover : move[number];
 
     if (!picture) {
