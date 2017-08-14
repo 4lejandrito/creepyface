@@ -13,14 +13,13 @@
     "babel-preset-stage-0": "^6.24.1",
     "browser-sync": "^2.18.13",
     "jest": "^20.0.4",
-    "npm-run-all": "^4.0.2",
-    "rollup": "^0.45.2",
+    "rollup": "^0.47.2",
     "rollup-plugin-babel": "^3.0.1",
+    "rollup-plugin-browsersync": "^0.1.0",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^2.0.1",
-    "rollup-watch": "^4.3.1"
+    "rollup-plugin-uglify": "^2.0.1"
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1",
@@ -29,9 +28,7 @@
     "zen-observable": "^0.5.2"
   },
   "scripts": {
-    "start": "npm-run-all -p watch serve",
-    "watch": "rollup -c -w",
-    "serve": "browser-sync start --server 'dist' --files 'dist'",
+    "start": "rollup -c -w",
     "build": "rollup -c",
     "test": "jest"
   },
