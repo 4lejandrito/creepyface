@@ -9,7 +9,6 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "browser-sync": "^2.18.13",
     "jest": "^20.0.4",
@@ -23,8 +22,6 @@
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "zen-observable": "^0.5.2"
   },
   "scripts": {
@@ -40,8 +37,7 @@
           "modules": false
         }
       ],
-      "stage-0",
-      "react"
+      "stage-0"
     ],
     "plugins": [
       "transform-class-properties"
@@ -50,8 +46,7 @@
       "test": {
         "presets": [
           "es2015",
-          "stage-0",
-          "react"
+          "stage-0"
         ]
       },
       "production": {
