@@ -7,9 +7,6 @@ import pkg from './package.json';
 import browsersync from 'rollup-plugin-browsersync';
 
 const production = process.env.NODE_ENV === 'production';
-const babelPlugin = babel({
-    exclude: ['node_modules/!(zen-observable)/**']
-});
 const folders = ['test', 'dist'];
 
 export default[
@@ -19,9 +16,9 @@ export default[
         format : 'umd',
         moduleName: 'creepyFace',
         plugins : [
-            babelPlugin,
             resolve({browser: true}),
             commonjs(),
+            babel(),
             replace({
                 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
             }),
@@ -31,7 +28,7 @@ export default[
     }, {
         entry : 'src/index.js',
         external : Object.keys(pkg.dependencies),
-        plugins : [babelPlugin],
+        plugins : [babel()],
         targets : [
             {
                 dest: pkg.main,
