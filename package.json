@@ -10,7 +10,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "browser-sync": "^2.18.13",
     "jest": "^20.0.4",
     "rollup": "^0.47.2",
     "rollup-plugin-babel": "^3.0.1",
