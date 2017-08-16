@@ -27,6 +27,6 @@ function getPictureData(element) {
     };
 }
 
-document.querySelectorAll('[data-creepy]').forEach(node => (
+[].forEach.call(document.querySelectorAll('[data-creepy]'), node => (
     creepyFace(node)
 ));
