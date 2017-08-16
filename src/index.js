@@ -3,8 +3,10 @@ import preload from './preload';
 import mousePoints from './streams/mouse';
 import fingerPoints from './streams/finger';
 import combined from './streams/combined';
+import toJs from 'data-attrs-to-js';
 
 const defaultPoints = combined([mousePoints, fingerPoints]);
+const toArray = o => Object.keys(o).sort().map(key => o[key]);
 
 export default function creepyFace(element, pictures, points = defaultPoints) {
     if (!pictures) pictures = getPictureData(element);
@@ -16,12 +18,12 @@ export default function creepyFace(element, pictures, points = defaultPoints) {
 }
 
 function getPictureData(element) {
-    let slices = element.getAttribute('data-src-slices');
+    let {hover, slice} = toJs(element).src;
 
     return {
         default: element.getAttribute('src'),
-        hover: element.getAttribute('data-src-hover'),
-        slices: slices ? slices.split(',') : []
+        hover,
+        slices: toArray(slice)
     };
 }
 
