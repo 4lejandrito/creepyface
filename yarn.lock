@@ -1151,6 +1151,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+data-attrs-to-js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/data-attrs-to-js/-/data-attrs-to-js-1.1.1.tgz#c52c2817784b065c6df31b493b00883cfe175efb"
+
 debug@2.2.0, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"

@@ -20,6 +20,7 @@
     "rollup-plugin-uglify": "^2.0.1"
   },
   "dependencies": {
+    "data-attrs-to-js": "^1.1.1",
     "lodash.throttle": "^4.1.1",
     "zen-observable": "^0.5.2"
   },
