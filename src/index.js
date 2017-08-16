@@ -16,12 +16,12 @@ export default function creepyFace(element, pictures, points = defaultPoints) {
 }
 
 function getPictureData(element) {
-    let move = element.getAttribute('data-src-move');
+    let slices = element.getAttribute('data-src-slices');
 
     return {
         default: element.getAttribute('src'),
         hover: element.getAttribute('data-src-hover'),
-        move: move ? move.split(',') : []
+        slices: slices ? slices.split(',') : []
     };
 }
 

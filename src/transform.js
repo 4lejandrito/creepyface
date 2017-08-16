@@ -7,11 +7,11 @@ const center = node => [
 
 export default function transform(point, node, pictures) {
     let {target, source, coords} = point,
-        {move, hover} = pictures,
-        chunks = move.length,
+        {slices, hover} = pictures,
+        chunks = slices.length,
         angle = getAngle(rotate(diff(coords, center(node)), Math.PI / chunks)),
         number = Math.floor((angle / (2 * Math.PI)) * chunks),
-        picture = (node === target && hover) ? hover : move[number];
+        picture = (node === target && hover) ? hover : slices[number];
 
     if (!picture) {
         picture = pictures.default;
