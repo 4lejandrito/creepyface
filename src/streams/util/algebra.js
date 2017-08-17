@@ -20,3 +20,5 @@ export let diff = (v1, v2) => v1.map((x, i) => x - v2[i]);
 export let times = (v, n) => v.map(x => x * n);
 export let add = (v1, v2) => v1.map((x, i) => x + v2[i]);
 export let sign = n => n ? n < 0 ? -1 : 1 : 0;
+export let rad = deg => deg * Math.PI / 180;
+export let mod = (n, m) => (m + n % m) % m;
