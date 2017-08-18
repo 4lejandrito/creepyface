@@ -1,9 +1,10 @@
 import {rotate, getAngle, diff, sign, rad} from './streams/util/algebra';
+import getElementCenter from 'get-element-center';
 
-const center = node => [
-    node.offsetLeft + node.clientWidth / 2,
-    node.offsetTop + node.clientHeight / 2
-];
+const center = node => {
+    let coords = getElementCenter(node);
+    return [coords.x, coords.y];
+};
 
 let shortest = angle => Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Math.PI : angle;
 let compare = angle => (a, b) => Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
