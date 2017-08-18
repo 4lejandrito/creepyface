@@ -10,14 +10,14 @@ let shortest = angle => Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Ma
 let compare = angle => (a, b) => Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
 let closest = (angle, slices) => slices.slice(0).sort(compare(angle))[0];
 
-export default function transform(point, node, pictures) {
+export default function transform(point, img, pictures) {
     let {target, source, coords} = point,
         {slices, hover} = pictures,
-        angle = getAngle(rotate(diff(coords, center(node)), Math.PI / 2)),
+        angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2)),
         picture = pictures.default,
         fieldOfVision = rad(150);
 
-    if (node === target && hover) {
+    if (img === target && hover) {
         picture = hover;
     } else {
         let closestSlice = closest(angle, slices);

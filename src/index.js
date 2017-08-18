@@ -8,13 +8,13 @@ import $ from 'queryselectorall';
 
 const defaultPoints = combined([mousePoints, fingerPoints]);
 
-export default function creepyFace(element, pictures, points = defaultPoints) {
-    if (!pictures) pictures = fromElement(element);
+export default function creepyFace(img, pictures, points = defaultPoints) {
+    if (!pictures) pictures = fromElement(img);
     return preload(pictures).then(imgs => (
         points.subscribe(point => {
-            element.src = imgs[transform(point, element, pictures)].src;
+            img.src = imgs[transform(point, img, pictures)].src;
         })
     ));
 }
 
-$('[data-creepy]').forEach(node => creepyFace(node));
+$('img[data-creepy]').forEach(img => creepyFace(img));
