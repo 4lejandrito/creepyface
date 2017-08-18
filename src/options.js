@@ -2,7 +2,9 @@ import parseDataAttributes from 'data-attrs-to-js';
 import WindRose from 'windrose';
 import {rad} from './streams/util/algebra';
 
-const textToAngle = text => rad(WindRose.getDegrees(text.toUpperCase()).value);
+const textToAngle = text => rad(
+    isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
+);
 
 const getSlices = slice => Object.keys(slice).map(
     key => ({
