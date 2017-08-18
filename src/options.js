@@ -6,14 +6,14 @@ const textToAngle = text => rad(
     isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
 );
 
-const getSlices = slice => Object.keys(slice).map(
+const getSlices = slice => Object.keys(slice || {}).map(
     key => ({
         angle: textToAngle(key), src: slice[key]
     })
 );
 
 export default function fromElement(element) {
-    let {hover, slice} = parseDataAttributes(element).src;
+    let {hover, slice} = parseDataAttributes(element).src || {};
 
     return {
         default: element.getAttribute('src'),
