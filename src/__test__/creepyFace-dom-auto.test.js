@@ -1,9 +1,9 @@
 import doTest from './do-test';
-import creepyFace from '../index';
 
-describe('Using DOM api', () => {
+describe('Using automatic DOM api (via data-creepy attribute)', () => {
     const img = document.createElement('img');
     img.setAttribute('src'               , 'srcUrl');
+    img.setAttribute('data-creepy'       , 'true');
     img.setAttribute('data-src-hover'    , 'hoverUrl');
     img.setAttribute('data-src-slice-n'  , 'northUrl');
     img.setAttribute('data-src-slice-ne' , 'northEastUrl');
@@ -16,7 +16,7 @@ describe('Using DOM api', () => {
 
     document.body.appendChild(img);
 
-    creepyFace(img);
+    require('../index');
 
     doTest(img)
 });
