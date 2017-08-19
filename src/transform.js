@@ -26,9 +26,5 @@ export default function transform(point, img, pictures) {
         }
     }
 
-    if (process.env.NODE_ENV !== 'production') {
-        console.log(`${source} => ${coords} => ${angle} => ${picture}`);
-    }
-
     return picture;
 }
