@@ -3,7 +3,7 @@ import doTest from './do-test';
 describe('Using automatic DOM api (via data-creepy attribute)', () => {
     const img = document.createElement('img');
     img.setAttribute('src'               , 'srcUrl');
-    img.setAttribute('data-creepy'       , 'true');
+    img.setAttribute('data-creepy'       , '');
     img.setAttribute('data-src-hover'    , 'hoverUrl');
     img.setAttribute('data-src-slice-n'  , 'northUrl');
     img.setAttribute('data-src-slice-ne' , 'northEastUrl');
