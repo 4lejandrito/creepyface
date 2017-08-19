@@ -32,6 +32,7 @@
   "scripts": {
     "start": "rollup -c -w",
     "build": "rollup -c",
+    "build:netlify": "npm run build && cp -r test/* dist",
     "test": "jest"
   },
   "babel": {
