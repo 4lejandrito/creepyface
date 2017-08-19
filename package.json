@@ -17,7 +17,8 @@
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^2.0.1"
+    "rollup-plugin-uglify": "^2.0.1",
+    "simulate-event": "^1.4.0"
   },
   "dependencies": {
     "data-attrs-to-js": "^1.1.1",
@@ -63,5 +64,8 @@
         ]
       }
     }
+  },
+  "jest": {
+      "timers": "fake"
   }
 }
