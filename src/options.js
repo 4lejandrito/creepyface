@@ -4,6 +4,7 @@ import {rad} from './util/algebra';
 import mousePoints from './streams/mouse';
 import fingerPoints from './streams/finger';
 import combined from './streams/combined';
+import defaults from 'lodash.defaults';
 
 const textToAngle = text => rad(
     isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
@@ -25,16 +26,18 @@ export const getSrcs = options => {
 export function fromElement(element) {
     let {hover, look} = parseDataAttributes(element).src || {};
 
-    return {
+    return defaults({
         default: element.getAttribute('src'),
         hover,
         looks: getLooks(look)
-    };
+    }, defaultOptions);
 }
 
-export default {
+const defaultOptions = {
     default: '',
     hover: '',
     looks: [],
     points: combined([mousePoints, fingerPoints])
 };
+
+export default defaultOptions;
