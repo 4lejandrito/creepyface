@@ -9,7 +9,7 @@ describe('Using JS api', () => {
 
     creepyFace(img, {
         hover: 'hoverUrl',
-        slices: [
+        looks: [
             {angle: 0 * Math.PI / 4, src: 'northUrl'},
             {angle: 1 * Math.PI / 4, src: 'northEastUrl'},
             {angle: 2 * Math.PI / 4, src: 'eastUrl'},
