@@ -1,6 +1,9 @@
 import parseDataAttributes from 'data-attrs-to-js';
 import WindRose from 'windrose';
 import {rad} from './util/algebra';
+import mousePoints from './streams/mouse';
+import fingerPoints from './streams/finger';
+import combined from './streams/combined';
 
 const textToAngle = text => rad(
     isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
@@ -12,7 +15,14 @@ const getLooks = look => Object.keys(look || {}).map(
     })
 );
 
-export default function fromElement(element) {
+export const getSrcs = options => {
+    let srcs = options.looks.map(({src}) => src);
+    if (options.default) srcs.push(options.default);
+    if (options.hover) srcs.push(options.hover);
+    return srcs;
+}
+
+export function fromElement(element) {
     let {hover, look} = parseDataAttributes(element).src || {};
 
     return {
@@ -21,3 +31,7 @@ export default function fromElement(element) {
         looks: getLooks(look)
     };
 }
+
+export default {
+    points: combined([mousePoints, fingerPoints])
+};
