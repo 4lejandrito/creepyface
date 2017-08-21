@@ -1,5 +1,5 @@
 export default function preload(pictures) {
-    let srcs = pictures.slices.map(slice => slice.src);
+    let srcs = pictures.looks.map(look => look.src);
     if (pictures.default) srcs.push(pictures.default);
     if (pictures.hover) srcs.push(pictures.hover);
     return Promise.all(

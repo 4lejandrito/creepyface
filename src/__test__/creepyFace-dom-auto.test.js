@@ -5,14 +5,14 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
     img.setAttribute('src'               , 'srcUrl');
     img.setAttribute('data-creepy'       , '');
     img.setAttribute('data-src-hover'    , 'hoverUrl');
-    img.setAttribute('data-src-slice-n'  , 'northUrl');
-    img.setAttribute('data-src-slice-ne' , 'northEastUrl');
-    img.setAttribute('data-src-slice-e'  , 'eastUrl');
-    img.setAttribute('data-src-slice-135', 'southEastUrl');
-    img.setAttribute('data-src-slice-s'  , 'southUrl');
-    img.setAttribute('data-src-slice-sw' , 'southWestUrl');
-    img.setAttribute('data-src-slice-270', 'westUrl');
-    img.setAttribute('data-src-slice-315', 'northWestUrl');
+    img.setAttribute('data-src-look-n'  , 'northUrl');
+    img.setAttribute('data-src-look-ne' , 'northEastUrl');
+    img.setAttribute('data-src-look-e'  , 'eastUrl');
+    img.setAttribute('data-src-look-135', 'southEastUrl');
+    img.setAttribute('data-src-look-s'  , 'southUrl');
+    img.setAttribute('data-src-look-sw' , 'southWestUrl');
+    img.setAttribute('data-src-look-270', 'westUrl');
+    img.setAttribute('data-src-look-315', 'northWestUrl');
 
     document.body.appendChild(img);
 

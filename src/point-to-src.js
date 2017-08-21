@@ -8,11 +8,11 @@ const center = node => {
 
 let shortest = angle => Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Math.PI : angle;
 let compare = angle => (a, b) => Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
-let closest = (angle, slices) => slices.slice(0).sort(compare(angle))[0];
+let closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0];
 
 export default function pointToSrc(point, img, pictures) {
     let {target, source, coords} = point,
-        {slices, hover} = pictures,
+        {looks, hover} = pictures,
         angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2)),
         src = pictures.default,
         fieldOfVision = rad(150);
@@ -20,9 +20,9 @@ export default function pointToSrc(point, img, pictures) {
     if (img === target && hover) {
         src = hover;
     } else {
-        let closestSlice = closest(angle, slices);
-        if (Math.abs(shortest(closestSlice.angle - angle)) < fieldOfVision / 2) {
-            src = closestSlice.src;
+        let closestLook = closest(angle, looks);
+        if (Math.abs(shortest(closestLook.angle - angle)) < fieldOfVision / 2) {
+            src = closestLook.src;
         }
     }
 
