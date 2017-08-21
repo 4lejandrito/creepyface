@@ -1,8 +1,10 @@
 import point from './util/point';
 import events from './util/events';
+import {add} from './util/algebra';
 
 export default events(document, 'touchmove').map(event => {
-    // sum all the vectors and return the angle
-    var touch = event.changedTouches[0];
-    return point([touch.pageX, touch.pageY], event.target, 'finger');
+    let coords = [].slice.call(event.touches)
+    .map(touch => [touch.clientX, touch.clientY])
+    .reduce(add, [0, 0]);
+    return point(coords, event.target, 'finger');
 });
