@@ -1,6 +1,8 @@
 import simulateEvent from 'simulate-event';
 import lolex from 'lolex';
 
+jest.mock('image-promise', () => () => Promise.resolve([]));
+
 export default function(img) {
 
     const clock = lolex.install();
