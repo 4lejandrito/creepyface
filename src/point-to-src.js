@@ -1,4 +1,4 @@
-import {rotate, getAngle, diff, sign, rad} from './streams/util/algebra';
+import {rotate, getAngle, diff, sign, rad} from './util/algebra';
 import getElementCenter from 'get-element-center';
 
 const center = node => {

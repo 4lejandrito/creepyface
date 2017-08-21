@@ -1,5 +1,5 @@
 import Observable from 'zen-observable';
-import point from './util/point';
+import point from '../util/point';
 
 let random = x => Math.floor(Math.random() * x);
 

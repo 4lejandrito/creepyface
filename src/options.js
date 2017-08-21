@@ -1,6 +1,6 @@
 import parseDataAttributes from 'data-attrs-to-js';
 import WindRose from 'windrose';
-import {rad} from './streams/util/algebra';
+import {rad} from './util/algebra';
 
 const textToAngle = text => rad(
     isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
