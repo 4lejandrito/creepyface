@@ -10,11 +10,11 @@ let shortest = angle => Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Ma
 let compare = angle => (a, b) => Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
 let closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0];
 
-export default function pointToSrc(point, img, pictures) {
+export default function pointToSrc(point, img, options) {
     let {target, source, coords} = point,
-        {looks, hover} = pictures,
+        {looks, hover} = options,
         angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2)),
-        src = pictures.default,
+        src = options.default,
         fieldOfVision = rad(150);
 
     if (img === target && hover) {

@@ -6,13 +6,15 @@ import combined from './streams/combined';
 import fromElement from './options';
 import $ from 'queryselectorall';
 
-const defaultPoints = combined([mousePoints, fingerPoints]);
+const defaultOptions = {
+    points: combined([mousePoints, fingerPoints])
+};
 
-export default function creepyFace(img, pictures, points = defaultPoints) {
-    if (!pictures) pictures = fromElement(img);
-    return preload(pictures).then(imgs => (
-        points.subscribe(point => {
-            img.src = imgs[pointToSrc(point, img, pictures)].src;
+export default function creepyFace(img, options) {
+    options = Object.assign({}, defaultOptions, fromElement(img), options);
+    return preload(options).then(imgs => (
+        options.points.subscribe(point => {
+            img.src = imgs[pointToSrc(point, img, options)].src
         })
     ));
 }
