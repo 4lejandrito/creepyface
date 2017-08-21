@@ -33,5 +33,8 @@ export function fromElement(element) {
 }
 
 export default {
+    default: '',
+    hover: '',
+    looks: [],
     points: combined([mousePoints, fingerPoints])
 };
