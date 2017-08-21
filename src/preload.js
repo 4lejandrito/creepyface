@@ -1,7 +1,7 @@
-export default function preload(pictures) {
-    let srcs = pictures.looks.map(look => look.src);
-    if (pictures.default) srcs.push(pictures.default);
-    if (pictures.hover) srcs.push(pictures.hover);
+export default function preload(options) {
+    let srcs = options.looks.map(look => look.src);
+    if (options.default) srcs.push(options.default);
+    if (options.hover) srcs.push(options.hover);
     return Promise.all(
         srcs.map(
             src => new Promise((resolve, reject) => {
