@@ -24,9 +24,11 @@ export const getSrcs = options => {
 }
 
 export function fromElement(element) {
-    let {hover, look} = parseDataAttributes(element).src || {};
+    let {src, fieldofvision} = parseDataAttributes(element);
+    let {hover, look} = src || {};
 
     return defaults({
+        fieldOfVision: isNaN(fieldofvision) || rad(parseFloat(fieldofvision)),
         default: element.getAttribute('src'),
         hover,
         looks: getLooks(look)
@@ -34,6 +36,7 @@ export function fromElement(element) {
 }
 
 const defaultOptions = {
+    fieldOfVision: rad(150),
     default: '',
     hover: '',
     looks: [],

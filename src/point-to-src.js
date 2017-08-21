@@ -12,10 +12,9 @@ let closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0];
 
 export default function pointToSrc(point, img, options) {
     let {target, source, coords} = point,
-        {looks, hover} = options,
+        {looks, hover, fieldOfVision} = options,
         angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2)),
-        src = options.default,
-        fieldOfVision = rad(150);
+        src = options.default;
 
     if (img === target && hover) {
         src = hover;
