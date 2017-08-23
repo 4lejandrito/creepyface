@@ -2,7 +2,7 @@ import pointToSrc from './point-to-src';
 import loadImages from 'image-promise';
 import {fromElement, getSrcs} from './options';
 import $ from 'queryselectorall';
-import defaults from 'lodash.defaults';
+import defaults from 'object.defaults';
 
 export default function creepyFace(img, userOptions) {
     const options = defaults({}, userOptions, fromElement(img));

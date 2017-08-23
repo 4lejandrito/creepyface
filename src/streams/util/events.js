@@ -1,5 +1,5 @@
 import Observable from 'zen-observable';
-import throttle from 'lodash.throttle';
+import throttle from 'throttleit';
 
 export default function events(element, eventName) {
     return new Observable(observer => {

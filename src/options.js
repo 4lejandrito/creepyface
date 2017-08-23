@@ -4,7 +4,7 @@ import {rad} from './util/algebra';
 import mousePoints from './streams/mouse';
 import fingerPoints from './streams/finger';
 import combined from './streams/combined';
-import defaults from 'lodash.defaults';
+import defaults from 'object.defaults';
 
 const textToAngle = text => rad(
     isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
