@@ -17,7 +17,6 @@
     "rollup-plugin-browsersync": "^0.2.2",
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.1",
     "simulate-event": "^1.4.0"
   },
