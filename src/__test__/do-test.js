@@ -1,7 +1,10 @@
 import simulateEvent from 'simulate-event';
 import lolex from 'lolex';
+import {getSrcs} from '../options';
 
-jest.mock('image-promise', () => () => Promise.resolve([]));
+jest.mock('image-promise', () => srcs => Promise.resolve(
+    srcs.map(src => {let img = new global.Image(); img.src = src; return img;})
+));
 
 export default function(img) {
 
@@ -16,6 +19,20 @@ export default function(img) {
         );
         expect(img.src).toBe(src);
     }
+
+    it('caches the preloaded images', () => {
+        let preloadedSrcs = img.creepyFaceReachableImages.map(img => img.src);
+        expect(preloadedSrcs).toContain('srcUrl');
+        expect(preloadedSrcs).toContain('hoverUrl');
+        expect(preloadedSrcs).toContain('northUrl');
+        expect(preloadedSrcs).toContain('northEastUrl');
+        expect(preloadedSrcs).toContain('eastUrl');
+        expect(preloadedSrcs).toContain('southEastUrl');
+        expect(preloadedSrcs).toContain('southUrl');
+        expect(preloadedSrcs).toContain('southWestUrl');
+        expect(preloadedSrcs).toContain('westUrl');
+        expect(preloadedSrcs).toContain('northWestUrl');
+    });
 
     it('has the original src by default', () => expect(img.src).toBe('srcUrl'));
     it('hovers', () => setsSrc([ 0, 0], 'hoverUrl', img));
