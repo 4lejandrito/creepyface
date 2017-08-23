@@ -1,12 +1,8 @@
-import Observable from 'zen-observable';
+import mappable from './mappable';
 import throttle from 'throttleit';
 
-export default function events(element, eventName) {
-    return new Observable(observer => {
-        let handler = throttle(event => observer.next(event), 100);
-        element.addEventListener(eventName, handler, true);
-        return () => {
-            element.removeEventListener(eventName, handler, true);
-        };
-    });
-}
+export default (element, eventName) => (
+    mappable(
+        next => element.addEventListener(eventName, throttle(next, 100), true)
+    )
+);

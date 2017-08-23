@@ -9,7 +9,7 @@ export default function creepyFace(img, userOptions) {
 
     return loadImages(getSrcs(options)).then(imgs => {
         img.creepyFaceReachableImages = imgs;
-        return options.points.subscribe(
+        return options.points.map(
             point => img.src = pointToSrc(point, img, options)
         );
     });
