@@ -1,10 +1,5 @@
-import Observable from 'zen-observable';
+import mappable from './util/mappable';
 
-export default function combined(streams) {
-    return new Observable(observer => {
-        let subscriptions = streams.map(
-            stream => stream.subscribe(p => observer.next(p))
-        );
-        return () => subscriptions.map(s => s.unsubscribe());
-    });
-}
+export default mappables => mappable(
+    next => mappables.map(m => m.map(next))
+);
