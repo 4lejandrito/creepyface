@@ -25,9 +25,9 @@
     "data-attrs-to-js": "^1.1.1",
     "get-element-center": "^1.1.0",
     "image-promise": "^5.0.1",
-    "lodash.defaults": "^4.2.0",
-    "lodash.throttle": "^4.1.1",
+    "object.defaults": "^1.1.0",
     "queryselectorall": "^0.1.0",
+    "throttleit": "^1.0.0",
     "windrose": "^2.0.2",
     "zen-observable": "^0.5.2"
   },
