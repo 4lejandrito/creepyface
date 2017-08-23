@@ -2,7 +2,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
-import replace from 'rollup-plugin-replace';
 import pkg from './package.json';
 import browsersync from 'rollup-plugin-browsersync';
 
@@ -19,9 +18,6 @@ export default[
             resolve({browser: true}),
             commonjs(),
             babel(),
-            replace({
-                'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-            }),
             production && uglify(),
             !production && browsersync({server: folders, files: folders})
         ]
