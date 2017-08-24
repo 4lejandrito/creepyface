@@ -12,7 +12,7 @@ function showAndHideImages(imgs) {
 
 export default function preload(img, srcs) {
     return loadImages(srcs).then(imgs => {
-        imgs.creepyFaceReachableImages = imgs;
+        img.creepyFaceReachableImages = imgs;
         if (isFirefox) showAndHideImages(imgs);
     });
 };
