@@ -1,7 +1,7 @@
 import mappable from './util/mappable'
 import point from '../util/point'
 
-let random = x => Math.floor(Math.random() * x)
+const random = x => Math.floor(Math.random() * x)
 
 export default (every = 200) => mappable(next => (
   setInterval(() => (
