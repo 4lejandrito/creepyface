@@ -24,14 +24,15 @@ export const getSrcs = options => {
 }
 
 export function fromElement(element) {
-    let {src, fieldofvision} = parseDataAttributes(element);
+    let {src, fieldofvision, throttle} = parseDataAttributes(element);
     let {hover, look} = src || {};
 
     return defaults({
         fieldOfVision: isNaN(fieldofvision) || rad(parseFloat(fieldofvision)),
         default: element.getAttribute('src'),
         hover,
-        looks: getLooks(look)
+        looks: getLooks(look),
+        throttle: parseFloat(throttle)
     }, defaultOptions);
 }
 
@@ -40,7 +41,8 @@ const defaultOptions = {
     default: '',
     hover: '',
     looks: [],
-    points: combined([mousePoints, fingerPoints])
+    points: combined([mousePoints, fingerPoints]),
+    throttle: 0
 };
 
 export default defaultOptions;

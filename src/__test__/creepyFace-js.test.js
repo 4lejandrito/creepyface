@@ -8,6 +8,7 @@ describe('Using JS api', () => {
     document.body.appendChild(img);
 
     creepyFace(img, {
+        throttle: 100,
         hover: 'hoverUrl',
         looks: [
             {angle: 0 * Math.PI / 4, src: 'northUrl'},
