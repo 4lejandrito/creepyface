@@ -1,7 +1,5 @@
-import mappable from './mappable';
+import mappable from './mappable'
 
-export default (element, eventName) => (
-    mappable(
-        next => element.addEventListener(eventName, next, true)
-    )
-);
+export default (element, eventName) => mappable(
+  next => element.addEventListener(eventName, next, true)
+)
