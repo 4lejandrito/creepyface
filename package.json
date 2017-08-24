@@ -18,7 +18,8 @@
     "rollup-plugin-commonjs": "^8.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
-    "simulate-event": "^1.4.0"
+    "simulate-event": "^1.4.0",
+    "standard": "^10.0.3"
   },
   "dependencies": {
     "data-attrs-to-js": "^1.1.1",
@@ -34,7 +35,8 @@
     "start": "rollup -c -w",
     "build": "rollup -c",
     "build:netlify": "npm run build && cp -r test/* dist",
-    "test": "jest"
+    "test": "standard && jest",
+    "fix": "standard --fix"
   },
   "babel": {
     "presets": [
