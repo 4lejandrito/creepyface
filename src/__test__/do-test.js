@@ -4,7 +4,7 @@ import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
 
 jest.mock('image-promise', () => srcs => Promise.resolve(
-  srcs.map(src => { let img = new global.Image(); img.src = src; return img })
+  srcs.map(src => { const img = new global.Image(); img.src = src; return img })
 ))
 
 export default function (img) {
@@ -21,7 +21,7 @@ export default function (img) {
   }
 
   it('caches the preloaded images', () => {
-    let preloadedSrcs = img.creepyFaceReachableImages.map(img => img.src)
+    const preloadedSrcs = img.creepyFaceReachableImages.map(img => img.src)
     expect(preloadedSrcs).toContain('srcUrl')
     expect(preloadedSrcs).toContain('hoverUrl')
     expect(preloadedSrcs).toContain('northUrl')

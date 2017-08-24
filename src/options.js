@@ -17,15 +17,15 @@ const getLooks = look => Object.keys(look || {}).map(
 )
 
 export const getSrcs = options => {
-  let srcs = options.looks.map(({src}) => src)
+  const srcs = options.looks.map(({src}) => src)
   if (options.default) srcs.push(options.default)
   if (options.hover) srcs.push(options.hover)
   return srcs
 }
 
 export function fromElement (element) {
-  let {src, fieldofvision, throttle} = parseDataAttributes(element)
-  let {hover, look} = src || {}
+  const {src, fieldofvision, throttle} = parseDataAttributes(element)
+  const {hover, look} = src || {}
 
   return defaults({
     fieldOfVision: isNaN(fieldofvision) || rad(parseFloat(fieldofvision)),
