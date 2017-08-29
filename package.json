@@ -6,7 +6,6 @@
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
   "devDependencies": {
-    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-0": "^6.24.1",
     "jest": "^20.0.4",
@@ -36,32 +35,5 @@
     "build:netlify": "npm run build && cp -r test/* dist",
     "test": "standard && jest",
     "fix": "standard --fix"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "modules": false
-        }
-      ]
-    ],
-    "env": {
-      "test": {
-        "presets": [
-          "env"
-        ]
-      },
-      "production": {
-        "plugins": [
-          "external-helpers"
-        ]
-      },
-      "development": {
-        "plugins": [
-          "external-helpers"
-        ]
-      }
-    }
   }
 }
