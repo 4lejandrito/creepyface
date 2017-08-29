@@ -7,7 +7,6 @@
   "browser": "dist/creepyface.umd.js",
   "devDependencies": {
     "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.24.1",
     "jest": "^20.0.4",
     "lolex": "^2.1.2",
     "rollup": "^0.47.2",
