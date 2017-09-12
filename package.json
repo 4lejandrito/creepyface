@@ -1,7 +1,9 @@
 {
   "name": "creepyface",
   "version": "1.0.0",
-  "private": true,
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "license": "MIT",
+  "files": ["dist"],
   "main": "dist/creepyface.cjs.js",
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
@@ -29,6 +31,7 @@
     "windrose": "^2.0.2"
   },
   "scripts": {
+    "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
     "build:netlify": "npm run build && cp -r test/* dist",
