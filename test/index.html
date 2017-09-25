@@ -12,40 +12,32 @@
           height: 100%;
         }
 
-        body, #wrapper {
+        body {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: row;
         }
 
-        #wrapper {
-            width: 20vw;
-            overflow: hidden;
-            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-            text-align: center;
-        }
-
         img {
-            width: 100%;
+            box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+            height: 40%;
         }
     </style>
   </head>
   <body>
-    <div id="wrapper">
-        <img
-            data-creepy
-            src="img/serious.jpg"
-            data-src-hover="img/crazy.jpg"
-            data-src-look-n="img/n.jpg"
-            data-src-look-ne="img/ne.jpg"
-            data-src-look-e="img/e.jpg"
-            data-src-look-se="img/se.jpg"
-            data-src-look-s="img/s.jpg"
-            data-src-look-sw="img/sw.jpg"
-            data-src-look-w="img/w.jpg"
-            data-src-look-nw="img/nw.jpg"/>
-    </div>
+    <img
+        data-creepy
+        src="img/serious.jpg"
+        data-src-hover="img/crazy.jpg"
+        data-src-look-n="img/n.jpg"
+        data-src-look-ne="img/ne.jpg"
+        data-src-look-e="img/e.jpg"
+        data-src-look-se="img/se.jpg"
+        data-src-look-s="img/s.jpg"
+        data-src-look-sw="img/sw.jpg"
+        data-src-look-w="img/w.jpg"
+        data-src-look-nw="img/nw.jpg"/>
     <script type="text/javascript" src="creepyface.umd.js"></script>
   </body>
 </html>
