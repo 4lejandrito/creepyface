@@ -34,7 +34,7 @@
     "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
-    "build:netlify": "npm run build && cp -r test/* dist",
+    "build:netlify": "npm run build && cp -r example/* dist",
     "test": "standard && jest",
     "fix": "standard --fix"
   }
