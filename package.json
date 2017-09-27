@@ -1,9 +1,11 @@
 {
   "name": "creepyface",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
   "license": "MIT",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/creepyface.cjs.js",
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
