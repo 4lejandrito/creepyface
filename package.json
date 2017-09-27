@@ -34,7 +34,7 @@
     "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
-    "build:netlify": "npm run build && cp -r example/* dist",
+    "build:netlify": "npm run build && cp dist/creepyface.umd.js example/",
     "test": "standard && jest",
     "fix": "standard --fix"
   }
