@@ -20,7 +20,7 @@ export default function pointToSrc (point, img, options) {
   const angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2))
   let src = options.default
 
-  if (contains(img.getBoundingClientRect(), coords)) {
+  if (hover && contains(img.getBoundingClientRect(), coords)) {
     src = hover
   } else {
     const closestLook = closest(angle, looks)
