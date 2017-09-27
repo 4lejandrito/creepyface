@@ -38,7 +38,7 @@ Creepy Face works out-of-the-box via a declarative data-attribute API.
 
     Creepy Face will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are.
 
-    You can add as many creepy faces as you want as long as they all have the `data-creepy` attribute).
+    You can add as many creepy faces as you want as long as they all have the `data-creepy` attribute.
 
 ## Advanced usage
 
