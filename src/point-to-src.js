@@ -14,9 +14,16 @@ const compare = angle => (a, b) => (
 )
 const closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0]
 const within = (n, a, b) => n >= a && n <= b
-const contains = ({left, top, right, bottom}, [x, y]) => (
+const rectContains = ({left, top, right, bottom}, [x, y]) => (
   within(x, left, right) && within(y, top, bottom)
 )
+const elementContains = (img, [x, y]) => {
+  if (document.elementFromPoint) {
+    return document.elementFromPoint(x, y) === img
+  } else {
+    return rectContains(img.getBoundingClientRect(), [x, y])
+  }
+}
 
 export default function pointToSrc (point, img, options) {
   const {coords} = point
@@ -24,7 +31,7 @@ export default function pointToSrc (point, img, options) {
   const angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2))
   let src = options.default
 
-  if (hover && contains(img.getBoundingClientRect(), coords)) {
+  if (hover && elementContains(img, coords)) {
     src = hover
   } else {
     const closestLook = closest(angle, looks)
