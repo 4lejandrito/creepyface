@@ -6,8 +6,12 @@ const center = node => {
   return [coords.x, coords.y]
 }
 
-const shortest = angle => Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Math.PI : angle
-const compare = angle => (a, b) => Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
+const shortest = angle => (
+  Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Math.PI : angle
+)
+const compare = angle => (a, b) => (
+  Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
+)
 const closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0]
 const within = (n, a, b) => n >= a && n <= b
 const contains = ({left, top, right, bottom}, [x, y]) => (
