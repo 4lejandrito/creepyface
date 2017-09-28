@@ -35,7 +35,7 @@ export default function pointToSrc (point, img, options) {
     src = hover
   } else {
     const closestLook = closest(angle, looks)
-    if (Math.abs(shortest(closestLook.angle - angle)) < fieldOfVision / 2) {
+    if (closestLook && Math.abs(shortest(closestLook.angle - angle)) < fieldOfVision / 2) {
       src = closestLook.src
     }
   }
