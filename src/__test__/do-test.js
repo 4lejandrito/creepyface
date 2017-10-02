@@ -1,4 +1,4 @@
-/* global jest, it, expect */
+/* global jest, it, describe, beforeEach, expect */
 
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
@@ -45,4 +45,13 @@ export default function (img) {
   it('looks south-west', () => setsSrc([-1, 1], 'southWestUrl'))
   it('looks west', () => setsSrc([-1, 0], 'westUrl'))
   it('looks north-west', () => setsSrc([-1, -1], 'northWestUrl'))
+
+  describe('after a second with no points', () => {
+    beforeEach(() => {
+      setsSrc([0, -1], 'northUrl')
+      clock.tick(1000)
+    })
+
+    it('looks forward', () => expect(img.src).toBe('srcUrl'))
+  })
 }

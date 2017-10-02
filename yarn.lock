@@ -1090,6 +1090,10 @@ data-attrs-to-js@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/data-attrs-to-js/-/data-attrs-to-js-1.1.1.tgz#c52c2817784b065c6df31b493b00883cfe175efb"
 
+debounce@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.0.2.tgz#503cc674d8d7f737099664fb75ddbd36b9626dc6"
+
 debug-log@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debug-log/-/debug-log-1.0.1.tgz#2307632d4c04382b8df8a32f70b895046d52745f"

@@ -16,6 +16,10 @@ const getLooks = look => Object.keys(look || {}).map(
   })
 )
 
+const parseNumericOption = option => (
+  isNaN(option) ? undefined : parseFloat(option)
+)
+
 export const getSrcs = options => {
   const srcs = options.looks.map(({src}) => src)
   if (options.default) srcs.push(options.default)
@@ -24,7 +28,9 @@ export const getSrcs = options => {
 }
 
 export function fromElement (element) {
-  const {src, fieldofvision, throttle} = parseDataAttributes(element)
+  const {
+    src, fieldofvision, throttle, backtonormal
+  } = parseDataAttributes(element)
   const {hover, look} = src || {}
 
   return defaults({
@@ -32,7 +38,8 @@ export function fromElement (element) {
     default: element.getAttribute('src'),
     hover,
     looks: getLooks(look),
-    throttle: parseFloat(throttle)
+    throttle: parseNumericOption(throttle),
+    backToNormal: parseNumericOption(backtonormal)
   }, defaultOptions)
 }
 
@@ -42,7 +49,8 @@ const defaultOptions = {
   hover: '',
   looks: [],
   points: combined([mousePoints, fingerPoints]),
-  throttle: 0
+  throttle: 0,
+  backToNormal: 1000
 }
 
 export default defaultOptions
