@@ -3484,9 +3484,9 @@ rollup-plugin-babel@^3.0.1:
   dependencies:
     rollup-pluginutils "^1.5.0"
 
-rollup-plugin-browsersync@^0.2.2:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-browsersync/-/rollup-plugin-browsersync-0.2.4.tgz#02f75d9f6b1266582faaca1cb328f52c992131e2"
+rollup-plugin-browsersync@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-browsersync/-/rollup-plugin-browsersync-0.2.5.tgz#cd528ef9c6cd53fb5b3c7ba44bbe5659fbc55b55"
   dependencies:
     browser-sync "^2.18.13"
 
