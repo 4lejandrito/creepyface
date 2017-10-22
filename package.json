@@ -13,7 +13,7 @@
     "babel-preset-env": "^1.6.0",
     "jest": "^20.0.4",
     "lolex": "^2.1.2",
-    "rollup": "^0.47.2",
+    "rollup": "^0.50.0",
     "rollup-plugin-babel": "^3.0.1",
     "rollup-plugin-browsersync": "^0.2.5",
     "rollup-plugin-commonjs": "^8.1.0",
