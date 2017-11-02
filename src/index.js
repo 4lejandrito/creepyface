@@ -3,7 +3,6 @@ import preload from './util/preload'
 import {fromElement, getSrcs} from './options'
 import $ from 'queryselectorall'
 import defaults from 'object.defaults'
-import throttle from 'throttleit'
 import debounce from 'debounce'
 import watchElement from './util/watch-element'
 
@@ -15,13 +14,10 @@ const attach = (img, userOptions) => {
   )
   preload(img, getSrcs(options)).then(() => (
     img.pointObserver = options.points.map(
-      throttle(
-        point => {
-          img.src = pointToSrc(point, img, options)
-          options.backToNormal > 0 && backToNormal()
-        },
-        options.throttle
-      )
+      point => {
+        img.src = pointToSrc(point, img, options)
+        options.backToNormal > 0 && backToNormal()
+      }
     )
   ))
 }

@@ -50,7 +50,6 @@ import creepyFace from 'creepyface'
 const faceImg = document.querySelector('img#face')
 
 const cancel = creepyFace(faceImg, {
-  throttle: 100, // Number of milliseconds to wait between src updates
   hover: 'img/face/crazy.jpg', // Image URL to display on hover
   looks: [ // Each of the images looking at a given direction (angles in radians)
     {angle: 0 * Math.PI / 4, src: 'img/face/north.jpg'},

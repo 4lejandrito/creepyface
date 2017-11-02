@@ -6,7 +6,6 @@ import creepyFace from '../index'
 describe('Using DOM api', () => {
   const img = document.createElement('img')
   img.setAttribute('src', 'srcUrl')
-  img.setAttribute('data-throttle', '100')
   img.setAttribute('data-src-hover', 'hoverUrl')
   img.setAttribute('data-src-look-n', 'northUrl')
   img.setAttribute('data-src-look-ne', 'northEastUrl')

@@ -11,7 +11,6 @@ export default function (img) {
   const clock = lolex.install()
 
   function setsSrc (point, src, element = document) {
-    clock.tick(100)
     simulateEvent.simulate(
       element,
       'mousemove',

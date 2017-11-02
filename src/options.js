@@ -29,7 +29,7 @@ export const getSrcs = options => {
 
 export function fromElement (element) {
   const {
-    src, fieldofvision, throttle, backtonormal
+    src, fieldofvision, backtonormal
   } = parseDataAttributes(element)
   const {hover, look} = src || {}
 
@@ -38,7 +38,6 @@ export function fromElement (element) {
     default: element.getAttribute('src'),
     hover,
     looks: getLooks(look),
-    throttle: parseNumericOption(throttle),
     backToNormal: parseNumericOption(backtonormal)
   }, defaultOptions)
 }
@@ -49,7 +48,6 @@ const defaultOptions = {
   hover: '',
   looks: [],
   points: combined([mousePoints, fingerPoints]),
-  throttle: 0,
   backToNormal: 1000
 }
 

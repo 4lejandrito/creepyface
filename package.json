@@ -30,7 +30,6 @@
     "is-firefox": "^1.0.3",
     "object.defaults": "^1.1.0",
     "queryselectorall": "^0.1.0",
-    "throttleit": "^1.0.0",
     "windrose": "^2.0.2"
   },
   "scripts": {
