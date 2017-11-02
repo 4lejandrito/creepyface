@@ -5,17 +5,16 @@ import $ from 'queryselectorall'
 import defaults from 'object.defaults'
 import throttle from 'throttleit'
 import debounce from 'debounce'
+import watchElement from './util/watch-element'
 
-export default function creepyFace (img, userOptions) {
+const attach = (img, userOptions) => {
   const options = defaults({}, userOptions, fromElement(img))
   const backToNormal = debounce(
     () => { img.src = options.default },
     options.backToNormal
   )
-  let pointObserver
-
   preload(img, getSrcs(options)).then(() => (
-    pointObserver = options.points.map(
+    img.pointObserver = options.points.map(
       throttle(
         point => {
           img.src = pointToSrc(point, img, options)
@@ -25,8 +24,22 @@ export default function creepyFace (img, userOptions) {
       )
     )
   ))
+}
 
-  return () => pointObserver.cancel()
+const detach = img => {
+  img.pointObserver.cancel()
+}
+
+export function creepyFace(img, options) {
+  const stopWatching = watchElement(
+    img,
+    () => attach(img, options),
+    () => detach(img)
+  )
+  return () => {
+    stopWatching()
+    detach(img)
+  }
 }
 
 $('img[data-creepy]').forEach(img => creepyFace(img))
