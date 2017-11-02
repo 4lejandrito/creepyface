@@ -12,8 +12,10 @@ export default function creepyFace (img, userOptions) {
     () => { img.src = options.default },
     options.backToNormal
   )
-  return preload(img, getSrcs(options)).then(() => (
-    options.points.map(
+  let pointObserver
+
+  preload(img, getSrcs(options)).then(() => (
+    pointObserver = options.points.map(
       throttle(
         point => {
           img.src = pointToSrc(point, img, options)
@@ -23,6 +25,8 @@ export default function creepyFace (img, userOptions) {
       )
     )
   ))
+
+  return () => pointObserver.cancel()
 }
 
 $('img[data-creepy]').forEach(img => creepyFace(img))
