@@ -5,36 +5,47 @@ import $ from 'queryselectorall'
 import defaults from 'object.defaults'
 import debounce from 'debounce'
 import watchElement from './util/watch-element'
+import mappable from './streams/util/mappable'
+
+const srcs = (img, options) => mappable(next => {
+  const backToNormal = debounce(
+    () => next(options.default),
+    options.backToNormal
+  )
+  const points = options.points.map(
+    point => {
+      next(pointToSrc(point, img, options))
+      options.backToNormal > 0 && backToNormal()
+    }
+  )
+  return () => points.cancel()
+})
 
 const attach = (img, userOptions) => {
   const options = defaults({}, userOptions, fromElement(img))
-  const backToNormal = debounce(
-    () => { img.src = options.default },
-    options.backToNormal
-  )
-  preload(img, getSrcs(options)).then(() => (
-    img.pointObserver = options.points.map(
-      point => {
-        img.src = pointToSrc(point, img, options)
-        options.backToNormal > 0 && backToNormal()
-      }
-    )
-  ))
+  const setSrc = src => { img.src = src }
+  let isCanceled = false
+  let cancel = () => { isCanceled = true }
+
+  preload(img, getSrcs(options)).then(() => {
+    if (!isCanceled) {
+      cancel = srcs(img, options).map(setSrc).cancel
+    }
+  })
+
+  return () => cancel()
 }
 
-const detach = img => {
-  img.pointObserver.cancel()
-}
-
-export function creepyFace(img, options) {
+export default function creepyFace (img, options) {
+  let detach = () => {}
   const stopWatching = watchElement(
     img,
-    () => attach(img, options),
-    () => detach(img)
+    () => { detach = attach(img, options) },
+    () => detach()
   )
   return () => {
     stopWatching()
-    detach(img)
+    detach()
   }
 }
 
