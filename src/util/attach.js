@@ -10,5 +10,8 @@ export default (img, userOptions) => {
     sources(img, options).subscribe(setSrc)
   ))
 
-  return () => preloaded.then(s => s.unsubscribe())
+  return () => preloaded.then(s => {
+    s.unsubscribe()
+    setSrc(options.default)
+  })
 }
