@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creepy Face</title>
+    <style media="screen">
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
+
+      img {
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+        height: 40%;
+        position: relative;
+        top: 30%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <img title="Click to enable/disable creepyface" src="img/serious.jpg"/>
+
+    <script type="text/javascript" src="creepyface.umd.js"></script>
+    <script type="text/javascript">
+      const img = document.querySelector('img')
+      const enable = () => creepyFace(img, {
+        hover: 'img/crazy.jpg',
+        looks: [
+          {angle:   0, src: 'img/n.jpg'},
+          {angle:  45, src: 'img/ne.jpg'},
+          {angle:  90, src: 'img/e.jpg'},
+          {angle: 135, src: 'img/se.jpg'},
+          {angle: 180, src: 'img/s.jpg'},
+          {angle: 225, src: 'img/sw.jpg'},
+          {angle: 270, src: 'img/w.jpg'},
+          {angle: 315, src: 'img/nw.jpg'}
+        ]
+      })
+      let cancel = enable()
+
+      img.onclick = () => {
+        if (cancel) {
+          cancel()
+          cancel = null
+        } else {
+          cancel = enable()
+        }
+      }
+    </script>
+  </body>
+</html>
