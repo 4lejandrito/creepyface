@@ -1,7 +1,7 @@
 import preload from './preload'
 import {fromElement, getSrcs} from './options'
 import defaults from 'object.defaults'
-import sources from '../streams/sources'
+import sources from '../observables/sources'
 
 export default (img, userOptions) => {
   const options = defaults({}, userOptions, fromElement(img))
