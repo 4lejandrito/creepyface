@@ -51,15 +51,15 @@ const faceImg = document.querySelector('img#face')
 
 const cancel = creepyFace(faceImg, {
   hover: 'img/face/crazy.jpg', // Image URL to display on hover
-  looks: [ // Each of the images looking at a given direction (angles in radians)
-    {angle: 0 * Math.PI / 4, src: 'img/face/north.jpg'},
-    {angle: 1 * Math.PI / 4, src: 'img/face/north-east.jpg'},
-    {angle: 2 * Math.PI / 4, src: 'img/face/east.jpg'},
-    {angle: 3 * Math.PI / 4, src: 'img/face/south-east.jpg'},
-    {angle: 4 * Math.PI / 4, src: 'img/face/south.jpg'},
-    {angle: 5 * Math.PI / 4, src: 'img/face/south-west.jpg'},
-    {angle: 6 * Math.PI / 4, src: 'img/face/west.jpg'},
-    {angle: 7 * Math.PI / 4, src: 'img/face/north-west.jpg'}
+  looks: [ // Each of the images looking at a given direction
+    {angle:   0, src: 'img/face/north.jpg'},
+    {angle:  45, src: 'img/face/north-east.jpg'},
+    {angle:  90, src: 'img/face/east.jpg'},
+    {angle: 135, src: 'img/face/south-east.jpg'},
+    {angle: 180, src: 'img/face/south.jpg'},
+    {angle: 225, src: 'img/face/south-west.jpg'},
+    {angle: 270, src: 'img/face/west.jpg'},
+    {angle: 315, src: 'img/face/north-west.jpg'}
   ]
 })
 

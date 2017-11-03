@@ -7,7 +7,7 @@ const center = node => {
 }
 
 const shortest = angle => (
-  Math.abs(angle) > Math.PI ? angle - sign(angle) * 2 * Math.PI : angle
+  Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle
 )
 const compare = angle => (a, b) => (
   Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
@@ -28,7 +28,7 @@ const elementContains = (img, [x, y]) => {
 export default function pointToSrc (point, img, options) {
   const {coords} = point
   const {looks, hover, fieldOfVision} = options
-  const angle = getAngle(rotate(diff(coords, center(img)), Math.PI / 2))
+  const angle = getAngle(rotate(diff(coords, center(img)), 90))
   let src = options.default
 
   if (hover && elementContains(img, coords)) {

@@ -56,7 +56,7 @@ export default new Observable(observer => {
 
         node.style.left = `${firefly.position[0]}px`
         node.style.top = `${firefly.position[1]}px`
-        node.style.transform = `rotate(${getAngle(newVspeed) + Math.PI / 2}rad)`
+        node.style.transform = `rotate(${getAngle(newVspeed) + 90}deg)`
       } else {
         firefly.destination = [window.innerWidth, window.innerHeight].map(rand)
       }
