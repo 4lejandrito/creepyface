@@ -12,7 +12,7 @@ const srcs = (img, options) => mappable(next => {
     () => next(options.default),
     options.backToNormal
   )
-  const points = options.points.map(
+  const points = options.points().map(
     point => {
       next(pointToSrc(point, img, options))
       options.backToNormal > 0 && backToNormal()

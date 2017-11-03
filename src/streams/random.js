@@ -3,7 +3,7 @@ import point from './util/point'
 
 const random = x => Math.floor(Math.random() * x)
 
-export default (every = 200) => mappable(next => {
+export default (every = 200) => () => mappable(next => {
   const interval = setInterval(() => (
     next(
       point(
