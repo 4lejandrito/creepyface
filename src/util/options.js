@@ -1,9 +1,9 @@
 import parseDataAttributes from 'data-attrs-to-js'
 import WindRose from 'windrose'
-import {rad} from './util/algebra'
-import mousePoints from './streams/mouse'
-import fingerPoints from './streams/finger'
-import combined from './streams/combined'
+import {rad} from '../util/algebra'
+import mousePoints from '../streams/mouse'
+import fingerPoints from '../streams/finger'
+import combined from '../streams/combined'
 import defaults from 'object.defaults'
 
 const textToAngle = text => rad(

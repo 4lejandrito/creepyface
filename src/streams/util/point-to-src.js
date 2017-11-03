@@ -1,4 +1,4 @@
-import {rotate, getAngle, diff, sign} from './util/algebra'
+import {rotate, getAngle, diff, sign} from '../../util/algebra'
 import getElementCenter from 'get-element-center'
 
 const center = node => {
