@@ -6,14 +6,9 @@ import sources from '../streams/sources'
 export default (img, userOptions) => {
   const options = defaults({}, userOptions, fromElement(img))
   const setSrc = src => { img.src = src }
-  let isCanceled = false
-  let cancel = () => { isCanceled = true }
+  const preloaded = preload(img, getSrcs(options)).then(() => (
+    sources(img, options).subscribe(setSrc)
+  ))
 
-  preload(img, getSrcs(options)).then(() => {
-    if (!isCanceled) {
-      cancel = sources(img, options).map(setSrc).cancel
-    }
-  })
-
-  return () => cancel()
+  return () => preloaded.then(s => s.unsubscribe())
 }

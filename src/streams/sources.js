@@ -1,17 +1,17 @@
 import pointToSrc from './util/point-to-src'
 import debounce from 'debounce'
-import mappable from './util/mappable'
+import Observable from './util/observable'
 
-export default (img, options) => mappable(next => {
+export default (img, options) => new Observable(observer => {
   const backToNormal = debounce(
-    () => next(options.default),
+    () => observer.next(options.default),
     options.backToNormal
   )
-  const points = options.points().map(
+  const subscription = options.points.subscribe(
     point => {
-      next(pointToSrc(point, img, options))
+      observer.next(pointToSrc(point, img, options))
       options.backToNormal > 0 && backToNormal()
     }
   )
-  return () => points.cancel()
+  return () => subscription.unsubscribe()
 })

@@ -1,8 +1,9 @@
-import mappable from './util/mappable'
+import Observable from './util/observable'
 
-export default mappables => () => mappable(
-  next => {
-    const newMappables = mappables.map(m => m().map(next))
-    return () => newMappables.forEach(m => m.cancel())
+export default observables => new Observable(
+  observer => {
+    const next = observer.next.bind(observer)
+    const subscriptions = observables.map(o => o.subscribe(next))
+    return () => subscriptions.forEach(s => s.unsubscribe())
   }
 )
