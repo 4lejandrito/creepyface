@@ -1,5 +1,5 @@
 import point from './util/point'
-import events from './util/events'
+import events from './events'
 import {add} from '../util/algebra'
 
 export default () => events(document, 'touchmove').map(event => {

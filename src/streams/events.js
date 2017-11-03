@@ -1,4 +1,4 @@
-import mappable from './mappable'
+import mappable from './util/mappable'
 
 export default (element, eventName) => mappable(
   next => {
