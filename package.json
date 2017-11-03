@@ -33,7 +33,6 @@
     "present": "^1.0.0",
     "queryselectorall": "^0.1.0",
     "raf": "^3.4.0",
-    "windrose": "^2.0.2",
     "zen-observable": "^0.6.0"
   },
   "scripts": {

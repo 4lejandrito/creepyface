@@ -1,17 +1,12 @@
 import parseDataAttributes from 'data-attrs-to-js'
-import WindRose from 'windrose'
 import mousePoints from '../observables/mouse'
 import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
 import defaults from 'object.defaults'
 
-const textToAngle = text => (
-  isNaN(text) ? WindRose.getDegrees(text.toUpperCase()).value : parseFloat(text)
-)
-
 const getLooks = look => Object.keys(look || {}).map(
   key => ({
-    angle: textToAngle(key), src: look[key]
+    angle: parseFloat(key), src: look[key]
   })
 )
 

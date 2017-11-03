@@ -17,18 +17,18 @@ Creepy Face works out-of-the-box via a declarative data-attribute API.
       data-creepy
       src="img/face/serious.jpg"
       data-src-hover="img/face/crazy.jpg"
-      data-src-look-n="img/face/north.jpg"
-      data-src-look-ne="img/face/north-east.jpg"
-      data-src-look-e="img/face/east.jpg"
-      data-src-look-se="img/face/south-east.jpg"
-      data-src-look-s="img/face/south.jpg"
-      data-src-look-sw="img/face/south-west.jpg"
-      data-src-look-w="img/face/west.jpg"
-      data-src-look-nw="img/face/north-west.jpg"
+      data-src-look-0="img/face/north.jpg"
+      data-src-look-45="img/face/north-east.jpg"
+      data-src-look-90="img/face/east.jpg"
+      data-src-look-135="img/face/south-east.jpg"
+      data-src-look-180="img/face/south.jpg"
+      data-src-look-225="img/face/south-west.jpg"
+      data-src-look-270="img/face/west.jpg"
+      data-src-look-315="img/face/north-west.jpg"
     />
     ```
 
-    The `data-src-look` attributes can specify either compass points (n, ne, w...) or degrees (0 - 360). For example `data-src-look-s` would be equivalent to `data-src-look-180`.
+    The `data-src-look` specify degrees (0 - 360).
 
 3. Include creepyface script at the end of your page:
 
