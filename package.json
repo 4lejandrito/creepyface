@@ -10,7 +10,12 @@
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "flow-bin": "^0.58.0",
+    "flow-typed": "^2.2.3",
     "jest": "^20.0.4",
     "lolex": "^2.1.2",
     "rollup": "^0.50.0",
@@ -35,11 +40,18 @@
     "raf": "^3.4.0"
   },
   "scripts": {
+    "prepare": "flow-typed install",
     "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
     "build:netlify": "npm run build && cp dist/creepyface.umd.js example/",
-    "test": "standard && jest",
+    "test": "flow && standard && jest",
     "fix": "standard --fix"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype"
+    ]
   }
 }

@@ -16,9 +16,9 @@ export default [{
   },
   name: 'creepyFace',
   plugins: [
+    babel(),
     resolve({browser: true}),
     commonjs(),
-    babel(),
     production && uglify(),
     !production && browsersync({server: folders, files: folders})
   ]
