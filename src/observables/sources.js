@@ -7,11 +7,10 @@ export default (img, options) => new Observable(observer => {
     () => observer.next(options.default),
     options.backToNormal
   )
-  const subscription = options.points.subscribe(
+  return options.points.subscribe(
     point => {
       observer.next(pointToSrc(point, img, options))
       options.backToNormal > 0 && backToNormal()
     }
   )
-  return () => subscription.unsubscribe()
 })
