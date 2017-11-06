@@ -49,6 +49,9 @@
     "fix": "standard --fix"
   },
   "standard": {
+    "ignore": [
+      "flow-typed/"
+    ],
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"
