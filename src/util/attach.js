@@ -9,12 +9,12 @@ import type {Cancel} from './types'
 export default (img: Image, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
   const setSrc = src => { img.src = src }
-  const preloaded = preload(img, options).then(() => (
+  const subscribed = preload(img, options).then(() => (
     sources(img, options).subscribe(setSrc)
   ))
 
-  return () => preloaded.then(s => {
-    s.unsubscribe()
+  return () => subscribed.then(subscription => {
+    subscription.unsubscribe()
     setSrc(options.default)
   })
 }
