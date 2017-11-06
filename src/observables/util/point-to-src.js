@@ -1,12 +1,16 @@
+// @flow
+/* global Image */
 import {rotate, getAngle, diff, sign} from '../../util/algebra'
 import getElementCenter from 'get-element-center'
+import type {Options, ImageURL} from '../../util/options'
+import type {Vector} from '../../util/algebra'
 
 const center = node => {
   const coords = getElementCenter(node)
   return [coords.x, coords.y]
 }
 
-const shortest = angle => (
+const shortest = (angle: number) => (
   Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle
 )
 const compare = angle => (a, b) => (
@@ -25,7 +29,7 @@ const elementContains = (img, [x, y]) => {
   }
 }
 
-export default function pointToSrc (point, img, options) {
+export default function pointToSrc (point: Vector, img: Image, options: Options): ImageURL {
   const {looks, hover, fieldOfVision} = options
   const angle = getAngle(rotate(diff(point, center(img)), 90))
   let src = options.default

@@ -1,6 +1,8 @@
+// @flow
 import Observable from './util/observable'
+import type {Vector} from '../util/algebra'
 
-export default observables => new Observable(
+export default (observables: Array<Observable<Vector>>) => new Observable(
   observer => {
     const next = observer.next.bind(observer)
     const subscriptions = observables.map(o => o.subscribe(next))

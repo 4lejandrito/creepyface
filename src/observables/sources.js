@@ -1,8 +1,11 @@
+// @flow
+/* global Image */
 import pointToSrc from './util/point-to-src'
 import debounce from 'debounce'
 import Observable from './util/observable'
+import type {Options} from '../util/options'
 
-export default (img, options) => new Observable(observer => {
+export default (img: Image, options: Options) => new Observable(observer => {
   const backToNormal = debounce(
     () => observer.next(options.default),
     options.backToNormal

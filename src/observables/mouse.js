@@ -1,5 +1,11 @@
-import events from './events'
+// @flow
+/* global MouseEvent */
+import Observable from './util/observable'
 
-export default events(document, 'mousemove').map(
-  event => [event.clientX, event.clientY]
-)
+export default new Observable(observer => {
+  const next = (event: MouseEvent) => observer.next(
+    [event.clientX, event.clientY]
+  )
+  document.addEventListener('mousemove', next, true)
+  return () => document.removeEventListener('mousemove', next, true)
+})
