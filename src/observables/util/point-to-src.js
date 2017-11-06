@@ -26,12 +26,11 @@ const elementContains = (img, [x, y]) => {
 }
 
 export default function pointToSrc (point, img, options) {
-  const {coords} = point
   const {looks, hover, fieldOfVision} = options
-  const angle = getAngle(rotate(diff(coords, center(img)), 90))
+  const angle = getAngle(rotate(diff(point, center(img)), 90))
   let src = options.default
 
-  if (hover && elementContains(img, coords)) {
+  if (hover && elementContains(img, point)) {
     src = hover
   } else {
     const closestLook = closest(angle, looks)

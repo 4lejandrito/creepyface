@@ -1,5 +1,4 @@
 import Observable from './util/observable'
-import point from './util/point'
 import mouse from './mouse'
 import finger from './finger'
 import combined from './combined'
@@ -9,7 +8,7 @@ import {
     rotate, getAngle, norm, rand, diff, times, add, sign
 } from '../util/algebra'
 
-let fireflyToPoint = firefly => point(firefly.position, firefly.node, 'firefly')
+let fireflyToPoint = firefly => firefly.position
 
 let firefly = () => {
   const subscription = combined([mouse, finger]).subscribe(
