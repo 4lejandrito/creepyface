@@ -4,7 +4,6 @@ import parseDataAttributes from 'data-attrs-to-js'
 import mousePoints from '../observables/mouse'
 import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
-import defaults from 'object.defaults'
 import type Observable from '../observables/util/observable'
 import type {Angle, Vector} from './algebra'
 
@@ -18,52 +17,56 @@ export type Look = {
 export type Options = {
   fieldOfVision: Angle,
   default: ImageURL,
-  hover: ImageURL,
+  hover?: ImageURL,
   looks: Array<Look>,
   points: Observable<Vector>,
   backToNormal: Time
 }
-
-const getLooks = (look: Look) => Object.keys(look || {}).map(
-  key => ({
-    angle: parseFloat(key), src: look[key]
-  })
-)
-
-const parseNumericOption = (option: ?string) => (
-  isNaN(option) ? undefined : parseFloat(option)
-)
-
-export const getSrcs = (options: Options): Array<ImageURL> => {
-  const srcs = options.looks.map(({src}) => src)
-  if (options.default) srcs.push(options.default)
-  if (options.hover) srcs.push(options.hover)
-  return srcs
+export type UserOptions = {
+  fieldOfVision?: ?Angle,
+  default?: ?ImageURL,
+  hover?: ?ImageURL,
+  looks?: ?Array<Look>,
+  points?: ?Observable<Vector>,
+  backToNormal?: ?Time
 }
 
-export function fromElement (element: Image): Options {
+const getLooks = (look: {[string]: string}): Array<Look> => {
+  if (!look) return []
+  return Object.keys(look).map(
+    key => ({
+      angle: parseFloat(key), src: look[key]
+    })
+  )
+}
+
+function fromImage (element: Image): UserOptions {
   const {
-    src, fieldofvision, backtonormal
+    src = {}, fieldofvision, backtonormal
   } = parseDataAttributes(element)
-  const {hover, look} = src || {}
+  const options: UserOptions = {
+    default: element.getAttribute('src')
+  }
 
-  return defaults({
-    fieldOfVision: isNaN(fieldofvision) ? undefined : parseFloat(fieldofvision),
-    default: element.getAttribute('src'),
-    hover,
-    looks: getLooks(look),
-    backToNormal: parseNumericOption(backtonormal)
-  }, defaultOptions)
+  if (backtonormal) options.backToNormal = parseFloat(backtonormal)
+  if (fieldofvision) options.fieldOfVision = parseFloat(fieldofvision)
+  if (src.hover) options.hover = src.hover
+  if (src.look) options.looks = getLooks(src.look)
+
+  return options
 }
 
-// usar diff type here
-const defaultOptions = {
-  fieldOfVision: 150,
-  default: '',
-  hover: '',
-  looks: [],
-  points: combined([mousePoints, fingerPoints]),
-  backToNormal: 1000
-}
+export default function getOptions (img: Image, options?: UserOptions = {}): Options {
+  const userOptions = Object.assign({}, fromImage(img), options)
 
-export default (defaultOptions: Options)
+  if (!userOptions.default) throw new Error('A default URL must be specified')
+
+  return {
+    fieldOfVision: userOptions.fieldOfVision || 150,
+    default: userOptions.default,
+    hover: userOptions.hover || '',
+    points: userOptions.points || combined([mousePoints, fingerPoints]),
+    looks: userOptions.looks || [],
+    backToNormal: userOptions.backToNormal || 1000
+  }
+}
