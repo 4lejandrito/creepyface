@@ -32,8 +32,7 @@
     "object.defaults": "^1.1.0",
     "present": "^1.0.0",
     "queryselectorall": "^0.1.0",
-    "raf": "^3.4.0",
-    "zen-observable": "^0.6.0"
+    "raf": "^3.4.0"
   },
   "scripts": {
     "prepublishOnly": "NODE_ENV=production npm run build",
