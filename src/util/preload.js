@@ -2,6 +2,7 @@
 /* global Image */
 import loadImages from 'image-promise'
 import isFirefox from 'is-firefox'
+import type {Options, ImageURL} from './options'
 
 function showAndHideImages (imgs: Array<Image>) {
   imgs.forEach(img => {
@@ -15,8 +16,15 @@ function showAndHideImages (imgs: Array<Image>) {
   })
 }
 
-export default function preload (img: Image, srcs: Array<string>): Promise<void> {
-  return loadImages(srcs).then(imgs => {
+const getSrcs = (options: Options): Array<ImageURL> => {
+  const srcs = options.looks.map(({src}) => src)
+  if (options.default) srcs.push(options.default)
+  if (options.hover) srcs.push(options.hover)
+  return srcs
+}
+
+export default function preload (img: Image, options: Options): Promise<void> {
+  return loadImages(getSrcs(options)).then(imgs => {
     // $FlowFixMe
     img.creepyFaceReachableImages = imgs
     if (isFirefox) showAndHideImages(imgs)
