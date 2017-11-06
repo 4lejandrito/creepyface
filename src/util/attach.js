@@ -4,8 +4,7 @@ import preload from './preload'
 import getOptions from './options'
 import sources from '../observables/sources'
 import type {Options, UserOptions, ImageURL} from './options'
-
-type Cancel = void => mixed
+import type {Cancel} from './types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({src}) => src)

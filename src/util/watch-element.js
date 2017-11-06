@@ -1,8 +1,12 @@
-export default (node, onAdded, onRemoved) => {
+// @flow
+/* global HTMLElement, MutationObserver */
+type Cancel = void => void
+
+export default (node: HTMLElement, onAdded: void => void, onRemoved: void => void): Cancel => {
   let wasAdded = !!node.parentNode
   if (wasAdded) onAdded()
   if (!window.MutationObserver) return () => {}
-  const observer = new window.MutationObserver(mutations => {
+  const observer = new MutationObserver(mutations => {
     if (!node.parentNode && wasAdded) {
       onRemoved()
       wasAdded = false
