@@ -14,13 +14,20 @@ export type Look = {
   src: ImageURL,
   angle: Angle
 }
+export type CreepyData = {
+  point?: Vector,
+  angle?: Angle,
+  src: string
+}
+export type Debug = CreepyData => void
 export type Options = {
   fieldOfVision: Angle,
   default: ImageURL,
   hover?: ImageURL,
   looks: Array<Look>,
   points: Observable<Vector>,
-  backToNormal: Time
+  backToNormal: Time,
+  debug: Debug
 }
 export type UserOptions = {
   fieldOfVision?: ?Angle,
@@ -28,7 +35,8 @@ export type UserOptions = {
   hover?: ?ImageURL,
   looks?: ?Array<Look>,
   points?: ?Observable<Vector>,
-  backToNormal?: ?Time
+  backToNormal?: ?Time,
+  debug?: ?Debug
 }
 
 const getLooks = (look: {[string]: string}): Array<Look> => {
@@ -67,6 +75,7 @@ export default function getOptions (img: Image, options?: UserOptions = {}): Opt
     hover: userOptions.hover || '',
     points: userOptions.points || combined([mousePoints, fingerPoints]),
     looks: userOptions.looks || [],
-    backToNormal: userOptions.backToNormal || 1000
+    backToNormal: userOptions.backToNormal || 1000,
+    debug: userOptions.debug || (() => {})
   }
 }

@@ -10,7 +10,10 @@ export default (img: Image, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
   const setSrc = src => { img.src = src }
   const subscribed = preload(img, options).then(() => (
-    sources(img, options).subscribe(setSrc)
+    sources(img, options).subscribe(data => {
+      setSrc(data.src)
+      options.debug(data)
+    })
   ))
 
   return () => subscribed.then(subscription => {

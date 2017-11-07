@@ -1,19 +1,24 @@
 // @flow
 /* global Image */
-import pointToSrc from './util/point-to-src'
+import getAngle from './util/get-angle'
+import getSrc from './util/get-src'
 import debounce from 'debounce'
 import Observable from './util/observable'
-import type {Options} from '../util/options'
+import type {Options, CreepyData} from '../util/options'
 
-export default (img: Image, options: Options) => new Observable(observer => {
-  const backToNormal = debounce(
-    () => observer.next(options.default),
-    options.backToNormal
-  )
-  return options.points.subscribe(
-    point => {
-      observer.next(pointToSrc(point, img, options))
-      options.backToNormal > 0 && backToNormal()
-    }
-  )
-})
+export default (img: Image, options: Options): Observable<CreepyData> => (
+  new Observable(observer => {
+    const backToNormal = debounce(
+      () => observer.next({src: options.default}),
+      options.backToNormal
+    )
+    return options.points.subscribe(
+      point => {
+        const angle = getAngle(img, point)
+        const src = getSrc(img, point, angle, options)
+        observer.next({point, angle, src})
+        options.backToNormal > 0 && backToNormal()
+      }
+    )
+  })
+)

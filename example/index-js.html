@@ -29,6 +29,7 @@
     <script type="text/javascript">
       const img = document.querySelector('img')
       const enable = () => creepyFace(img, {
+        debug: data => console.log(data),
         hover: 'img/crazy.jpg',
         looks: [
           {angle:   0, src: 'img/n.jpg'},
