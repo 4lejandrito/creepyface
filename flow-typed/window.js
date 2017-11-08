@@ -1,4 +1,4 @@
-declare type Window = {
+declare var window: {
   MutationObserver?: typeof MutationObserver,
   innerWidth: number,
   innerHeight: number

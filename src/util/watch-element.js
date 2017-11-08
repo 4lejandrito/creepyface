@@ -1,6 +1,5 @@
 // @flow
 /* global HTMLElement */
-import window from './window'
 import type {Cancel} from './types'
 
 export default (node: HTMLElement, onAdded: void => void, onRemoved: void => void): Cancel => {
