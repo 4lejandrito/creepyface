@@ -17,7 +17,8 @@ export type Look = {
 export type CreepyData = {
   point?: Vector,
   angle?: Angle,
-  src: string
+  src: string,
+  options: Options
 }
 export type Debug = CreepyData => void
 export type Options = {
