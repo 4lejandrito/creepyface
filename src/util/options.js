@@ -14,12 +14,14 @@ export type Look = {
   src: ImageURL,
   angle: Angle
 }
+/* eslint-disable no-use-before-define */
 export type CreepyData = {
   point?: Vector,
   angle?: Angle,
   src: string,
   options: Options
 }
+/* eslint-enable no-use-before-define */
 export type Debug = CreepyData => void
 export type Options = {
   fieldOfVision: Angle,
