@@ -12,8 +12,8 @@ let fireflyToPoint = firefly => firefly.position
 
 let firefly = () => {
   const subscription = combined([mouse, finger]).subscribe(
-      ({coords}) => { o.destination = coords }
-    )
+    coords => { o.destination = coords }
+  )
   const node = new window.Image()
   node.src = 'http://www.svgcuts.com/fsvgfotw/2012/svgcuts_2012_06_29.png'
   node.style.position = 'fixed'
@@ -22,7 +22,7 @@ let firefly = () => {
   let o = {
     position: [rand(window.innerWidth), rand(window.innerHeight)],
     destination: [window.innerWidth / 2, window.innerHeight / 2],
-    turnSpeed: (3 * Math.PI / 2) / 1000,
+    turnSpeed: 270 / 1000,
     vspeed: [0.15, 0.15],
     node,
     remove: () => {
@@ -42,7 +42,7 @@ export default new Observable(observer => {
       let direction = diff(destination, position)
       let angle = getAngle(direction) - getAngle(vspeed)
 
-      if (Math.abs(angle) > Math.PI) angle -= sign(angle) * 2 * Math.PI
+      if (Math.abs(angle) > 180) angle -= sign(angle) * 360
 
       let newVspeed = rotate(
         vspeed,
