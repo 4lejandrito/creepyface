@@ -19,5 +19,6 @@ export default function creepyFace (img: Image, options?: UserOptions): Cancel {
   }
 }
 
-// $FlowFixMe
-$('img[data-creepy]').forEach(img => creepyFace(img))
+$('img[data-creepy]').forEach(el => {
+  if (el instanceof Image) creepyFace(el)
+})
