@@ -37,7 +37,6 @@
     "queryselectorall": "^0.1.0"
   },
   "scripts": {
-    "prepare": "flow-typed install",
     "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
