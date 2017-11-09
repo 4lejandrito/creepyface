@@ -29,7 +29,7 @@ export type Options = {
   hover?: ImageURL,
   looks: Array<Look>,
   points: Observable<Vector>,
-  backToNormal: Time,
+  timeToDefault: Time,
   debug: Debug
 }
 export type UserOptions = {
@@ -38,7 +38,7 @@ export type UserOptions = {
   hover?: ?ImageURL,
   looks?: ?Array<Look>,
   points?: ?Observable<Vector>,
-  backToNormal?: ?Time,
+  timeToDefault?: ?Time,
   debug?: ?Debug
 }
 
@@ -53,13 +53,13 @@ const getLooks = (look: {[string]: string}): Array<Look> => {
 
 function fromImage (element: Image): UserOptions {
   const {
-    src = {}, fieldofvision, backtonormal
+    src = {}, fieldofvision, timetodefault
   } = parseDataAttributes(element)
   const options: UserOptions = {
     default: element.getAttribute('src')
   }
 
-  if (backtonormal) options.backToNormal = parseFloat(backtonormal)
+  if (timetodefault) options.timeToDefault = parseFloat(timetodefault)
   if (fieldofvision) options.fieldOfVision = parseFloat(fieldofvision)
   if (src.hover) options.hover = src.hover
   if (src.look) options.looks = getLooks(src.look)
@@ -78,7 +78,7 @@ export default function getOptions (img: Image, options?: UserOptions = {}): Opt
     hover: userOptions.hover || '',
     points: userOptions.points || combined([mousePoints, fingerPoints]),
     looks: userOptions.looks || [],
-    backToNormal: userOptions.backToNormal || 1000,
+    timeToDefault: userOptions.timeToDefault || 1000,
     debug: userOptions.debug || (() => {})
   }
 }

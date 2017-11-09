@@ -60,7 +60,8 @@ const cancel = creepyFace(faceImg, {
     {angle: 225, src: 'img/face/south-west.jpg'},
     {angle: 270, src: 'img/face/west.jpg'},
     {angle: 315, src: 'img/face/north-west.jpg'}
-  ]
+  ],
+  timeToDefault: 1000 // Time (in ms) to show back the default image after no input is detected
 })
 
 // at some point

@@ -2,7 +2,7 @@
 // flow-typed version: <<STUB>>/data-attrs-to-js_v^1.1.1/flow_v0.58.0
 
 declare type Return = {
-  backtonormal?: ?string,
+  timetodefault?: ?string,
   fieldofvision?: ?string,
   src?: {
     hover?: string,
