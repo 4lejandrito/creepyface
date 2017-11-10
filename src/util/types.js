@@ -1,5 +1,5 @@
 // @flow
-/* global HTMLImageElement, Image */
+/* global HTMLImageElement */
 
 export type Cancel = void => mixed
-export type CreepyImage = HTMLImageElement | Image
+export type CreepyImage = HTMLImageElement

@@ -1,5 +1,5 @@
 // @flow
-/* global Image */
+/* global HTMLImageElement */
 import attach from './util/attach'
 import watchElement from './util/watch-element'
 import $ from 'queryselectorall'
@@ -20,5 +20,5 @@ export default function creepyFace (img: CreepyImage, options?: UserOptions): Ca
 }
 
 $('img[data-creepy]').forEach(el => {
-  if (el instanceof Image) creepyFace(el)
+  if (el instanceof HTMLImageElement) creepyFace(el)
 })

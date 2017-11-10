@@ -2,5 +2,5 @@
 // flow-typed version: <<STUB>>/image-promise_v^5.0.1/flow_v0.58.0
 
 declare module 'image-promise' {
-  declare export default (srcs: Array<string>) => Promise<Array<Image>>;
+  declare export default (srcs: Array<string>) => Promise<Array<HTMLImageElement>>;
 }
