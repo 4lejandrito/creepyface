@@ -1,11 +1,11 @@
 // @flow
-/* global Image */
 import parseDataAttributes from 'data-attrs-to-js'
 import mousePoints from '../observables/mouse'
 import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
 import type Observable from '../observables/util/observable'
 import type {Angle, Vector} from './algebra'
+import type {CreepyImage} from './types'
 
 export type Millis = number
 export type Time = Millis
@@ -51,7 +51,7 @@ const getLooks = (look: {[string]: string}): Array<Look> => {
   )
 }
 
-function fromImage (element: Image): UserOptions {
+function fromImage (element: CreepyImage): UserOptions {
   const {
     src = {}, fieldofvision, timetodefault
   } = parseDataAttributes(element)
@@ -67,7 +67,7 @@ function fromImage (element: Image): UserOptions {
   return options
 }
 
-export default function getOptions (img: Image, options?: UserOptions = {}): Options {
+export default function getOptions (img: CreepyImage, options?: UserOptions = {}): Options {
   const userOptions = Object.assign({}, fromImage(img), options)
 
   if (!userOptions.default) throw new Error('A default URL must be specified')

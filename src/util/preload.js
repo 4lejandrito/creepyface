@@ -3,6 +3,7 @@
 import loadImages from 'image-promise'
 import isFirefox from 'is-firefox'
 import type {Options, ImageURL} from './options'
+import type {CreepyImage} from './types'
 
 function showAndHideImages (imgs: Array<Image>) {
   imgs.forEach(img => {
@@ -23,7 +24,7 @@ const getSrcs = (options: Options): Array<ImageURL> => {
   return srcs
 }
 
-export default function preload (img: Image, options: Options): Promise<void> {
+export default function preload (img: CreepyImage, options: Options): Promise<void> {
   return loadImages(getSrcs(options)).then(imgs => {
     (img: Object).creepyFaceReachableImages = imgs
     if (isFirefox) showAndHideImages(imgs)

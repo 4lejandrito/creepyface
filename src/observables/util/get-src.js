@@ -1,8 +1,8 @@
 // @flow
-/* global Image */
 import {sign} from '../../util/algebra'
 import type {Options, ImageURL} from '../../util/options'
 import type {Vector, Angle} from '../../util/algebra'
+import type {CreepyImage} from '../../util/types'
 
 const shortest = (angle: number) => (
   Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle
@@ -23,7 +23,7 @@ const elementContains = (img, [x, y]) => {
   }
 }
 
-export default (img: Image, point: Vector, angle: Angle, options: Options): ImageURL => {
+export default (img: CreepyImage, point: Vector, angle: Angle, options: Options): ImageURL => {
   const {looks, hover, fieldOfVision} = options
   let src = options.default
 

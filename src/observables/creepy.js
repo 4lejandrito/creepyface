@@ -1,12 +1,12 @@
 // @flow
-/* global Image */
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import debounce from 'debounce'
 import Observable from './util/observable'
 import type {Options, CreepyData} from '../util/options'
+import type {CreepyImage} from '../util/types'
 
-export default (img: Image, options: Options): Observable<CreepyData> => (
+export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
   new Observable(observer => {
     const backToDefault = debounce(
       () => observer.next({src: options.default, options}),
