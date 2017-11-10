@@ -5,9 +5,9 @@ declare type Return = {
   timetodefault?: ?string,
   fieldofvision?: ?string,
   src?: {
-    hover?: string,
+    hover?: ?string,
     look?: {
-      [angle: string]: string
+      [angle: string]: ?string
     }
   }
 }

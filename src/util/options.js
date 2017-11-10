@@ -42,13 +42,15 @@ export type UserOptions = {
   debug?: ?Debug
 }
 
-const getLooks = (look: {[string]: string}): Array<Look> => {
-  if (!look) return []
-  return Object.keys(look).map(
-    key => ({
-      angle: parseFloat(key), src: look[key]
-    })
-  )
+const getLooks = (look: {[string]: ?string}): Array<Look> => {
+  const looks: Array<Look> = []
+  for (const key of Object.keys(look)) {
+    const src = look[key]
+    if (src) {
+      looks.push({angle: parseFloat(key), src})
+    }
+  }
+  return looks
 }
 
 function fromImage (element: CreepyImage): UserOptions {
