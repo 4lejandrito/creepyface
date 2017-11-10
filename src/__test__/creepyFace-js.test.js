@@ -1,13 +1,15 @@
+// @flow
 /* global describe */
 
 import doTest from './do-test'
 import creepyFace from '../index'
+import body from './util/body'
 
 describe('Using JS api', () => {
   const img = document.createElement('img')
   img.setAttribute('src', 'srcUrl')
 
-  document.body.appendChild(img)
+  body.appendChild(img)
 
   creepyFace(img, {
     hover: 'hoverUrl',

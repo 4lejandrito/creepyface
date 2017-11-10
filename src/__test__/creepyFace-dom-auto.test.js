@@ -1,6 +1,8 @@
+// @flow
 /* global describe */
 
 import doTest from './do-test'
+import body from './util/body'
 
 describe('Using automatic DOM api (via data-creepy attribute)', () => {
   const img = document.createElement('img')
@@ -16,7 +18,7 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
   img.setAttribute('data-src-look-270', 'westUrl')
   img.setAttribute('data-src-look-315', 'northWestUrl')
 
-  document.body.appendChild(img)
+  body.appendChild(img)
 
   require('../index')
 

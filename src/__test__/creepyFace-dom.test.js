@@ -1,7 +1,9 @@
+// @flow
 /* global describe */
 
 import doTest from './do-test'
 import creepyFace from '../index'
+import body from './util/body'
 
 describe('Using DOM api', () => {
   const img = document.createElement('img')
@@ -16,7 +18,7 @@ describe('Using DOM api', () => {
   img.setAttribute('data-src-look-270', 'westUrl')
   img.setAttribute('data-src-look-315', 'northWestUrl')
 
-  document.body.appendChild(img)
+  body.appendChild(img)
 
   creepyFace(img)
 

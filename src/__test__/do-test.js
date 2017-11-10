@@ -1,4 +1,5 @@
-/* global jest, it, describe, beforeEach, expect */
+// @flow
+/* global jest, it, describe, beforeEach, expect, HTMLImageElement, Image */
 
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
@@ -7,7 +8,7 @@ jest.mock('image-promise', () => srcs => Promise.resolve(
   srcs.map(src => { const img = new global.Image(); img.src = src; return img })
 ))
 
-export default function (img) {
+export default function (img: HTMLImageElement) {
   const clock = lolex.install()
 
   function setsSrc (point, src, element = document) {
@@ -20,7 +21,11 @@ export default function (img) {
   }
 
   it('caches the preloaded images', () => {
-    const preloadedSrcs = img.creepyFaceReachableImages.map(img => img.src)
+    const cachedImages: Array<Image> = (img: Object).creepyFaceReachableImages
+    if (!cachedImages) {
+      throw new Error('No images have been cached')
+    }
+    const preloadedSrcs = cachedImages.map(img => img.src)
     expect(preloadedSrcs).toContain('srcUrl')
     expect(preloadedSrcs).toContain('hoverUrl')
     expect(preloadedSrcs).toContain('northUrl')
