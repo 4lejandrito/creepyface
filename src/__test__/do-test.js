@@ -4,7 +4,7 @@
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
 
-jest.mock('image-promise', () => srcs => Promise.resolve(
+jest.mock('image-promise', () => (srcs: string[]) => Promise.resolve(
   srcs.map(src => { const img = new global.Image(); img.src = src; return img })
 ))
 
