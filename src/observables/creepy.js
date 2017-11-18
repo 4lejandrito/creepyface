@@ -9,7 +9,7 @@ import type {CreepyImage} from '../util/types'
 export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
   new Observable(observer => {
     const backToDefault = debounce(
-      () => observer.next({src: options.default, options}),
+      () => observer.next({src: options.src, options}),
       options.timeToDefault
     )
     return options.points.subscribe(

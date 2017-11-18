@@ -25,7 +25,7 @@ export type CreepyData = {
 export type Debug = CreepyData => void
 export type Options = {
   fieldOfVision: Angle,
-  default: ImageURL,
+  src: ImageURL,
   hover?: ImageURL,
   looks: Array<Look>,
   points: Observable<Vector>,
@@ -34,7 +34,7 @@ export type Options = {
 }
 export type UserOptions = {
   fieldOfVision?: ?Angle,
-  default?: ?ImageURL,
+  src?: ?ImageURL,
   hover?: ?ImageURL,
   looks?: ?Array<Look>,
   points?: ?Observable<Vector>,
@@ -58,7 +58,7 @@ function fromImage (element: CreepyImage): UserOptions {
     src = {}, fieldofvision, timetodefault
   } = parseDataAttributes(element)
   const options: UserOptions = {
-    default: element.getAttribute('src')
+    src: element.getAttribute('src')
   }
 
   if (timetodefault) options.timeToDefault = parseFloat(timetodefault)
@@ -72,11 +72,11 @@ function fromImage (element: CreepyImage): UserOptions {
 export default function getOptions (img: CreepyImage, options?: UserOptions = {}): Options {
   const userOptions = Object.assign({}, fromImage(img), options)
 
-  if (!userOptions.default) throw new Error('A default URL must be specified')
+  if (!userOptions.src) throw new Error('A default URL must be specified')
 
   return {
     fieldOfVision: userOptions.fieldOfVision || 150,
-    default: userOptions.default,
+    src: userOptions.src,
     hover: userOptions.hover || '',
     points: userOptions.points || combined([mousePoints, fingerPoints]),
     looks: userOptions.looks || [],

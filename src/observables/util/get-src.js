@@ -25,7 +25,7 @@ const elementContains = (img, [x, y]) => {
 
 export default (img: CreepyImage, point: Vector, angle: Angle, options: Options): ImageURL => {
   const {looks, hover, fieldOfVision} = options
-  let src = options.default
+  let src = options.src
 
   if (hover && elementContains(img, point)) {
     src = hover

@@ -17,6 +17,6 @@ export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
 
   return () => subscribed.then(subscription => {
     subscription.unsubscribe()
-    setSrc(options.default)
+    setSrc(options.src)
   })
 }

@@ -19,7 +19,7 @@ function showAndHideImages (imgs: Array<HTMLImageElement>) {
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({src}) => src)
-  if (options.default) srcs.push(options.default)
+  if (options.src) srcs.push(options.src)
   if (options.hover) srcs.push(options.hover)
   return srcs
 }
