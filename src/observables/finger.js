@@ -7,7 +7,10 @@ export default new Observable(observer => {
   const next = (event: TouchEvent): mixed => {
     let point = [0, 0]
     for (const touch of event.touches) {
-      point = add(point, [touch.clientX, touch.clientY])
+      point = add(
+        point,
+        [touch.clientX + window.scrollX, touch.clientY + window.scrollX]
+      )
     }
     observer.next(point)
   }
