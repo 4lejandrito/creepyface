@@ -1,5 +1,5 @@
 // @flow
-import {rotate, getAngle, diff} from '../../util/algebra'
+import {rotate, getAngle, diff, add} from '../../util/algebra'
 import getElementCenter from 'get-element-center'
 import type {Vector, Angle} from '../../util/algebra'
 import type {CreepyImage} from '../../util/types'
@@ -10,5 +10,5 @@ const center = node => {
 }
 
 export default (img: CreepyImage, point: Vector): Angle => (
-  getAngle(rotate(diff(point, center(img)), 90))
+  getAngle(rotate(diff(add([window.scrollX, window.scrollY], point), center(img)), 90))
 )
