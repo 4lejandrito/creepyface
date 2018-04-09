@@ -8,15 +8,17 @@ import type {Cancel, CreepyImage} from './types'
 export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
   const setSrc = src => { img.src = src }
-  const subscribed = preload(img, options).then(() => (
-    creepy(img, options).subscribe(data => {
+  const subscribed = preload(img, options).then(() => {
+    options.onAttach()
+    return creepy(img, options).subscribe(data => {
       setSrc(data.src)
-      options.debug(data)
+      options.onDebug(data)
     })
-  ))
+  })
 
   return () => subscribed.then(subscription => {
     subscription.unsubscribe()
     setSrc(options.src)
+    options.onDetach()
   })
 }

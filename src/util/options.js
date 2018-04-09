@@ -23,6 +23,7 @@ export type CreepyData = {
 }
 /* eslint-enable no-use-before-define */
 export type Debug = CreepyData => void
+export type EventListener = void => void
 export type Options = {
   fieldOfVision: Angle,
   src: ImageURL,
@@ -30,7 +31,9 @@ export type Options = {
   looks: Array<Look>,
   points: Observable<Vector>,
   timeToDefault: Time,
-  debug: Debug
+  onDebug: Debug,
+  onAttach: EventListener,
+  onDetach: EventListener
 }
 export type UserOptions = {
   fieldOfVision?: ?Angle,
@@ -39,7 +42,9 @@ export type UserOptions = {
   looks?: ?Array<Look>,
   points?: ?Observable<Vector>,
   timeToDefault?: ?Time,
-  debug?: ?Debug
+  onDebug?: ?Debug,
+  onAttach?: ?EventListener,
+  onDetach?: ?EventListener
 }
 
 const getLooks = (look: {[string]: ?string}): Array<Look> => {
@@ -81,6 +86,8 @@ export default function getOptions (img: CreepyImage, options?: UserOptions = {}
     points: userOptions.points || combined([mousePoints, fingerPoints]),
     looks: userOptions.looks || [],
     timeToDefault: userOptions.timeToDefault || 1000,
-    debug: userOptions.debug || (() => {})
+    onDebug: userOptions.onDebug || (() => {}),
+    onAttach: userOptions.onAttach || (() => {}),
+    onDetach: userOptions.onDetach || (() => {})
   }
 }
