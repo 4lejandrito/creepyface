@@ -10,7 +10,7 @@
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "7.2.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
