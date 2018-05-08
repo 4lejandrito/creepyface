@@ -1,6 +1,6 @@
 # Creepy Face
 
-Creepy Face is a little JavaScript tool (<3K minified & gzipped) for making your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
+Creepy Face is a little JavaScript tool (<3K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
 
 ![Example animated gif of a face following the pointer](example.gif)
 
@@ -36,7 +36,7 @@ Creepy Face works out-of-the-box via a declarative data-attribute API.
     <script type="text/javascript" src="creepyface.umd.js"></script>
     ```
 
-    Creepy Face will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are.
+    Creepy Face will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are using.
 
     You can add as many creepy faces as you want as long as they all have the `data-creepy` attribute.
 
