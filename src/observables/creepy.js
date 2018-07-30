@@ -12,7 +12,7 @@ export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
       () => observer.next({src: options.src, options}),
       options.timeToDefault
     )
-    return options.points.subscribe(
+    const subscription = options.points.subscribe(
       point => {
         const angle = getAngle(img, point)
         const src = getSrc(img, point, angle, options)
@@ -20,5 +20,9 @@ export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
         backToDefault()
       }
     )
+    return () => {
+      backToDefault.clear()
+      subscription.unsubscribe()
+    }
   })
 )
