@@ -1,16 +1,22 @@
-# Creepy Face
+# Creepyface
 
-Creepy Face is a little JavaScript tool (<3K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
+Creepyface is a little JavaScript tool (<3K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
+
+[Demo](http://creepyface.io)
 
 ![Example animated gif of a face following the pointer](example.gif)
 
 ## Usage
 
-Creepy Face works out-of-the-box via a declarative data-attribute API.
+The simplest way to create your Creepyface is by using [our wizard](http://creepyface.io/create).
+
+---
+
+If you want to customize it even more you can use our declarative data-attribute API:
 
 1. Take a bunch of pictures of yourself looking at different directions.
 
-2. Create a standard `<img>` tag like the following using the pictures taken in step 1:
+2. Create a standard `<img>` tag like the following using the pictures you just took:
 
     ```html
     <img
@@ -30,19 +36,19 @@ Creepy Face works out-of-the-box via a declarative data-attribute API.
 
     The `data-src-look` specify degrees (0 - 360).
 
-3. Include creepyface script at the end of your page:
+3. Include Creepyface script at the end of your page:
 
     ```html
     <script type="text/javascript" src="creepyface.umd.js"></script>
     ```
 
-    Creepy Face will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are using.
+    Creepyface will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are using.
 
-    You can add as many creepy faces as you want as long as they all have the `data-creepy` attribute.
+    You can add as many Creepyfaces as you want as long as they all have the `data-creepy` attribute.
 
 ## Advanced usage
 
-For more advanced use cases Creepy Face can also be set up via a programmatic API:
+For more advanced use cases Creepyface can also be set up via a programmatic API:
 
 ```js
 import creepyFace from 'creepyface'
@@ -77,3 +83,7 @@ cancel() // will restore the original image and stop creepyface
 ## Contributing
 
 Please feel free to create issues and / or submit pull requests. For the latter, [test cases](src/__test__) are very welcome.
+
+## License
+
+MIT, see [LICENSE](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) for details.
