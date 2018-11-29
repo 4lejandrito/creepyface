@@ -14,6 +14,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
+    "coveralls": "^3.0.2",
     "eslint-plugin-flowtype": "^2.39.1",
     "flow-bin": "^0.58.0",
     "flow-typed": "^2.2.3",
@@ -42,6 +43,7 @@
     "build": "rollup -c",
     "build:netlify": "npm run build && cp dist/creepyface.umd.js example/",
     "test": "flow --include-warnings --quiet && standard && jest",
+    "test:coveralls": "flow --include-warnings --quiet && standard && jest --coverage && cat ./coverage/lcov.info | coveralls",
     "fix": "standard --fix"
   },
   "standard": {
