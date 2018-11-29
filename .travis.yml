@@ -1,3 +1,11 @@
 language: node_js
 node_js:
 - '10'
+deploy:
+  provider: npm
+  email: alejandro@tardin.com
+  api_key:
+    secure: jnj3KNLv1X8wg32jHmvgeA4cm+iYTY886rkD2MPV9Wd8aGAbBeuKBhaXFG0Ppu8b4yP4QYlMcdudIKZu9CaF2zHU1IrYcJKSj4lmKfygZyobjD97gfKHwivLbX3mzqm9Wi5av+aTuJen9fBJImvco0xuyxAJczDpUgaYGSy6NRHNgTZFIx7oAIAf5csb6pFJlqa/KlP02j1ygSxAqdSvZ4nZcm0CQXWIE1p0YCwwmk4RKLKySPi9udcJqC31rU/Q9w3c8Zv0mLNm/RJa3SlFTwsKGS72rAI4od9+a+qVBN/r/c2ZopQIauGMmtUXxP6mrSGFB++kp3moGQlL7mQISiVJ1oNggTabOpIW0NZ380lMnpoV5ukQwlJGqRzTPcaqcKvsSmQGt1UeMAqrkwjhjwJlhhWfU5J3P/ARs9H4V61CGnDm53GTo1Y8hkL34oAp5GS6/qBZ+S9Auhoc28zZjcGpPfQFTrDxl/qIy632DoG4ljMZphP0vsU37hfoNkA0rpsfGqQGj9Eq0Q/JH/UEmNgZw5t/BApjBCSmdpSJ27cONNMqd2+x7AjA5XXtSwCSd73ljhMv4n2gW9Mg8nNAbXDJ3wLFT95B3itQlmzabzmEC6Ewk2M14z/DCtBbiRuJnf+2nhkPyicq3oUkIUeFzpL+MiKqkvXDTEBASGoh6U0=
+  on:
+    tags: true
+    repo: 4lejandrito/creepyface
