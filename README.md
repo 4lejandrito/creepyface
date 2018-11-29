@@ -1,4 +1,4 @@
-# Creepyface
+# [Creepyface](https://creepyface.io) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface) [![Build Status](https://api.travis-ci.org/4lejandrito/creepyface.svg?branch=master)](https://travis-ci.org/4lejandrito/creepyface)
 
 Creepyface is a little JavaScript tool (<3K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
 
