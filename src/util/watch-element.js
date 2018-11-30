@@ -4,21 +4,9 @@ import type {Cancel} from './types'
 
 export default (node: HTMLElement, onAdded: void => void, onRemoved: void => void): Cancel => {
   const isReady = (is: boolean) => is ? onAdded() : onRemoved()
-  const IntersectionObserver = window.IntersectionObserver
   const MutationObserver = window.MutationObserver
 
-  if (IntersectionObserver) {
-    const observer = new IntersectionObserver(
-      changes => {
-        if (changes.length > 0) {
-          isReady(changes[0].isIntersecting)
-        }
-      },
-      {}
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  } else if (MutationObserver) {
+  if (MutationObserver) {
     let wasInDOM = document.body && document.body.contains(node)
     if (wasInDOM) isReady(true)
     const observer = new MutationObserver(mutations => {
