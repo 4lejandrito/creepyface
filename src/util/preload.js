@@ -1,5 +1,4 @@
 // @flow
-/* global HTMLImageElement */
 import loadImages from 'image-promise'
 import type {Options, ImageURL} from './options'
 import type {CreepyImage} from './types'
