@@ -8,6 +8,7 @@ import body from './util/body'
 describe('Using DOM api', () => {
   const img = document.createElement('img')
   img.setAttribute('src', 'srcUrl')
+  img.setAttribute('data-throttle', '100')
   img.setAttribute('data-src-hover', 'hoverUrl')
   img.setAttribute('data-src-look-0', 'northUrl')
   img.setAttribute('data-src-look-45', 'northEastUrl')

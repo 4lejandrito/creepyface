@@ -3,6 +3,7 @@ import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import debounce from 'debounce'
 import Observable from './util/observable'
+import throttle from 'lodash.throttle'
 import type {Options, CreepyData} from '../util/options'
 import type {CreepyImage} from '../util/types'
 
@@ -13,12 +14,12 @@ export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
       options.timeToDefault
     )
     const subscription = options.points.subscribe(
-      point => {
+      throttle(point => {
         const angle = getAngle(img, point)
         const src = getSrc(img, point, angle, options)
         observer.next({point, angle, src, options})
         backToDefault()
-      }
+      }, options.throttle)
     )
     return () => {
       backToDefault.clear()
