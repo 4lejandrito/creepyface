@@ -2,10 +2,17 @@
 /* global MouseEvent */
 import Observable from './util/observable'
 
+const observers = []
+
+document.addEventListener(
+  'mousemove',
+  (event: MouseEvent) => observers.forEach(
+    observer => observer.next([event.clientX, event.clientY])
+  ),
+  true
+)
+
 export default new Observable(observer => {
-  const next = (event: MouseEvent) => observer.next(
-    [event.clientX, event.clientY]
-  )
-  document.addEventListener('mousemove', next, true)
-  return () => document.removeEventListener('mousemove', next, true)
+  observers.push(observer)
+  return () => { observers.splice(observers.indexOf(observer), 1) }
 })
