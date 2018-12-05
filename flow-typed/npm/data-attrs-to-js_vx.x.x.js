@@ -5,6 +5,7 @@ declare type Return = {
   timetodefault?: ?string,
   fieldofvision?: ?string,
   resetoncancel?: ?string,
+  throttle?: ?string,
   src?: {
     hover?: ?string,
     look?: {

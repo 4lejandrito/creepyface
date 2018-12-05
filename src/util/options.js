@@ -32,6 +32,7 @@ export type Options = {
   points: Observable<Vector>,
   timeToDefault: Time,
   resetOnCancel: boolean,
+  throttle: Time,
   onDebug: Debug,
   onAttach: EventListener,
   onDetach: EventListener
@@ -44,6 +45,7 @@ export type UserOptions = {
   points?: ?Observable<Vector>,
   timeToDefault?: ?Time,
   resetOnCancel?: ?boolean,
+  throttle?: ?Time,
   onDebug?: ?Debug,
   onAttach?: ?EventListener,
   onDetach?: ?EventListener
@@ -62,13 +64,14 @@ const getLooks = (look: {[string]: ?string}): Array<Look> => {
 
 function fromImage (element: CreepyImage): UserOptions {
   const {
-    src = {}, fieldofvision, timetodefault, resetoncancel
+    src = {}, fieldofvision, timetodefault, resetoncancel, throttle
   } = parseDataAttributes(element)
   const options: UserOptions = {
     src: element.getAttribute('src')
   }
 
   if (timetodefault) options.timeToDefault = parseFloat(timetodefault)
+  if (throttle) options.throttle = parseFloat(throttle)
   if (fieldofvision) options.fieldOfVision = parseFloat(fieldofvision)
   if (resetoncancel) options.resetOnCancel = resetoncancel === 'true'
   if (src.hover) options.hover = src.hover
@@ -90,6 +93,7 @@ export default function getOptions (img: CreepyImage, options?: UserOptions = {}
     looks: userOptions.looks || [],
     timeToDefault: userOptions.timeToDefault || 1000,
     resetOnCancel: !(userOptions.resetOnCancel === false),
+    throttle: userOptions.throttle || 100,
     onDebug: userOptions.onDebug || (() => {}),
     onAttach: userOptions.onAttach || (() => {}),
     onDetach: userOptions.onDetach || (() => {})
