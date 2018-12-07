@@ -4,6 +4,7 @@
 declare type Return = {
   timetodefault?: ?string,
   fieldofvision?: ?string,
+  resetoncancel?: ?string,
   src?: {
     hover?: ?string,
     look?: {
