@@ -1,6 +1,7 @@
 // @flow
 /* global MouseEvent */
 import Observable from './util/observable'
+import type {Vector} from '../util/algebra'
 
 const observers = []
 
@@ -12,7 +13,7 @@ document.addEventListener(
   true
 )
 
-export default new Observable(observer => {
+export default new Observable<Vector>(observer => {
   observers.push(observer)
   return () => { observers.splice(observers.indexOf(observer), 1) }
 })
