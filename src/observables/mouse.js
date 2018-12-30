@@ -1,7 +1,7 @@
 // @flow
 /* global MouseEvent */
 import Observable from './util/observable'
-import type {Vector} from '../util/algebra'
+import type { Vector } from '../util/algebra'
 
 const observers = []
 

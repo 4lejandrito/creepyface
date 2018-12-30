@@ -11,7 +11,7 @@ export default class Observable<T> {
     this.subscriber = subscriber
   }
   subscribe (consumer: Consumer<T>): Subscription {
-    const observer = {next: consumer}
+    const observer = { next: consumer }
     const result = this.subscriber(observer)
     return typeof result === 'function' ? { unsubscribe: result } : result
   }

@@ -17,10 +17,10 @@ export default [{
   },
   plugins: [
     babel({ exclude: 'node_modules/**' }),
-    resolve({browser: true}),
+    resolve({ browser: true }),
     commonjs(),
     production && uglify(),
-    !production && browsersync({server: folders, files: folders})
+    !production && browsersync({ server: folders, files: folders })
   ]
 }, {
   input: 'src/index.js',

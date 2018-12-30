@@ -1,6 +1,6 @@
 // @flow
 /* global HTMLElement */
-import type {Cancel} from './types'
+import type { Cancel } from './types'
 
 export default (node: HTMLElement, onAdded: void => void, onRemoved: void => void): Cancel => {
   const isReady = (is: boolean) => is ? onAdded() : onRemoved()
@@ -19,7 +19,7 @@ export default (node: HTMLElement, onAdded: void => void, onRemoved: void => voi
         wasInDOM = true
       }
     })
-    observer.observe(document, {childList: true, subtree: true})
+    observer.observe(document, { childList: true, subtree: true })
     return () => observer.disconnect()
   } else {
     if (document.body && document.body.contains(node)) isReady(true)

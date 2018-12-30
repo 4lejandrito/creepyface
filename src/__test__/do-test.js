@@ -16,7 +16,7 @@ export default function (img: HTMLImageElement) {
     simulateEvent.simulate(
       element,
       'mousemove',
-      {clientX: point[0], clientY: point[1]}
+      { clientX: point[0], clientY: point[1] }
     )
     expect(img.src).toBe(src)
   }

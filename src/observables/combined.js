@@ -1,6 +1,6 @@
 // @flow
 import Observable from './util/observable'
-import type {Vector} from '../util/algebra'
+import type { Vector } from '../util/algebra'
 
 export default (observables: Array<Observable<Vector>>) => new Observable<Vector>(
   observer => {

@@ -1,8 +1,8 @@
 // @flow
-import {rotate, getAngle, diff, add} from '../../util/algebra'
+import { rotate, getAngle, diff, add } from '../../util/algebra'
 import getElementCenter from 'get-element-center'
-import type {Vector, Angle} from '../../util/algebra'
-import type {CreepyImage} from '../../util/types'
+import type { Vector, Angle } from '../../util/algebra'
+import type { CreepyImage } from '../../util/types'
 
 const center = node => {
   const coords = getElementCenter(node)

@@ -1,8 +1,8 @@
 // @flow
 /* global TouchEvent */
 import Observable from './util/observable'
-import {add} from '../util/algebra'
-import type {Vector} from '../util/algebra'
+import { add } from '../util/algebra'
+import type { Vector } from '../util/algebra'
 
 const observers = []
 

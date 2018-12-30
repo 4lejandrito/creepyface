@@ -4,8 +4,8 @@ import mousePoints from '../observables/mouse'
 import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
 import type Observable from '../observables/util/observable'
-import type {Angle, Vector} from './algebra'
-import type {CreepyImage} from './types'
+import type { Angle, Vector } from './algebra'
+import type { CreepyImage } from './types'
 
 export type Millis = number
 export type Time = Millis
@@ -56,7 +56,7 @@ const getLooks = (look: {[string]: ?string}): Array<Look> => {
   for (const key of Object.keys(look)) {
     const src = look[key]
     if (src) {
-      looks.push({angle: parseFloat(key), src})
+      looks.push({ angle: parseFloat(key), src })
     }
   }
   return looks

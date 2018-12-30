@@ -3,8 +3,8 @@
 import attach from './util/attach'
 import watchElement from './util/watch-element'
 import $ from 'queryselectorall'
-import type {UserOptions} from './util/options'
-import type {Cancel, CreepyImage} from './util/types'
+import type { UserOptions } from './util/options'
+import type { Cancel, CreepyImage } from './util/types'
 
 export default function creepyFace (img: CreepyImage, options?: UserOptions): Cancel {
   let detach = () => {}
