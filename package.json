@@ -23,7 +23,7 @@
     "flow-bin": "^0.89.0",
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
-    "lolex": "^2.1.2",
+    "lolex": "^3.0.0",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-browsersync": "^1.0.0",
