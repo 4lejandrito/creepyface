@@ -2,13 +2,13 @@
 
 Creepyface is a little JavaScript tool (<4K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
 
-[Demo](http://creepyface.io)
+[Demo](https://creepyface.io)
 
 ![Example animated gif of a face following the pointer](example.gif)
 
 ## Usage
 
-The simplest way to create your Creepyface is by using [our wizard](http://creepyface.io/create).
+The simplest way to create your Creepyface is by using [our wizard](https://creepyface.io/create).
 
 ---
 
