@@ -4,19 +4,20 @@
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
 import body from './util/body'
+import type { Cancel } from '../util/types'
 
 jest.mock('image-promise', () => (srcs: string[]) => Promise.resolve(
   srcs.map(src => { const img = new global.Image(); img.src = src; return img })
 ))
 
-export default (registerCreepyface: HTMLImageElement => void) => {
-  let clock, img
+export default (registerCreepyface: HTMLImageElement => Cancel) => {
+  let clock, img, cancel
 
   beforeAll(() => {
     clock = lolex.install()
     img = document.createElement('img')
     body.appendChild(img)
-    registerCreepyface(img)
+    cancel = registerCreepyface(img)
   })
 
   afterAll(() => { clock.uninstall() })
@@ -68,5 +69,23 @@ export default (registerCreepyface: HTMLImageElement => void) => {
     })
 
     it('looks forward', () => expect(img.src).toBe('http://localhost/srcUrl'))
+  })
+
+  describe('after unregistering', () => {
+    beforeAll(() => {
+      cancel()
+      clock.tick(1000)
+    })
+
+    it('does not look forward', () => expect(img.src).toBe('http://localhost/srcUrl'))
+    it('does not hover', () => setsSrc([0, 0], 'http://localhost/srcUrl', img))
+    it('does not look north', () => setsSrc([0, -1], 'http://localhost/srcUrl'))
+    it('does not look north-east', () => setsSrc([1, -1], 'http://localhost/srcUrl'))
+    it('does not look east', () => setsSrc([1, 0], 'http://localhost/srcUrl'))
+    it('does not look south-east', () => setsSrc([1, 1], 'http://localhost/srcUrl'))
+    it('does not look south', () => setsSrc([0, 1], 'http://localhost/srcUrl'))
+    it('does not look south-west', () => setsSrc([-1, 1], 'http://localhost/srcUrl'))
+    it('does not look west', () => setsSrc([-1, 0], 'http://localhost/srcUrl'))
+    it('does not look north-west', () => setsSrc([-1, -1], 'http://localhost/srcUrl'))
   })
 }

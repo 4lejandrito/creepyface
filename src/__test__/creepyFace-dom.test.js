@@ -18,6 +18,6 @@ describe('Using DOM api', () => {
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    creepyFace(img)
+    return creepyFace(img)
   })
 })

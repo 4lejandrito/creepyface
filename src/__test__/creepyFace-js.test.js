@@ -8,7 +8,7 @@ describe('Using JS api', () => {
   doTest(img => {
     img.setAttribute('src', 'srcUrl')
 
-    creepyFace(img, {
+    return creepyFace(img, {
       throttle: 100,
       hover: 'hoverUrl',
       looks: [
