@@ -1,10 +1,7 @@
 [ignore]
-.*/node_modules/.*immutable.*
 
 [include]
 
 [libs]
-
-[lints]
 
 [options]
