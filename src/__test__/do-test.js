@@ -86,5 +86,10 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
     it('does not look south-west', () => setsSrc([-1, 1], 'http://localhost/srcUrl'))
     it('does not look west', () => setsSrc([-1, 0], 'http://localhost/srcUrl'))
     it('does not look north-west', () => setsSrc([-1, -1], 'http://localhost/srcUrl'))
+
+    it('does not have private data', () => {
+      expect(img.creepyFaceCancel).toBeUndefined()
+      expect(img.creepyFaceReachableImages).toBeUndefined()
+    })
   })
 }

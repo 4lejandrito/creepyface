@@ -1,7 +1,7 @@
 // @flow
 import loadImages from 'image-promise'
 import type { Options, ImageURL } from './options'
-import type { CreepyImage } from './types'
+import type { CreepyImage, Cancel } from './types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)
@@ -10,8 +10,9 @@ const getSrcs = (options: Options): Array<ImageURL> => {
   return srcs
 }
 
-export default function preload (img: CreepyImage, options: Options): Promise<void> {
+export default function preload (img: CreepyImage, options: Options): Promise<Cancel> {
   return loadImages(getSrcs(options)).then(imgs => {
     img.creepyFaceReachableImages = imgs
+    return () => { delete img.creepyFaceReachableImages }
   })
 }
