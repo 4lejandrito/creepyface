@@ -2,7 +2,6 @@
 /* global HTMLImageElement */
 import attach from './util/attach'
 import watchElement from './util/watch-element'
-import $ from 'queryselectorall'
 import type { UserOptions } from './util/options'
 import type { Cancel, CreepyImage } from './util/types'
 
@@ -27,6 +26,6 @@ creepyFace.cancel = (img: CreepyImage) => {
   if (img.creepyFaceCancel) img.creepyFaceCancel()
 }
 
-$('img[data-creepy]').forEach(el => {
+[...document.querySelectorAll('img[data-creepy]')].forEach(el => {
   if (el instanceof HTMLImageElement) creepyFace(el)
 })
