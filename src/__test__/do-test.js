@@ -3,7 +3,6 @@
 
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
-import body from './util/body'
 import type { Cancel } from '../util/types'
 
 jest.mock('image-promise', () => (srcs: string[]) => Promise.resolve(
@@ -16,7 +15,8 @@ export default (registerCreepyface: HTMLImageElement => Cancel) => {
   beforeAll(() => {
     clock = lolex.install()
     img = document.createElement('img')
-    body.appendChild(img)
+    const body = document.body
+    if (body) body.appendChild(img)
     cancel = registerCreepyface(img)
   })
 
