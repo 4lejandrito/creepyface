@@ -7,16 +7,24 @@ import type { UserOptions } from './util/options'
 import type { Cancel, CreepyImage } from './util/types'
 
 export default function creepyFace (img: CreepyImage, options?: UserOptions): Cancel {
+  creepyFace.cancel(img)
+
   let detach = () => {}
   const stopWatching = watchElement(
     img,
     () => { detach = attach(img, options) },
     () => { detach() }
   )
-  return () => {
+  const cancel = img.creepyFaceCancel = () => {
     stopWatching()
     detach()
+    delete img.creepyFaceCancel
   }
+  return cancel
+}
+
+creepyFace.cancel = (img: CreepyImage) => {
+  if (img.creepyFaceCancel) img.creepyFaceCancel()
 }
 
 $('img[data-creepy]').forEach(el => {

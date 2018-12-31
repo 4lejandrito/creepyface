@@ -46,6 +46,11 @@ If you want to customize it even more you can use our declarative data-attribute
 
     You can add as many Creepyfaces as you want as long as they all have the `data-creepy` attribute.
 
+    If you want to stop Creepyface on a given image:
+    ```js
+    creepyFace.cancel(document.querySelector('img'))
+    ```
+
 ## Advanced usage
 
 For more advanced use cases Creepyface can also be set up via a programmatic API:

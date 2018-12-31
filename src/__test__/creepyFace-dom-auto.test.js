@@ -18,14 +18,8 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    window.MutationObserver = function (listener) {
-      const interval = setInterval(listener, 100)
+    const creepyFace = require('../index').default
 
-      return { observe: () => {}, disconnect: () => { clearInterval(interval) } }
-    }
-
-    require('../index')
-
-    return () => img.remove()
+    return () => { creepyFace.cancel(img) }
   })
 })
