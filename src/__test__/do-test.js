@@ -71,10 +71,7 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
   })
 
   describe('after unregistering', () => {
-    beforeAll(() => {
-      cancel()
-      clock.tick(1000)
-    })
+    beforeAll(() => { cancel() })
 
     it('does not look forward', () => expect(img.src).toBe('http://localhost/srcUrl'))
     it('does not hover', () => setsSrc([0, 0], 'http://localhost/srcUrl', img))
