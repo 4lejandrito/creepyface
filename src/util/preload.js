@@ -12,6 +12,6 @@ const getSrcs = (options: Options): Array<ImageURL> => {
 
 export default function preload (img: CreepyImage, options: Options): Promise<void> {
   return loadImages(getSrcs(options)).then(imgs => {
-    (img: Object).creepyFaceReachableImages = imgs
+    img.creepyFaceReachableImages = imgs
   })
 }
