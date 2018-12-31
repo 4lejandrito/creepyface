@@ -34,7 +34,7 @@ If you want to customize it even more you can use our declarative data-attribute
     />
     ```
 
-    The `data-src-look` specify degrees (0 - 360).
+    The `data-src-look` attributes must be set to degrees (0 - 360).
 
 3. Include Creepyface script at the end of your page:
 
