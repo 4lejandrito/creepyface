@@ -13,7 +13,7 @@ export default [{
   output: {
     file: pkg.browser,
     format: 'umd',
-    name: 'creepyFace'
+    name: 'creepyface'
   },
   plugins: [
     babel({ exclude: 'node_modules/**' }),

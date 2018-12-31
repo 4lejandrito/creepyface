@@ -2,13 +2,13 @@
 /* global describe */
 
 import doTest from './do-test'
-import creepyFace from '../index'
+import creepyface from '../index'
 
 describe('Using JS api', () => {
   doTest(img => {
     img.setAttribute('src', 'srcUrl')
 
-    return creepyFace(img, {
+    return creepyface(img, {
       throttle: 100,
       hover: 'hoverUrl',
       looks: [

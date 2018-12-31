@@ -12,7 +12,7 @@ const getSrcs = (options: Options): Array<ImageURL> => {
 
 export default function preload (img: CreepyImage, options: Options): Promise<Cancel> {
   return loadImages(getSrcs(options)).then(imgs => {
-    img.creepyFaceReachableImages = imgs
-    return () => { delete img.creepyFaceReachableImages }
+    img.creepyfaceReachableImages = imgs
+    return () => { delete img.creepyfaceReachableImages }
   })
 }

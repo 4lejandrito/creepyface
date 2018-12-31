@@ -48,7 +48,7 @@ If you want to customize it even more you can use our declarative data-attribute
 
     If you want to stop Creepyface on a given image:
     ```js
-    creepyFace.cancel(document.querySelector('img'))
+    creepyface.cancel(document.querySelector('img'))
     ```
 
 ## Advanced usage
@@ -56,11 +56,11 @@ If you want to customize it even more you can use our declarative data-attribute
 For more advanced use cases Creepyface can also be set up via a programmatic API:
 
 ```js
-import creepyFace from 'creepyface'
+import creepyface from 'creepyface'
 
 const faceImg = document.querySelector('img#face')
 
-const cancel = creepyFace(faceImg, {
+const cancel = creepyface(faceImg, {
   throttle: 100, // Number of milliseconds to wait between src updates
   hover: 'img/face/crazy.jpg', // Image URL to display on hover
   looks: [ // Each of the images looking at a given direction

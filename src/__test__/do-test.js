@@ -33,10 +33,10 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
   }
 
   it('caches the preloaded images', () => {
-    if (!img.creepyFaceReachableImages) {
+    if (!img.creepyfaceReachableImages) {
       throw new Error('No images have been cached')
     }
-    const preloadedSrcs = img.creepyFaceReachableImages.map(img => img.src)
+    const preloadedSrcs = img.creepyfaceReachableImages.map(img => img.src)
     expect(preloadedSrcs).toContain('http://localhost/srcUrl')
     expect(preloadedSrcs).toContain('http://localhost/hoverUrl')
     expect(preloadedSrcs).toContain('http://localhost/northUrl')
@@ -85,8 +85,8 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
     it('does not look north-west', () => setsSrc([-1, -1], 'http://localhost/srcUrl'))
 
     it('does not have private data', () => {
-      expect(img.creepyFaceCancel).toBeUndefined()
-      expect(img.creepyFaceReachableImages).toBeUndefined()
+      expect(img.creepyfaceCancel).toBeUndefined()
+      expect(img.creepyfaceReachableImages).toBeUndefined()
     })
   })
 }

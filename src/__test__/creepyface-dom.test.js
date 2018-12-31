@@ -2,11 +2,11 @@
 /* global describe */
 
 import doTest from './do-test'
+import creepyface from '../index'
 
-describe('Using automatic DOM api (via data-creepy attribute)', () => {
+describe('Using DOM api', () => {
   doTest(img => {
     img.setAttribute('src', 'srcUrl')
-    img.setAttribute('data-creepy', '')
     img.setAttribute('data-throttle', '100')
     img.setAttribute('data-src-hover', 'hoverUrl')
     img.setAttribute('data-src-look-0', 'northUrl')
@@ -18,8 +18,6 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    const creepyFace = require('../index').default
-
-    return () => { creepyFace.cancel(img) }
+    return creepyface(img)
   })
 })
