@@ -1,6 +1,10 @@
 {
   "name": "creepyface",
   "version": "3.6.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/4lejandrito/creepyface.git"
+  },
   "author": "Alejandro Tardín <alejandro@tardin.com>",
   "license": "MIT",
   "files": [
