@@ -12,7 +12,7 @@ export default function creepyFace (img: CreepyImage, options?: UserOptions): Ca
   const stopWatching = watchElement(
     img,
     () => { detach = attach(img, options) },
-    () => { detach() }
+    () => cancel()
   )
   const cancel = img.creepyFaceCancel = () => {
     stopWatching()
