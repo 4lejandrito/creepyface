@@ -1,5 +1,5 @@
 // @flow
-/* global jest, it, describe, afterAll, beforeAll, beforeEach, expect */
+/* global jest, it, describe, afterAll, beforeAll, beforeEach, expect, TouchEvent */
 
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
@@ -29,6 +29,12 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
       'mousemove',
       { clientX: point[0], clientY: point[1] }
     )
+    expect(img.src).toBe(src)
+    clock.tick(1000)
+    expect(img.src).toBe('http://localhost/srcUrl')
+    element.dispatchEvent(new TouchEvent('touchmove', {
+      touches: [{ clientX: point[0], clientY: point[1] }]
+    }))
     expect(img.src).toBe(src)
   }
 
