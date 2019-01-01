@@ -56,7 +56,13 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
   })
 
   it('has the original src by default', () => expect(img.src).toBe('http://localhost/srcUrl'))
-  it('hovers', () => setsSrc([0, 0], 'http://localhost/hoverUrl', img))
+  it('hovers', () => {
+    setsSrc([0, 0], 'http://localhost/hoverUrl', img)
+    clock.tick(1000);
+    (document: Object).elementFromPoint = (x, y) => (x === 0 && y === 0) ? img : document
+    setsSrc([0, 0], 'http://localhost/hoverUrl', img)
+    delete document.elementFromPoint
+  })
 
   it('looks north', () => setsSrc([0, -1], 'http://localhost/northUrl'))
   it('looks north-east', () => setsSrc([1, -1], 'http://localhost/northEastUrl'))
