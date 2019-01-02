@@ -6,7 +6,6 @@ import pkg from './package.json'
 import browsersync from 'rollup-plugin-browsersync'
 
 const production = process.env.NODE_ENV === 'production'
-const folders = ['example', 'dist']
 
 export default [{
   input: 'src/index.js',
@@ -20,7 +19,7 @@ export default [{
     resolve({ browser: true }),
     commonjs(),
     production && uglify(),
-    !production && browsersync({ server: folders, files: folders })
+    !production && browsersync({ server: ['test', '.'] })
   ]
 }, {
   input: 'src/index.js',

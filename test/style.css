@@ -1,0 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  max-width: 15%;
+}
