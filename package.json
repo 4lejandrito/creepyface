@@ -54,11 +54,11 @@
     "lodash.throttle": "^4.1.1"
   },
   "scripts": {
-    "prepublishOnly": "NODE_ENV=production npm run build",
+    "prepublishOnly": "npm run test && npm run build",
     "start": "rollup -c -w",
-    "build": "rollup -c",
+    "build": "NODE_ENV=production rollup -c",
     "test": "flow --quiet && standard && jest",
-    "test:coveralls": "flow --quiet && standard && jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test:coveralls": "npm run test --  --coverage && cat ./coverage/lcov.info | coveralls",
     "fix": "standard --fix"
   },
   "standard": {
@@ -68,6 +68,11 @@
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      ".*test.*"
     ]
   }
 }
