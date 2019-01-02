@@ -31,7 +31,7 @@ export default (img: CreepyImage, point: Vector, angle: Angle, options: Options)
     src = hover
   } else {
     const closestLook = closest(angle, looks)
-    if (closestLook && Math.abs(shortest(closestLook.angle - angle)) < fieldOfVision / 2) {
+    if (Math.abs(shortest(closestLook.angle - angle)) < fieldOfVision / 2) {
       src = closestLook.src
     }
   }
