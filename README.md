@@ -1,10 +1,10 @@
 # [Creepyface](https://creepyface.io) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface) [![Build Status](https://api.travis-ci.org/4lejandrito/creepyface.svg?branch=master)](https://travis-ci.org/4lejandrito/creepyface) [![Coverage Status](https://coveralls.io/repos/github/4lejandrito/creepyface/badge.svg?branch=master)](https://coveralls.io/github/4lejandrito/creepyface?branch=master)
 
-Creepyface is a little JavaScript tool (<4K minified & gzipped) that makes your face follow the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
+Creepyface is a little JavaScript tool (<4K minified & gzipped) that makes your face look at the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
 
 [Demo](https://creepyface.io)
 
-![Example animated gif of a face following the pointer](example.gif)
+![Example animated gif of a face looking at the pointer](example.gif)
 
 ## Usage
 
@@ -42,7 +42,7 @@ If you want to customize it even more you can use our declarative data-attribute
     <script type="text/javascript" src="creepyface.umd.js"></script>
     ```
 
-    Creepyface will automatically detect your image (thanks to the `data-creepy` attribute) and make it follow the mouse or fingers depending on which device you are using.
+    Creepyface will automatically detect your image (thanks to the `data-creepy` attribute) and make it look at the mouse or fingers depending on which device you are using.
 
     You can add as many Creepyfaces as you want as long as they all have the `data-creepy` attribute.
 
