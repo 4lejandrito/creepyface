@@ -5,3 +5,4 @@
 [libs]
 
 [options]
+include_warnings=true

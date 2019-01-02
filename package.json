@@ -57,8 +57,8 @@
     "prepublishOnly": "NODE_ENV=production npm run build",
     "start": "rollup -c -w",
     "build": "rollup -c",
-    "test": "flow --include-warnings --quiet && standard && jest",
-    "test:coveralls": "flow --include-warnings --quiet && standard && jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test": "flow --quiet && standard && jest",
+    "test:coveralls": "flow --quiet && standard && jest --coverage && cat ./coverage/lcov.info | coveralls",
     "fix": "standard --fix"
   },
   "standard": {
