@@ -1,6 +1,7 @@
 {
   "name": "creepyface",
   "version": "4.0.0",
+  "keywords": ["face", "look", "mouse", "pointer", "finger", "follow", "creepy"],
   "repository": {
     "type": "git",
     "url": "https://github.com/4lejandrito/creepyface.git"
