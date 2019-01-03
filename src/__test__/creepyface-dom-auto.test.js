@@ -1,7 +1,8 @@
 // @flow
-/* global describe */
+/* global describe, Event */
 
 import doTest from './do-test'
+import creepyface from '../index'
 
 describe('Using automatic DOM api (via data-creepy attribute)', () => {
   doTest(img => {
@@ -18,7 +19,10 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    const creepyface = require('../index').default
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+      bubbles: true,
+      cancelable: true
+    }))
 
     return () => { creepyface.cancel(img) }
   })

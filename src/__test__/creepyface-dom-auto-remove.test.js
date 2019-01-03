@@ -1,7 +1,8 @@
 // @flow
-/* global describe */
+/* global describe, Event */
 
 import doTest from './do-test'
+import '../index'
 
 describe('Using automatic DOM api (via data-creepy attribute) removing from the DOM', () => {
   doTest(img => {
@@ -24,7 +25,10 @@ describe('Using automatic DOM api (via data-creepy attribute) removing from the 
       return { observe: () => {}, disconnect: () => { clearInterval(interval) } }
     }
 
-    require('../index')
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+      bubbles: true,
+      cancelable: true
+    }))
 
     return () => img.remove()
   })

@@ -36,7 +36,7 @@ If you want to customize it even more you can use our declarative data-attribute
 
     The `data-src-look` attributes must be set to degrees (0 - 360).
 
-3. Include Creepyface script at the end of your page:
+3. Include Creepyface script in your page:
 
     ```html
     <script type="text/javascript" src="creepyface.umd.js"></script>

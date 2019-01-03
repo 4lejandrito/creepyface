@@ -26,6 +26,8 @@ creepyface.cancel = (img: CreepyImage) => {
   if (img.creepyfaceCancel) img.creepyfaceCancel()
 }
 
-[...document.querySelectorAll('img[data-creepy]')].forEach(el => {
-  if (el instanceof HTMLImageElement) creepyface(el)
+document.addEventListener('DOMContentLoaded', () => {
+  [...document.querySelectorAll('img[data-creepy]')].forEach(el => {
+    if (el instanceof HTMLImageElement) creepyface(el)
+  })
 })
