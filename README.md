@@ -59,13 +59,15 @@ For more advanced use cases Creepyface can also be set up via a programmatic API
 ```js
 import creepyface from 'creepyface'
 
-const faceImg = document.querySelector('img#face')
+const img = document.querySelector('img#face')
 
-const cancel = creepyface(faceImg, {
-  throttle: 100, // Number of milliseconds to wait between src updates
-  hover: 'img/face/crazy.jpg', // Image URL to display on hover
+const cancel = creepyface(img, {
+  // Time (in ms) to wait between src updates
+  throttle: 100,
+  // Image URL to display on hover
+  hover: 'img/face/crazy.jpg',
+  // Each of the images looking at a given direction
   looks: [
-    // Each of the images looking at a given direction
     { angle: 0, src: 'img/face/north.jpg' },
     { angle: 45, src: 'img/face/north-east.jpg' },
     { angle: 90, src: 'img/face/east.jpg' },
@@ -75,11 +77,12 @@ const cancel = creepyface(faceImg, {
     { angle: 270, src: 'img/face/west.jpg' },
     { angle: 315, src: 'img/face/north-west.jpg' }
   ],
-  timeToDefault: 1000 // Time (in ms) to show back the default image after no input is detected
+  // Time (in ms) to restore the default image after the last input
+  timeToDefault: 1000
 })
 
-// at some point
-cancel() // will restore the original image and stop creepyface
+// at some point restore the original image and stop creepyface
+cancel()
 ```
 
 ## Developing
