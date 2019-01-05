@@ -1,8 +1,12 @@
 import { Cancel } from './types'
 import noop from './noop'
 
-export default (node: HTMLElement, onAdded: () => void, onRemoved: () => void): Cancel => {
-  const isReady = (is: boolean) => is ? onAdded() : onRemoved()
+export default (
+  node: HTMLElement,
+  onAdded: () => void,
+  onRemoved: () => void
+): Cancel => {
+  const isReady = (is: boolean) => (is ? onAdded() : onRemoved())
   if (MutationObserver) {
     let wasInDOM = document.body && document.body.contains(node)
     if (wasInDOM) isReady(true)

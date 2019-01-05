@@ -11,45 +11,45 @@ export type Millis = number
 export type Time = Millis
 export type ImageURL = string
 export type Look = {
-  src: ImageURL,
+  src: ImageURL
   angle: Angle
 }
 export type CreepyData = {
-  point?: Vector,
-  angle?: Angle,
-  src: string,
+  point?: Vector
+  angle?: Angle
+  src: string
   options: Options
 }
 export type Debug = (data: CreepyData) => void
 export type EventListener = () => void
 export type Options = {
-  fieldOfVision: Angle,
-  src: ImageURL,
-  hover?: ImageURL,
-  looks: Array<Look>,
-  points: Observable<Vector>,
-  timeToDefault: Time,
-  resetOnCancel: boolean,
-  throttle: Time,
-  onDebug: Debug,
-  onAttach: EventListener,
+  fieldOfVision: Angle
+  src: ImageURL
+  hover?: ImageURL
+  looks: Array<Look>
+  points: Observable<Vector>
+  timeToDefault: Time
+  resetOnCancel: boolean
+  throttle: Time
+  onDebug: Debug
+  onAttach: EventListener
   onDetach: EventListener
 }
 export type UserOptions = {
-  fieldOfVision?: Angle,
-  src?: ImageURL,
-  hover?: ImageURL,
-  looks?: Array<Look>,
-  points?: Observable<Vector>,
-  timeToDefault?: Time,
-  resetOnCancel?: boolean,
-  throttle?: Time,
-  onDebug?: Debug,
-  onAttach?: EventListener,
+  fieldOfVision?: Angle
+  src?: ImageURL
+  hover?: ImageURL
+  looks?: Array<Look>
+  points?: Observable<Vector>
+  timeToDefault?: Time
+  resetOnCancel?: boolean
+  throttle?: Time
+  onDebug?: Debug
+  onAttach?: EventListener
   onDetach?: EventListener
 }
 
-const getLooks = (look: {[key: string]: string | null }): Array<Look> => {
+const getLooks = (look: { [key: string]: string | null }): Array<Look> => {
   const looks: Array<Look> = []
   for (const key of Object.keys(look)) {
     const src = look[key]
@@ -60,9 +60,13 @@ const getLooks = (look: {[key: string]: string | null }): Array<Look> => {
   return looks
 }
 
-function fromImage (element: CreepyImage): UserOptions {
+function fromImage(element: CreepyImage): UserOptions {
   const {
-    src = {}, fieldofvision, timetodefault, resetoncancel, throttle
+    src = {},
+    fieldofvision,
+    timetodefault,
+    resetoncancel,
+    throttle
   } = parseDataAttributes(element)
   const options: UserOptions = {
     src: element.getAttribute('src') || undefined
@@ -78,7 +82,10 @@ function fromImage (element: CreepyImage): UserOptions {
   return options
 }
 
-export default function getOptions (img: CreepyImage, options: UserOptions = {}): Options {
+export default function getOptions(
+  img: CreepyImage,
+  options: UserOptions = {}
+): Options {
   const userOptions = Object.assign({}, fromImage(img), options)
 
   if (!userOptions.src) throw new Error('A default URL must be specified')

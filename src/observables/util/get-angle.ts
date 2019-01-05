@@ -7,6 +7,7 @@ const center = (node: HTMLElement) => {
   return [coords.x, coords.y]
 }
 
-export default (img: CreepyImage, point: Vector): Angle => (
-  getAngle(rotate(diff(add([window.scrollX, window.scrollY], point), center(img)), 90))
-)
+export default (img: CreepyImage, point: Vector): Angle =>
+  getAngle(
+    rotate(diff(add([window.scrollX, window.scrollY], point), center(img)), 90)
+  )

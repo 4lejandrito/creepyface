@@ -8,26 +8,28 @@ const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
   creepyface.cancel(img)
 
   let detach: Cancel = noop
-  const creepyImage = (img as CreepyImage)
+  const creepyImage = img as CreepyImage
   const stopWatching = watchElement(
     img,
-    () => { detach = attach(creepyImage, options) },
+    () => {
+      detach = attach(creepyImage, options)
+    },
     () => creepyface.cancel(img)
   )
-  return creepyImage.creepyfaceCancel = () => {
+  return (creepyImage.creepyfaceCancel = () => {
     stopWatching()
     detach()
     delete creepyImage.creepyfaceCancel
-  }
+  })
 }
 
 creepyface.cancel = (img: HTMLImageElement) => {
-  const creepyImage = (img as CreepyImage)
+  const creepyImage = img as CreepyImage
   if (creepyImage.creepyfaceCancel) creepyImage.creepyfaceCancel()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  [...document.querySelectorAll('img[data-creepy]')].forEach(el => {
+  ;[...document.querySelectorAll('img[data-creepy]')].forEach(el => {
     if (el instanceof HTMLImageElement) creepyface(el)
   })
 })

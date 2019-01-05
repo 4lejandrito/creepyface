@@ -7,29 +7,35 @@ import browsersync from 'rollup-plugin-browsersync'
 
 const production = process.env.NODE_ENV === 'production'
 
-export default [{
-  input: 'dist/creepyface.js',
-  output: {
-    file: pkg.browser,
-    format: 'umd',
-    name: 'creepyface'
+export default [
+  {
+    input: 'dist/creepyface.js',
+    output: {
+      file: pkg.browser,
+      format: 'umd',
+      name: 'creepyface'
+    },
+    plugins: [
+      babel({ exclude: 'node_modules/**' }),
+      resolve({ browser: true }),
+      commonjs(),
+      production && uglify(),
+      !production && browsersync({ server: ['test', '.'] })
+    ]
   },
-  plugins: [
-    babel({ exclude: 'node_modules/**' }),
-    resolve({ browser: true }),
-    commonjs(),
-    production && uglify(),
-    !production && browsersync({ server: ['test', '.'] })
-  ]
-}, {
-  input: 'dist/creepyface.js',
-  external: Object.keys(pkg.dependencies),
-  plugins: [babel({ exclude: 'node_modules/**' })],
-  output: [{
-    file: pkg.main,
-    format: 'cjs'
-  }, {
-    file: pkg.module,
-    format: 'es'
-  }]
-}]
+  {
+    input: 'dist/creepyface.js',
+    external: Object.keys(pkg.dependencies),
+    plugins: [babel({ exclude: 'node_modules/**' })],
+    output: [
+      {
+        file: pkg.main,
+        format: 'cjs'
+      },
+      {
+        file: pkg.module,
+        format: 'es'
+      }
+    ]
+  }
+]

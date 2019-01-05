@@ -1,16 +1,16 @@
 declare module 'data-attrs-to-js' {
   type Return = {
-    timetodefault?: string,
-    fieldofvision?: string,
-    resetoncancel?: string,
-    throttle?: string,
+    timetodefault?: string
+    fieldofvision?: string
+    resetoncancel?: string
+    throttle?: string
     src?: {
-      hover?: string,
+      hover?: string
       look?: {
         [angle: string]: string
       }
     }
   }
-  function dataAttrsToJs (node: HTMLElement): Return
+  function dataAttrsToJs(node: HTMLElement): Return
   export default dataAttrsToJs
 }

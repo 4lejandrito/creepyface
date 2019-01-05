@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-- '10'
+  - '10'
 addons:
-  firefox: "64.0"
+  firefox: '64.0'
 script:
   - npm run travis

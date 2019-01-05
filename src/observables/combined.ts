@@ -1,10 +1,9 @@
 import Observable from './util/observable'
 import { Vector } from '../util/algebra'
 
-export default (observables: Array<Observable<Vector>>) => new Observable<Vector>(
-  observer => {
+export default (observables: Array<Observable<Vector>>) =>
+  new Observable<Vector>(observer => {
     const next = observer.next.bind(observer)
     const subscriptions = observables.map(o => o.subscribe(next))
     return () => subscriptions.forEach(s => s.unsubscribe())
-  }
-)
+  })

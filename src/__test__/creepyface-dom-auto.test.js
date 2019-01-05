@@ -16,11 +16,15 @@ describe('Using automatic DOM api (via data-creepy attribute)', () => {
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    window.document.dispatchEvent(new Event('DOMContentLoaded', {
-      bubbles: true,
-      cancelable: true
-    }))
+    window.document.dispatchEvent(
+      new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true
+      })
+    )
 
-    return () => { creepyface.cancel(img) }
+    return () => {
+      creepyface.cancel(img)
+    }
   })
 })

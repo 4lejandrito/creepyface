@@ -5,7 +5,9 @@ import { Cancel, CreepyImage } from './types'
 
 export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
-  const setSrc = (src: string) => { img.src = src }
+  const setSrc = (src: string) => {
+    img.src = src
+  }
   const preloaded = preload(img, options)
   const subscribed = preloaded.then(() => {
     options.onAttach()

@@ -16,10 +16,12 @@ describe('Using automatic DOM api (via data-creepy attribute) removing from the 
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
 
-    window.document.dispatchEvent(new Event('DOMContentLoaded', {
-      bubbles: true,
-      cancelable: true
-    }))
+    window.document.dispatchEvent(
+      new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true
+      })
+    )
 
     return () => img.remove()
   })
