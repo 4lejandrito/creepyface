@@ -1,8 +1,5 @@
-// @flow
-/* global describe, Event */
-
 import doTest from './do-test'
-import creepyface from '../index'
+import creepyface from '../creepyface'
 
 describe('Using automatic DOM api (via data-creepy attribute)', () => {
   doTest(img => {

@@ -1,8 +1,5 @@
-// @flow
-/* global describe */
-
 import doTest from './do-test'
-import creepyface from '../index'
+import creepyface from '../creepyface'
 
 describe('Using JS api', () => {
   doTest(img => {

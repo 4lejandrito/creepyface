@@ -1,11 +1,10 @@
-// @flow
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import debounce from 'debounce'
 import Observable from './util/observable'
 import throttle from 'lodash.throttle'
-import type { Options, CreepyData } from '../util/options'
-import type { CreepyImage } from '../util/types'
+import { Options, CreepyData } from '../util/options'
+import { CreepyImage } from '../util/types'
 
 export default (img: CreepyImage, options: Options): Observable<CreepyData> => (
   new Observable(observer => {

@@ -1,11 +1,8 @@
-// @flow
-/* global HTMLElement */
-import type { Cancel } from './types'
+import { Cancel } from './types'
+import noop from './noop'
 
-export default (node: HTMLElement, onAdded: void => void, onRemoved: void => void): Cancel => {
+export default (node: HTMLElement, onAdded: () => void, onRemoved: () => void): Cancel => {
   const isReady = (is: boolean) => is ? onAdded() : onRemoved()
-  const MutationObserver = window.MutationObserver
-
   if (MutationObserver) {
     let wasInDOM = document.body && document.body.contains(node)
     if (wasInDOM) isReady(true)
@@ -25,6 +22,6 @@ export default (node: HTMLElement, onAdded: void => void, onRemoved: void => voi
     if (document.body && document.body.contains(node)) isReady(true)
     node.addEventListener('DOMNodeInserted', () => isReady(true), false)
     node.addEventListener('DOMNodeRemoved', () => isReady(false), false)
-    return () => {}
+    return noop
   }
 }

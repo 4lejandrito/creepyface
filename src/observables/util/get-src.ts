@@ -1,21 +1,19 @@
-// @flow
-import { sign } from '../../util/algebra'
-import type { Options, ImageURL } from '../../util/options'
-import type { Vector, Angle } from '../../util/algebra'
-import type { CreepyImage } from '../../util/types'
+import { sign, Vector, Angle } from '../../util/algebra'
+import { Options, ImageURL, Look } from '../../util/options'
+import { CreepyImage } from '../../util/types'
 
 const shortest = (angle: number) => (
   Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle
 )
-const compare = angle => (a, b) => (
+const compare = (angle: number) => (a: Look, b: Look) => (
   Math.abs(shortest(a.angle - angle)) - Math.abs(shortest(b.angle - angle))
 )
-const closest = (angle, looks) => looks.slice(0).sort(compare(angle))[0]
-const within = (n, a, b) => n >= a && n <= b
-const rectContains = ({ left, top, right, bottom }, [x, y]) => (
+const closest = (angle: number, looks: Look[]) => looks.slice(0).sort(compare(angle))[0]
+const within = (n: number, a: number, b: number) => n >= a && n <= b
+const rectContains = ({ left, top, right, bottom }: ClientRect | DOMRect, [x, y]: Vector) => (
   within(x, left, right) && within(y, top, bottom)
 )
-const elementContains = (img, [x, y]) => {
+const elementContains = (img: CreepyImage, [x, y]: Vector) => {
   if (document.elementFromPoint) {
     return document.elementFromPoint(x, y) === img
   } else {

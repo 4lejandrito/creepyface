@@ -1,10 +1,7 @@
-// @flow
-/* global TouchEvent */
-import Observable from './util/observable'
-import { add } from '../util/algebra'
-import type { Vector } from '../util/algebra'
+import Observable, { Observer } from './util/observable'
+import { add, Vector } from '../util/algebra'
 
-const observers = []
+const observers: Observer<Vector>[] = []
 
 document.addEventListener(
   'touchmove',

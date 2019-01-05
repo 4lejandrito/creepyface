@@ -1,13 +1,11 @@
-// @flow
 import preload from './preload'
-import getOptions from './options'
+import getOptions, { UserOptions } from './options'
 import creepy from '../observables/creepy'
-import type { UserOptions } from './options'
-import type { Cancel, CreepyImage } from './types'
+import { Cancel, CreepyImage } from './types'
 
 export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
-  const setSrc = src => { img.src = src }
+  const setSrc = (src: string) => { img.src = src }
   const preloaded = preload(img, options)
   const subscribed = preloaded.then(() => {
     options.onAttach()
@@ -17,10 +15,12 @@ export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
     })
   })
 
-  return () => subscribed.then(subscription => {
-    preloaded.then(unload => unload())
+  return async () => {
+    const subscription = await subscribed
+    const unload = await preloaded
     subscription.unsubscribe()
+    unload()
     if (options.resetOnCancel) setSrc(options.src)
     options.onDetach()
-  })
+  }
 }

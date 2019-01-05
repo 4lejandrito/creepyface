@@ -4,4 +4,4 @@ node_js:
 addons:
   firefox: "64.0"
 script:
-  - npm run test:coveralls
+  - npm run travis

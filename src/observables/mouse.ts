@@ -1,9 +1,7 @@
-// @flow
-/* global MouseEvent */
-import Observable from './util/observable'
-import type { Vector } from '../util/algebra'
+import Observable, { Observer } from './util/observable'
+import { Vector } from '../util/algebra'
 
-const observers = []
+const observers: Observer<Vector>[] = []
 
 document.addEventListener(
   'mousemove',

@@ -1,5 +1,3 @@
-// @flow
-/* global jest, it, describe, afterAll, beforeAll, expect */
 const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
 const url = path => `file://${__dirname}/${path}`

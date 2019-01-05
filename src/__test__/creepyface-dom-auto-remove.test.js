@@ -1,8 +1,5 @@
-// @flow
-/* global describe, Event */
-
 import doTest from './do-test'
-import '../index'
+import '../creepyface'
 
 describe('Using automatic DOM api (via data-creepy attribute) removing from the DOM', () => {
   doTest(img => {
@@ -18,12 +15,6 @@ describe('Using automatic DOM api (via data-creepy attribute) removing from the 
     img.setAttribute('data-src-look-225', 'southWestUrl')
     img.setAttribute('data-src-look-270', 'westUrl')
     img.setAttribute('data-src-look-315', 'northWestUrl')
-
-    window.MutationObserver = function (listener) {
-      const interval = setInterval(listener, 100)
-
-      return { observe: () => {}, disconnect: () => { clearInterval(interval) } }
-    }
 
     window.document.dispatchEvent(new Event('DOMContentLoaded', {
       bubbles: true,

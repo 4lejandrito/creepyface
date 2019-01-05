@@ -1,7 +1,6 @@
-// @flow
 import loadImages from 'image-promise'
-import type { Options, ImageURL } from './options'
-import type { CreepyImage, Cancel } from './types'
+import { Options, ImageURL } from './options'
+import { CreepyImage, Cancel } from './types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)

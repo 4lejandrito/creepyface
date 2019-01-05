@@ -22,23 +22,24 @@
   "main": "dist/creepyface.cjs.js",
   "module": "dist/creepyface.esm.js",
   "browser": "dist/creepyface.umd.js",
+  "types": "dist/creepyface.d.ts",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-env": "^7.2.3",
-    "@babel/preset-flow": "^7.0.0",
+    "@types/debounce": "^1.2.0",
+    "@types/jest": "^23.3.11",
+    "@types/lodash.throttle": "^4.1.4",
     "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.1",
     "babel-jest": "^23.6.0",
-    "coveralls": "^3.0.2",
     "chromedriver": "^2.45.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.11.1",
-    "eslint-plugin-flowtype": "^3.2.0",
-    "flow-bin": "^0.89.0",
-    "flow-typed": "^2.5.1",
     "geckodriver": "^1.14.1",
     "jest": "^23.6.0",
     "lolex": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3",
     "rollup": "^1.0.0",
     "rollup-plugin-babel": "^4.2.0",
     "rollup-plugin-browsersync": "^1.0.0",
@@ -47,7 +48,11 @@
     "rollup-plugin-uglify": "^6.0.0",
     "selenium-webdriver": "^4.0.0-alpha.1",
     "simulate-event": "^1.4.0",
-    "standard": "^12.0.1"
+    "standard": "^12.0.1",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.2.2"
   },
   "dependencies": {
     "data-attrs-to-js": "^1.1.1",
@@ -57,25 +62,16 @@
     "lodash.throttle": "^4.1.1"
   },
   "scripts": {
-    "prepublishOnly": "npm run test",
-    "start": "rollup -c -w",
-    "build": "NODE_ENV=production rollup -c",
-    "test": "flow --quiet && standard && npm run build && jest",
-    "test:coveralls": "npm run test --  --coverage && cat ./coverage/lcov.info | coveralls",
-    "fix": "standard --fix"
-  },
-  "standard": {
-    "ignore": [
-      "flow-typed/"
-    ],
-    "parser": "babel-eslint",
-    "plugins": [
-      "flowtype"
-    ]
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      ".*test.*"
-    ]
+    "all": "run-s clean lint build test",
+    "travis": "run-s clean lint build test:coverage",
+    "prepublishOnly": "npm run all",
+    "start": "npm run build:ts && run-p \"build:* -- -w\"",
+    "lint": "tslint --project tsconfig.json",
+    "build:ts": "tsc",
+    "build:umd": "rollup -c",
+    "build": "NODE_ENV=production run-s build:*",
+    "clean": "rimraf dist",
+    "test": "jest",
+    "test:coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   }
 }

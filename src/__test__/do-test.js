@@ -1,18 +1,19 @@
-// @flow
-/* global jest, it, describe, afterAll, beforeAll, beforeEach, expect, TouchEvent */
-
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
-import type { Cancel, CreepyImage } from '../util/types'
 
-jest.mock('image-promise', () => (srcs: string[]) => Promise.resolve(
+jest.mock('image-promise', () => srcs => Promise.resolve(
   srcs.map(src => { const img = new global.Image(); img.src = src; return img })
 ))
 
-export default (registerCreepyface: CreepyImage => Cancel) => {
-  let clock, img: CreepyImage, cancel
+export default registerCreepyface => {
+  let clock, img, cancel
 
   beforeAll(() => {
+    global['MutationObserver'] = function (listener) {
+      const interval = setInterval(listener, 100)
+
+      return { observe: () => {}, disconnect: () => { clearInterval(interval) } }
+    }
     clock = lolex.install()
     img = document.createElement('img')
     const body = document.body
@@ -20,7 +21,10 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
     cancel = registerCreepyface(img)
   })
 
-  afterAll(() => { clock.uninstall() })
+  afterAll(() => {
+    delete global['MutationObserver']
+    clock.uninstall()
+  })
 
   function setsSrc (point, src, element = document) {
     clock.tick(100)
@@ -58,8 +62,8 @@ export default (registerCreepyface: CreepyImage => Cancel) => {
   it('has the original src by default', () => expect(img.src).toBe('http://localhost/srcUrl'))
   it('hovers', () => {
     setsSrc([0, 0], 'http://localhost/hoverUrl', img)
-    clock.tick(1000);
-    (document: Object).elementFromPoint = (x, y) => (x === 0 && y === 0) ? img : document
+    clock.tick(1000)
+    document.elementFromPoint = (x, y) => (x === 0 && y === 0) ? img : document
     setsSrc([0, 0], 'http://localhost/hoverUrl', img)
     delete document.elementFromPoint
   })

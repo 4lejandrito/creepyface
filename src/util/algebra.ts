@@ -1,4 +1,3 @@
-// @flow
 export type Vector = Array<number>
 export type Degrees = number
 export type Radians = number

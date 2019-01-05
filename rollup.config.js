@@ -8,7 +8,7 @@ import browsersync from 'rollup-plugin-browsersync'
 const production = process.env.NODE_ENV === 'production'
 
 export default [{
-  input: 'src/index.js',
+  input: 'dist/creepyface.js',
   output: {
     file: pkg.browser,
     format: 'umd',
@@ -22,7 +22,7 @@ export default [{
     !production && browsersync({ server: ['test', '.'] })
   ]
 }, {
-  input: 'src/index.js',
+  input: 'dist/creepyface.js',
   external: Object.keys(pkg.dependencies),
   plugins: [babel({ exclude: 'node_modules/**' })],
   output: [{
