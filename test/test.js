@@ -1,8 +1,10 @@
 // @flow
-/* global it, describe, afterAll, beforeAll, expect */
+/* global jest, it, describe, afterAll, beforeAll, expect */
 const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
 const url = path => `file://${__dirname}/${path}`
+
+jest.setTimeout(10000)
 
 describe('Creepyface', () => {
   ['index.html', 'index-js.html'].forEach(fileName => {
