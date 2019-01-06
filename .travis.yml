@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '10'
 addons:
-  firefox: '64.0'
+  firefox: latest
   chrome: stable
 script:
   - npm run travis
