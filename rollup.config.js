@@ -11,7 +11,7 @@ export default [
   {
     input: 'dist/creepyface.js',
     output: {
-      file: pkg.browser,
+      file: pkg.main,
       format: 'umd',
       name: 'creepyface'
     },
@@ -21,21 +21,6 @@ export default [
       commonjs(),
       production && uglify(),
       !production && browsersync({ server: ['test', '.'] })
-    ]
-  },
-  {
-    input: 'dist/creepyface.js',
-    external: Object.keys(pkg.dependencies),
-    plugins: [babel({ exclude: 'node_modules/**' })],
-    output: [
-      {
-        file: pkg.main,
-        format: 'cjs'
-      },
-      {
-        file: pkg.module,
-        format: 'es'
-      }
     ]
   }
 ]

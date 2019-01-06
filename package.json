@@ -19,9 +19,7 @@
   "files": [
     "dist"
   ],
-  "main": "dist/creepyface.cjs.js",
-  "module": "dist/creepyface.esm.js",
-  "browser": "dist/creepyface.umd.js",
+  "main": "dist/creepyface.umd.js",
   "types": "dist/creepyface.d.ts",
   "devDependencies": {
     "@babel/core": "^7.2.2",
