@@ -3,5 +3,6 @@ node_js:
   - '10'
 addons:
   firefox: '64.0'
+  chrome: stable
 script:
   - npm run travis
