@@ -17,12 +17,11 @@ export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
     })
   })
 
-  return async () => {
-    const subscription = await subscribed
-    const unload = await preloaded
-    subscription.unsubscribe()
-    unload()
-    if (options.resetOnCancel) setSrc(options.src)
-    options.onDetach()
-  }
+  return () =>
+    subscribed.then(subscription => {
+      subscription.unsubscribe()
+      if (options.resetOnCancel) setSrc(options.src)
+      options.onDetach()
+      return preloaded.then(unload => unload())
+    })
 }
