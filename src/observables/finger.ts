@@ -1,4 +1,4 @@
-import Observable, { Observer } from './util/observable'
+import observable, { Observer } from './util/observable'
 import { add, Vector } from '../util/algebra'
 
 const observers: Observer<Vector>[] = []
@@ -8,7 +8,8 @@ document.addEventListener(
   (event: TouchEvent) =>
     observers.forEach(observer => {
       let point = [0, 0]
-      for (const touch of event.touches) {
+      for (let i = 0; i < event.touches.length; i++) {
+        const touch = event.touches[i]
         point = add(point, [touch.clientX, touch.clientY])
       }
       observer.next(point)
@@ -16,7 +17,7 @@ document.addEventListener(
   true
 )
 
-export default new Observable<Vector>(observer => {
+export default observable<Vector>(observer => {
   observers.push(observer)
   return () => {
     observers.splice(observers.indexOf(observer), 1)

@@ -1,4 +1,4 @@
-import Observable, { Observer } from './util/observable'
+import observable, { Observer } from './util/observable'
 import { Vector } from '../util/algebra'
 
 const observers: Observer<Vector>[] = []
@@ -12,7 +12,7 @@ document.addEventListener(
   true
 )
 
-export default new Observable<Vector>(observer => {
+export default observable<Vector>(observer => {
   observers.push(observer)
   return () => {
     observers.splice(observers.indexOf(observer), 1)

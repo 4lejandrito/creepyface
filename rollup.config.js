@@ -16,7 +16,7 @@ export default [
       name: 'creepyface'
     },
     plugins: [
-      babel({ exclude: 'node_modules/**' }),
+      babel(),
       resolve({ browser: true }),
       commonjs(),
       production && uglify(),

@@ -1,8 +1,7 @@
-import parseDataAttributes from 'data-attrs-to-js'
 import mousePoints from '../observables/mouse'
 import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
-import Observable from '../observables/util/observable'
+import { Observable } from '../observables/util/observable'
 import { Angle, Vector } from './algebra'
 import { CreepyImage } from './types'
 import noop from './noop'
@@ -49,44 +48,39 @@ export type UserOptions = {
   onDetach?: EventListener
 }
 
-const getLooks = (look: { [key: string]: string | null }): Array<Look> => {
+const getLooks = (img: HTMLElement): Array<Look> | undefined => {
+  const regex = /data-src-look-(\d+)/i
   const looks: Array<Look> = []
-  for (const key of Object.keys(look)) {
-    const src = look[key]
-    if (src) {
-      looks.push({ angle: parseFloat(key), src })
+  for (let i = 0; i < img.attributes.length; i++) {
+    const attr = img.attributes[i]
+    const match = regex.exec(attr.name)
+    if (match) {
+      looks.push({ angle: parseFloat(match[1]), src: attr.value })
     }
   }
-  return looks
+  return looks.length ? looks : undefined
 }
 
-function fromImage(element: CreepyImage): UserOptions {
-  const {
-    src = {},
-    fieldofvision,
-    timetodefault,
-    resetoncancel,
-    throttle
-  } = parseDataAttributes(element)
-  const options: UserOptions = {
-    src: element.getAttribute('src') || undefined
-  }
-
-  if (timetodefault) options.timeToDefault = parseFloat(timetodefault)
-  if (throttle) options.throttle = parseFloat(throttle)
-  if (fieldofvision) options.fieldOfVision = parseFloat(fieldofvision)
-  if (resetoncancel) options.resetOnCancel = resetoncancel === 'true'
-  if (src.hover) options.hover = src.hover
-  if (src.look) options.looks = getLooks(src.look)
-
-  return options
+const getFloat = (s: string | null): number | undefined => {
+  const float = s ? parseFloat(s) : NaN
+  return isNaN(float) ? undefined : float
 }
+
+const fromImage = (img: CreepyImage): UserOptions => ({
+  src: img.getAttribute('src') || undefined,
+  hover: img.getAttribute('data-src-hover') || undefined,
+  looks: getLooks(img),
+  timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
+  throttle: getFloat(img.getAttribute('data-throttle')),
+  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
+  resetOnCancel: img.getAttribute('data-resetoncancel') === 'true'
+})
 
 export default function getOptions(
   img: CreepyImage,
   options: UserOptions = {}
 ): Options {
-  const userOptions = Object.assign({}, fromImage(img), options)
+  const userOptions = { ...fromImage(img), ...options }
 
   if (!userOptions.src) throw new Error('A default URL must be specified')
 

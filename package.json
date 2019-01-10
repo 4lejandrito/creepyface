@@ -23,11 +23,8 @@
   "types": "dist/creepyface.d.ts",
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-env": "^7.2.3",
-    "@types/debounce": "^1.2.0",
     "@types/jest": "^23.3.11",
-    "@types/lodash.throttle": "^4.1.4",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "chromedriver": "^2.45.0",
@@ -57,11 +54,8 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "data-attrs-to-js": "^1.1.1",
-    "debounce": "^1.0.2",
     "get-element-center": "^1.1.0",
-    "image-promise": "^5.0.1",
-    "lodash.throttle": "^4.1.1"
+    "image-promise": "^5.0.1"
   },
   "lint-staged": {
     "./**/*": [

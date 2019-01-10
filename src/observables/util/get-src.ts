@@ -11,13 +11,13 @@ const closest = (angle: number, looks: Look[]) =>
 const within = (n: number, a: number, b: number) => n >= a && n <= b
 const rectContains = (
   { left, top, right, bottom }: ClientRect | DOMRect,
-  [x, y]: Vector
-) => within(x, left, right) && within(y, top, bottom)
-const elementContains = (img: CreepyImage, [x, y]: Vector) => {
+  point: Vector
+) => within(point[0], left, right) && within(point[1], top, bottom)
+const elementContains = (img: CreepyImage, point: Vector) => {
   if (document.elementFromPoint) {
-    return document.elementFromPoint(x, y) === img
+    return document.elementFromPoint(point[0], point[1]) === img
   } else {
-    return rectContains(img.getBoundingClientRect(), [x, y])
+    return rectContains(img.getBoundingClientRect(), [point[0], point[1]])
   }
 }
 

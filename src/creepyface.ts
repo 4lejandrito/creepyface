@@ -29,9 +29,11 @@ creepyface.cancel = (img: HTMLImageElement) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  ;[...document.querySelectorAll('img[data-creepy]')].forEach(el => {
+  const elements = document.querySelectorAll('img[data-creepy]')
+  for (let i = 0; i < elements.length; i++) {
+    const el = elements[i]
     if (el instanceof HTMLImageElement) creepyface(el)
-  })
+  }
 })
 
 export default creepyface
