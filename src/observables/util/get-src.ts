@@ -1,6 +1,5 @@
 import { sign, Vector, Angle } from '../../util/algebra'
 import { Options, ImageURL, Look } from '../../util/options'
-import { CreepyImage } from '../../util/types'
 
 const shortest = (angle: number) =>
   Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle
@@ -13,7 +12,7 @@ const rectContains = (
   { left, top, right, bottom }: ClientRect | DOMRect,
   point: Vector
 ) => within(point[0], left, right) && within(point[1], top, bottom)
-const elementContains = (img: CreepyImage, point: Vector) => {
+const elementContains = (img: HTMLImageElement, point: Vector) => {
   if (document.elementFromPoint) {
     return document.elementFromPoint(point[0], point[1]) === img
   } else {
@@ -22,7 +21,7 @@ const elementContains = (img: CreepyImage, point: Vector) => {
 }
 
 export default (
-  img: CreepyImage,
+  img: HTMLImageElement,
   point: Vector,
   angle: Angle,
   options: Options

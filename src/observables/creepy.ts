@@ -4,9 +4,11 @@ import debounce from './util/debounce'
 import observable, { Observable } from './util/observable'
 import throttle from './util/throttle'
 import { Options, CreepyData } from '../util/options'
-import { CreepyImage } from '../util/types'
 
-export default (img: CreepyImage, options: Options): Observable<CreepyData> =>
+export default (
+  img: HTMLImageElement,
+  options: Options
+): Observable<CreepyData> =>
   observable(observer => {
     const backToDefault = debounce(
       () => observer.next({ src: options.src, options }),

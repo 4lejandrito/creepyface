@@ -3,7 +3,6 @@ import fingerPoints from '../observables/finger'
 import combined from '../observables/combined'
 import { Observable } from '../observables/util/observable'
 import { Angle, Vector } from './algebra'
-import { CreepyImage } from './types'
 import noop from './noop'
 
 export type Millis = number
@@ -66,7 +65,7 @@ const getFloat = (s: string | null): number | undefined => {
   return isNaN(float) ? undefined : float
 }
 
-const fromImage = (img: CreepyImage): UserOptions => ({
+const fromImage = (img: HTMLImageElement): UserOptions => ({
   src: img.getAttribute('src') || undefined,
   hover: img.getAttribute('data-src-hover') || undefined,
   looks: getLooks(img),
@@ -77,7 +76,7 @@ const fromImage = (img: CreepyImage): UserOptions => ({
 })
 
 export default function getOptions(
-  img: CreepyImage,
+  img: HTMLImageElement,
   options: UserOptions = {}
 ): Options {
   const userOptions = { ...fromImage(img), ...options }

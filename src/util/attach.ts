@@ -1,9 +1,9 @@
 import preload from './preload'
 import getOptions, { UserOptions } from './options'
 import creepy from '../observables/creepy'
-import { Cancel, CreepyImage } from './types'
+import { Cancel } from './types'
 
-export default (img: CreepyImage, userOptions?: UserOptions): Cancel => {
+export default (img: HTMLImageElement, userOptions?: UserOptions): Cancel => {
   const options = getOptions(img, userOptions)
   const setSrc = (src: string) => {
     img.src = src
