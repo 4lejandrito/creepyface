@@ -35,7 +35,6 @@ export type Options = {
 }
 export type UserOptions = {
   fieldOfVision?: Angle
-  src?: ImageURL
   hover?: ImageURL
   looks?: Array<Look>
   points?: Observable<Vector>
@@ -66,7 +65,6 @@ const getFloat = (s: string | null): number | undefined => {
 }
 
 const fromImage = (img: HTMLImageElement): UserOptions => ({
-  src: img.getAttribute('src') || undefined,
   hover: img.getAttribute('data-src-hover') || undefined,
   looks: getLooks(img),
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
@@ -80,12 +78,13 @@ export default function getOptions(
   options: UserOptions = {}
 ): Options {
   const userOptions = { ...fromImage(img), ...options }
+  const src = img.src
 
-  if (!userOptions.src) throw new Error('A default URL must be specified')
+  if (!src) throw new Error('A default URL must be specified')
 
   return {
     fieldOfVision: userOptions.fieldOfVision || 150,
-    src: userOptions.src,
+    src,
     hover: userOptions.hover || '',
     points: userOptions.points || combined([mousePoints, fingerPoints]),
     looks: userOptions.looks || [],
