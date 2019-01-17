@@ -8,20 +8,25 @@ export default (img: HTMLImageElement, userOptions?: UserOptions): Cancel => {
   const setSrc = (src: string) => {
     img.src = src
   }
-  const preloaded = preload(img, options)
-  const subscribed = preloaded.then(() => {
+  let cancelled = false
+  let cancel: Cancel = () => {
+    cancelled = true
+  }
+
+  preload(img, options, unload => {
+    if (cancelled) return
     options.onAttach()
-    return creepy(img, options).subscribe(data => {
+    const subscription = creepy(img, options).subscribe(data => {
       setSrc(data.src)
       options.onDebug(data)
     })
-  })
-
-  return () =>
-    subscribed.then(subscription => {
+    cancel = () => {
       subscription.unsubscribe()
       if (options.resetOnCancel) setSrc(options.src)
       options.onDetach()
-      return preloaded.then(unload => unload())
-    })
+      unload()
+    }
+  })
+
+  return () => cancel()
 }

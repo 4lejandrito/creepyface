@@ -54,8 +54,7 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
-    "get-element-center": "^1.1.0",
-    "image-promise": "^5.0.1"
+    "get-element-center": "^1.1.0"
   },
   "lint-staged": {
     "./**/*": [
