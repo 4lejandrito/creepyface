@@ -20,7 +20,7 @@ If you want to customize it even more you can use our declarative data-attribute
 
    ```html
    <img
-     data-creepy
+     data-creepyface
      src="img/face/serious.jpg"
      data-src-hover="img/face/crazy.jpg"
      data-src-look-0="img/face/north.jpg"
@@ -42,9 +42,9 @@ If you want to customize it even more you can use our declarative data-attribute
    <script type="text/javascript" src="https://unpkg.com/creepyface"></script>
    ```
 
-   Creepyface will automatically detect your image (thanks to the `data-creepy` attribute) and make it look at the mouse or fingers depending on which device you are using.
+   Creepyface will automatically detect your image (thanks to the `data-creepyface` attribute) and make it look at the mouse or fingers depending on which device you are using.
 
-   You can add as many Creepyfaces as you want as long as they all have the `data-creepy` attribute.
+   You can add as many Creepyfaces as you want as long as they all have the `data-creepyface` attribute.
 
    If you want to stop Creepyface on a given image:
 

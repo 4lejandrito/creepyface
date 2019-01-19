@@ -1,10 +1,10 @@
 import doTest from './do-test'
 import creepyface from '../creepyface'
 
-describe('Using automatic DOM api (via data-creepy attribute)', () => {
+describe('Using automatic DOM api (via data-creepyface attribute)', () => {
   doTest(img => {
     img.setAttribute('src', 'http://localhost/serious')
-    img.setAttribute('data-creepy', '')
+    img.setAttribute('data-creepyface', '')
     img.setAttribute('data-throttle', '100')
     img.setAttribute('data-src-hover', 'http://localhost/hover')
     img.setAttribute('data-src-look-0', 'http://localhost/north')
