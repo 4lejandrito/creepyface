@@ -39,7 +39,7 @@ If you want to customize it even more you can use our declarative data-attribute
 3. Include Creepyface script in your page:
 
    ```html
-   <script src="https://unpkg.com/creepyface"></script>
+   <script src="https://creepyface.io/creepyface.js"></script>
    ```
 
    Creepyface will automatically detect your image (thanks to the `data-creepyface` attribute) and make it look at the mouse or fingers depending on which device you are using.
