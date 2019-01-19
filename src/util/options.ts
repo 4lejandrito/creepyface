@@ -78,7 +78,7 @@ export default function getOptions(
   options: UserOptions = {}
 ): Options {
   const userOptions = { ...fromImage(img), ...options }
-  const src = img.src
+  const src = img.getAttribute('src')
 
   if (!src) throw new Error('A default URL must be specified')
 
