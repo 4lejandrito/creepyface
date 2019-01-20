@@ -70,7 +70,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
   throttle: getFloat(img.getAttribute('data-throttle')),
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
-  resetOnCancel: img.getAttribute('data-resetoncancel') === 'true'
+  resetOnCancel: !(img.getAttribute('data-resetoncancel') === 'false')
 })
 
 export default function getOptions(
