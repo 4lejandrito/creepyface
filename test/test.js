@@ -109,7 +109,7 @@ describe(
         'follows it east',
         testLook(
           ({ width, height }) => ({
-            x: Math.floor(width / 2) + 1,
+            x: Math.floor(width / 2) + 10,
             y: 0
           }),
           `e.jpg`
