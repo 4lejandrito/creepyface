@@ -12,7 +12,7 @@ const browsers = [
     driver: () =>
       new Builder()
         .forBrowser('chrome')
-        .setChromeOptions(new chrome.Options().addArguments('headless'))
+        .setChromeOptions(new chrome.Options().headless())
         .build()
   },
   {
