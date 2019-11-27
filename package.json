@@ -27,7 +27,6 @@
     "@types/jest": "^23.3.11",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
-    "chromedriver": "^78.0.1",
     "coveralls": "^3.0.2",
     "eslint": "^5.11.1",
     "geckodriver": "^1.19.1",

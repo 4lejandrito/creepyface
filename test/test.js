@@ -1,19 +1,10 @@
 const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
-const chrome = require('selenium-webdriver/chrome')
 const url = path => `file://${__dirname}/${path}`
 
 jest.setTimeout(10000)
 
 const browsers = [
-  {
-    name: 'chrome',
-    driver: () =>
-      new Builder()
-        .forBrowser('chrome')
-        .setChromeOptions(new chrome.Options().headless())
-        .build()
-  },
   {
     name: 'firefox',
     driver: () =>
