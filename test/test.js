@@ -1,5 +1,4 @@
 const { By, Builder } = require('selenium-webdriver')
-const { LegacyActionSequence } = require('selenium-webdriver/lib/actions')
 const firefox = require('selenium-webdriver/firefox')
 const chrome = require('selenium-webdriver/chrome')
 const url = path => `file://${__dirname}/${path}`
@@ -33,7 +32,7 @@ const describeCombination = fn => () => {
           let driver = browser.driver()
           beforeAll(() => driver.get(url(fileName)))
           afterAll(() => driver.quit())
-          fn(driver, browser.name === 'firefox')
+          fn(driver)
         })
       })
     })
@@ -42,7 +41,7 @@ const describeCombination = fn => () => {
 
 describe(
   'Creepyface',
-  describeCombination((driver, supportsW3C) => {
+  describeCombination(driver => {
     it('shows the default src by default', async () =>
       expect(
         driver.findElement(By.css('img')).getAttribute('src')
@@ -53,19 +52,10 @@ describe(
         const creepyface = await driver.findElement(By.css('img'))
         const size = await creepyface.getRect()
         const coords = getCoords(size)
-        if (!supportsW3C) {
-          await new LegacyActionSequence(driver)
-            .mouseMove(creepyface, {
-              x: coords.x + size.width / 2,
-              y: coords.y + size.height / 2
-            })
-            .perform()
-        } else {
-          await driver
-            .actions()
-            .move({ duration: 10, origin: creepyface, ...coords })
-            .perform()
-        }
+        await driver
+          .actions()
+          .move({ duration: 10, origin: creepyface, ...coords })
+          .perform()
         await driver.sleep(100)
         return expect(creepyface.getAttribute('src')).resolves.toBe(
           url(`img/${name}`)
