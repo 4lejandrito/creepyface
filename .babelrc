@@ -1,3 +1,17 @@
 {
-  "presets": ["@babel/env"]
+  "presets": ["@babel/env"],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ]
+    }
+  }
 }
