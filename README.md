@@ -98,3 +98,9 @@ Please feel free to create issues and / or submit pull requests. For the latter,
 ## License
 
 MIT, see [LICENSE](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) for details.
+
+## Big Thanks
+
+Cross-browser Testing Platform and Open Source ❤️ provided by [Sauce Labs][homepage].
+
+[homepage]: https://saucelabs.com
