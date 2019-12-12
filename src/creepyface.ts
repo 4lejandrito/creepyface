@@ -3,6 +3,9 @@ import watchElement from './util/watch-element'
 import { UserOptions } from './util/options'
 import { Cancel, CreepyImage } from './util/types'
 import noop from './util/noop'
+import { Observable } from './observables/util/observable'
+import { Vector } from './util/algebra'
+import * as observableStore from './observables/util/store'
 
 const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
   creepyface.cancel(img)
@@ -25,6 +28,13 @@ const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
 creepyface.cancel = (img: HTMLImageElement) => {
   const cancel = (img as CreepyImage).creepyfaceCancel
   if (cancel) cancel()
+}
+
+creepyface.registerPointSource = (
+  name: string,
+  observable: Observable<Vector>
+) => {
+  observableStore.register(name, observable)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,9 +1,7 @@
-import mousePoints from '../observables/mouse'
-import fingerPoints from '../observables/finger'
-import combined from '../observables/combined'
 import { Observable } from '../observables/util/observable'
 import { Angle, Vector } from './algebra'
 import noop from './noop'
+import * as observableStore from '../observables/util/store'
 
 export type Millis = number
 export type Time = Millis
@@ -37,7 +35,7 @@ export type UserOptions = {
   fieldOfVision?: Angle
   hover?: ImageURL
   looks?: Array<Look>
-  points?: Observable<Vector>
+  points?: Observable<Vector> | string
   timeToDefault?: Time
   resetOnCancel?: boolean
   throttle?: Time
@@ -67,11 +65,19 @@ const getFloat = (s: string | null): number | undefined => {
 const fromImage = (img: HTMLImageElement): UserOptions => ({
   hover: img.getAttribute('data-src-hover') || undefined,
   looks: getLooks(img),
+  points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
   throttle: getFloat(img.getAttribute('data-throttle')),
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
   resetOnCancel: !(img.getAttribute('data-resetoncancel') === 'false')
 })
+
+const getPoints = (userOptions: UserOptions): Observable<Vector> => {
+  if (typeof userOptions.points === 'object') {
+    return userOptions.points
+  }
+  return observableStore.retrieve(userOptions.points || 'pointer')
+}
 
 export default function getOptions(
   img: HTMLImageElement,
@@ -86,7 +92,7 @@ export default function getOptions(
     fieldOfVision: userOptions.fieldOfVision || 150,
     src,
     hover: userOptions.hover || '',
-    points: userOptions.points || combined([mousePoints, fingerPoints]),
+    points: getPoints(userOptions),
     looks: userOptions.looks || [],
     timeToDefault: userOptions.timeToDefault || 1000,
     resetOnCancel: !(userOptions.resetOnCancel === false),
