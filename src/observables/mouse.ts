@@ -1,7 +1,7 @@
 import observable, { Observer } from './util/observable'
-import { Vector } from '../util/algebra'
+import { Point } from '../util/algebra'
 
-const observers: Observer<Vector>[] = []
+const observers: Observer<Point>[] = []
 
 document.addEventListener(
   'mousemove',
@@ -12,7 +12,7 @@ document.addEventListener(
   true
 )
 
-export default observable<Vector>(observer => {
+export default observable<Point>(observer => {
   observers.push(observer)
   return () => {
     observers.splice(observers.indexOf(observer), 1)

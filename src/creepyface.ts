@@ -4,7 +4,7 @@ import { UserOptions } from './util/options'
 import { Cancel, CreepyImage } from './util/types'
 import noop from './util/noop'
 import { Observable } from './observables/util/observable'
-import { Vector } from './util/algebra'
+import { Point } from './util/algebra'
 import * as observableStore from './observables/util/store'
 
 const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
@@ -32,7 +32,7 @@ creepyface.cancel = (img: HTMLImageElement) => {
 
 creepyface.registerPointSource = (
   name: string,
-  observable: Observable<Vector>
+  observable: Observable<Point>
 ) => {
   observableStore.register(name, observable)
 }

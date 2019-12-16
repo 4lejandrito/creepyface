@@ -1,5 +1,5 @@
 import { Observable } from '../observables/util/observable'
-import { Angle, Vector } from './algebra'
+import { Angle, Point } from './algebra'
 import noop from './noop'
 import * as observableStore from '../observables/util/store'
 
@@ -11,7 +11,7 @@ export type Look = {
   angle: Angle
 }
 export type CreepyData = {
-  point?: Vector
+  point?: Point
   angle?: Angle
   src: string
   options: Options
@@ -23,7 +23,7 @@ export type Options = {
   src: ImageURL
   hover?: ImageURL
   looks: Array<Look>
-  points: Observable<Vector>
+  points: Observable<Point>
   timeToDefault: Time
   resetOnCancel: boolean
   throttle: Time
@@ -35,7 +35,7 @@ export type UserOptions = {
   fieldOfVision?: Angle
   hover?: ImageURL
   looks?: Array<Look>
-  points?: Observable<Vector> | string
+  points?: Observable<Point> | string
   timeToDefault?: Time
   resetOnCancel?: boolean
   throttle?: Time
@@ -72,7 +72,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   resetOnCancel: !(img.getAttribute('data-resetoncancel') === 'false')
 })
 
-const getPoints = (userOptions: UserOptions): Observable<Vector> => {
+const getPoints = (userOptions: UserOptions): Observable<Point> => {
   if (typeof userOptions.points === 'object') {
     return userOptions.points
   }

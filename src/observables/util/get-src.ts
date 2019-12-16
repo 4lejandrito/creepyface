@@ -1,4 +1,4 @@
-import { sign, Vector, Angle } from '../../util/algebra'
+import { sign, Point, Angle } from '../../util/algebra'
 import { Options, ImageURL, Look } from '../../util/options'
 
 const shortest = (angle: number) =>
@@ -10,9 +10,9 @@ const closest = (angle: number, looks: Look[]) =>
 const within = (n: number, a: number, b: number) => n >= a && n <= b
 const rectContains = (
   { left, top, right, bottom }: ClientRect | DOMRect,
-  point: Vector
+  point: Point
 ) => within(point[0], left, right) && within(point[1], top, bottom)
-const elementContains = (img: HTMLImageElement, point: Vector) => {
+const elementContains = (img: HTMLImageElement, point: Point) => {
   if (document.elementFromPoint) {
     return document.elementFromPoint(point[0], point[1]) === img
   } else {
@@ -22,7 +22,7 @@ const elementContains = (img: HTMLImageElement, point: Vector) => {
 
 export default (
   img: HTMLImageElement,
-  point: Vector,
+  point: Point,
   angle: Angle,
   options: Options
 ): ImageURL => {
