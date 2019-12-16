@@ -25,7 +25,6 @@ export type Options = {
   looks: Array<Look>
   points: Observable<Point>
   timeToDefault: Time
-  resetOnCancel: boolean
   throttle: Time
   onDebug: Debug
   onAttach: EventListener
@@ -37,7 +36,6 @@ export type UserOptions = {
   looks?: Array<Look>
   points?: Observable<Point> | string
   timeToDefault?: Time
-  resetOnCancel?: boolean
   throttle?: Time
   onDebug?: Debug
   onAttach?: EventListener
@@ -68,8 +66,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
   throttle: getFloat(img.getAttribute('data-throttle')),
-  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
-  resetOnCancel: !(img.getAttribute('data-resetoncancel') === 'false')
+  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision'))
 })
 
 const getPoints = (userOptions: UserOptions): Observable<Point> => {
@@ -95,7 +92,6 @@ export default function getOptions(
     points: getPoints(userOptions),
     looks: userOptions.looks || [],
     timeToDefault: userOptions.timeToDefault || 1000,
-    resetOnCancel: !(userOptions.resetOnCancel === false),
     throttle: userOptions.throttle || 100,
     onDebug: userOptions.onDebug || noop,
     onAttach: userOptions.onAttach || noop,

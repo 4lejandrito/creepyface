@@ -22,7 +22,7 @@ export default (img: HTMLImageElement, userOptions?: UserOptions): Cancel => {
     })
     cancel = () => {
       subscription.unsubscribe()
-      if (options.resetOnCancel) setSrc(options.src)
+      setSrc(options.src)
       options.onDetach()
       unload()
     }
