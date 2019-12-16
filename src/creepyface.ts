@@ -30,7 +30,7 @@ creepyface.cancel = (img: HTMLImageElement) => {
   if (cancel) cancel()
 }
 
-creepyface.registerPointSource = (
+creepyface.registerObservable = (
   name: string,
   observable: Observable<Point>
 ) => {

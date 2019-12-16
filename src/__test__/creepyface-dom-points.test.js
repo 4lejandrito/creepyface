@@ -6,7 +6,7 @@ import finger from '../observables/finger'
 
 describe('Using DOM api with custom points', () => {
   doTest(img => {
-    creepyface.registerPointSource('custom', combined([mouse, finger]))
+    creepyface.registerObservable('custom', combined([mouse, finger]))
 
     img.setAttribute('src', 'http://localhost/serious')
     img.setAttribute('data-throttle', '100')
