@@ -1,6 +1,6 @@
 # [Creepyface](https://creepyface.io) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface) [![Build Status](https://api.travis-ci.org/4lejandrito/creepyface.svg?branch=master)](https://travis-ci.org/4lejandrito/creepyface) [![Coverage Status](https://coveralls.io/repos/github/4lejandrito/creepyface/badge.svg?branch=master)](https://coveralls.io/github/4lejandrito/creepyface?branch=master)
 
-Creepyface is a little JavaScript tool that makes your face look at the mouse (or fingers). It is ideal for resumes, team presentation sites, etc...
+Creepyface is a little JavaScript tool that makes your face look at the pointer (or a [firefly](https://github.com/4lejandrito/creepyface-firefly)). It is ideal for resumes, team presentation sites, etc...
 
 [Demo](https://creepyface.io)
 
@@ -83,6 +83,85 @@ const cancel = creepyface(img, {
 
 // at some point restore the original image and stop creepyface
 cancel()
+```
+
+## Super advanced usage
+
+Creepyface will look at the pointer by default, however custom point sources can be defined (see [firefly](https://github.com/4lejandrito/creepyface-firefly) for a real world implementation).
+
+For example, to make your face look at a random point every half a second you need to register an observable:
+
+```js
+import creepyface from 'creepyface'
+
+creepyface.registerObservable('random', observer => {
+  const interval = setInterval(
+    () =>
+      observer([
+        Math.random() * window.innerWidth,
+        Math.random() * window.innerHeight
+      ]),
+    500
+  )
+  return () => {
+    clearInterval(interval)
+  }
+})
+```
+
+and consume it from the data-attribute API using the `data-points` attribute:
+
+```html
+<img
+  data-creepyface
+  data-points="random"
+  src="img/face/serious.jpg"
+  data-src-hover="img/face/crazy.jpg"
+  data-src-look-0="img/face/north.jpg"
+  data-src-look-45="img/face/north-east.jpg"
+  data-src-look-90="img/face/east.jpg"
+  data-src-look-135="img/face/south-east.jpg"
+  data-src-look-180="img/face/south.jpg"
+  data-src-look-225="img/face/south-west.jpg"
+  data-src-look-270="img/face/west.jpg"
+  data-src-look-315="img/face/north-west.jpg"
+/>
+```
+
+or pass it programmatically:
+
+```js
+const img = document.querySelector('img#face')
+
+creepyface(img, {
+  // An observable that provides the points to look at
+  points: observer => {
+    const interval = setInterval(
+      () =>
+        observer([
+          Math.random() * window.innerWidth,
+          Math.random() * window.innerHeight
+        ]),
+      500
+    )
+    return () => {
+      clearInterval(interval)
+    }
+  },
+  // Image URL to display on hover
+  hover: 'img/face/crazy.jpg',
+  // Each of the images looking at a given direction
+  looks: [
+    { angle: 0, src: 'img/face/north.jpg' },
+    { angle: 45, src: 'img/face/north-east.jpg' },
+    { angle: 90, src: 'img/face/east.jpg' },
+    { angle: 135, src: 'img/face/south-east.jpg' },
+    { angle: 180, src: 'img/face/south.jpg' },
+    { angle: 225, src: 'img/face/south-west.jpg' },
+    { angle: 270, src: 'img/face/west.jpg' },
+    { angle: 315, src: 'img/face/north-west.jpg' }
+  ]
+})
 ```
 
 ## Developing
