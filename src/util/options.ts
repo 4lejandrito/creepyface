@@ -1,4 +1,4 @@
-import { Observable } from '../observables/util/observable'
+import { Observable } from './types'
 import { Angle, Point } from './algebra'
 import noop from './noop'
 import * as observableStore from '../observables/util/store'
@@ -70,7 +70,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
 })
 
 const getPoints = (userOptions: UserOptions): Observable<Point> => {
-  if (typeof userOptions.points === 'object') {
+  if (typeof userOptions.points === 'function') {
     return userOptions.points
   }
   return observableStore.retrieve(userOptions.points || 'pointer')

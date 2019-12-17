@@ -16,12 +16,12 @@ export default (img: HTMLImageElement, userOptions?: UserOptions): Cancel => {
   preload(img, options, unload => {
     if (cancelled) return
     options.onAttach()
-    const subscription = creepy(img, options).subscribe(data => {
+    const stopCreepyface = creepy(img, options)(data => {
       setSrc(data.src)
       options.onDebug(data)
     })
     cancel = () => {
-      subscription.unsubscribe()
+      stopCreepyface()
       setSrc(options.src)
       options.onDetach()
       unload()

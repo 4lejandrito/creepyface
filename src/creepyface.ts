@@ -1,9 +1,8 @@
 import attach from './util/attach'
 import watchElement from './util/watch-element'
 import { UserOptions } from './util/options'
-import { Cancel, CreepyImage } from './util/types'
+import { Cancel, CreepyImage, Observable } from './util/types'
 import noop from './util/noop'
-import { Observable } from './observables/util/observable'
 import { Point } from './util/algebra'
 import * as observableStore from './observables/util/store'
 

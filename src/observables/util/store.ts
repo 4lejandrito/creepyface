@@ -1,4 +1,4 @@
-import { Observable } from './observable'
+import { Observable } from '../../util/types'
 import { Point } from '../../util/algebra'
 import combined from '../combined'
 import mouse from '../mouse'

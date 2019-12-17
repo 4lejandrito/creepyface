@@ -1,4 +1,4 @@
-import observable, { Observer } from './util/observable'
+import { Observer } from '../util/types'
 import { add, Point } from '../util/algebra'
 
 const observers: Observer<Point>[] = []
@@ -12,14 +12,14 @@ document.addEventListener(
         const touch = event.touches[i]
         point = add(point, [touch.clientX, touch.clientY])
       }
-      observer.next(point)
+      observer(point)
     }),
   true
 )
 
-export default observable<Point>(observer => {
+export default (observer: Observer<Point>) => {
   observers.push(observer)
   return () => {
     observers.splice(observers.indexOf(observer), 1)
   }
-})
+}
