@@ -52,9 +52,6 @@
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.7.3"
   },
-  "dependencies": {
-    "get-element-center": "^1.1.0"
-  },
   "lint-staged": {
     "./**/*": [
       "prettier --write",
