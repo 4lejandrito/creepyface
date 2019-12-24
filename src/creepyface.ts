@@ -1,24 +1,15 @@
 import attach from './util/attach'
-import watchElement from './util/watch-element'
 import { UserOptions } from './util/options'
 import { Cancel, CreepyImage, Observable } from './util/types'
-import noop from './util/noop'
 import { Point } from './util/algebra'
 import * as observableStore from './observables/util/store'
 
 const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
   creepyface.cancel(img)
 
-  let detach: Cancel = noop
-  const stopWatching = watchElement(
-    img,
-    () => {
-      detach = attach(img, options)
-    },
-    () => creepyface.cancel(img)
-  )
+  const detach = attach(img, options)
+
   return ((img as CreepyImage).creepyfaceCancel = () => {
-    stopWatching()
     detach()
     delete (img as CreepyImage).creepyfaceCancel
   })

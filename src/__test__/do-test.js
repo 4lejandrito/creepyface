@@ -4,17 +4,7 @@ import lolex from 'lolex'
 export default registerCreepyface => {
   let clock, img, cancel
 
-  beforeAll(() => {
-    global['MutationObserver'] = function(listener) {
-      const interval = setInterval(listener, 100)
-
-      return {
-        observe: () => {},
-        disconnect: () => {
-          clearInterval(interval)
-        }
-      }
-    }
+  beforeAll(() => {    
     global['Image'] = function() {
       const img = { naturalWidth: 100 }
       setImmediate(() => {
@@ -30,8 +20,7 @@ export default registerCreepyface => {
     clock.tick(1)
   })
 
-  afterAll(() => {
-    delete global['MutationObserver']
+  afterAll(() => {    
     clock.uninstall()
   })
 
