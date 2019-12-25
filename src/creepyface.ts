@@ -14,7 +14,6 @@ const creepyface = (
   const options = getOptions(img, userOptions)
 
   const cancel = preload(img, options, unload => {
-    options.onAttach()
     const consumer = (data: CreepyData) => {
       img.src = data.src
       options.onDebug(data)
@@ -32,12 +31,13 @@ const creepyface = (
       }, options.throttle),
       img
     )
+    options.onAttach()
     return () => {
       backToDefault.clear()
       stopPointProvider()
       img.src = options.src
-      options.onDetach()
       unload()
+      options.onDetach()
     }
   })
 
