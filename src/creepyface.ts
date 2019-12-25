@@ -1,5 +1,5 @@
 import getOptions, { UserOptions } from './util/options'
-import { Cancel, CreepyImage, PointProvider } from './util/types'
+import { Cancel, CreepyImage, PointProvider } from './types'
 import * as pointProviderStore from './providers/util/store'
 import preload from './util/preload'
 import creepy from './providers/creepy'

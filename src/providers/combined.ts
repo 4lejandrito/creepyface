@@ -1,4 +1,4 @@
-import { PointProvider, Consumer } from '../util/types'
+import { PointProvider, Consumer } from '../types'
 import { Point } from '../util/algebra'
 
 export default (providers: Array<PointProvider>) => (

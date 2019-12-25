@@ -1,7 +1,7 @@
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import debounce from './util/debounce'
-import { Consumer, Cancel } from '../util/types'
+import { Consumer, Cancel } from '../types'
 import throttle from './util/throttle'
 import { Options, CreepyData } from '../util/options'
 

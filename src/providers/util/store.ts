@@ -1,4 +1,4 @@
-import { PointProvider } from '../../util/types'
+import { PointProvider } from '../../types'
 import combined from '../combined'
 import mouse from '../mouse'
 import finger from '../finger'

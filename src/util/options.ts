@@ -1,4 +1,4 @@
-import { PointProvider } from './types'
+import { PointProvider } from '../types'
 import { Angle, Point } from './algebra'
 import * as pointProviderStore from '../providers/util/store'
 

@@ -1,5 +1,5 @@
 import { Options, ImageURL } from './options'
-import { CreepyImage, Cancel } from './types'
+import { CreepyImage, Cancel } from '../types'
 
 type Callback<T> = (payload: T) => void
 

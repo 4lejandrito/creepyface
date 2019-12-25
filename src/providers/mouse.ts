@@ -1,4 +1,4 @@
-import { Consumer } from '../util/types'
+import { Consumer } from '../types'
 import { Point } from '../util/algebra'
 
 const consumers: Consumer<Point>[] = []
