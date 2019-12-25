@@ -45,9 +45,9 @@ export default function preload(
   }
   loadImages(getSrcs(options), imgs => {
     if (cancelled) return
-    img.creepyfaceReachableImages = imgs
+    img.__creepyfaceReachableImages = imgs
     cancel = callback(() => {
-      delete img.creepyfaceReachableImages
+      delete img.__creepyfaceReachableImages
     })
   })
   return () => cancel()

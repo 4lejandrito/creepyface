@@ -41,14 +41,14 @@ const creepyface = (
     }
   })
 
-  return ((img as CreepyImage).creepyfaceCancel = () => {
+  return ((img as CreepyImage).__creepyfaceCancel = () => {
     cancel()
-    delete (img as CreepyImage).creepyfaceCancel
+    delete (img as CreepyImage).__creepyfaceCancel
   })
 }
 
 creepyface.cancel = (img: HTMLImageElement) => {
-  const cancel = (img as CreepyImage).creepyfaceCancel
+  const cancel = (img as CreepyImage).__creepyfaceCancel
   if (cancel) cancel()
 }
 

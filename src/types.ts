@@ -6,6 +6,6 @@ export type PointProvider = (
   img: HTMLImageElement
 ) => Cancel
 export type CreepyImage = HTMLImageElement & {
-  creepyfaceCancel?: Cancel
-  creepyfaceReachableImages?: Array<HTMLImageElement>
+  __creepyfaceCancel?: Cancel
+  __creepyfaceReachableImages?: Array<HTMLImageElement>
 }
