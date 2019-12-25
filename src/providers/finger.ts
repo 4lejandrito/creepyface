@@ -1,5 +1,5 @@
-import { Consumer } from '../types'
-import { add, Point } from '../util/algebra'
+import { Consumer, Point } from '../types'
+import { add } from '../util/algebra'
 
 const consumers: Consumer<Point>[] = []
 

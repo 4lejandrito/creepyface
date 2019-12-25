@@ -1,5 +1,4 @@
-import { Point } from './util/algebra'
-
+export type Point = [number, number]
 export type Cancel = () => void
 export type Consumer<T> = (t: T) => void
 export type PointProvider = (

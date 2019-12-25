@@ -1,9 +1,8 @@
-import { PointProvider, Consumer } from '../types'
-import { Point } from '../util/algebra'
+import { PointProvider } from '../types'
 
 export default (providers: Array<PointProvider>): PointProvider => (
-  consumer: Consumer<Point>,
-  img: HTMLImageElement
+  consumer,
+  img
 ) => {
   const cancels = providers.map(p => p(consumer, img))
   return () => cancels.forEach(cancel => cancel())

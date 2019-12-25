@@ -1,4 +1,5 @@
-export type Point = [number, number]
+import { Point } from '../types'
+
 export type Degrees = number
 export type Radians = number
 export type Angle = Degrees
