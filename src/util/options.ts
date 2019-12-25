@@ -1,6 +1,5 @@
 import { PointProvider } from './types'
 import { Angle, Point } from './algebra'
-import noop from './noop'
 import * as pointProviderStore from '../providers/util/store'
 
 export type Millis = number
@@ -75,6 +74,8 @@ const getPoints = (userOptions: UserOptions): PointProvider => {
   }
   return pointProviderStore.retrieve(userOptions.points || 'pointer')
 }
+
+const noop = (): void => undefined
 
 export default function getOptions(
   img: HTMLImageElement,
