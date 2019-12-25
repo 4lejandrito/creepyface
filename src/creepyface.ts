@@ -9,19 +9,14 @@ const creepyface = (
   userOptions?: UserOptions
 ): Cancel => {
   const options = getOptions(img, userOptions)
-  let cancelled = false
-  let cancel: Cancel = () => {
-    cancelled = true
-  }
 
-  preload(img, options, unload => {
-    if (cancelled) return
+  const cancel = preload(img, options, unload => {
     options.onAttach()
     const stopCreepyface = creepy(img, options)(data => {
       img.src = data.src
       options.onDebug(data)
     })
-    cancel = () => {
+    return () => {
       stopCreepyface()
       img.src = options.src
       options.onDetach()

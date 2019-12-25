@@ -37,12 +37,18 @@ const loadImages = (
 export default function preload(
   img: CreepyImage,
   options: Options,
-  callback: Consumer<Cancel>
-): void {
+  callback: (unload: Cancel) => Cancel
+): Cancel {
+  let cancelled = false
+  let cancel: Cancel = () => {
+    cancelled = true
+  }
   loadImages(getSrcs(options), imgs => {
+    if (cancelled) return
     img.creepyfaceReachableImages = imgs
-    callback(() => {
+    cancel = callback(() => {
       delete img.creepyfaceReachableImages
     })
   })
+  return () => cancel()
 }
