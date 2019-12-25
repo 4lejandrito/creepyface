@@ -1,5 +1,5 @@
 import { Options, ImageURL } from './options'
-import { CreepyImage, Cancel, Consumer } from '../types'
+import { Cancel, Consumer } from '../types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)
@@ -35,7 +35,7 @@ const loadImages = (
 }
 
 export default function preload(
-  img: CreepyImage,
+  img: HTMLImageElement,
   options: Options,
   callback: (unload: Cancel) => Cancel
 ): Cancel {

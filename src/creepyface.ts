@@ -1,5 +1,5 @@
 import getOptions, { UserOptions, CreepyData } from './util/options'
-import { Cancel, CreepyImage, PointProvider, Point } from './types'
+import { Cancel, PointProvider, Point } from './types'
 import * as pointProviderStore from './providers/store'
 import preload from './util/preload'
 import { throttle, debounce } from 'throttle-debounce'
@@ -41,14 +41,14 @@ const creepyface = (
     }
   })
 
-  return ((img as CreepyImage).__creepyfaceCancel = () => {
+  return (img.__creepyfaceCancel = () => {
     cancel()
-    delete (img as CreepyImage).__creepyfaceCancel
+    delete img.__creepyfaceCancel
   })
 }
 
 creepyface.cancel = (img: HTMLImageElement) => {
-  const cancel = (img as CreepyImage).__creepyfaceCancel
+  const cancel = img.__creepyfaceCancel
   if (cancel) cancel()
 }
 
