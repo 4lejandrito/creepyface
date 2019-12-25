@@ -1,7 +1,7 @@
 import { PointProvider, Consumer } from '../types'
 import { Point } from '../util/algebra'
 
-export default (providers: Array<PointProvider>) => (
+export default (providers: Array<PointProvider>): PointProvider => (
   consumer: Consumer<Point>,
   img: HTMLImageElement
 ) => {
