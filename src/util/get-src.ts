@@ -1,5 +1,5 @@
-import { sign, Point, Angle } from '../../util/algebra'
-import { Options, ImageURL, Look } from '../../util/options'
+import { sign, Point, Angle } from './algebra'
+import { Options, ImageURL, Look } from './options'
 
 const shortest = (angle: number) =>
   Math.abs(angle) > 180 ? angle - sign(angle) * 360 : angle

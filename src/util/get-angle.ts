@@ -1,4 +1,4 @@
-import { rotate, getAngle, diff, add, Point, Angle } from '../../util/algebra'
+import { rotate, getAngle, diff, add, Point, Angle } from './algebra'
 
 const center = (node: HTMLElement): Point => {
   const { left, top, width, height } = node.getBoundingClientRect()

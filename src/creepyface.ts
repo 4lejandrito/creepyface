@@ -1,11 +1,11 @@
 import getOptions, { UserOptions, CreepyData } from './util/options'
 import { Cancel, CreepyImage, PointProvider } from './types'
-import * as pointProviderStore from './providers/util/store'
+import * as pointProviderStore from './providers/store'
 import preload from './util/preload'
-import debounce from './providers/util/debounce'
-import throttle from './providers/util/throttle'
-import getAngle from './providers/util/get-angle'
-import getSrc from './providers/util/get-src'
+import debounce from './util/debounce'
+import throttle from './util/throttle'
+import getAngle from './util/get-angle'
+import getSrc from './util/get-src'
 
 const creepyface = (
   img: HTMLImageElement,

@@ -1,7 +1,7 @@
-import { PointProvider } from '../../types'
-import combined from '../combined'
-import mouse from '../mouse'
-import finger from '../finger'
+import { PointProvider } from '../types'
+import combined from './combined'
+import mouse from './mouse'
+import finger from './finger'
 
 const providers: { [K: string]: PointProvider } = {
   pointer: combined([mouse, finger])

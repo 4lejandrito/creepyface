@@ -1,6 +1,6 @@
 import { PointProvider } from '../types'
 import { Angle, Point } from './algebra'
-import * as pointProviderStore from '../providers/util/store'
+import * as pointProviderStore from '../providers/store'
 
 export type Millis = number
 export type Time = Millis
