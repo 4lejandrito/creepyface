@@ -1,7 +1,5 @@
 import { Options, ImageURL } from './options'
-import { CreepyImage, Cancel } from '../types'
-
-type Callback<T> = (payload: T) => void
+import { CreepyImage, Cancel, Consumer } from '../types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)
@@ -10,7 +8,7 @@ const getSrcs = (options: Options): Array<ImageURL> => {
   return srcs
 }
 
-const loadImage = (src: string, callback: Callback<HTMLImageElement>) => {
+const loadImage = (src: string, consumer: Consumer<HTMLImageElement>) => {
   const img = new Image()
   img.src = src
   img.onload = img.onerror = () => {
@@ -19,19 +17,19 @@ const loadImage = (src: string, callback: Callback<HTMLImageElement>) => {
     }
     delete img.onload
     delete img.onerror
-    callback(img)
+    consumer(img)
   }
 }
 
 const loadImages = (
   srcs: Array<string>,
-  callback: Callback<Array<HTMLImageElement>>
+  consumer: Consumer<Array<HTMLImageElement>>
 ) => {
   const imgs: Array<HTMLImageElement> = []
   srcs.forEach(src => {
     loadImage(src, img => {
       imgs.push(img)
-      if (imgs.length === srcs.length) callback(imgs)
+      if (imgs.length === srcs.length) consumer(imgs)
     })
   })
 }
@@ -39,7 +37,7 @@ const loadImages = (
 export default function preload(
   img: CreepyImage,
   options: Options,
-  callback: (cancel: Cancel) => void
+  callback: Consumer<Cancel>
 ): void {
   loadImages(getSrcs(options), imgs => {
     img.creepyfaceReachableImages = imgs
