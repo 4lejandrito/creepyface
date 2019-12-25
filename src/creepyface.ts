@@ -67,3 +67,4 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 export default creepyface
+export { PointProvider, Consumer, Point } from './types'
