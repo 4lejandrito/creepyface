@@ -8,7 +8,6 @@ const creepyface = (
   img: HTMLImageElement,
   userOptions?: UserOptions
 ): Cancel => {
-  creepyface.cancel(img)
   const options = getOptions(img, userOptions)
   let cancelled = false
   let cancel: Cancel = () => {
