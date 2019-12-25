@@ -10,9 +10,6 @@ const creepyface = (
 ): Cancel => {
   creepyface.cancel(img)
   const options = getOptions(img, userOptions)
-  const setSrc = (src: string) => {
-    img.src = src
-  }
   let cancelled = false
   let cancel: Cancel = () => {
     cancelled = true
@@ -22,12 +19,12 @@ const creepyface = (
     if (cancelled) return
     options.onAttach()
     const stopCreepyface = creepy(img, options)(data => {
-      setSrc(data.src)
+      img.src = data.src
       options.onDebug(data)
     })
     cancel = () => {
       stopCreepyface()
-      setSrc(options.src)
+      img.src = options.src
       options.onDetach()
       unload()
     }
