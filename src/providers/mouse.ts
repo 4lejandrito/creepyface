@@ -1,17 +1,8 @@
-import { Consumer, Point } from '../types'
+import singleton from './singleton'
 
-const consumers: Consumer<Point>[] = []
-
-document.addEventListener(
-  'mousemove',
-  (event: MouseEvent) =>
-    consumers.forEach(consumer => consumer([event.clientX, event.clientY])),
-  true
-)
-
-export default (consumer: Consumer<Point>) => {
-  consumers.push(consumer)
-  return () => {
-    consumers.splice(consumers.indexOf(consumer), 1)
-  }
-}
+export default singleton(consumer => {
+  const listener = (event: MouseEvent) =>
+    consumer([event.clientX, event.clientY])
+  window.addEventListener('mousemove', listener, true)
+  return () => window.removeEventListener('mousemove', listener, true)
+})

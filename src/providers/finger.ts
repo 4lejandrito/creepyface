@@ -1,25 +1,16 @@
-import { Consumer, Point } from '../types'
+import { Point } from '../types'
 import { add } from '../util/algebra'
+import singleton from './singleton'
 
-const consumers: Consumer<Point>[] = []
-
-document.addEventListener(
-  'touchmove',
-  (event: TouchEvent) =>
-    consumers.forEach(consumer => {
-      let point: Point = [0, 0]
-      for (let i = 0; i < event.touches.length; i++) {
-        const touch = event.touches[i]
-        point = add(point, [touch.clientX, touch.clientY])
-      }
-      consumer(point)
-    }),
-  true
-)
-
-export default (consumer: Consumer<Point>) => {
-  consumers.push(consumer)
-  return () => {
-    consumers.splice(consumers.indexOf(consumer), 1)
+export default singleton(consumer => {
+  const listener = (event: TouchEvent) => {
+    let point: Point = [0, 0]
+    for (let i = 0; i < event.touches.length; i++) {
+      const touch = event.touches[i]
+      point = add(point, [touch.clientX, touch.clientY])
+    }
+    consumer(point)
   }
-}
+  window.addEventListener('touchmove', listener, true)
+  return () => window.removeEventListener('touchmove', listener, true)
+})
