@@ -1,8 +1,7 @@
 import attach from './util/attach'
 import { UserOptions } from './util/options'
-import { Cancel, CreepyImage, Observable } from './util/types'
-import { Point } from './util/algebra'
-import * as observableStore from './observables/util/store'
+import { Cancel, CreepyImage, PointProvider } from './util/types'
+import * as pointProviderStore from './providers/util/store'
 
 const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
   creepyface.cancel(img)
@@ -20,11 +19,8 @@ creepyface.cancel = (img: HTMLImageElement) => {
   if (cancel) cancel()
 }
 
-creepyface.registerObservable = (
-  name: string,
-  observable: Observable<Point>
-) => {
-  observableStore.register(name, observable)
+creepyface.registerPointProvider = (name: string, provider: PointProvider) => {
+  pointProviderStore.register(name, provider)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,6 +1,6 @@
 import preload from './preload'
 import getOptions, { UserOptions } from './options'
-import creepy from '../observables/creepy'
+import creepy from '../providers/creepy'
 import { Cancel } from './types'
 
 export default (img: HTMLImageElement, userOptions?: UserOptions): Cancel => {

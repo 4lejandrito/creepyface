@@ -1,12 +1,12 @@
 import doTest from './do-test'
 import creepyface from '../creepyface'
-import mouse from '../observables/mouse'
-import combined from '../observables/combined'
-import finger from '../observables/finger'
+import mouse from '../providers/mouse'
+import combined from '../providers/combined'
+import finger from '../providers/finger'
 
 describe('Using DOM api with custom points', () => {
   doTest(img => {
-    creepyface.registerObservable('custom', combined([mouse, finger]))
+    creepyface.registerPointProvider('custom', combined([mouse, finger]))
 
     img.setAttribute('src', 'http://localhost/serious')
     img.setAttribute('data-throttle', '100')

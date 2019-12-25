@@ -1,7 +1,9 @@
+import { Point } from './algebra'
+
 export type Cancel = () => void
-export type Observer<T> = (t: T) => void
-export type Observable<T> = (
-  observer: Observer<T>,
+export type Consumer<T> = (t: T) => void
+export type PointProvider = (
+  consumer: Consumer<Point>,
   img: HTMLImageElement
 ) => Cancel
 export type CreepyImage = HTMLImageElement & {

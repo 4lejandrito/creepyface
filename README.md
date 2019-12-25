@@ -87,17 +87,17 @@ cancel()
 
 ## Super advanced usage
 
-Creepyface will look at the pointer by default, however custom point sources can be defined (see [firefly](https://github.com/4lejandrito/creepyface-firefly) for a real world implementation).
+Creepyface will look at the pointer by default, however custom point providers can be defined (see [firefly](https://github.com/4lejandrito/creepyface-firefly) for a real world implementation).
 
-For example, to make your face look at a random point every half a second you need to register an observable:
+For example, to make your face look at a random point every half a second you need to register a point provider:
 
 ```js
 import creepyface from 'creepyface'
 
-creepyface.registerObservable('random', observer => {
+creepyface.registerPointProvider('random', consumer => {
   const interval = setInterval(
     () =>
-      observer([
+      consumer([
         Math.random() * window.innerWidth,
         Math.random() * window.innerHeight
       ]),
@@ -134,11 +134,11 @@ or pass it programmatically:
 const img = document.querySelector('img#face')
 
 creepyface(img, {
-  // An observable that provides the points to look at
-  points: observer => {
+  // An provider that provides the points to look at
+  points: consumer => {
     const interval = setInterval(
       () =>
-        observer([
+        consumer([
           Math.random() * window.innerWidth,
           Math.random() * window.innerHeight
         ]),

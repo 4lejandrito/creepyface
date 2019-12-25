@@ -1,25 +1,25 @@
-import { Observer } from '../util/types'
+import { Consumer } from '../util/types'
 import { add, Point } from '../util/algebra'
 
-const observers: Observer<Point>[] = []
+const consumers: Consumer<Point>[] = []
 
 document.addEventListener(
   'touchmove',
   (event: TouchEvent) =>
-    observers.forEach(observer => {
+    consumers.forEach(consumer => {
       let point: Point = [0, 0]
       for (let i = 0; i < event.touches.length; i++) {
         const touch = event.touches[i]
         point = add(point, [touch.clientX, touch.clientY])
       }
-      observer(point)
+      consumer(point)
     }),
   true
 )
 
-export default (observer: Observer<Point>) => {
-  observers.push(observer)
+export default (consumer: Consumer<Point>) => {
+  consumers.push(consumer)
   return () => {
-    observers.splice(observers.indexOf(observer), 1)
+    consumers.splice(consumers.indexOf(consumer), 1)
   }
 }

@@ -1,7 +1,7 @@
-import { Observable } from './types'
+import { PointProvider } from './types'
 import { Angle, Point } from './algebra'
 import noop from './noop'
-import * as observableStore from '../observables/util/store'
+import * as pointProviderStore from '../providers/util/store'
 
 export type Millis = number
 export type Time = Millis
@@ -23,7 +23,7 @@ export type Options = {
   src: ImageURL
   hover?: ImageURL
   looks: Array<Look>
-  points: Observable<Point>
+  points: PointProvider
   timeToDefault: Time
   throttle: Time
   onDebug: Debug
@@ -34,7 +34,7 @@ export type UserOptions = {
   fieldOfVision?: Angle
   hover?: ImageURL
   looks?: Array<Look>
-  points?: Observable<Point> | string
+  points?: PointProvider | string
   timeToDefault?: Time
   throttle?: Time
   onDebug?: Debug
@@ -69,11 +69,11 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision'))
 })
 
-const getPoints = (userOptions: UserOptions): Observable<Point> => {
+const getPoints = (userOptions: UserOptions): PointProvider => {
   if (typeof userOptions.points === 'function') {
     return userOptions.points
   }
-  return observableStore.retrieve(userOptions.points || 'pointer')
+  return pointProviderStore.retrieve(userOptions.points || 'pointer')
 }
 
 export default function getOptions(
