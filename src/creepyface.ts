@@ -2,8 +2,7 @@ import getOptions, { UserOptions, CreepyData } from './util/options'
 import { Cancel, CreepyImage, PointProvider, Point } from './types'
 import * as pointProviderStore from './providers/store'
 import preload from './util/preload'
-import debounce from './util/debounce'
-import throttle from './util/throttle'
+import { throttle, debounce } from 'throttle-debounce'
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 
@@ -18,21 +17,23 @@ const creepyface = (
       img.src = data.src
       options.onDebug(data)
     }
-    const backToDefault = debounce(
-      () => consumer({ src: options.src, options }),
-      options.timeToDefault
+    const backToDefault = debounce(options.timeToDefault, () =>
+      consumer({ src: options.src, options })
     )
-    const throttledConsumer = throttle((point: Point) => {
-      const angle = getAngle(img, point)
-      const src = getSrc(img, point, angle, options)
-      consumer({ point, angle, src, options })
-      backToDefault()
-    }, options.throttle)
+    const throttledConsumer = throttle(
+      options.throttle,
+      (point: Point) => {
+        const angle = getAngle(img, point)
+        const src = getSrc(img, point, angle, options)
+        consumer({ point, angle, src, options })
+        backToDefault()
+      }
+    )
     const stopPointProvider = options.pointProvider(throttledConsumer, img)
     options.onAttach()
     return () => {
-      backToDefault.clear()
-      throttledConsumer.clear()
+      backToDefault.cancel()
+      throttledConsumer.cancel()
       stopPointProvider()
       img.src = options.src
       unload()

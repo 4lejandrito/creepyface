@@ -4,7 +4,7 @@ import lolex from 'lolex'
 export default registerCreepyface => {
   let clock, img, cancel
 
-  beforeAll(() => {    
+  beforeAll(() => {
     global['Image'] = function() {
       const img = { naturalWidth: 100 }
       setImmediate(() => {
@@ -20,12 +20,12 @@ export default registerCreepyface => {
     clock.tick(1)
   })
 
-  afterAll(() => {    
+  afterAll(() => {
     clock.uninstall()
   })
 
   function setsSrc(point, src, element = document) {
-    clock.tick(100)
+    clock.tick(101)
     simulateEvent.simulate(element, 'mousemove', {
       clientX: point[0],
       clientY: point[1]
