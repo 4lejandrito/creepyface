@@ -13,27 +13,27 @@ const creepyface = (
   const options = getOptions(img, userOptions)
 
   const cancel = preload(img, options, unload => {
-    const consumer = (data: CreepyData) => {
+    const dataConsumer = (data: CreepyData) => {
       img.src = data.src
       options.onDebug(data)
     }
     const backToDefault = debounce(options.timeToDefault, () =>
-      consumer({ src: options.src, options })
+      dataConsumer({ src: options.src, options })
     )
-    const throttledConsumer = throttle(
+    const throttledPointConsumer = throttle(
       options.throttle,
       (point: Point) => {
         const angle = getAngle(img, point)
         const src = getSrc(img, point, angle, options)
-        consumer({ point, angle, src, options })
+        dataConsumer({ point, angle, src, options })
         backToDefault()
       }
     )
-    const stopPointProvider = options.pointProvider(throttledConsumer, img)
+    const stopPointProvider = options.pointProvider(throttledPointConsumer, img)
     options.onAttach()
     return () => {
       backToDefault.cancel()
-      throttledConsumer.cancel()
+      throttledPointConsumer.cancel()
       stopPointProvider()
       img.src = options.src
       unload()
