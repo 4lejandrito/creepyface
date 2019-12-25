@@ -1,15 +1,40 @@
-import attach from './util/attach'
-import { UserOptions } from './util/options'
+import getOptions, { UserOptions } from './util/options'
 import { Cancel, CreepyImage, PointProvider } from './util/types'
 import * as pointProviderStore from './providers/util/store'
+import preload from './util/preload'
+import creepy from './providers/creepy'
 
-const creepyface = (img: HTMLImageElement, options?: UserOptions): Cancel => {
+const creepyface = (
+  img: HTMLImageElement,
+  userOptions?: UserOptions
+): Cancel => {
   creepyface.cancel(img)
+  const options = getOptions(img, userOptions)
+  const setSrc = (src: string) => {
+    img.src = src
+  }
+  let cancelled = false
+  let cancel: Cancel = () => {
+    cancelled = true
+  }
 
-  const detach = attach(img, options)
+  preload(img, options, unload => {
+    if (cancelled) return
+    options.onAttach()
+    const stopCreepyface = creepy(img, options)(data => {
+      setSrc(data.src)
+      options.onDebug(data)
+    })
+    cancel = () => {
+      stopCreepyface()
+      setSrc(options.src)
+      options.onDetach()
+      unload()
+    }
+  })
 
   return ((img as CreepyImage).creepyfaceCancel = () => {
-    detach()
+    cancel()
     delete (img as CreepyImage).creepyfaceCancel
   })
 }
