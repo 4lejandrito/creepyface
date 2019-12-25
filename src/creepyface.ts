@@ -23,7 +23,7 @@ const creepyface = (
       () => consumer({ src: options.src, options }),
       options.timeToDefault
     )
-    const stopPointProvider = options.points(
+    const stopPointProvider = options.pointProvider(
       throttle(point => {
         const angle = getAngle(img, point)
         const src = getSrc(img, point, angle, options)

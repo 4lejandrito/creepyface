@@ -22,7 +22,7 @@ export type Options = {
   src: ImageURL
   hover?: ImageURL
   looks: Array<Look>
-  points: PointProvider
+  pointProvider: PointProvider
   timeToDefault: Time
   throttle: Time
   onDebug: Debug
@@ -90,7 +90,7 @@ export default function getOptions(
     fieldOfVision: userOptions.fieldOfVision || 150,
     src,
     hover: userOptions.hover || '',
-    points: getPoints(userOptions),
+    pointProvider: getPoints(userOptions),
     looks: userOptions.looks || [],
     timeToDefault: userOptions.timeToDefault || 1000,
     throttle: userOptions.throttle || 100,
