@@ -18,7 +18,6 @@ export type CreepyData = {
 export type Debug = (data: CreepyData) => void
 export type EventListener = () => void
 export type Options = {
-  fieldOfVision: Angle
   src: ImageURL
   hover?: ImageURL
   looks: Array<Look>
@@ -30,7 +29,6 @@ export type Options = {
   onDetach: EventListener
 }
 export type UserOptions = {
-  fieldOfVision?: Angle
   hover?: ImageURL
   looks?: Array<Look>
   points?: PointProvider | string
@@ -64,8 +62,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   looks: getLooks(img),
   points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
-  throttle: getFloat(img.getAttribute('data-throttle')),
-  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision'))
+  throttle: getFloat(img.getAttribute('data-throttle'))
 })
 
 const getPoints = (userOptions: UserOptions): PointProvider => {
@@ -87,7 +84,6 @@ export default function getOptions(
   if (!src) throw new Error('A default URL must be specified')
 
   return {
-    fieldOfVision: userOptions.fieldOfVision || 150,
     src,
     hover: userOptions.hover || '',
     pointProvider: getPoints(userOptions),
