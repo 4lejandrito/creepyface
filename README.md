@@ -94,7 +94,7 @@ For example, to make your face look at a random point every half a second you ne
 ```js
 import creepyface from 'creepyface'
 
-creepyface.registerPointProvider('random', consumer => {
+creepyface.registerPointProvider('random', (consumer, img) => {
   const interval = setInterval(
     () =>
       consumer([
@@ -135,7 +135,7 @@ const img = document.querySelector('img#face')
 
 creepyface(img, {
   // An provider that provides the points to look at
-  points: consumer => {
+  points: (consumer, img) => {
     const interval = setInterval(
       () =>
         consumer([
@@ -164,6 +164,12 @@ creepyface(img, {
 })
 ```
 
+The following point providers are available out of the box:
+
+- `pointer` for both mouse and touch events. This is the default.
+- `mouse` just for mouse events.
+- `finger` just for touch events.
+
 ## Developing
 
 - `npm start` will spin up a local server with the sample page watching your file changes.
@@ -172,7 +178,7 @@ creepyface(img, {
 
 ## Contributing
 
-Please feel free to create issues and / or submit pull requests. For the latter, [test cases](src/__test__) are very welcome.
+Please feel free to create issues and / or submit pull requests. For the latter, [test cases](test/) are very welcome.
 
 ## License
 
