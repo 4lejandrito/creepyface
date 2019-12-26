@@ -1,9 +1,9 @@
 import simulateEvent from 'simulate-event'
 import lolex from 'lolex'
-import creepyface from '../creepyface'
-import mouse from '../providers/mouse'
-import combined from '../providers/combined'
-import finger from '../providers/finger'
+import creepyface from '../src/creepyface'
+import mouse from '../src/providers/mouse'
+import combined from '../src/providers/combined'
+import finger from '../src/providers/finger'
 
 const doTest = registerCreepyface => {
   let clock, img, cancel
