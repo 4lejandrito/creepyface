@@ -2,7 +2,7 @@
 
 Creepyface is a little JavaScript tool that makes your face look at the pointer (or a [firefly](https://github.com/4lejandrito/creepyface-firefly)). It is ideal for resumes, team presentation sites, etc...
 
-[Demo](https://creepyface.io)
+[Codepen](https://codepen.io/4lejandrito/pen/vbgxEB)
 
 ![Example animated gif of a face looking at the pointer](example.gif)
 
