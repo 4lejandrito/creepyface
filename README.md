@@ -134,7 +134,7 @@ or pass it programmatically:
 const img = document.querySelector('img#face')
 
 creepyface(img, {
-  // An provider that provides the points to look at
+  // Provides the points to look at
   points: (consumer, img) => {
     const interval = setInterval(
       () =>
