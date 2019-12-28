@@ -1,6 +1,6 @@
-import { PointProvider, Point } from '../types'
+import { PointProvider, Point, Consumer } from '../types'
 import { Angle } from './algebra'
-import * as pointProviderStore from '../providers/store'
+import { retrieve as retrievePointProvider } from '../providers/store'
 
 export type Millis = number
 export type Time = Millis
@@ -15,8 +15,6 @@ export type CreepyData = {
   src: string
   options: Options
 }
-export type Debug = (data: CreepyData) => void
-export type EventListener = () => void
 export type Options = {
   src: ImageURL
   hover?: ImageURL
@@ -24,9 +22,9 @@ export type Options = {
   pointProvider: PointProvider
   timeToDefault: Time
   throttle: Time
-  onDebug: Debug
-  onAttach: EventListener
-  onDetach: EventListener
+  onDebug: Consumer<CreepyData>
+  onAttach: Consumer<void>
+  onDetach: Consumer<void>
 }
 export type UserOptions = {
   hover?: ImageURL
@@ -34,9 +32,9 @@ export type UserOptions = {
   points?: PointProvider | string
   timeToDefault?: Time
   throttle?: Time
-  onDebug?: Debug
-  onAttach?: EventListener
-  onDetach?: EventListener
+  onDebug?: Consumer<CreepyData>
+  onAttach?: Consumer<void>
+  onDetach?: Consumer<void>
 }
 
 const getLooks = (img: HTMLElement): Array<Look> | undefined => {
@@ -69,7 +67,7 @@ const getPoints = (userOptions: UserOptions): PointProvider => {
   if (typeof userOptions.points === 'function') {
     return userOptions.points
   }
-  return pointProviderStore.retrieve(userOptions.points || 'pointer')
+  return retrievePointProvider(userOptions.points || 'pointer')
 }
 
 const noop = (): void => undefined

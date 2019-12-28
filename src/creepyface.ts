@@ -1,10 +1,11 @@
-import getOptions, { UserOptions, CreepyData } from './util/options'
-import { Cancel, PointProvider, Point } from './types'
-import * as pointProviderStore from './providers/store'
+import getOptions, { UserOptions } from './util/options'
+import { Cancel, Point, Consumer } from './types'
+import { register as registerPointProvider } from './providers/store'
 import preload from './util/preload'
 import { throttle, debounce } from 'throttle-debounce'
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
+import { Angle } from './util/algebra'
 
 const creepyface = (
   img: HTMLImageElement,
@@ -13,27 +14,24 @@ const creepyface = (
   const options = getOptions(img, userOptions)
 
   const cancel = preload(img, options, unload => {
-    const dataConsumer = (data: CreepyData) => {
-      img.src = data.src
-      options.onDebug(data)
+    const update = (src: string, point?: Point, angle?: Angle) => {
+      img.src = src
+      options.onDebug({ src, point, angle, options })
     }
     const backToDefault = debounce(options.timeToDefault, () =>
-      dataConsumer({ src: options.src, options })
+      update(options.src)
     )
-    const throttledPointConsumer = throttle(
-      options.throttle,
-      (point: Point) => {
-        const angle = getAngle(img, point)
-        const src = getSrc(img, point, angle, options)
-        dataConsumer({ point, angle, src, options })
-        backToDefault()
-      }
-    )
-    const stopPointProvider = options.pointProvider(throttledPointConsumer, img)
+    const pointConsumer = throttle<Consumer<Point>>(options.throttle, point => {
+      const angle = getAngle(img, point)
+      const src = getSrc(img, point, angle, options)
+      update(src, point, angle)
+      backToDefault()
+    })
+    const stopPointProvider = options.pointProvider(pointConsumer, img)
     options.onAttach()
     return () => {
       backToDefault.cancel()
-      throttledPointConsumer.cancel()
+      pointConsumer.cancel()
       stopPointProvider()
       img.src = options.src
       unload()
@@ -52,9 +50,7 @@ creepyface.cancel = (img: HTMLImageElement) => {
   if (cancel) cancel()
 }
 
-creepyface.registerPointProvider = (name: string, provider: PointProvider) => {
-  pointProviderStore.register(name, provider)
-}
+creepyface.registerPointProvider = registerPointProvider
 
 document.addEventListener('DOMContentLoaded', () => {
   const elements = document.querySelectorAll(
