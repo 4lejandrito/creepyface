@@ -21,7 +21,8 @@ const creepyface = (
     const backToDefault = debounce(options.timeToDefault, () =>
       update(options.src)
     )
-    const pointConsumer = throttle<Consumer<Point>>(options.throttle, point => {
+    const pointConsumer = throttle(options.throttle, (point: Point | null) => {
+      if (!point) return update(options.src)
       const angle = getAngle(img, point)
       const src = getSrc(img, point, angle, options)
       update(src, point, angle)

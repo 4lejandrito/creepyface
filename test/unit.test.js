@@ -5,8 +5,8 @@ import mouse from '../src/providers/mouse'
 import combined from '../src/providers/combined'
 import finger from '../src/providers/finger'
 
-const doTest = registerCreepyface => {
-  let clock, img, cancel
+describe('creepyface', () => {
+  let clock
 
   beforeAll(() => {
     global['Image'] = function() {
@@ -17,106 +17,118 @@ const doTest = registerCreepyface => {
       return img
     }
     clock = lolex.install()
-    img = document.createElement('img')
-    const body = document.body
-    body.appendChild(img)
-    cancel = registerCreepyface(img)
-    clock.tick(1)
   })
 
   afterAll(() => {
     clock.uninstall()
   })
 
-  function setsSrc(point, src, element = document) {
-    clock.tick(101)
-    simulateEvent.simulate(element, 'mousemove', {
-      clientX: point[0],
-      clientY: point[1]
+  const doTest = registerCreepyface => {
+    let cancel, img
+
+    beforeAll(() => {
+      img = document.createElement('img')
+      const body = document.body
+      body.appendChild(img)
+      cancel = registerCreepyface(img)
+      clock.tick(1)
     })
-    expect(img.src).toBe(src)
-    clock.tick(1000)
-    expect(img.src).toBe('http://localhost/serious')
-    element.dispatchEvent(
-      new TouchEvent('touchmove', {
-        touches: [{ clientX: point[0], clientY: point[1] }]
+
+    function setsSrc(point, src, element = document) {
+      clock.tick(101)
+      simulateEvent.simulate(element, 'mousemove', {
+        clientX: point[0],
+        clientY: point[1]
       })
-    )
-    expect(img.src).toBe(src)
+      expect(img.src).toBe(src)
+      clock.tick(1000)
+      expect(img.src).toBe('http://localhost/serious')
+      element.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: point[0], clientY: point[1] }]
+        })
+      )
+      expect(img.src).toBe(src)
+    }
+
+    it('caches the preloaded images', () => {
+      const preloadedSrcs = img.__creepyfaceReachableImages.map(img => img.src)
+      expect(preloadedSrcs).toContain('http://localhost/serious')
+      expect(preloadedSrcs).toContain('http://localhost/hover')
+      expect(preloadedSrcs).toContain('http://localhost/north')
+      expect(preloadedSrcs).toContain('http://localhost/northEast')
+      expect(preloadedSrcs).toContain('http://localhost/east')
+      expect(preloadedSrcs).toContain('http://localhost/southEast')
+      expect(preloadedSrcs).toContain('http://localhost/south')
+      expect(preloadedSrcs).toContain('http://localhost/southWest')
+      expect(preloadedSrcs).toContain('http://localhost/west')
+      expect(preloadedSrcs).toContain('http://localhost/northWest')
+    })
+
+    it('has the original src by default', () =>
+      expect(img.src).toBe('http://localhost/serious'))
+    it('hovers', () => {
+      setsSrc([0, 0], 'http://localhost/hover', img)
+      clock.tick(1000)
+      document.elementFromPoint = (x, y) =>
+        x === 0 && y === 0 ? img : document
+      setsSrc([0, 0], 'http://localhost/hover', img)
+      delete document.elementFromPoint
+    })
+
+    it('looks north', () => setsSrc([0, -1], 'http://localhost/north'))
+    it('looks north-east', () => setsSrc([1, -1], 'http://localhost/northEast'))
+    it('looks east', () => setsSrc([1, 0], 'http://localhost/east'))
+    it('looks south-east', () => setsSrc([1, 1], 'http://localhost/southEast'))
+    it('looks south', () => setsSrc([0, 1], 'http://localhost/south'))
+    it('looks south-west', () => setsSrc([-1, 1], 'http://localhost/southWest'))
+    it('looks west', () => setsSrc([-1, 0], 'http://localhost/west'))
+    it('looks north-west', () =>
+      setsSrc([-1, -1], 'http://localhost/northWest'))
+
+    describe('after a second with no points', () => {
+      beforeEach(() => {
+        setsSrc([0, -1], 'http://localhost/north')
+        clock.tick(1000)
+      })
+
+      it('looks forward', () =>
+        expect(img.src).toBe('http://localhost/serious'))
+    })
+
+    describe('after unregistering', () => {
+      beforeAll(() => {
+        cancel()
+      })
+
+      it('does not look forward', () =>
+        expect(img.src).toBe('http://localhost/serious'))
+      it('does not hover', () =>
+        setsSrc([0, 0], 'http://localhost/serious', img))
+      it('does not look north', () =>
+        setsSrc([0, -1], 'http://localhost/serious'))
+      it('does not look north-east', () =>
+        setsSrc([1, -1], 'http://localhost/serious'))
+      it('does not look east', () =>
+        setsSrc([1, 0], 'http://localhost/serious'))
+      it('does not look south-east', () =>
+        setsSrc([1, 1], 'http://localhost/serious'))
+      it('does not look south', () =>
+        setsSrc([0, 1], 'http://localhost/serious'))
+      it('does not look south-west', () =>
+        setsSrc([-1, 1], 'http://localhost/serious'))
+      it('does not look west', () =>
+        setsSrc([-1, 0], 'http://localhost/serious'))
+      it('does not look north-west', () =>
+        setsSrc([-1, -1], 'http://localhost/serious'))
+
+      it('does not have private data', () => {
+        expect(img.__creepyfaceCancel).toBeUndefined()
+        expect(img.__creepyfaceReachableImages).toBeUndefined()
+      })
+    })
   }
 
-  it('caches the preloaded images', () => {
-    const preloadedSrcs = img.__creepyfaceReachableImages.map(img => img.src)
-    expect(preloadedSrcs).toContain('http://localhost/serious')
-    expect(preloadedSrcs).toContain('http://localhost/hover')
-    expect(preloadedSrcs).toContain('http://localhost/north')
-    expect(preloadedSrcs).toContain('http://localhost/northEast')
-    expect(preloadedSrcs).toContain('http://localhost/east')
-    expect(preloadedSrcs).toContain('http://localhost/southEast')
-    expect(preloadedSrcs).toContain('http://localhost/south')
-    expect(preloadedSrcs).toContain('http://localhost/southWest')
-    expect(preloadedSrcs).toContain('http://localhost/west')
-    expect(preloadedSrcs).toContain('http://localhost/northWest')
-  })
-
-  it('has the original src by default', () =>
-    expect(img.src).toBe('http://localhost/serious'))
-  it('hovers', () => {
-    setsSrc([0, 0], 'http://localhost/hover', img)
-    clock.tick(1000)
-    document.elementFromPoint = (x, y) => (x === 0 && y === 0 ? img : document)
-    setsSrc([0, 0], 'http://localhost/hover', img)
-    delete document.elementFromPoint
-  })
-
-  it('looks north', () => setsSrc([0, -1], 'http://localhost/north'))
-  it('looks north-east', () => setsSrc([1, -1], 'http://localhost/northEast'))
-  it('looks east', () => setsSrc([1, 0], 'http://localhost/east'))
-  it('looks south-east', () => setsSrc([1, 1], 'http://localhost/southEast'))
-  it('looks south', () => setsSrc([0, 1], 'http://localhost/south'))
-  it('looks south-west', () => setsSrc([-1, 1], 'http://localhost/southWest'))
-  it('looks west', () => setsSrc([-1, 0], 'http://localhost/west'))
-  it('looks north-west', () => setsSrc([-1, -1], 'http://localhost/northWest'))
-
-  describe('after a second with no points', () => {
-    beforeEach(() => {
-      setsSrc([0, -1], 'http://localhost/north')
-      clock.tick(1000)
-    })
-
-    it('looks forward', () => expect(img.src).toBe('http://localhost/serious'))
-  })
-
-  describe('after unregistering', () => {
-    beforeAll(() => {
-      cancel()
-    })
-
-    it('does not look forward', () =>
-      expect(img.src).toBe('http://localhost/serious'))
-    it('does not hover', () => setsSrc([0, 0], 'http://localhost/serious', img))
-    it('does not look north', () =>
-      setsSrc([0, -1], 'http://localhost/serious'))
-    it('does not look north-east', () =>
-      setsSrc([1, -1], 'http://localhost/serious'))
-    it('does not look east', () => setsSrc([1, 0], 'http://localhost/serious'))
-    it('does not look south-east', () =>
-      setsSrc([1, 1], 'http://localhost/serious'))
-    it('does not look south', () => setsSrc([0, 1], 'http://localhost/serious'))
-    it('does not look south-west', () =>
-      setsSrc([-1, 1], 'http://localhost/serious'))
-    it('does not look west', () => setsSrc([-1, 0], 'http://localhost/serious'))
-    it('does not look north-west', () =>
-      setsSrc([-1, -1], 'http://localhost/serious'))
-
-    it('does not have private data', () => {
-      expect(img.__creepyfaceCancel).toBeUndefined()
-      expect(img.__creepyfaceReachableImages).toBeUndefined()
-    })
-  })
-}
-
-describe('creepyface', () => {
   ;['data-creepy', 'data-creepyface'].forEach(targetDataAttribute => {
     describe(`Using automatic DOM api (via ${targetDataAttribute} attribute)`, () => {
       doTest(img => {
@@ -266,6 +278,35 @@ describe('creepyface', () => {
           { angle: 7 * 45, src: 'http://localhost/northWest' }
         ]
       })
+    })
+  })
+
+  describe('Using JS api with a custom point provider', () => {
+    let testConsumer, cancel, img
+
+    beforeEach(() => {
+      img = document.createElement('img')
+      img.setAttribute('src', 'http://localhost/serious')
+
+      cancel = creepyface(img, {
+        throttle: 100,
+        points: consumer => {
+          testConsumer = consumer
+          return () => {}
+        }
+      })
+    })
+
+    afterEach(() => cancel())
+
+    describe('when the consumer is passed null', () => {
+      beforeEach(() => {
+        clock.tick(101)
+        testConsumer(null)
+      })
+
+      it('looks forward', () =>
+        expect(img.src).toBe('http://localhost/serious'))
     })
   })
 
