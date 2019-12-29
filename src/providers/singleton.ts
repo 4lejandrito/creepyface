@@ -1,7 +1,7 @@
 import { Consumer, Point, PointProvider, Cancel } from '../types'
 
 export default (provider: PointProvider): PointProvider => {
-  const consumers: Consumer<Point>[] = []
+  const consumers: Consumer<Point | null>[] = []
   let cancel: Cancel
 
   return (consumer, img) => {
