@@ -1,6 +1,7 @@
 import { PointProvider, Point, Consumer } from '../types'
 import { Angle } from './algebra'
 import { retrieve as retrievePointProvider } from '../providers/store'
+import combined from '../providers/combined'
 
 export type Millis = number
 export type Time = Millis
@@ -67,7 +68,9 @@ const getPoints = (userOptions: UserOptions): PointProvider => {
   if (typeof userOptions.points === 'function') {
     return userOptions.points
   }
-  return retrievePointProvider(userOptions.points || 'pointer')
+  return combined(
+    (userOptions.points || 'pointer').split(',').map(retrievePointProvider)
+  )
 }
 
 const noop = (): void => undefined
