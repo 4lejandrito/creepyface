@@ -12,7 +12,7 @@ export const add = (v1: Point, v2: Point): Point => [
   v1[0] + v2[0],
   v1[1] + v2[1]
 ]
-export const sign = (n: number) => (n ? (n < 0 ? -1 : 1) : 0)
+export const sign = (n: number) => (n < 0 ? -1 : 1)
 export const rad = (deg: Degrees) => (deg * Math.PI) / 180
 export const deg = (rad: Radians) => (rad * 180) / Math.PI
 export const mod = (n: number, m: number) => (m + (n % m)) % m
