@@ -1,5 +1,5 @@
 import getOptions, { UserOptions } from './util/options'
-import { Cancel, Point, Consumer } from './types'
+import { Cancel, Point } from './types'
 import { register as registerPointProvider } from './providers/store'
 import preload from './util/preload'
 import { throttle, debounce } from 'throttle-debounce'
