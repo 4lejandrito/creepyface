@@ -13,7 +13,7 @@ const creepyface = (
 ): Cancel => {
   const options = getOptions(img, userOptions)
 
-  const cancel = preload(img, options, unload => {
+  return (img.__creepyfaceCancel = preload(img, options, unload => {
     const update = (src: string, point?: Point, angle?: Angle) => {
       img.src = src
       options.onDebug({ src, point, angle, options })
@@ -35,15 +35,11 @@ const creepyface = (
       pointConsumer.cancel()
       stopPointProvider()
       img.src = options.src
+      delete img.__creepyfaceCancel
       unload()
       options.onDetach()
     }
-  })
-
-  return (img.__creepyfaceCancel = () => {
-    cancel()
-    delete img.__creepyfaceCancel
-  })
+  }))
 }
 
 creepyface.cancel = (img: HTMLImageElement) => {

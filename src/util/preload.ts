@@ -44,11 +44,13 @@ export default function preload(
     cancelled = true
   }
   loadImages(getSrcs(options), imgs => {
-    if (cancelled) return
     img.__creepyfaceReachableImages = imgs
     cancel = callback(() => {
       delete img.__creepyfaceReachableImages
     })
+    if (cancelled || imgs.some(img => !img.naturalWidth)) {
+      cancel()
+    }
   })
   return () => cancel()
 }
