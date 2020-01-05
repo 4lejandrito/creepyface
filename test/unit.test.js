@@ -213,6 +213,8 @@ describe('creepyface', () => {
     withCreepyfaceRegistered(() => creepyface(img))
 
     it('logs an error message', () => expect(console.error).toHaveBeenCalled())
+
+    isDeactivated(img, [provideMousePoint, provideTouchPoint])
   })
 
   describe('when all the images load', () => {
