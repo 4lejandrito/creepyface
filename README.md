@@ -52,6 +52,17 @@ If you want to customize it even more you can use our declarative data-attribute
    creepyface.cancel(document.querySelector('img'))
    ```
 
+### Full list of data attributes
+
+| Name                    | Description                                                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-creepyface`       | Add this to automatically attach creepyface to your image when the page loads.                                                                                                              |
+| `data-src-hover`        | The URL of the image to use when the pointer is over your image.                                                                                                                            |
+| `data-src-look-<angle>` | The URL of the image to use when the pointer forms the specified angle (in degrees) with the center of your image. Add as many as you want.                                                 |
+| `data-timetodefault`    | The amount of time (in milliseconds) after which the default src is restored if no pointer events are received. 1 second by default.                                                        |
+| `data-throttle`         | The amount of time (in milliseconds) to wait between src changes. 100 by default.                                                                                                           |
+| `data-points`           | Optionally, a comma-separated list of point provider names to make your face look at things other than the pointer. See [Super advanced usage](#super-advanced-usage) for more information. |
+
 ## Advanced usage
 
 For more advanced use cases Creepyface can also be set up via a programmatic API:
@@ -87,7 +98,7 @@ cancel()
 
 ## Super advanced usage
 
-Creepyface will look at the pointer by default, however custom point providers can be defined (see [firefly](https://github.com/4lejandrito/creepyface-firefly) for a real world implementation).
+Creepyface will look at the pointer by default, however custom point providers can be defined.
 
 For example, to make your face look at a random point every half a second (see [codepen](https://codepen.io/4lejandrito/pen/ZEYJLrN)) you need to register a [point provider](https://github.com/4lejandrito/creepyface/blob/master/src/types.ts#L4-L7):
 
@@ -109,7 +120,7 @@ creepyface.registerPointProvider('random', (consumer, img) => {
 })
 ```
 
-and consume it from the data-attribute API using the `data-points` attribute:
+and consume it using the `data-points` attribute:
 
 ```html
 <img
@@ -164,11 +175,17 @@ creepyface(img, {
 })
 ```
 
+**Note:** several point providers can work at the same time by using a comma-separated string like `"random,pointer"`.
+
 The following point providers are available out of the box:
 
 - `pointer` for both mouse and touch events. This is the default.
 - `mouse` just for mouse events.
 - `finger` just for touch events.
+
+The are also external point providers:
+
+- [firefly](https://github.com/4lejandrito/creepyface-firefly) to follow a moving firefly on the screen.
 
 ## Developing
 
