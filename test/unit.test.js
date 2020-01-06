@@ -345,6 +345,21 @@ describe('creepyface', () => {
           followsThePointer(img)
         })
 
+        describe('and no options or data-attributes', () => {
+          const img = withImage(
+            () => `
+              <img src="http://localhost/serious" />                                            />
+            `
+          )
+
+          withCreepyfaceRegistered(() => creepyface(img))
+
+          it('does nothing', () => {
+            const getNewSrc = createGetNewSrc(img, provideMousePoint)
+            expect(getNewSrc([0, -1])).toBe('http://localhost/serious')
+          })
+        })
+
         describe('and no hover image', () => {
           const img = withImage(
             () => `

@@ -31,6 +31,8 @@ export default (
 
   if (hover && elementContains(img, point)) {
     return hover
+  } else if (looks.length === 0) {
+    return options.src
   } else {
     return closest(angle, looks).src
   }
