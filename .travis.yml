@@ -1,7 +1,0 @@
-language: node_js
-node_js:
-  - '10'
-addons:
-  firefox: latest
-script:
-  - npm run travis

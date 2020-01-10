@@ -2,7 +2,7 @@ const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
 const url = path => `file://${__dirname}/${path}`
 
-jest.setTimeout(10000)
+jest.setTimeout(30000)
 
 const browsers = [
   {
