@@ -1,10 +1,19 @@
 const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
+const chrome = require('selenium-webdriver/chrome')
 const url = path => `file://${__dirname}/${path}`
 
 jest.setTimeout(30000)
 
 const browsers = [
+  {
+    name: 'chrome',
+    driver: () =>
+      new Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(new chrome.Options().headless())
+        .build()
+  },
   {
     name: 'firefox',
     driver: () =>
@@ -16,13 +25,13 @@ const browsers = [
 ]
 
 const describeCombination = fn => () => {
-  ;['index.html', 'index-js.html'].forEach(fileName => {
-    describe(fileName, () => {
-      browsers.forEach(browser => {
-        describe(`Running in ${browser.name}`, () => {
-          let driver = browser.driver()
+  browsers.forEach(browser => {
+    describe(`Running in ${browser.name}`, () => {
+      let driver = browser.driver()
+      afterAll(() => driver.quit())
+      ;['index.html', 'index-js.html'].forEach(fileName => {
+        describe(fileName, () => {
           beforeAll(() => driver.get(url(fileName)))
-          afterAll(() => driver.quit())
           fn(driver)
         })
       })
