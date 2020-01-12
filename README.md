@@ -100,7 +100,7 @@ cancel()
 
 Creepyface will look at the pointer by default, however custom point providers can be defined.
 
-For example, to make your face look at a random point every half a second (see [codepen](https://codepen.io/4lejandrito/pen/ZEYJLrN)) you need to register a [point provider](https://github.com/4lejandrito/creepyface/blob/master/src/types.ts#L4-L7):
+For example, to make your face look at a random point every half a second (see [codepen](https://codepen.io/4lejandrito/pen/ZEYJLrN)) you need to register a [point provider](https://github.com/4lejandrito/creepyface/blob/master/src/types.d.ts#L5-L8):
 
 ```js
 import creepyface from 'creepyface'
