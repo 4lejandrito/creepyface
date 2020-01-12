@@ -14,6 +14,7 @@ export default [
     output: {
       file: pkg.main,
       format: 'umd',
+      sourcemap: true,
       name: 'creepyface'
     },
     plugins: [
