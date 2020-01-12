@@ -1,5 +1,4 @@
-import { Options, ImageURL } from './options'
-import { Cancel, Consumer } from '../types'
+import { Cancel, Consumer, Options, ImageURL } from '../types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)

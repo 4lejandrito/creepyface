@@ -1,5 +1,5 @@
-import getOptions, { UserOptions } from './util/options'
-import { Cancel, Point } from './types'
+import getOptions from './util/options'
+import { Cancel, Creepyface, Point, UserOptions } from './types'
 import { register as registerPointProvider } from './providers/store'
 import preload from './util/preload'
 import { throttle, debounce } from 'throttle-debounce'
@@ -7,7 +7,7 @@ import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import { Angle } from './util/algebra'
 
-const creepyface = (
+const creepyface: Creepyface = (
   img: HTMLImageElement,
   userOptions?: UserOptions
 ): Cancel => {

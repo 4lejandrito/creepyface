@@ -19,13 +19,7 @@ export default [
     plugins: [
       resolve({ browser: true }),
       commonjs(),
-      typescript({
-        tsconfigOverride: {
-          compilerOptions: {
-            declaration: false
-          }
-        }
-      }),
+      typescript(),
       babel({ extensions: ['.js', '.ts'] }),
       production && uglify(),
       !production && browsersync({ server: ['test', '.'] })

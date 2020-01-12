@@ -1,42 +1,6 @@
-import { PointProvider, Point, Consumer } from '../types'
-import { Angle } from './algebra'
+import { PointProvider, UserOptions, Options, Look } from '../types'
 import { retrieve as retrievePointProvider } from '../providers/store'
 import combined from '../providers/combined'
-
-export type Millis = number
-export type Time = Millis
-export type ImageURL = string
-export type Look = {
-  src: ImageURL
-  angle: Angle
-}
-export type CreepyData = {
-  point?: Point
-  angle?: Angle
-  src: string
-  options: Options
-}
-export type Options = {
-  src: ImageURL
-  hover?: ImageURL
-  looks: Array<Look>
-  pointProvider: PointProvider
-  timeToDefault: Time
-  throttle: Time
-  onDebug: Consumer<CreepyData>
-  onAttach: Consumer<void>
-  onDetach: Consumer<void>
-}
-export type UserOptions = {
-  hover?: ImageURL
-  looks?: Array<Look>
-  points?: PointProvider | string
-  timeToDefault?: Time
-  throttle?: Time
-  onDebug?: Consumer<CreepyData>
-  onAttach?: Consumer<void>
-  onDetach?: Consumer<void>
-}
 
 const getLooks = (img: HTMLElement): Array<Look> | undefined => {
   const regex = /data-src-look-(\d+)/i
