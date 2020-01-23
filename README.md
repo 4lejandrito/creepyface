@@ -6,6 +6,11 @@ Creepyface is a little JavaScript tool that makes your face look at the pointer 
 
 ![Example animated gif of a face looking at the pointer](example.gif)
 
+Sites using Creepyface:
+
+- https://atroshenkonikita.com
+- https://www.yitzi.dev
+
 ## Usage
 
 The simplest way to create your Creepyface is by using [our wizard](https://creepyface.io/create).
