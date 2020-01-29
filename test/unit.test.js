@@ -233,7 +233,7 @@ describe('creepyface', () => {
           const img = withImage(
             () => `
               <img src="http://localhost/serious"
-                data-creepyface
+                ${attributeName}
                 data-throttle="100"
                 data-src-hover="http://localhost/hover"
                 data-src-look-0="http://localhost/north"
@@ -265,7 +265,7 @@ describe('creepyface', () => {
           const img1 = withImage(
             () => `
               <img src="http://localhost/serious"
-                data-creepyface
+                ${attributeName}
                 data-src-hover="http://localhost/hover"
                 data-src-look-0="http://localhost/north"
                 data-src-look-45="http://localhost/northEast"
@@ -282,7 +282,7 @@ describe('creepyface', () => {
           const img2 = withImage(
             () => `
               <img src="http://localhost/serious"
-                data-creepyface
+                ${attributeName}
                 data-src-hover="http://localhost/hover"
                 data-src-look-0="http://localhost/north"
                 data-src-look-45="http://localhost/northEast"
