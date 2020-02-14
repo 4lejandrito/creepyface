@@ -602,5 +602,37 @@ describe('creepyface', () => {
 
       isDeactivated(img, [provideMousePoint, provideTouchPoint])
     })
+
+    describe('when timeToDefault is 0', () => {
+      const img = withImage(
+        () => `
+          <img src="http://localhost/serious"
+            data-src-hover="http://localhost/hover"
+            data-src-look-0="http://localhost/north"
+            data-src-look-45="http://localhost/northEast"
+            data-src-look-90="http://localhost/east"
+            data-src-look-135="http://localhost/southEast"
+            data-src-look-180="http://localhost/south"
+            data-src-look-225="http://localhost/southWest"
+            data-src-look-270="http://localhost/west"
+            data-src-look-315="http://localhost/northWest"
+            data-timeToDefault="0"
+          />
+        `
+      )
+
+      withCreepyfaceRegistered(() => creepyface(img))
+
+      describe('after a day with no points', () => {
+        beforeAndAfter(() => {
+          const getNewSrc = createGetNewSrc(img, provideMousePoint)
+          expect(getNewSrc([0, -1])).toBe('http://localhost/north')
+          jest.advanceTimersByTime(24 * 60 * 60)
+        })
+
+        it('keeps looking at the pointer', () =>
+          expect(img.src).toBe('http://localhost/north'))
+      })
+    })
   })
 })

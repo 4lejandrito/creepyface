@@ -53,7 +53,10 @@ export default function getOptions(
     hover: userOptions.hover || '',
     pointProvider: getPoints(userOptions),
     looks: userOptions.looks || [],
-    timeToDefault: userOptions.timeToDefault || 1000,
+    timeToDefault:
+      userOptions.timeToDefault !== undefined
+        ? userOptions.timeToDefault
+        : 1000,
     throttle: userOptions.throttle || 100,
     onDebug: userOptions.onDebug || noop,
     onAttach: userOptions.onAttach || noop,

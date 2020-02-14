@@ -26,7 +26,7 @@ const creepyface: Creepyface = (
       const angle = getAngle(img, point)
       const src = getSrc(img, point, angle, options)
       update(src, point, angle)
-      backToDefault()
+      if (options.timeToDefault > 0) backToDefault()
     })
     const stopPointProvider = options.pointProvider(pointConsumer, img)
     options.onAttach()

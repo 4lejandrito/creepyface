@@ -61,14 +61,14 @@ If you want to customize it even more you can use our declarative data-attribute
 
 ### Full list of data attributes
 
-| Name                    | Description                                                                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data-creepyface`       | Add this to automatically attach creepyface to your image when the page loads.                                                                                                              |
-| `data-src-hover`        | The URL of the image to use when the pointer is over your image.                                                                                                                            |
-| `data-src-look-<angle>` | The URL of the image to use when the pointer forms the specified angle (in degrees) with the center of your image. Add as many as you want.                                                 |
-| `data-timetodefault`    | The amount of time (in milliseconds) after which the default src is restored if no pointer events are received. 1 second by default.                                                        |
-| `data-throttle`         | The amount of time (in milliseconds) to wait between src changes. 100 by default.                                                                                                           |
-| `data-points`           | Optionally, a comma-separated list of point provider names to make your face look at things other than the pointer. See [Super advanced usage](#super-advanced-usage) for more information. |
+| Name                    | Description                                                                                                                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-creepyface`       | Add this to automatically attach creepyface to your image when the page loads.                                                                                                                                      |
+| `data-src-hover`        | The URL of the image to use when the pointer is over your image.                                                                                                                                                    |
+| `data-src-look-<angle>` | The URL of the image to use when the pointer forms the specified angle (in degrees) with the center of your image. Add as many as you want.                                                                         |
+| `data-timetodefault`    | The amount of time (in milliseconds) after which the default src is restored if no pointer events are received. 1 second by default. 0 means it will never be restored (the image will always look at the pointer). |
+| `data-throttle`         | The amount of time (in milliseconds) to wait between src changes. 100 by default.                                                                                                                                   |
+| `data-points`           | Optionally, a comma-separated list of point provider names to make your face look at things other than the pointer. See [Super advanced usage](#super-advanced-usage) for more information.                         |
 
 ## Advanced usage
 
