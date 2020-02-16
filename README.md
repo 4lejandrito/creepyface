@@ -13,6 +13,8 @@ Creepyface in the wild:
 - https://1aville.ch/about.html
 - https://github.com/reflog/mattermost-plugin-creepy
 
+Now also available for React: https://github.com/4lejandrito/react-creepyface.
+
 ## Usage
 
 The simplest way to create your Creepyface is by using [our wizard](https://creepyface.io/create).
