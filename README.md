@@ -1,6 +1,6 @@
 # [Creepyface](https://creepyface.io) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface) [![Build](https://github.com/4lejandrito/creepyface/workflows/Build/badge.svg)](https://github.com/4lejandrito/creepyface/actions?query=workflow%3ABuild+branch%3Amaster) [![Coverage Status](https://coveralls.io/repos/github/4lejandrito/creepyface/badge.svg?branch=master)](https://coveralls.io/github/4lejandrito/creepyface?branch=master)
 
-Creepyface is a little JavaScript tool that makes your face look at the pointer (or a [firefly](https://github.com/4lejandrito/creepyface-firefly)). It is ideal for resumes, team presentation sites, etc...
+Creepyface is a little JavaScript tool that makes your face look at the pointer (or a [firefly](packages/creepyface-firefly)). It is ideal for resumes, team presentation sites, etc...
 
 [Codepen](https://codepen.io/4lejandrito/pen/vbgxEB)
 
@@ -13,7 +13,7 @@ Creepyface in the wild:
 - https://1aville.ch/about.html
 - https://github.com/reflog/mattermost-plugin-creepy
 
-Now also available for React: https://github.com/4lejandrito/react-creepyface.
+Now also [available for React](packages/react-creepyface)!
 
 ## Usage
 
@@ -109,7 +109,7 @@ cancel()
 
 Creepyface will look at the pointer by default, however custom point providers can be defined.
 
-For example, to make your face look at a random point every half a second (see [codepen](https://codepen.io/4lejandrito/pen/ZEYJLrN)) you need to register a [point provider](https://github.com/4lejandrito/creepyface/blob/master/src/types.d.ts#L5-L8):
+For example, to make your face look at a random point every half a second (see [codepen](https://codepen.io/4lejandrito/pen/ZEYJLrN)) you need to register a [point provider](packages/creepyface/src/types.d.ts#L5-L8):
 
 ```js
 import creepyface from 'creepyface'
@@ -194,21 +194,22 @@ The following point providers are available out of the box:
 
 The are also external point providers:
 
-- [firefly](https://github.com/4lejandrito/creepyface-firefly) to follow a moving firefly on the screen.
+- [firefly](packages/creepyface-firefly) to follow a moving firefly on the screen.
 
 ## Developing
 
-- `npm start` will spin up a local server with the sample page watching your file changes.
+- `npm run bootstrap` will set up the packages using [Lerna](https://lerna.js.org/).
+- `npm start` will spin up local servers for each of the packages.
 - `npm test` will run the tests.
-- `npm run build` will generate the production scripts under the `dist` folder.
+- `npm run build` will generate the production scripts under the `dist` folder of each package.
 
 ## Contributing
 
-Please feel free to create issues and / or submit pull requests. For the latter, [test cases](test/) are very welcome.
+Please feel free to create issues and / or submit pull requests. For the latter, [test cases](packages/creepyface/test/) are very welcome.
 
 ## License
 
-MIT, see [LICENSE](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) for details.
+MIT, see [LICENSE](LICENSE) for details.
 
 ## Big Thanks
 

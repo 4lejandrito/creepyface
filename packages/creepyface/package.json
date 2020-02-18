@@ -1,0 +1,64 @@
+{
+  "name": "creepyface",
+  "version": "7.2.1",
+  "keywords": [
+    "face",
+    "look",
+    "mouse",
+    "pointer",
+    "finger",
+    "follow",
+    "creepy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/4lejandrito/creepyface.git"
+  },
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/creepyface.umd.js",
+  "types": "dist/creepyface.d.ts",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@types/jest": "^23.3.11",
+    "@types/throttle-debounce": "^2.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.9.0",
+    "chromedriver": "^79.0.0",
+    "eslint": "^5.11.1",
+    "geckodriver": "^1.19.1",
+    "jest": "^24.9.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.0.0",
+    "rollup-plugin-babel": "^4.2.0",
+    "rollup-plugin-browsersync": "^1.1.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "rollup-plugin-uglify": "^6.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.5",
+    "simulate-event": "^1.4.0",
+    "standard": "^12.0.1",
+    "throttle-debounce": "^2.1.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.12.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "all": "run-s clean lint build test",
+    "prepublishOnly": "npm run all",
+    "start": "rollup -c -w",
+    "lint": "tslint --project tsconfig.json",
+    "build": "NODE_ENV=production rollup -c && cp src/types.d.ts dist/creepyface.d.ts",
+    "clean": "rimraf dist",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  }
+}
