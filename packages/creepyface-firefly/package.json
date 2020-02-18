@@ -1,0 +1,38 @@
+{
+  "name": "creepyface-firefly",
+  "version": "7.1.2",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "open test/index.html",
+    "build": "NODE_ENV=production tsc --emitDeclarationOnly && rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/4lejandrito/creepyface-firefly.git"
+  },
+  "author": "Alejandro Tardín",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/4lejandrito/creepyface-firefly/issues"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
+    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@types/raf": "^3.4.0",
+    "creepyface": "^7.1.2",
+    "present": "^1.0.0",
+    "raf": "^3.4.1",
+    "rollup": "^1.27.13",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^3.7.3"
+  }
+}
