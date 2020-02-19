@@ -1,11 +1,12 @@
 {
   "name": "creepyface-monorepo",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/4lejandrito/creepyface.git"
   },
-  "author": "Alejandro Tardín <alejandro@tardin.com>",
-  "license": "MIT",
   "devDependencies": {
     "husky": "^1.3.1",
     "lerna": "^3.20.2",

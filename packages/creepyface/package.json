@@ -1,6 +1,13 @@
 {
   "name": "creepyface",
   "version": "7.2.1",
+  "main": "dist/creepyface.umd.js",
+  "types": "dist/creepyface.d.ts",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
+  "repository": "https://github.com/4lejandrito/creepyface/tree/master/packages/creepyface",
+  "funding": "https://github.com/4lejandrito/creepyface?sponsor=1",
   "keywords": [
     "face",
     "look",
@@ -10,17 +17,9 @@
     "follow",
     "creepy"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/4lejandrito/creepyface.git"
-  },
-  "author": "Alejandro Tardín <alejandro@tardin.com>",
-  "license": "MIT",
   "files": [
     "dist"
   ],
-  "main": "dist/creepyface.umd.js",
-  "types": "dist/creepyface.d.ts",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",

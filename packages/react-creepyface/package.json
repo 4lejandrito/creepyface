@@ -1,21 +1,24 @@
 {
   "name": "react-creepyface",
   "version": "7.1.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
+  "repository": "https://github.com/4lejandrito/creepyface/tree/master/packages/react-creepyface",
+  "funding": "https://github.com/4lejandrito/creepyface?sponsor=1",
+  "keywords": [
+    "react",
+    "face",
+    "look",
+    "follow",
+    "creepy"
+  ],
   "scripts": {
     "start": "start-storybook -p 6006",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "NODE_ENV=production npm run build"
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/4lejandrito/creepyface.git"
-  },
-  "author": "Alejandro Tardín",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/4lejandrito/creepyface/issues"
   },
   "peerDependencies": {
     "creepyface": "^7",
