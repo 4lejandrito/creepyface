@@ -2,6 +2,8 @@
 
 React-Creepyface is a [React](https://reactjs.org/) component for [Creepyface](https://github.com/4lejandrito/creepyface).
 
+[![Edit quizzical-dawn-0hzuq](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/quizzical-dawn-0hzuq?fontsize=14&hidenavigation=1&theme=dark)
+
 ## Installation
 
 ```
