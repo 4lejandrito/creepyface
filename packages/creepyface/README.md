@@ -1,12 +1,12 @@
 # [Creepyface](https://creepyface.io) &middot; [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface)
 
-**For the full documentation go to the [root README](../../README.md).**
+**For the full documentation go to the [root README](https://github.com/4lejandrito/creepyface).**
 
 Creepyface is a little JavaScript library that makes your face look at the pointer.
 
 See it in action at [creepyface.io](https://creepyface.io) and create your own one using [the wizard](https://creepyface.io/create).
 
-![Example animated gif of a face looking at the pointer](../../example.gif)
+![Example animated gif of a face looking at the pointer](https://github.com/4lejandrito/creepyface/raw/master/example.gif)
 
 ## Usage
 
