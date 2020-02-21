@@ -1,0 +1,40 @@
+{
+  "name": "creepyface-custom-element",
+  "version": "7.2.5",
+  "main": "dist/index.js",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
+  "repository": "https://github.com/4lejandrito/creepyface/tree/master/packages/creepyface-custom-element",
+  "funding": "https://github.com/4lejandrito/creepyface?sponsor=1",
+  "keywords": [
+    "customElements",
+    "face",
+    "look",
+    "follow",
+    "creepy"
+  ],
+  "scripts": {
+    "start": "start-storybook",
+    "build": "NODE_ENV=production rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "creepyface": "^7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.7.6",
+    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@storybook/addon-knobs": "^5.3.13",
+    "@storybook/addon-storysource": "^5.3.13",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/html": "^5.3.13",
+    "@ungap/custom-elements-builtin": "^0.3.0",
+    "babel-loader": "^8.0.6",
+    "rollup": "^1.27.13",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.4"
+  }
+}

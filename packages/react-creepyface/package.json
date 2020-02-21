@@ -16,7 +16,7 @@
     "creepy"
   ],
   "scripts": {
-    "start": "start-storybook -p 6006",
+    "start": "start-storybook",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "NODE_ENV=production npm run build"
   },
