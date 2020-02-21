@@ -4,6 +4,8 @@ Creepyface is a little JavaScript library that makes your face look at the point
 
 See it in action at [creepyface.io](https://creepyface.io) and create your own one using [the wizard](https://creepyface.io/create).
 
+If you use React, check out [\<Creepyface /\>](packages/react-creepyface).
+
 ![Example animated gif of a face looking at the pointer](example.gif)
 
 Creepyface in the wild:
