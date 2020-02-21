@@ -2,9 +2,7 @@
 
 A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to make your face follow a firefly.
 
-Try to find the firefly on https://creepyface.io!
-
-[Codepen](https://codepen.io/4lejandrito/pen/povrRWq)
+Try to find the firefly on https://creepyface.io! If you give up here is a [codepen](https://codepen.io/4lejandrito/pen/povrRWq).
 
 ## Usage
 
