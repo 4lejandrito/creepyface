@@ -23,6 +23,9 @@
     "build": "NODE_ENV=production tsc --emitDeclarationOnly && rollup -c",
     "prepublishOnly": "npm run build"
   },
+  "peerDependencies": {
+    "creepyface": "^7"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
