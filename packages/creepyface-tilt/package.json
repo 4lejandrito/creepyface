@@ -1,0 +1,44 @@
+{
+  "name": "creepyface-tilt",
+  "version": "7.2.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
+  "repository": "https://github.com/4lejandrito/creepyface/tree/master/packages/creepyface-tilt",
+  "funding": "https://github.com/4lejandrito/creepyface?sponsor=1",
+  "keywords": [
+    "face",
+    "look",
+    "tilt",
+    "deviceorientation",
+    "orientation",
+    "motion",
+    "follow",
+    "creepy"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "open test/index.html",
+    "build": "NODE_ENV=production tsc --emitDeclarationOnly && rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "creepyface": "^7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
+    "@rollup/plugin-node-resolve": "^6.0.0",
+    "creepyface": "7.1.2",
+    "rollup": "^1.27.13",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^3.7.3"
+  }
+}

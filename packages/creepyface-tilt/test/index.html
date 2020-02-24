@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Creepyface Tilt</title>
+    <script src="../node_modules/creepyface/dist/creepyface.umd.js"></script>
+    <script src="../dist/index.js"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      img {
+        max-width: 10em;
+      }
+      #debug {
+        width: 10px;
+        height: 10px;
+        background: red;
+        border-radius: 50%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="https://creepyface.io/img/0/serious"
+      data-points="tilt"
+      data-throttle="-1"
+      data-src-look-0="https://creepyface.io/img/0/0"
+      data-src-look-45="https://creepyface.io/img/0/45"
+      data-src-look-90="https://creepyface.io/img/0/90"
+      data-src-look-135="https://creepyface.io/img/0/135"
+      data-src-look-180="https://creepyface.io/img/0/180"
+      data-src-look-225="https://creepyface.io/img/0/225"
+      data-src-look-270="https://creepyface.io/img/0/270"
+      data-src-look-315="https://creepyface.io/img/0/315"
+    />
+    <div id="debug"></div>
+    <script>
+      const debug = document.getElementById('debug')
+      creepyface(document.querySelector('img'), {
+        onDebug: ({ point }) => {
+          debug.style.left = point && `${point[0]}px`
+          debug.style.top = point && `${point[1]}px`
+        }
+      })
+    </script>
+  </body>
+</html>

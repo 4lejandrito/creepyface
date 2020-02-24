@@ -189,6 +189,7 @@ The following point providers are available out of the box:
 
 The are also external point providers:
 
+- [tilt](packages/creepyface-tilt) to stare at you when you tilt your phone.
 - [firefly](packages/creepyface-firefly) to follow a moving firefly on the screen.
 
 ## Developing
