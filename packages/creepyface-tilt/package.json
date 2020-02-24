@@ -1,6 +1,6 @@
 {
   "name": "creepyface-tilt",
-  "version": "7.2.2",
+  "version": "7.2.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
