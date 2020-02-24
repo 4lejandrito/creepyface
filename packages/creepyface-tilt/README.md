@@ -25,6 +25,8 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 />
 ```
 
+> Run this example on [codepen](https://codepen.io/4lejandrito/pen/qBdRbJj).
+
 ## Developing
 
 - `npm start` will spin up a test page.
