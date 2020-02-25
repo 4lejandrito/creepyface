@@ -52,7 +52,7 @@
   },
   "scripts": {
     "all": "run-s clean lint build test",
-    "prepublishOnly": "npm run all",
+    "prepublishOnly": "yarn all",
     "start": "rollup -c -w",
     "lint": "tslint --project tsconfig.json",
     "build": "NODE_ENV=production rollup -c && cp src/types.d.ts dist/creepyface.d.ts",

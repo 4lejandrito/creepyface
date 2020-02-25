@@ -24,7 +24,7 @@
   "scripts": {
     "start": "open test/index.html",
     "build": "NODE_ENV=production tsc --emitDeclarationOnly && rollup -c",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
     "creepyface": "^7"
@@ -34,7 +34,7 @@
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-typescript": "^7.7.4",
     "@rollup/plugin-node-resolve": "^6.0.0",
-    "creepyface": "7.1.2",
+    "creepyface": "^7.2.4",
     "rollup": "^1.27.13",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",

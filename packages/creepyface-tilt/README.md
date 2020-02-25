@@ -29,5 +29,5 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 
 ## Developing
 
-- `npm start` will spin up a test page.
-- `npm run build` will generate the production scripts under the `dist` folder.
+- `yarn start` will spin up a test page.
+- `yarn build` will generate the production scripts under the `dist` folder.

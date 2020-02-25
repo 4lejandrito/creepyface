@@ -18,7 +18,7 @@
   "scripts": {
     "start": "start-storybook",
     "build": "rm -rf dist && tsc",
-    "prepublishOnly": "NODE_ENV=production npm run build"
+    "prepublishOnly": "NODE_ENV=production yarn build"
   },
   "peerDependencies": {
     "creepyface": "^7",

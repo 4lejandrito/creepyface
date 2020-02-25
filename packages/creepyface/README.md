@@ -30,5 +30,5 @@ See it in action at [creepyface.io](https://creepyface.io) and create your own o
 
 ## Developing
 
-- `npm start` will spin up a test page.
-- `npm run build` will generate the production scripts under the `dist` folder.
+- `yarn start` will spin up a test page.
+- `yarn build` will generate the production scripts under the `dist` folder.
