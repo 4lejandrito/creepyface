@@ -1,0 +1,29 @@
+.ReactModalPortal {
+  z-index: 1;
+  .ReactModal__Overlay {
+    background-color: rgba($color-main, 0.85) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ReactModal__Content {
+    @extend %card;
+    max-height: 100%;
+    position: relative;
+    background: white;
+    overflow: auto;
+    padding: $spacing;
+    margin: $spacing;
+    .cancel {
+      position: absolute;
+      padding: $spacing / 2;
+      top: $spacing / 2;
+      right: $spacing / 2;
+      margin: 0;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+  }
+}

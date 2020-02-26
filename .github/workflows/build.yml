@@ -6,7 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: yarn install, build, and test
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
@@ -21,3 +23,10 @@ jobs:
           path-to-lcov: ./packages/creepyface/coverage/lcov.info
         env:
           CI: true
+      - name: Deploy site
+        uses: idoberko2/dokku-deploy-github-action@v1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          dokku-host: creepyface.io
+          app-name: live
+          git-push-flags: --force

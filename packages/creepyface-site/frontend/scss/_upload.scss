@@ -1,0 +1,31 @@
+.permissions {
+  max-width: 480px;
+  text-align: left;
+  font-size: 80%;
+  margin: $spacing;
+  button {
+    margin: 0;
+  }
+  main > p:nth-child(1) {
+    padding-right: 2 * $spacing;
+  }
+  p {
+    margin-bottom: $spacing / 2;
+  }
+  fieldset {
+    label {
+      display: block;
+      margin-bottom: $spacing / 2;
+    }
+    input[type='checkbox'] {
+      width: 1.5 * $spacing;
+    }
+    button {
+      margin: 0;
+    }
+    p {
+      padding-left: 1.5 * $spacing;
+      margin: 0;
+    }
+  }
+}

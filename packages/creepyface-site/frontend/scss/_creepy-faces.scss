@@ -1,0 +1,34 @@
+.sample .creepy {
+  cursor: pointer;
+}
+
+.creepyfaces {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    display: inline-block;
+    .creepy {
+      opacity: 0.3;
+      border: none;
+      transition: all ease-in-out 100ms;
+      @include square(100%);
+      .loader {
+        font-size: 0.8rem;
+        bottom: $spacing / 4;
+        right: $spacing / 4;
+      }
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
+  .react-spinner * {
+    background-color: white;
+  }
+}

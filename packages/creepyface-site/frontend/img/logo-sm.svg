@@ -1,0 +1,22 @@
+<svg
+  className='eye'
+  viewBox='0 0 106 106'
+  xmlns='http://www.w3.org/2000/svg'
+  xmlnsXlink='http://www.w3.org/1999/xlink'
+>
+  <circle
+    class='iris'
+    cx='53'
+    cy='53'
+    r='50'
+    fill="#1abc9c"
+  />
+
+  <circle
+    class='pupil'
+    cx='68'
+    cy='38'
+    r='20'
+    fill="white"
+  />
+</svg>

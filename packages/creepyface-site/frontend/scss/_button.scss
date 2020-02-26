@@ -1,0 +1,64 @@
+@mixin button($color, $background) {
+  @include link($color);
+  &:not(.link) {
+    border-color: $color;
+    &:disabled {
+      opacity: 0.5;
+    }
+    &:not(:disabled):hover {
+      background: $color;
+      color: $background;
+      text-decoration: none;
+    }
+  }
+  .loader {
+    width: 1.25em;
+    display: inline-block;
+  }
+}
+
+button,
+.button {
+  @include button(white, $color-main);
+  position: relative;
+  background: none;
+  padding: 0;
+  font-size: 1em;
+  transition: all ease 0.2s;
+
+  &:not(.link) {
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-width: 3px;
+    padding: $spacing / 4 $spacing / 2;
+    margin: $spacing $spacing / 2;
+    vertical-align: middle;
+    &.negative {
+      @include button($color-danger, white);
+    }
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+  .shortcut {
+    @extend %absolute-center;
+    bottom: -0.8em;
+  }
+  &.link {
+    border: none;
+  }
+  &.tiny {
+    border: none;
+    padding: $spacing / 6 $spacing / 3;
+  }
+}
+
+.light button,
+.light .button {
+  @include button($color-text, white);
+}
+
+.danger button {
+  @include button(white, $color-danger);
+}

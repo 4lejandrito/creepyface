@@ -1,0 +1,35 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+
+    title Creepyface
+    meta(name='description', content='The Javascript library that makes your face follow the pointer')
+
+    meta(name='viewport', content='width=device-width,initial-scale=1,shrink-to-fit=no')
+    meta(name='theme-color', content='#148f77')
+
+    link(rel='manifest', href='./manifest.webmanifest')
+    link(rel='shortcut icon', href='./img/favicon.ico')
+    link(href='img/logo-sm.png', rel='icon', sizes='512x512', type='image/png')
+
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='twitter:site', content='@creepyface_io')
+    meta(name='twitter:creator', content='@4lejandrito')
+
+    meta(property='og:title', content='Creepyface')
+    meta(property='og:description', content='The Javascript library that makes your face follow the pointer')
+
+    - var publicUrl = process.env.PUBLIC_URL || 'http://localhost:1989';
+
+    meta(property='og:url', content=publicUrl)
+    meta(property='og:image', content=publicUrl + '/logo.png')
+
+    link(rel='stylesheet', href='scss/main.scss')
+
+    script(type='text/javascript', src=publicUrl + '/creepyface.js')
+    script(type='text/javascript', src=publicUrl + '/creepyface-firefly.js')
+  body
+    noscript You need to enable JavaScript to run this app.
+    #root
+    script(type='text/javascript', src='index.tsx')

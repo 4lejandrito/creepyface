@@ -1,0 +1,76 @@
+.html {
+  @media (max-width: 900px) {
+    display: none;
+  }
+  background: #282a36;
+  position: relative;
+  margin: 0 2 * $spacing;
+  overflow: auto;
+  ::selection {
+    background-color: #3e404b;
+  }
+  .node {
+    font-family: monospace;
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    display: block;
+    overflow: auto;
+    white-space: nowrap;
+    &.margin {
+      margin-bottom: 1rem;
+    }
+    .tag {
+      color: #ff79c6;
+    }
+    .attribute {
+      &:not(:first-child) {
+        display: block;
+        padding-left: 1rem;
+      }
+      .name {
+        color: #50fa7b;
+      }
+      .value {
+        color: #f1fa8c;
+      }
+    }
+  }
+  button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    margin: -0.5rem;
+  }
+  padding: 18px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.55) 0px 20px 68px;
+  text-align: left;
+
+  $duration: 200ms;
+
+  &.transition-enter {
+    opacity: 0.01;
+    max-width: 0;
+    .node {
+      overflow: hidden;
+    }
+  }
+  &.transition-enter-active {
+    opacity: 1;
+    max-width: 1000px;
+    transition: all $duration ease-out;
+  }
+  &.transition-exit {
+    opacity: 1;
+    max-width: 1000px;
+    .node {
+      overflow: hidden;
+    }
+  }
+  &.transition-exit-active {
+    opacity: 0.01;
+    max-width: 0;
+    transition: all $duration ease-out;
+  }
+}

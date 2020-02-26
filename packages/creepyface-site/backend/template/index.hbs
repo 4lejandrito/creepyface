@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:url" content="{{url}}" />
+    <meta property="og:title" content="Creepyface" />
+    <meta property="og:description" content="The Javascript library that makes your face follow the pointer" />
+    <meta property="og:image" content="{{baseURL}}/logo.png" />
+
+    <title>Creepyface</title>
+    <style media="screen">
+      html, body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      img {
+        margin-bottom: 2rem;
+        max-width: 300px;
+      }
+    </style>
+    <script src="{{baseURL}}/creepyface.js"></script>
+  </head>
+  <body>
+    <img
+      data-creepyface
+      {{#with options}}
+      src="img/{{src}}"
+      data-src-hover="img/{{hover}}"
+      {{#each looks}}
+      data-src-look-{{angle}}="img/{{src}}"
+      {{/each}}
+      {{/with}}
+    />
+    <footer>
+      Powered by <a target="_blank" href="{{baseURL}}">creepyface.io</a>
+    </footer>
+  </body>
+</html>

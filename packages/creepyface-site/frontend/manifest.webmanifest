@@ -1,0 +1,15 @@
+{
+  "short_name": "Creepyface",
+  "name": "Creepyface",
+  "icons": [
+    {
+      "src": "./img/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#1abc9c"
+}

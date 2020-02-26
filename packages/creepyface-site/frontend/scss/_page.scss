@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy|Open+Sans:400,700');
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  @include short {
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+html {
+  @media (max-width: 320px) {
+    font-size: 14px;
+  }
+  font-size: 16px;
+  @include tablet {
+    font-size: 18px;
+  }
+}
+
+body {
+  @extend %center;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  border-top: solid 4px darken($color-main, 10%);
+  background-image: linear-gradient(
+    to bottom,
+    $color-main,
+    darken($color-main, 5%)
+  );
+  color: white;
+  @media (pointer: coarse) {
+    overscroll-behavior: contain;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  line-height: 1.2;
+  font-weight: normal;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+kbd {
+  @extend %shadow;
+  @extend %round;
+  color: white;
+  background-color: #212529;
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  @include link;
+  .light & {
+    @include link($color-text);
+  }
+  .danger & {
+    @include link(white);
+  }
+}
+
+#root {
+  @extend %center;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: $spacing;
+  @include short {
+    display: block;
+  }
+
+  > header {
+    padding: 2 * $spacing 0 $spacing 0;
+    h1 {
+      small {
+        font-size: (2em/3);
+        display: block;
+        text-transform: none;
+        color: darken($color-text, 10%);
+      }
+    }
+    @include tablet {
+      padding-top: 4 * $spacing;
+      h1 {
+        font-size: 2.5rem;
+      }
+      @media (max-height: 700px) {
+        padding: 3 * $spacing 0 0 0;
+      }
+    }
+  }
+
+  > footer {
+    opacity: 0.6;
+  }
+}

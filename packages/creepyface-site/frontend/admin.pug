@@ -1,0 +1,14 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1,shrink-to-fit=no')
+    meta(name='theme-color', content='#148f77')
+    link(rel='shortcut icon', href='img/favicon.ico')
+    link(rel='stylesheet', href='scss/admin.scss')
+    title Creepyface Admin
+    - var publicUrl = process.env.PUBLIC_URL || 'http://localhost:1989';
+    script(type='text/javascript', src=publicUrl + '/creepyface.js')    
+  body
+    #root
+    script(type='text/javascript', src='./admin.js')

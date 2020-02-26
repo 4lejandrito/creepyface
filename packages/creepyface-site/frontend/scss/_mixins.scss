@@ -1,0 +1,154 @@
+$spacing: 1rem;
+
+$color-main: #1abc9c;
+$color-danger: #dc3545;
+$color-text: darken($color-main, 5%);
+
+@mixin desktop {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 500px) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: 500px) {
+    @content;
+  }
+}
+
+.hide-phone {
+  @include phone {
+    display: none;
+  }
+}
+
+@mixin short {
+  @media (max-height: 480px) {
+    @content;
+  }
+}
+
+@mixin link($color: white) {
+  color: $color;
+  font-weight: bold;
+  display: inline-block;
+  @extend %round;
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
+    outline: 0 !important;
+  }
+  &:not(:disabled):hover {
+    text-decoration: underline;
+    color: $color;
+  }
+}
+
+.danger a {
+  @include link(white);
+}
+
+%shadow {
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.31);
+}
+
+%border {
+  border: 1px solid rgb(195, 195, 195);
+}
+
+%round {
+  border-radius: 4px;
+}
+
+@mixin square($width) {
+  width: $width;
+  height: $width;
+}
+
+%media {
+  @extend %shadow;
+  @extend %border;
+  @extend %round;
+  background-color: white;
+  color: $color-text;
+}
+
+%card {
+  @extend %media;
+  @extend %round;
+  padding: $spacing;
+  border: none;
+}
+
+%absolute-center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+%center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+%expand {
+  width: 100%;
+  height: 100%;
+}
+
+.creepy {
+  @extend %media;
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+  display: inline-block;
+  width: 175px;
+  height: 225px;
+  img,
+  video {
+    @extend %expand;
+    object-fit: cover;
+  }
+  &:not(.video) {
+    .loader {
+      color: white;
+      position: absolute;
+      bottom: $spacing / 2;
+      right: $spacing / 2;
+    }
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: darken($color-main, 10%);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      svg {
+        @include square(60%);
+      }
+    }
+  }
+  &.video {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.danger {
+  background: $color-danger;
+  color: white;
+  border: solid 5px darken($color-danger, 5%);
+}
