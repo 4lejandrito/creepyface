@@ -19,13 +19,15 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: yarn install, build, and test
+      - name: Install
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
             CHROMEDRIVER_VERSION=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
-            yarn
-          yarn build
-          yarn test:coverage
+            yarn          
+      - name: Build
+        run: yarn build
+      - name: Test
+        run: yarn test:coverage
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
