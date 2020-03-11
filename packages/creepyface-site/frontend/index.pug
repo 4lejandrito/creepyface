@@ -20,15 +20,13 @@ html(lang='en')
     meta(property='og:title', content='Creepyface')
     meta(property='og:description', content='The Javascript library that makes your face follow the pointer')
 
-    - var publicUrl = process.env.PUBLIC_URL || 'http://localhost:1989';
-
-    meta(property='og:url', content=publicUrl)
-    meta(property='og:image', content=publicUrl + '/logo.png')
+    meta(property='og:url', content=process.env.PUBLIC_URL)
+    meta(property='og:image', content=process.env.PUBLIC_URL + '/logo.png')
 
     link(rel='stylesheet', href='scss/main.scss')
 
-    script(type='text/javascript', src=publicUrl + '/creepyface.js')
-    script(type='text/javascript', src=publicUrl + '/creepyface-firefly.js')
+    script(type='text/javascript', src=process.env.PUBLIC_URL + '/creepyface.js')
+    script(type='text/javascript', src=process.env.PUBLIC_URL + '/creepyface-firefly.js')
   body
     noscript You need to enable JavaScript to run this app.
     #root

@@ -7,8 +7,7 @@ html(lang='en')
     link(rel='shortcut icon', href='img/favicon.ico')
     link(rel='stylesheet', href='scss/admin.scss')
     title Creepyface Admin
-    - var publicUrl = process.env.PUBLIC_URL || 'http://localhost:1989';
-    script(type='text/javascript', src=publicUrl + '/creepyface.js')    
+    script(type='text/javascript', src=process.env.PUBLIC_URL + '/creepyface.js')
   body
     #root
     script(type='text/javascript', src='./admin.js')
