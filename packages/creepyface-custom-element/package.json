@@ -1,6 +1,6 @@
 {
   "name": "creepyface-custom-element",
-  "version": "7.2.10",
+  "version": "7.3.0",
   "main": "dist/index.js",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
   "homepage": "https://creepyface.io",
@@ -20,7 +20,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "creepyface": "^7.2.10"
+    "creepyface": "^7.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
