@@ -634,5 +634,35 @@ describe('creepyface', () => {
           expect(img.src).toBe('http://localhost/north'))
       })
     })
+
+    describe('when there is only one image', () => {
+      const img = withImage(
+        () => `
+          <img src="http://localhost/serious"
+            data-src-look-0="http://localhost/north"
+            data-fieldOfVision="180"
+          />
+        `
+      )
+
+      withCreepyfaceRegistered(() => creepyface(img))
+
+      describe('and the pointer is within the field of vision', () => {
+        beforeAndAfter(() => {
+          createGetNewSrc(img, provideMousePoint)([0, -1])
+        })
+
+        it('looks at it', () => expect(img.src).toBe('http://localhost/north'))
+      })
+
+      describe('and the pointer is outside of the field of vision', () => {
+        beforeAndAfter(() => {
+          createGetNewSrc(img, provideMousePoint)([0, 1])
+        })
+
+        it('ignores it and looks forward', () =>
+          expect(img.src).toBe('http://localhost/serious'))
+      })
+    })
   })
 })

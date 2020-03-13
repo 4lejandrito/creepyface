@@ -1,3 +1,4 @@
+export type Degrees = number
 export type Point = [number, number]
 export type Cancel = () => void
 export type Consumer<T> = (t: T) => void
@@ -29,6 +30,7 @@ export type Options = {
   pointProvider: PointProvider
   timeToDefault: Millis
   throttle: Millis
+  fieldOfVision: Degrees
   onDebug: Consumer<CreepyData>
   onAttach: Consumer<void>
   onDetach: Consumer<void>
@@ -40,6 +42,7 @@ export type UserOptions = {
   points?: PointProvider | string
   timeToDefault?: Millis
   throttle?: Millis
+  fieldOfVision?: Degrees
   onDebug?: Consumer<CreepyData>
   onAttach?: Consumer<void>
   onDetach?: Consumer<void>

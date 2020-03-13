@@ -26,13 +26,16 @@ export default (
   angle: Angle,
   options: Options
 ): ImageURL => {
-  const { looks, hover } = options
+  const { looks, hover, fieldOfVision } = options
 
   if (hover && elementContains(img, point)) {
     return hover
-  } else if (looks.length === 0) {
-    return options.src
-  } else {
-    return closest(angle, looks).src
+  } else if (looks.length > 0) {
+    const closestLook = closest(angle, looks)
+    if (Math.abs(shortest(closestLook.angle - angle)) <= fieldOfVision / 2) {
+      return closestLook.src
+    }
   }
+
+  return options.src
 }

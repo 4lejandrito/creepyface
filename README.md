@@ -56,6 +56,7 @@ creepyface.cancel(document.querySelector('img'))
 | `data-src-look-<angle>` | The URL of the image to use when the pointer forms the specified angle (in degrees) with the center of your image. Add as many as you want.                                                                         |
 | `data-timetodefault`    | The amount of time (in milliseconds) after which the default src is restored if no pointer events are received. 1 second by default. 0 means it will never be restored (the image will always look at the pointer). |
 | `data-throttle`         | The amount of time (in milliseconds) to wait between src changes. 100 by default.                                                                                                                                   |
+| `data-fieldofvision`    | The angle (in degrees) inside which the pointer will be detected by a given direction. 150 by default.                                                                                                              |
 | `data-points`           | Optionally, a comma-separated list of point provider names to make your face look at things other than the pointer. See [Super advanced usage](#super-advanced-usage) for more information.                         |
 
 ## Advanced usage
@@ -89,6 +90,8 @@ const cancel = creepyface(img, {
   ],
   // Time (in ms) to restore the default image after the last input
   timeToDefault: 1000
+  // The angle (in degrees) inside which the pointer will be detected
+  fieldOfVision: 150
 })
 
 // at some point restore the original image and stop creepyface
