@@ -18,7 +18,7 @@
     "prettier": "^1.15.3"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md,json,html,css,webmanifest}": "prettier --write"
+    "*.{js,ts,tsx,md,json,html,css,scss,webmanifest}": "prettier --write"
   },
   "scripts": {
     "build": "lerna run build",
