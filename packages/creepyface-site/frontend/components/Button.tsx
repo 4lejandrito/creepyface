@@ -4,7 +4,7 @@ import Icon, { IconType } from './Icon'
 import Loader from './Loader'
 import Link from './Link'
 import { useShortcuts } from './Shortcuts'
-import { useGlobalState, useDispatch } from './State'
+import { useDispatch, useSelector } from './State'
 import { useTranslate } from './Language'
 import { ActionCreator } from '../redux/util'
 import { Language } from '../redux/types'
@@ -40,7 +40,7 @@ export default function Button({
   download,
   lang
 }: Props) {
-  const state = useGlobalState()
+  const state = useSelector(state => state)
   const dispatch = useDispatch()
   const shortcuts = useShortcuts()
   const translate = useTranslate()

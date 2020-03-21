@@ -1,4 +1,3 @@
-import { push } from 'connected-react-router'
 import { makeActionCreator } from './util'
 import getNext from '../get-next'
 import { Language, Action, Dispatch, State } from './types'
@@ -98,11 +97,6 @@ export const upload = makeActionCreator(
   },
   ({ pictures }) => getNext(pictures) === undefined
 )
-
-export const stopCreation = makeActionCreator(() => dispatch => {
-  dispatch({ type: 'restartCreation' })
-  dispatch(push('/'))
-})
 
 export const requestCount = makeActionCreator(() => dispatch => {
   fetch('/creepyfaces', {

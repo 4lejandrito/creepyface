@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useLayoutEffect } from 'react'
 import Button from './components/Button'
 import { Code, Copyright, Repo, Twitter } from './components/Project'
-import { Route } from 'react-router-dom'
 import { LanguageSelector, useTranslate } from './components/Language'
 import Logo from './components/Logo'
 import Sample from './components/Sample'
@@ -9,6 +8,7 @@ import useWindows from './hooks/windows'
 import noBounce from 'no-bounce'
 import { useSelector } from './components/State'
 import { toggleFirefly } from './redux/actions'
+import { useHistory } from 'react-router'
 
 const CreepyFaceCreatorModal = lazy(() =>
   import('./components/CreepyFaceCreatorModal')
@@ -19,6 +19,9 @@ export default function App() {
   useWindows()
   const translate = useTranslate()
   const showFirefly = useSelector(state => state.showFirefly)
+  const isCreating = useSelector(state => state.isCreating)
+  const history = useHistory()
+
   return (
     <>
       <header>
@@ -39,24 +42,17 @@ export default function App() {
         {translate('Ideal for resumes or team pages')}.
       </p>
       <Sample />
-      <Route
-        path="/create"
-        children={({ match }) => (
-          <>
-            <div className="actions">
-              <Button loading={!!match} icon="create" href="/create">
-                {translate('Create yours')}
-              </Button>
-              <Repo />
-            </div>
-            {match && (
-              <Suspense fallback={null}>
-                <CreepyFaceCreatorModal />
-              </Suspense>
-            )}
-          </>
-        )}
-      />
+      <div className="actions">
+        <Button loading={isCreating} icon="create" href={'/create'}>
+          {translate('Create yours')}
+        </Button>
+        <Repo />
+      </div>
+      {isCreating && (
+        <Suspense fallback={null}>
+          <CreepyFaceCreatorModal onClose={() => history.push('/')} />
+        </Suspense>
+      )}
       <footer>
         <small>
           <Copyright /> | <Twitter /> | <LanguageSelector />

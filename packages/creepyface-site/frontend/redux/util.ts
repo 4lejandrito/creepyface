@@ -1,23 +1,35 @@
 import { ThunkAction } from 'redux-thunk'
 import { State, Action } from './types'
 
-type ActionCreatorFn = () => ThunkAction<void, State, void, Action>
+type ActionCreatorFunction = () => ThunkAction<void, State, void, Action>
 
-export type ActionCreator = ActionCreatorFn & {
+export type ActionCreator = ActionCreatorFunction & {
   enabled: (state: State) => boolean
 }
 
 export const makeActionCreator = (
-  actionCreator: ActionCreatorFn,
+  actionCreatorFunction: ActionCreatorFunction,
   enabled: (state: State) => boolean = () => true
 ): ActionCreator => {
-  const wrappedActionCreator: ActionCreator = () => (dispatch, getState) => {
-    if (enabled(getState())) {
-      dispatch(actionCreator())
-    }
-  }
+  const actionCreator = () => actionCreatorFunction()
 
-  wrappedActionCreator.enabled = enabled
+  actionCreator.enabled = enabled
+
+  return wrapActionCreator(actionCreator, (dispatch, getState) => {
+    if (enabled(getState())) {
+      dispatch()
+    }
+  })
+}
+
+export const wrapActionCreator = (
+  actionCreator: ActionCreator,
+  wrapper: (dispatch: () => void, getState: () => State) => void
+): ActionCreator => {
+  const wrappedActionCreator: ActionCreator = () => (dispatch, getState) =>
+    wrapper(() => dispatch(actionCreator()), getState)
+
+  wrappedActionCreator.enabled = actionCreator.enabled
 
   return wrappedActionCreator
 }

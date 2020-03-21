@@ -15,7 +15,7 @@ export default function Modal({
 }: {
   children: ReactNode | ReactNode[]
   id: string
-  onClose: ActionCreator
+  onClose: () => void
   title: string
 }) {
   const dispatch = useDispatch()
@@ -24,10 +24,10 @@ export default function Modal({
       className={`light ${id}`}
       isOpen={true}
       contentLabel={title}
-      onRequestClose={() => dispatch(onClose())}
+      onRequestClose={onClose}
       shouldCloseOnOverlayClick={false}
     >
-      <Button className="cancel" action={onClose}>
+      <Button className="cancel" onClick={onClose}>
         <Icon name="times" />
       </Button>
       <main id={id}>{children}</main>

@@ -1,8 +1,3 @@
-import {
-  RouterState,
-  LocationChangeAction,
-  CallHistoryMethodAction
-} from 'connected-react-router'
 import { ThunkDispatch } from 'redux-thunk'
 
 export type Picture = {
@@ -16,7 +11,6 @@ export type Pictures = { [K in 'serious' | 'hover' | ValidAngle]: Picture }
 export type Language = 'en' | 'es'
 
 export type State = {
-  router: RouterState
   locale: {
     value: Language
     loading: boolean
@@ -35,6 +29,7 @@ export type State = {
   count: number | null
   showCode: boolean
   showFirefly: boolean
+  isCreating: boolean
 }
 
 export type Action =
@@ -59,6 +54,12 @@ export type Action =
   | {
       type: 'takePicture'
       payload: Picture
+    }
+  | {
+      type: 'startCreation'
+    }
+  | {
+      type: 'stopCreation'
     }
   | {
       type: 'restartCreation'
@@ -102,7 +103,5 @@ export type Action =
   | {
       type: 'toggleFirefly'
     }
-  | LocationChangeAction
-  | CallHistoryMethodAction
 
 export type Dispatch = ThunkDispatch<State, void, Action>

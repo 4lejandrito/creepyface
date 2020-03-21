@@ -29,7 +29,7 @@ export default function Upload() {
             <Modal
               id="permissions"
               title={'Permissions'}
-              onClose={showPermissions}
+              onClose={() => dispatch(showPermissions())}
             >
               <p>
                 {translate(

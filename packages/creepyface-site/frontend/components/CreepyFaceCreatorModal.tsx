@@ -10,13 +10,8 @@ import Button from './Button'
 import { useTranslate } from './Language'
 import Upload from './Upload'
 import Video from './Video'
-import {
-  stopCreation,
-  restartCreation,
-  takePicture,
-  toggleShortcuts
-} from '../redux/actions'
-import { useGlobalState, useSelector, useDispatch } from './State'
+import { restartCreation, takePicture, toggleShortcuts } from '../redux/actions'
+import { useSelector, useDispatch } from './State'
 import { Pictures } from '../redux/types'
 
 const defaultCreepyFaceImages = getHostedImages()
@@ -27,7 +22,6 @@ const getSrc = (next: keyof Pictures, images: Images) => {
 }
 
 function Take({ next }: { next: keyof Pictures }) {
-  const state = useGlobalState()
   const dispatch = useDispatch()
   const translate = useTranslate()
 
@@ -50,12 +44,7 @@ function Take({ next }: { next: keyof Pictures }) {
           onUnload={() => dispatch({ type: 'videoNotReady' })}
         />
       </div>
-      <Button
-        icon="camera"
-        showShortcut
-        loading={!takePicture.enabled(state)}
-        action={takePicture}
-      >
+      <Button icon="camera" showShortcut action={takePicture}>
         {translate('Take picture')}
       </Button>
     </>
@@ -84,7 +73,7 @@ function Download(props: { pictures: Pictures }) {
   )
 }
 
-export default function CreepyFaceCreatorModal() {
+export default function CreepyFaceCreatorModal(props: { onClose: () => void }) {
   const pictures = useSelector(state => state.pictures)
   const translate = useTranslate()
   const shortcuts = useShortcuts()
@@ -94,7 +83,7 @@ export default function CreepyFaceCreatorModal() {
     <Modal
       id="creator"
       title={translate('Creepyface creator')}
-      onClose={stopCreation}
+      onClose={props.onClose}
     >
       {next !== undefined ? (
         <Take next={next} />
