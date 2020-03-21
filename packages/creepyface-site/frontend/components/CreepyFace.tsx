@@ -2,14 +2,16 @@ import React, { useState, useCallback } from 'react'
 import Creepyface from 'react-creepyface'
 import Loader from './Loader'
 import { FaceIcon } from './Icon'
-import baseURL from '../url'
+import baseURL, { namespace } from '../url'
 import { ValidAngle } from '../redux/types'
 import { getAngles } from '../get-next'
 import { useSelector } from './State'
 
 const noop = () => {}
 const url = (id: number, size?: string) => (name: string) =>
-  `${baseURL}/img/${id}/${name}${size ? '/' + size : ''}`
+  `${baseURL}${namespace ? '/' + namespace : ''}/img/${id}/${name}${
+    size ? '/' + size : ''
+  }`
 
 export type Images = {
   src: string

@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 function Routes({ children }: { children: ReactNode | ReactNode[] }) {
   const previousIsCreating = useSelector(state => state.isCreating)
-  const isCreating = !!useRouteMatch('/create')
+  const isCreating = !!useRouteMatch('/:namespace?/create')
   const dispatch = useDispatch()
 
   useLayoutEffect(() => {

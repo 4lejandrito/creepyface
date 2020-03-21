@@ -1,6 +1,7 @@
 import { makeActionCreator } from './util'
 import getNext from '../get-next'
 import { Language, Action, Dispatch, State } from './types'
+import { namespace } from '../url'
 
 const receiveMessages = ({
   value,
@@ -86,6 +87,8 @@ export const upload = makeActionCreator(
           formData.append(name, `${enabled}`)
         })
 
+        formData.append('namespace', namespace)
+
         return formData
       })()
     })
@@ -99,7 +102,7 @@ export const upload = makeActionCreator(
 )
 
 export const requestCount = makeActionCreator(() => dispatch => {
-  fetch('/creepyfaces', {
+  fetch(`/creepyfaces?namespace=${namespace}`, {
     credentials: 'include'
   })
     .then(res => res.json())

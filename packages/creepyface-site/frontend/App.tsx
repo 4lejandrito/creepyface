@@ -9,6 +9,7 @@ import noBounce from 'no-bounce'
 import { useSelector } from './components/State'
 import { toggleFirefly } from './redux/actions'
 import { useHistory } from 'react-router'
+import { namespace } from './url'
 
 const CreepyFaceCreatorModal = lazy(() =>
   import('./components/CreepyFaceCreatorModal')
@@ -43,14 +44,16 @@ export default function App() {
       </p>
       <Sample />
       <div className="actions">
-        <Button loading={isCreating} icon="create" href={'/create'}>
+        <Button loading={isCreating} icon="create" href={`${namespace}/create`}>
           {translate('Create yours')}
         </Button>
         <Repo />
       </div>
       {isCreating && (
         <Suspense fallback={null}>
-          <CreepyFaceCreatorModal onClose={() => history.push('/')} />
+          <CreepyFaceCreatorModal
+            onClose={() => history.push(`/${namespace}`)}
+          />
         </Suspense>
       )}
       <footer>
