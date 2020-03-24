@@ -49,7 +49,7 @@ export default function Sample() {
           </Button>
         </small>
       </div>
-      {mainSampleLoaded && count != null && (
+      {mainSampleLoaded && count != null && count > 0 && (
         <CreepyFaces count={count} onSelect={select} />
       )}
       <CSSTransition
