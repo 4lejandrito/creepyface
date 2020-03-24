@@ -82,7 +82,8 @@ app.post('/upload', async (req, res) => {
       uuid,
       canUseForResearch === 'true' ? 1 : 0,
       canUseAsSample === 'true' ? 1 : 0,
-      namespace
+      namespace,
+      namespace === 'liferay' ? 1 : 0
     )
     res.send({
       download: `${baseURL}/${uuid}/download`,

@@ -127,13 +127,20 @@ module.exports = {
           namespace,
           i
         ),
-  addCreepyface: (uuid, canUseForResearch, canUseAsSample, namespace) =>
+  addCreepyface: (
+    uuid,
+    canUseForResearch,
+    canUseAsSample,
+    namespace,
+    approved
+  ) =>
     run(
-      'INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample, namespace) VALUES(?, ?, ?, ?)',
+      'INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample, namespace, approved) VALUES(?, ?, ?, ?, ?)',
       uuid,
       canUseForResearch,
       canUseAsSample,
-      namespace
+      namespace,
+      approved
     ),
   approveCreepyface: (uuid, approve = true) =>
     run('UPDATE creepyface SET approved = ? WHERE uuid = ?', approve, uuid),
