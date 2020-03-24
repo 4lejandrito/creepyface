@@ -8,7 +8,7 @@ export const messages = {
   'Use them for research': 'Utilizarlas para investigación',
   'We want to train an AI that can generate a creepyface based on just 1 image. For this to happen we need as many images as possible so please tick this box if you find it interesting':
     'Queremos crear una inteligencia artificial que sea capaz de generar creepyfaces a partir de una única imagen. Necesitamos muchas imágenes así que por favor acepta esta opción si te parece interesante',
-  'Use them as samples in the front page':
+  'Publish them as samples in the front page':
     'Utilizarlas como ejemplo en la página principal',
   'The images will be stored and publicly served as reduced size thumbnails. They may be permanently deleted at any time without further notice':
     'Tus imagenes se almacenarán y servirán de manera pública como miniaturas. Podrán ser eliminadas en cualquier momento sin previo aviso',
@@ -54,6 +54,7 @@ export const messages = {
   'Move the mouse around to see if you like the result':
     'Mueve el ratón para comprobar el resultado',
   Download: 'Descargar',
+  'Download and publish': 'Descargar y publicar',
   'Download again': 'Descargar otra vez',
   'Share on Twitter': 'Compartir en Twitter',
   'See my creepyface!': '¡Mira mi creepyface!',

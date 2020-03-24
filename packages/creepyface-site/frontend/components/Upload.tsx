@@ -85,7 +85,7 @@ export default function Upload() {
                     }
                   />
                   <strong>
-                    {translate('Use them as samples in the front page')}
+                    {translate('Publish them as samples in the front page')}
                   </strong>
                   <p>
                     <small>
@@ -124,7 +124,13 @@ export default function Upload() {
           download={!!downloadLink}
           action={!downloadLink ? upload : undefined}
         >
-          {translate(downloadLink ? 'Download again' : 'Download')}
+          {translate(
+            downloadLink
+              ? 'Download again'
+              : samples
+              ? 'Download and publish'
+              : 'Download'
+          )}
         </Button>
         {viewLink && (
           <Button
