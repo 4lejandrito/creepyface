@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useMemo } from 'react'
 import {
   Provider as ReduxProvider,
   useDispatch as useReduxDispatch,
@@ -6,17 +6,16 @@ import {
   TypedUseSelectorHook
 } from 'react-redux'
 import createStore from '../redux/store'
-import { State } from '../redux/types'
+import { State, Action } from '../redux/types'
 import { Dispatch } from '../redux/types'
+import { Store } from 'redux'
 
-const store = createStore()
-
-export default function StateProvider({
-  children
-}: {
+export default function StateProvider(props: {
+  store?: Store<State, Action>
   children: ReactNode | ReactNode[]
 }) {
-  return <ReduxProvider store={store}>{children}</ReduxProvider>
+  const store = useMemo(() => props.store || createStore(), [props.store])
+  return <ReduxProvider store={store}>{props.children}</ReduxProvider>
 }
 
 export const useSelector: TypedUseSelectorHook<State> = useReduxSelector
