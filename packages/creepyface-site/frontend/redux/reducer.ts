@@ -27,6 +27,8 @@ export default combineReducers({
     switch (action.type) {
       case 'toggleShortcuts':
         return !shortcuts
+      case 'stopCreation':
+        return false
       default:
         return shortcuts
     }
