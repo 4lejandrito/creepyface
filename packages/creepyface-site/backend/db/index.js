@@ -80,6 +80,15 @@ const { all, get, run } = require('./sqlite')([
       return `INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample, timestamp, namespace) VALUES('${uuid}', 1, 1, 1, 'liferay')`
     })(),
     down: 'DELETE FROM creepyface WHERE timestamp = 1'
+  },
+  {
+    up: 'ALTER TABLE creepyface ADD COLUMN exclusive INTEGER DEFAULT 0'
+  },
+  {
+    up: "UPDATE creepyface SET exclusive = 1 WHERE uuid = 'ray'"
+  },
+  {
+    up: "UPDATE creepyface SET approved = 1 WHERE uuid = 'ray'"
   }
 ])
 
@@ -100,7 +109,7 @@ module.exports = {
   countCreepyfaces: namespace =>
     (!namespace
       ? get(
-          'SELECT count(*) as count FROM creepyface WHERE canUseAsSample AND approved'
+          'SELECT count(*) as count FROM creepyface WHERE canUseAsSample AND approved AND not exclusive'
         )
       : get(
           'SELECT count(*) as count FROM creepyface WHERE namespace = ? AND canUseAsSample AND approved',
@@ -110,7 +119,7 @@ module.exports = {
   creepyfaceByIndex: (i, namespace) =>
     !namespace
       ? get(
-          'SELECT * FROM creepyface WHERE canUseAsSample AND approved ORDER BY timestamp LIMIT 1 OFFSET ?',
+          'SELECT * FROM creepyface WHERE canUseAsSample AND approved AND not exclusive ORDER BY timestamp LIMIT 1 OFFSET ?',
           i
         )
       : get(
