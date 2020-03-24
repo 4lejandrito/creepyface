@@ -117,5 +117,7 @@ module.exports = {
     ),
   approveCreepyface: (uuid, approve = true) =>
     run('UPDATE creepyface SET approved = ? WHERE uuid = ?', approve, uuid),
-  removeCreepyface: uuid => run('DELETE FROM creepyface WHERE uuid = ?', uuid)
+  removeCreepyface: uuid => run('DELETE FROM creepyface WHERE uuid = ?', uuid),
+  setNamespace: (uuid, namespace) =>
+    run('UPDATE creepyface SET namespace = ? WHERE uuid = ?', namespace, uuid)
 }

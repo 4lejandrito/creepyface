@@ -262,11 +262,12 @@ class Admin extends React.Component {
                 (() => this.api(`${uuid}/approve`, 'POST')),
               'thumbs-down':
                 !!approved && (() => this.api(`${uuid}/unapprove`, 'POST')),
-              trash: () => this.api(`${uuid}`, 'DELETE')
+              trash: () => this.api(`${uuid}`, 'DELETE'),
+              code: () => this.api(`${uuid}/namespace`, 'POST')
             })}
           >
             {(
-              { uuid, approved, canUseAsSample, canUseForResearch },
+              { uuid, approved, canUseAsSample, canUseForResearch, namespace },
               visible,
               selected
             ) => (
@@ -279,6 +280,11 @@ class Admin extends React.Component {
                   hidden={!visible}
                 />
                 <div className="badges">
+                  {namespace && (
+                    <small className="badge">
+                      <strong>{namespace}</strong>
+                    </small>
+                  )}
                   {!!canUseAsSample && !approved && (
                     <small className="badge">
                       <strong>New!</strong>

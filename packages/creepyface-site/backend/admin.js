@@ -1,5 +1,10 @@
 const express = require('express')
-const { creepyfaces, approveCreepyface, removeCreepyface } = require('./db')
+const {
+  creepyfaces,
+  approveCreepyface,
+  removeCreepyface,
+  setNamespace
+} = require('./db')
 const gif = require('./gif')
 const path = require('path')
 const basicAuth = require('express-basic-auth')
@@ -33,6 +38,11 @@ module.exports = () => {
 
   app.post('/:uuid/unapprove', async (req, res) => {
     await approveCreepyface(req.params.uuid, false)
+    res.send(await creepyfaces())
+  })
+
+  app.post('/:uuid/namespace', async (req, res) => {
+    await setNamespace(req.params.uuid, 'liferay')
     res.send(await creepyfaces())
   })
 
