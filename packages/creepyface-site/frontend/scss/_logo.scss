@@ -44,6 +44,14 @@
     }
     .windows & {
       top: -0.55em;
+      &.liferay {
+        top: -0.7em;
+      }
+    }
+    &.liferay {
+      top: -1em;
+      left: 2.4em;
+      width: 0.8em;
     }
   }
 
