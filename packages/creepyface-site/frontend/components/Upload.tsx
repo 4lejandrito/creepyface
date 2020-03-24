@@ -18,6 +18,34 @@ export default function Upload() {
 
   return (
     <div className="upload">
+      <div>
+        <Button
+          icon="download"
+          className="download"
+          href={downloadLink}
+          loading={uploading}
+          download={!!downloadLink}
+          action={!downloadLink ? upload : undefined}
+        >
+          {translate(
+            downloadLink
+              ? 'Download again'
+              : samples
+              ? 'Download and publish'
+              : 'Download'
+          )}
+        </Button>
+        {viewLink && (
+          <Button
+            icon="twitter"
+            href={`http://twitter.com/share?text=${translate(
+              'See my creepyface!'
+            )}&url=${viewLink}&hashtags=creepyface_io`}
+          >
+            {translate('Share on Twitter')}
+          </Button>
+        )}
+      </div>
       {!downloadLink && (
         <small>
           {translate('By downloading your creepyface you accept')}{' '}
@@ -115,34 +143,6 @@ export default function Upload() {
           )}
         </small>
       )}
-      <div>
-        <Button
-          icon="download"
-          className="download"
-          href={downloadLink}
-          loading={uploading}
-          download={!!downloadLink}
-          action={!downloadLink ? upload : undefined}
-        >
-          {translate(
-            downloadLink
-              ? 'Download again'
-              : samples
-              ? 'Download and publish'
-              : 'Download'
-          )}
-        </Button>
-        {viewLink && (
-          <Button
-            icon="twitter"
-            href={`http://twitter.com/share?text=${translate(
-              'See my creepyface!'
-            )}&url=${viewLink}&hashtags=creepyface_io`}
-          >
-            {translate('Share on Twitter')}
-          </Button>
-        )}
-      </div>
     </div>
   )
 }
