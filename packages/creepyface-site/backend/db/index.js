@@ -71,12 +71,23 @@ const { all, get, run } = require('./sqlite')([
   },
   {
     up: 'ALTER TABLE creepyface ADD COLUMN namespace TEXT'
+  },
+  {
+    up: (() => {
+      const uuid = 'ray'
+      fs.ensureDirSync(`${uploads}/${uuid}`)
+      fs.copySync(`${__dirname}/../ray`, `${uploads}/${uuid}/img`)
+      return `INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample, timestamp, namespace) VALUES('${uuid}', 1, 1, 1, 'liferay')`
+    })(),
+    down: 'DELETE FROM creepyface WHERE timestamp = 1'
   }
 ])
 
-fs.removeSync(`${thumbnails}/default`)
-fs.ensureDirSync(`${uploads}/default`)
-fs.copySync(`${__dirname}/../default`, `${uploads}/default/img`)
+;['default', 'ray'].forEach(uuid => {
+  fs.removeSync(`${thumbnails}/${uuid}`)
+  fs.ensureDirSync(`${uploads}/${uuid}`)
+  fs.copySync(`${__dirname}/../${uuid}`, `${uploads}/${uuid}/img`)
+})
 
 module.exports = {
   creepyfaces: namespace =>

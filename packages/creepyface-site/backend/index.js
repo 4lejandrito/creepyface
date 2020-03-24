@@ -132,6 +132,10 @@ const sendImage = async (
 
 app.get('/:namespace?/img/:i(\\d+)/:name?/:size?', async (req, res) => {
   const { i, name, size, namespace } = req.params
+  if (namespace === 'liferay' && i === '0') {
+    sendImage(res, { uuid: 'ray', name, size })
+    return
+  }
   const creepyfacesCount = await countCreepyfaces(namespace)
   if (creepyfacesCount === 0) return res.sendStatus(404)
   const { uuid } = await creepyfaceByIndex(
