@@ -1,9 +1,6 @@
 import { pathToRegexp } from 'path-to-regexp'
 
-const match = window.location.pathname.match(
-  pathToRegexp('/:namespace?/:create?')
-)
+const match = window.location.pathname.match(pathToRegexp('/liferay/:create?'))
 
-export const namespace =
-  (match && match[1] !== 'create' && match[1] !== 'admin' ? match[1] : '') || ''
+export const namespace = match ? 'liferay' : ''
 export default document.baseURI.replace(/\/$/, '')
