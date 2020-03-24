@@ -84,6 +84,7 @@ export type Action =
       payload: {
         download: string
         view: string
+        count: number
       }
     }
   | {

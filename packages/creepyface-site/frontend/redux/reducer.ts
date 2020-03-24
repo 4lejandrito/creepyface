@@ -157,6 +157,8 @@ export default combineReducers({
     switch (action.type) {
       case 'receiveCount':
         return action.payload
+      case 'receiveUpload':
+        return action.payload.count
       default:
         return count
     }

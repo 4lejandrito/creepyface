@@ -93,7 +93,7 @@ export const upload = makeActionCreator(
       })()
     })
       .then(res => res.json())
-      .then((data: { download: string; view: string }) =>
+      .then((data: { download: string; view: string; count: number }) =>
         dispatch({ type: 'receiveUpload', payload: data })
       )
       .catch(() => dispatch({ type: 'uploadFailed' }))

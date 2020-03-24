@@ -87,7 +87,9 @@ app.post('/upload', async (req, res) => {
     )
     res.send({
       download: `${baseURL}/${uuid}/download`,
-      view: canUseAsSample === 'true' ? `${baseURL}/content/${uuid}` : undefined
+      view:
+        canUseAsSample === 'true' ? `${baseURL}/content/${uuid}` : undefined,
+      count: await countCreepyfaces(namespace)
     })
   } catch (err) {
     console.error(err)
