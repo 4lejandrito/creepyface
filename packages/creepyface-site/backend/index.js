@@ -63,6 +63,7 @@ app.post('/upload', async (req, res) => {
     const parseForm = pify(form.parse.bind(form), { multiArgs: true })
     const [
       {
+        namespace: [namespace],
         samples: [canUseAsSample],
         research: [canUseForResearch]
       },
@@ -80,7 +81,8 @@ app.post('/upload', async (req, res) => {
     await addCreepyface(
       uuid,
       canUseForResearch === 'true' ? 1 : 0,
-      canUseAsSample === 'true' ? 1 : 0
+      canUseAsSample === 'true' ? 1 : 0,
+      namespace
     )
     res.send({
       download: `${baseURL}/${uuid}/download`,
@@ -128,11 +130,14 @@ const sendImage = async (
     })
 }
 
-app.get('/img/:i(\\d+)/:name?/:size?', async (req, res) => {
-  const { i, name, size } = req.params
-  const creepyfacesCount = await countCreepyfaces()
+app.get('/:namespace?/img/:i(\\d+)/:name?/:size?', async (req, res) => {
+  const { i, name, size, namespace } = req.params
+  const creepyfacesCount = await countCreepyfaces(namespace)
   if (creepyfacesCount === 0) return res.sendStatus(404)
-  const { uuid } = await creepyfaceByIndex(parseInt(i) % creepyfacesCount)
+  const { uuid } = await creepyfaceByIndex(
+    parseInt(i) % creepyfacesCount,
+    namespace
+  )
   sendImage(res, { uuid, name, size })
 })
 
@@ -142,7 +147,7 @@ app.get('/img/:uuid/:name?/:size?', async (req, res) =>
 
 app.get('/creepyfaces', async (req, res) =>
   res.send({
-    count: await countCreepyfaces()
+    count: await countCreepyfaces(req.query.namespace)
   })
 )
 

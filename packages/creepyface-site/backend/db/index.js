@@ -68,6 +68,9 @@ const { all, get, run } = require('./sqlite')([
   },
   {
     up: "UPDATE creepyface SET uuid = 'default' WHERE timestamp = 0"
+  },
+  {
+    up: 'ALTER TABLE creepyface ADD COLUMN namespace TEXT'
   }
 ])
 
@@ -76,24 +79,41 @@ fs.ensureDirSync(`${uploads}/default`)
 fs.copySync(`${__dirname}/../default`, `${uploads}/default/img`)
 
 module.exports = {
-  creepyfaces: () => all('SELECT * FROM creepyface ORDER BY timestamp DESC'),
-  countCreepyfaces: (waitingForApproval = false) =>
-    get(
-      'SELECT count(*) as count FROM creepyface WHERE canUseAsSample AND approved = ?',
-      waitingForApproval ? 0 : 1
+  creepyfaces: namespace =>
+    !namespace
+      ? all('SELECT * FROM creepyface ORDER BY timestamp DESC')
+      : all(
+          'SELECT * FROM creepyface WHERE namespace = ? ORDER BY timestamp DESC',
+          namespace
+        ),
+  countCreepyfaces: namespace =>
+    (!namespace
+      ? get(
+          'SELECT count(*) as count FROM creepyface WHERE canUseAsSample AND approved'
+        )
+      : get(
+          'SELECT count(*) as count FROM creepyface WHERE namespace = ? AND canUseAsSample AND approved',
+          namespace
+        )
     ).then(({ count }) => count),
-  creepyfaceByIndex: (i, waitingForApproval = false) =>
-    get(
-      'SELECT * FROM creepyface WHERE canUseAsSample AND approved = ? ORDER BY timestamp LIMIT 1 OFFSET ?',
-      waitingForApproval ? 0 : 1,
-      i
-    ),
-  addCreepyface: (uuid, canUseForResearch, canUseAsSample) =>
+  creepyfaceByIndex: (i, namespace) =>
+    !namespace
+      ? get(
+          'SELECT * FROM creepyface WHERE canUseAsSample AND approved ORDER BY timestamp LIMIT 1 OFFSET ?',
+          i
+        )
+      : get(
+          'SELECT * FROM creepyface WHERE namespace = ? AND canUseAsSample AND approved ORDER BY timestamp LIMIT 1 OFFSET ?',
+          namespace,
+          i
+        ),
+  addCreepyface: (uuid, canUseForResearch, canUseAsSample, namespace) =>
     run(
-      'INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample) VALUES(?, ?, ?)',
+      'INSERT INTO creepyface (uuid, canUseForResearch, canUseAsSample, namespace) VALUES(?, ?, ?, ?)',
       uuid,
       canUseForResearch,
-      canUseAsSample
+      canUseAsSample,
+      namespace
     ),
   approveCreepyface: (uuid, approve = true) =>
     run('UPDATE creepyface SET approved = ? WHERE uuid = ?', approve, uuid),
