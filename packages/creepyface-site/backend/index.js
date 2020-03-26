@@ -16,6 +16,7 @@ const public = require('./public')
 const { dependencies } = require('../package.json')
 const { getCloudinaryURL } = require('./cloudinary')
 const featureFlags = require('./feature-flags')
+const resolve = require('browser-resolve')
 
 const getImagesPath = uuid => `${uploads}/${uuid}/img`
 
@@ -145,16 +146,16 @@ app.get('/creepyfaces', async (req, res) =>
   })
 )
 
+const creepyfacePath = resolve.sync('creepyface')
 app.get('/creepyface.js', (req, res) => {
   track(req.cookies.uuid, 'script', { headers: req.headers })
-  res.redirect(`https://unpkg.com/creepyface@${dependencies.creepyface}`)
+  res.sendFile(creepyfacePath)
 })
 
+const creepyfaceFireflyPath = resolve.sync('creepyface-firefly')
 app.get('/creepyface-firefly.js', (req, res) => {
   track(req.cookies.uuid, 'script', { headers: req.headers })
-  res.redirect(
-    `https://unpkg.com/creepyface-firefly@${dependencies['creepyface-firefly']}`
-  )
+  res.sendFile(creepyfaceFireflyPath)
 })
 
 app.use('/admin', require('./admin')())
