@@ -11,7 +11,7 @@ export default function Creepyface(
   }
 ) {
   const { src, options, ...imgProps } = props
-  const { looks, ...rest } = { ...options }
+  const { looks, points, ...rest } = { ...options }
   const imageRef = useRef<HTMLImageElement>(null)
 
   useLayoutEffect(() => {
@@ -21,6 +21,7 @@ export default function Creepyface(
     }
   }, [
     src,
+    points,
     ...(looks || []).map(({ angle, src }) => `${angle}-${src}`),
     ...Object.values(rest),
     Object.entries(imgProps)
