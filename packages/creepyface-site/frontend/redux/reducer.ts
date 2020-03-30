@@ -173,12 +173,15 @@ export default combineReducers({
         return showCode
     }
   },
-  showFirefly: (showFirefly: boolean = false, action: Action) => {
+  pointProvider: (
+    pointProvider: State['pointProvider'] = 'pointer',
+    action: Action
+  ) => {
     switch (action.type) {
-      case 'toggleFirefly':
-        return !showFirefly
+      case 'changePointProvider':
+        return action.payload
       default:
-        return showFirefly
+        return pointProvider
     }
   },
   isCreating: (isCreating: boolean = false, action: Action) => {

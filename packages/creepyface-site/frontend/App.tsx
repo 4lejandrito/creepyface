@@ -7,7 +7,7 @@ import Sample from './components/Sample'
 import useWindows from './hooks/windows'
 import noBounce from 'no-bounce'
 import { useSelector } from './components/State'
-import { toggleFirefly } from './redux/actions'
+import { nextPointProvider } from './redux/actions'
 import { useHistory } from 'react-router'
 import { namespace } from './url'
 
@@ -19,7 +19,7 @@ export default function App() {
   useLayoutEffect(noBounce, [])
   useWindows()
   const translate = useTranslate()
-  const showFirefly = useSelector(state => state.showFirefly)
+  const pointProvider = useSelector(state => state.pointProvider)
   const isCreating = useSelector(state => state.isCreating)
   const history = useHistory()
 
@@ -34,9 +34,9 @@ export default function App() {
       <p className="description">
         {translate('A')} <Code>{translate('Javascript library')}</Code>{' '}
         {translate('that makes your')} {translate('face')}{' '}
-        {translate('look at')}{' '}
-        <Button type="link" action={toggleFirefly}>
-          {translate(!showFirefly ? 'the pointer' : 'a firefly')}
+        <Button type="link" action={nextPointProvider}>
+          {translate('look at')}{' '}
+          {translate(pointProvider === 'pointer' ? 'the pointer' : 'a firefly')}
         </Button>
         .
         <br />

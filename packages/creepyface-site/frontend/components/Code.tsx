@@ -71,7 +71,7 @@ const toText = (nodes: Node[]) =>
     .join('\n')
 
 export default function Code({ src, images }: { src: string; images: Images }) {
-  const showFirefly = useSelector(state => state.showFirefly)
+  const showFirefly = useSelector(state => state.pointProvider === 'firefly')
   const nodes = code(src, images, showFirefly)
   return (
     <span className="html">

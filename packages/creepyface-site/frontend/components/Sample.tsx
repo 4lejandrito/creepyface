@@ -13,6 +13,7 @@ export default function Sample() {
   const count = useSelector(state => state.count)
   const selectedCreepyface = useSelector(state => state.selectedCreepyface)
   const showCode = useSelector(state => state.showCode)
+  const pointProvider = useSelector(state => state.pointProvider)
   const images = useMemo(() => getHostedImages(selectedCreepyface), [
     selectedCreepyface
   ])
@@ -36,6 +37,7 @@ export default function Sample() {
       <div className="main">
         <CreepyFace
           images={images}
+          points={pointProvider}
           onChange={setSrc}
           onSelect={useCallback(
             () => count !== null && select(Math.floor(Math.random() * count)),
@@ -50,7 +52,7 @@ export default function Sample() {
         </small>
       </div>
       {mainSampleLoaded && count != null && count > 0 && (
-        <CreepyFaces count={count} onSelect={select} />
+        <CreepyFaces count={count} points={pointProvider} onSelect={select} />
       )}
       <CSSTransition
         in={showCode}

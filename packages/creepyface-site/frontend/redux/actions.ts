@@ -119,6 +119,16 @@ export const showPermissions = makeActionCreator(() => dispatch =>
   dispatch({ type: 'showPermissions' })
 )
 
-export const toggleFirefly = makeActionCreator(() => dispatch =>
-  dispatch({ type: 'toggleFirefly' })
+export const nextPointProvider = makeActionCreator(
+  () => (dispatch, getState) => {
+    const pointProviders = ['pointer', 'firefly'] as const
+    const { pointProvider } = getState()
+    dispatch({
+      type: 'changePointProvider',
+      payload:
+        pointProviders[
+          (pointProviders.indexOf(pointProvider) + 1) % pointProviders.length
+        ]
+    })
+  }
 )

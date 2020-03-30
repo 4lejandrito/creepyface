@@ -5,7 +5,7 @@ import { FaceIcon } from './Icon'
 import baseURL, { namespace } from '../url'
 import { ValidAngle } from '../redux/types'
 import { getAngles } from '../get-next'
-import { useSelector } from './State'
+import { PointProvider } from 'creepyface/src/types'
 
 const noop = () => {}
 const url = (id: number, size?: string) => (name: string) =>
@@ -32,6 +32,7 @@ export default function CreepyFace(props: {
   alt?: string
   images: Images
   hidden?: boolean
+  points?: string | PointProvider
   onSelect?: () => void
   onChange?: (src: string) => void
   onLoad?: () => void
@@ -40,6 +41,7 @@ export default function CreepyFace(props: {
     alt,
     images,
     hidden,
+    points,
     onSelect = noop,
     onChange = noop,
     onLoad = noop
@@ -47,7 +49,6 @@ export default function CreepyFace(props: {
   const [firstAttach, setFirstAttach] = useState(true)
   const [attached, setAttached] = useState(false)
   const [loaded, setLoaded] = useState(false)
-  const showFirefly = useSelector(state => state.showFirefly)
   const onAttach = useCallback(() => {
     setAttached(true)
     setFirstAttach(false)
@@ -66,7 +67,7 @@ export default function CreepyFace(props: {
           options={{
             hover: images.hover,
             looks: images.looks,
-            points: showFirefly ? 'firefly' : undefined,
+            points,
             onAttach,
             onDetach,
             onDebug

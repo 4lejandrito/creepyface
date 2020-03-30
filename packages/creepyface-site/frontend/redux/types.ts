@@ -28,7 +28,7 @@ export type State = {
   selectedCreepyface: number
   count: number | null
   showCode: boolean
-  showFirefly: boolean
+  pointProvider: 'pointer' | 'firefly'
   isCreating: boolean
 }
 
@@ -102,7 +102,8 @@ export type Action =
       type: 'toggleCode'
     }
   | {
-      type: 'toggleFirefly'
+      type: 'changePointProvider'
+      payload: State['pointProvider']
     }
 
 export type Dispatch = ThunkDispatch<State, void, Action>
