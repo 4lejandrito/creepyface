@@ -7,7 +7,8 @@ import {
   restartCreation,
   takePicture,
   toggleCode,
-  nextPointProvider
+  nextPointProvider,
+  toggleSong
 } from '../redux/actions'
 import { ActionCreator } from '../redux/util'
 
@@ -17,7 +18,8 @@ const shortcuts = {
   o: restartCreation,
   s: takePicture,
   c: toggleCode,
-  f: nextPointProvider
+  f: nextPointProvider,
+  d: toggleSong
 }
 
 export default function Shortcuts({

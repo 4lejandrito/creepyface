@@ -111,8 +111,9 @@ export const requestCount = makeActionCreator(() => dispatch => {
     )
 })
 
-export const toggleCode = makeActionCreator(() => dispatch =>
-  dispatch({ type: 'toggleCode' })
+export const toggleCode = makeActionCreator(
+  () => dispatch => dispatch({ type: 'toggleCode' }),
+  ({ pointProvider }) => pointProvider !== 'song'
 )
 
 export const showPermissions = makeActionCreator(() => dispatch =>
@@ -121,7 +122,7 @@ export const showPermissions = makeActionCreator(() => dispatch =>
 
 export const nextPointProvider = makeActionCreator(
   () => (dispatch, getState) => {
-    const pointProviders = ['pointer', 'firefly'] as const
+    const pointProviders = ['pointer', 'firefly', 'song'] as const
     const { pointProvider } = getState()
     dispatch({
       type: 'changePointProvider',
@@ -132,3 +133,11 @@ export const nextPointProvider = makeActionCreator(
     })
   }
 )
+
+export const toggleSong = makeActionCreator(() => (dispatch, getState) => {
+  const { pointProvider } = getState()
+  dispatch({
+    type: 'changePointProvider',
+    payload: pointProvider === 'song' ? 'pointer' : 'song'
+  })
+})

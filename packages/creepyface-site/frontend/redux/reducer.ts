@@ -169,6 +169,8 @@ export default combineReducers({
     switch (action.type) {
       case 'toggleCode':
         return !showCode
+      case 'changePointProvider':
+        return action.payload === 'song' ? false : showCode
       default:
         return showCode
     }

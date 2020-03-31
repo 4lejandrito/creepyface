@@ -21,3 +21,8 @@ declare module 'bowser' {
 declare module 'no-bounce' {
   export default function noBounce(): void
 }
+
+declare module '*.mp3' {
+  const content: string
+  export default content
+}

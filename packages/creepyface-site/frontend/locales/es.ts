@@ -24,6 +24,7 @@ export const messages = {
   'look at': 'mire',
   'the pointer': 'al puntero',
   'a firefly': 'a una luciérnaga',
+  dance: 'baile',
   and: 'y',
   'Ideal for resumes or team pages':
     'Ideal para páginas personales o de equipo',

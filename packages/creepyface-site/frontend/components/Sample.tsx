@@ -7,13 +7,14 @@ import Button from './Button'
 import { CSSTransition } from 'react-transition-group'
 import { useTranslate } from './Language'
 import { useSelector, useDispatch } from './State'
+import usePointProvider from '../hooks/point-provider'
 
 export default function Sample() {
   const dispatch = useDispatch()
   const count = useSelector(state => state.count)
   const selectedCreepyface = useSelector(state => state.selectedCreepyface)
   const showCode = useSelector(state => state.showCode)
-  const pointProvider = useSelector(state => state.pointProvider)
+  const pointProvider = usePointProvider()
   const images = useMemo(() => getHostedImages(selectedCreepyface), [
     selectedCreepyface
   ])

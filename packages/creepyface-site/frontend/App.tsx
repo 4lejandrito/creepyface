@@ -35,8 +35,16 @@ export default function App() {
         {translate('A')} <Code>{translate('Javascript library')}</Code>{' '}
         {translate('that makes your')} {translate('face')}{' '}
         <Button type="link" action={nextPointProvider}>
-          {translate('look at')}{' '}
-          {translate(pointProvider === 'pointer' ? 'the pointer' : 'a firefly')}
+          {pointProvider === 'song' ? (
+            translate('dance')
+          ) : (
+            <>
+              {translate('look at')}{' '}
+              {translate(
+                pointProvider === 'pointer' ? 'the pointer' : 'a firefly'
+              )}
+            </>
+          )}
         </Button>
         .
         <br />
