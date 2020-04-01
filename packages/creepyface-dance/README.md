@@ -42,6 +42,8 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 </script>
 ```
 
+> Run this example on [codepen](https://codepen.io/4lejandrito/pen/vYOMNJE).
+
 ## Developing
 
 - `yarn start` will spin up a test page.
