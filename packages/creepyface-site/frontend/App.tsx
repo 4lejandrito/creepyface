@@ -35,7 +35,7 @@ export default function App() {
         {translate('A')} <Code>{translate('Javascript library')}</Code>{' '}
         {translate('that makes your')} {translate('face')}{' '}
         <Button type="link" action={nextPointProvider}>
-          {pointProvider === 'song' ? (
+          {pointProvider === 'dance' ? (
             translate('dance')
           ) : (
             <>

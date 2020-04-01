@@ -1,23 +1,39 @@
-import { useMemo } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { useSelector, useDispatch } from '../components/State'
-import makeSongPointProvider from '../creepyface/song-point-provider'
-import { song, choreography } from '../music/songs/staying-alive'
+import { makePointProvider } from 'creepyface-dance'
+import { url, bpm, firstBeat, choreography } from '../songs/staying-alive'
+
+const audio = new Audio(url)
+const stayingAlivePointProvider = makePointProvider({
+  name: 'staying-alive',
+  audio,
+  bpm,
+  firstBeat,
+  choreography
+})
 
 export default function usePointProvider() {
   const dispatch = useDispatch()
-  const stayingAlivePointProvider = useMemo(
-    () =>
-      makeSongPointProvider({
-        song: listener =>
-          song(listener, () =>
-            dispatch({ type: 'changePointProvider', payload: 'pointer' })
-          ),
-        choreography
-      }),
-    [dispatch]
-  )
   const pointProviderName = useSelector(state => state.pointProvider)
-  return pointProviderName === 'song'
+
+  useEffect(() => {
+    const listener = () =>
+      dispatch({ type: 'changePointProvider', payload: 'pointer' })
+    audio.addEventListener('ended', listener)
+    return () => audio.removeEventListener('ended', listener)
+  }, [dispatch])
+
+  useLayoutEffect(() => {
+    if (pointProviderName === 'dance') {
+      audio.play()
+      return () => {
+        audio.pause()
+        audio.currentTime = 0
+      }
+    }
+  }, [pointProviderName])
+
+  return pointProviderName === 'dance'
     ? stayingAlivePointProvider
     : pointProviderName
 }

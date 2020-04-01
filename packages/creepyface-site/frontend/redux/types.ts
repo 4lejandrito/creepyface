@@ -28,7 +28,7 @@ export type State = {
   selectedCreepyface: number
   count: number | null
   showCode: boolean
-  pointProvider: 'pointer' | 'firefly' | 'song'
+  pointProvider: 'pointer' | 'firefly' | 'dance'
   isCreating: boolean
 }
 

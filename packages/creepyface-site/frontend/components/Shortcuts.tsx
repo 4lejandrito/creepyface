@@ -8,7 +8,7 @@ import {
   takePicture,
   toggleCode,
   nextPointProvider,
-  toggleSong
+  toggleDance
 } from '../redux/actions'
 import { ActionCreator } from '../redux/util'
 
@@ -19,7 +19,7 @@ const shortcuts = {
   s: takePicture,
   c: toggleCode,
   f: nextPointProvider,
-  d: toggleSong
+  d: toggleDance
 }
 
 export default function Shortcuts({

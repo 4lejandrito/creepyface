@@ -170,7 +170,7 @@ export default combineReducers({
       case 'toggleCode':
         return !showCode
       case 'changePointProvider':
-        return action.payload === 'song' ? false : showCode
+        return action.payload === 'dance' ? false : showCode
       default:
         return showCode
     }

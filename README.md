@@ -1,10 +1,10 @@
 # [Creepyface](https://creepyface.io) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/4lejandrito/creepyface/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/creepyface.svg?style=flat)](https://www.npmjs.com/package/creepyface) [![Build](https://github.com/4lejandrito/creepyface/workflows/Build/badge.svg)](https://github.com/4lejandrito/creepyface/actions?query=workflow%3ABuild+branch%3Amaster) [![Coverage Status](https://coveralls.io/repos/github/4lejandrito/creepyface/badge.svg?branch=master)](https://coveralls.io/github/4lejandrito/creepyface?branch=master) <a href="https://twitter.com/intent/follow?screen_name=creepyface_io"><img alt="Follow on Twitter" src="https://img.shields.io/twitter/follow/creepyface_io.svg?style=social&label=Follow"></a>
 
-Creepyface is a little JavaScript library that makes your face look at the pointer (or a [firefly](packages/creepyface-firefly)).
+Creepyface is a little JavaScript library that makes your face look at the pointer (or [dance](packages/creepyface-dance)!).
 
 See it in action at [creepyface.io](https://creepyface.io) and create your own one using [the wizard](https://creepyface.io/create).
 
-If you use React, check out [\<Creepyface /\>](packages/react-creepyface).
+If you use React, check out [\<Creepyface /\>](packages/react-creepyface). If you like fireflies, check out [creepyface-firefly](packages/creepyface-firefly).
 
 ![Example animated gif of a face looking at the pointer](example.gif)
 
@@ -192,8 +192,9 @@ The following point providers are available out of the box:
 
 The are also external point providers:
 
-- [tilt](packages/creepyface-tilt) to stare at you when you tilt your phone.
-- [firefly](packages/creepyface-firefly) to follow a moving firefly on the screen.
+- 🎶 [dance](packages/creepyface-dance) to dance to the rythm of the music.
+- 🤳 [tilt](packages/creepyface-tilt) to stare at you when you tilt your phone.
+- 🐝 [firefly](packages/creepyface-firefly) to follow a moving firefly on the screen.
 
 ## Developing
 

@@ -1,0 +1,46 @@
+{
+  "name": "creepyface-dance",
+  "version": "7.3.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Alejandro Tardín <alejandro@tardin.com>",
+  "homepage": "https://creepyface.io",
+  "license": "MIT",
+  "repository": "https://github.com/4lejandrito/creepyface/tree/master/packages/creepyface-dance",
+  "funding": "https://github.com/4lejandrito/creepyface?sponsor=1",
+  "keywords": [
+    "face",
+    "look",
+    "dance",
+    "follow",
+    "creepy",
+    "dance"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "open test/index.html",
+    "build": "NODE_ENV=production tsc --emitDeclarationOnly && rollup -c",
+    "prepublishOnly": "yarn build"
+  },
+  "peerDependencies": {
+    "creepyface": "^7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-typescript": "^7.7.4",
+    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@types/lodash.flatten": "^4.4.6",
+    "@types/lodash.range": "^3.2.6",
+    "creepyface": "^7.3.0",
+    "lodash.flatten": "^4.4.0",
+    "lodash.range": "^3.2.0",
+    "rollup": "^1.27.13",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^3.7.3"
+  }
+}
