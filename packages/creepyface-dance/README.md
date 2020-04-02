@@ -44,6 +44,16 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 
 > Run this example on [codepen](https://codepen.io/4lejandrito/pen/vYOMNJE).
 
+### makePointProvider parameters
+
+| Name           | Description                                                                                                                                                                                                                                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`         | The name for the point provider to be created. This will be used for the `data-creepyface` attribute of your image.                                                                                                                                                                                                         |
+| `audio`        | The [HTMLAudioElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement) with the song. Since browsers now block autoplaying media you will have to manually play the audio or call the [play](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) method in response to a user event. |
+| `bpm`          | The number of beats per minute of your song. You can use [this](http://www.beatsperminuteonline.com/) to calculate it.                                                                                                                                                                                                      |
+| `firstBeat`    | The time (in seconds) when the first beat happens in your song. This is when the first step of your choreography will be performed.                                                                                                                                                                                         |
+| `choreography` | The array of steps to perform on each beat. Valid steps are: `n`, `ne`, `e`, `se`, `s`, `sw`, `w`, `nw`, `serious` and `crazy`.                                                                                                                                                                                             |
+
 ## Developing
 
 - `yarn start` will spin up a test page.
