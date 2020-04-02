@@ -54,6 +54,18 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 | `firstBeat`    | The time (in seconds) when the first beat happens in your song. This is when the first step of your choreography will be performed.                                                                                                                                                                                         |
 | `choreography` | The array of steps to perform on each beat. Valid steps are: `n`, `ne`, `e`, `se`, `s`, `sw`, `w`, `nw`, `serious` and `crazy`.                                                                                                                                                                                             |
 
+### Available moves
+
+Moves are functions that return an array of steps. CreepyfaceSong provides [some of them out of the box](https://github.com/4lejandrito/creepyface/blob/master/packages/creepyface-dance/src/index.ts#L93-L110):
+
+| Name          | Description                                                                          | Example                            |
+| ------------- | ------------------------------------------------------------------------------------ | ---------------------------------- |
+| `repeat`      | Repeats the given sequence a specified amouht of times.                              | `repeat(10)(['s', 'n'])`           |
+| `circle`      | An 8 step move describing a circle looking to every direction from the one provided. | `circle('e')`                      |
+| `intercalate` | Constructs a secuence consisting of the itercalation of a given sequence and a step. | `intercalate(['n', 'w'], 'crazy')` |
+
+You can build you own moves too!
+
 ## Developing
 
 - `yarn start` will spin up a test page.
