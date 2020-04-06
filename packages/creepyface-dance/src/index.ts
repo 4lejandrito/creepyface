@@ -33,7 +33,6 @@ function onBeat(
   })
 }
 
-const listeners: BeatListener[] = []
 export function makePointProvider({
   name,
   audio,
@@ -47,6 +46,7 @@ export function makePointProvider({
   firstBeat: number
   choreography: Step[]
 }): PointProvider {
+  const listeners: BeatListener[] = []
   onBeat(audio, bpm, firstBeat, beat =>
     listeners.forEach(listener => listener(beat))
   )
