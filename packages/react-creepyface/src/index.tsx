@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import creepyface, { UserOptions } from 'creepyface'
 
 export default function Creepyface(
@@ -14,7 +14,7 @@ export default function Creepyface(
   const { looks, points, ...rest } = { ...options }
   const imageRef = useRef<HTMLImageElement>(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (imageRef.current) {
       if (src) imageRef.current.src = src
       return creepyface(imageRef.current, options)
