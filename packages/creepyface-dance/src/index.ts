@@ -18,8 +18,7 @@ function onBeat(
 ) {
   const secondsPerBeat = 60 / bpm
   let timeout: NodeJS.Timeout
-  audio.addEventListener('pause', () => clearTimeout(timeout))
-  audio.addEventListener('playing', () => {
+  const start = () => {
     let i =
       audio.currentTime <= firstBeat
         ? 0
@@ -30,7 +29,12 @@ function onBeat(
       beat()
       timeout = setInterval(beat, 1000 * secondsPerBeat)
     }, 1000 * (nextBeatSeconds - audio.currentTime))
-  })
+  }
+  audio.addEventListener('pause', () => clearTimeout(timeout))
+  audio.addEventListener('playing', start)
+  if (!audio.paused) {
+    start()
+  }
 }
 
 export function makePointProvider({
