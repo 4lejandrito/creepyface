@@ -41,7 +41,7 @@
     "live": "NODE_ENV=production node backend/index.js",
     "build": "yarn clean && tsc --noEmit && PUBLIC_URL=https://creepyface.io parcel build -d .dist frontend/*.pug",
     "analyze": "source-map-explorer .dist/frontend.*",
-    "deploy": "NODE_ENV=production yarn build && git add .dist && git commit -m Deploying",
+    "deploy": "NODE_ENV=production yarn build && git add .dist && git commit -m \"Building site\"",
     "gif": "node backend/gif"
   },
   "devDependencies": {
