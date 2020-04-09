@@ -31,7 +31,13 @@ function onBeat(
     }, 1000 * (nextBeatSeconds - audio.currentTime))
   }
   audio.addEventListener('pause', () => clearTimeout(timeout))
-  audio.addEventListener('playing', start)
+  audio.addEventListener('playing', () => {
+    const listener = () => {
+      start()
+      audio.removeEventListener('timeupdate', listener)
+    }
+    audio.addEventListener('timeupdate', listener)
+  })
   if (!audio.paused) {
     start()
   }
