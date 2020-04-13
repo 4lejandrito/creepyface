@@ -17,11 +17,7 @@ export default function Language({
     dispatch(loadLocale())
   }, [])
 
-  return locale.value !== 'en' && !locale.messages ? (
-    <Loader />
-  ) : (
-    <>{children}</>
-  )
+  return locale.value !== 'en' && !locale.messages ? null : <>{children}</>
 }
 
 export const useTranslate = (): ((text: ValidMessage) => string) => {
