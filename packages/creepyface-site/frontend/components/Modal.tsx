@@ -26,7 +26,7 @@ export default function Modal({
       isOpen={isOpen}
       contentLabel={title}
       onAfterOpen={onOpen}
-      onAfterClose={onClose}
+      onRequestClose={onClose}
       shouldCloseOnOverlayClick={false}
       closeTimeoutMS={200}
     >
