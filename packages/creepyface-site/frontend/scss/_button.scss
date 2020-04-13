@@ -49,6 +49,7 @@ button,
     border: none;
   }
   &.tiny {
+    font-size: 0.8em;
     border: none;
     padding: $spacing / 6 $spacing / 3;
   }

@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { ReactNode, Fragment } from 'react'
 import baseURL from '../url'
 import Clipboard from './Clipboard'
 import { Images } from './CreepyFace'
-import classNames from 'classnames'
-import { useSelector } from './State'
 
 type Attribute = { name: string; value: string }
 type Node = {
@@ -17,12 +15,14 @@ const node = (
   name: string,
   attributes: (Attribute | null)[],
   close = true,
-  margin = false
+  margin = false,
+  children = false
 ) => ({
   name,
   attributes: attributes.filter(attribute => attribute !== null) as Attribute[],
   close,
-  margin
+  margin,
+  children
 })
 const attribute = (name: string, value: string) => ({ name, value })
 const code = (src: string, images: Images, showFirefly: boolean): Node[] =>
@@ -70,30 +70,83 @@ const toText = (nodes: Node[]) =>
     )
     .join('\n')
 
-export default function Code({ src, images }: { src: string; images: Images }) {
-  const showFirefly = useSelector(state => state.pointProvider === 'firefly')
+function Attribute({ name, value }: { name: string; value: string }) {
+  return (
+    <>
+      <span className="name">{name}</span>
+      {value !== 'true' && (
+        <>
+          <span className="delimiter">=</span>
+          <span className="delimiter">"</span>
+          <span className="base-url">{baseURL}</span>
+          <span className="value" title={value}>
+            {value.replace(baseURL, '')}
+          </span>
+          <span className="delimiter">"</span>
+        </>
+      )}
+    </>
+  )
+}
+
+export const Space = () => <span className="space">&nbsp;</span>
+export const Tab = () => (
+  <>
+    <Space />
+    <Space />
+  </>
+)
+export const Line = (props: { children: ReactNode | ReactNode[] }) => (
+  <div className="line">{props.children}</div>
+)
+
+export default function Code({
+  src,
+  images,
+  points
+}: {
+  src: string
+  images: Images
+  points: string
+}) {
+  const showFirefly = points === 'firefly'
   const nodes = code(src, images, showFirefly)
   return (
-    <span className="html">
+    <div className="code">
       {nodes.map((node, i) => (
-        <span key={i} className={classNames('node', { margin: node.margin })}>
-          <span className="tag">
-            {'<'}
-            {node.name}{' '}
-          </span>
-          <span className="attributes">
-            {node.attributes.map(({ name, value }) => (
-              <span key={name} className="attribute">
-                <span className="name">{name}</span>
-                {value !== 'true' && '='}
-                {value !== 'true' && <span className="value">"{value}"</span>}
-              </span>
-            ))}
-          </span>
-          <span className="tag">{node.close ? `></${node.name}>` : ' />'}</span>
-        </span>
+        <Fragment key={i}>
+          <Line>
+            <span className="delimiter">{'<'}</span>
+            <span className="tag">{node.name}</span>
+            <Space />
+            <Attribute {...node.attributes[0]} />
+            {node.close && (
+              <>
+                <span className="delimiter">{'</'}</span>
+                <span className="tag">{node.name}</span>
+                <span className="delimiter">{'>'}</span>
+              </>
+            )}
+          </Line>
+          {node.attributes.slice(1).map(attribute => (
+            <Line key={attribute.name}>
+              <Tab />
+              <Attribute {...attribute} />
+            </Line>
+          ))}
+          {!node.close && (
+            <Line>
+              <span className="delimiter">{'/>'}</span>
+            </Line>
+          )}
+          {node.margin && (
+            <Line>
+              <Space />
+            </Line>
+          )}
+        </Fragment>
       ))}
       <Clipboard text={toText(code(images.src, images, showFirefly))} />
-    </span>
+    </div>
   )
 }

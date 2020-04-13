@@ -73,7 +73,11 @@ function Download(props: { pictures: Pictures }) {
   )
 }
 
-export default function CreepyFaceCreatorModal(props: { onClose: () => void }) {
+export default function CreepyFaceCreatorModal(props: {
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+}) {
   const pictures = useSelector(state => state.pictures)
   const translate = useTranslate()
   const shortcuts = useShortcuts()
@@ -82,7 +86,9 @@ export default function CreepyFaceCreatorModal(props: { onClose: () => void }) {
   return (
     <Modal
       id="creator"
+      isOpen={props.isOpen}
       title={translate('Creepyface creator')}
+      onOpen={props.onOpen}
       onClose={props.onClose}
     >
       {next !== undefined ? (

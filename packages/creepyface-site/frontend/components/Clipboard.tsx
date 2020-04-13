@@ -7,18 +7,18 @@ export default function Clipboard({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
   const translate = useTranslate()
   return (
-    <small>
-      <Button
-        type="tiny"
-        disabled={copied}
-        icon={copied ? 'accept' : 'clipboard'}
-        title={translate('Copy to clipboard')}
-        onClick={() => {
-          setCopied(true)
-          setTimeout(() => setCopied(false), 1000)
-          copy(text)
-        }}
-      />
-    </small>
+    <Button
+      type="tiny"
+      disabled={copied}
+      icon={copied ? 'accept' : 'clipboard'}
+      title={translate('Copy to clipboard')}
+      onClick={() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 1500)
+        copy(text)
+      }}
+    >
+      {!copied ? translate('Copy') : translate('Copied')}
+    </Button>
   )
 }

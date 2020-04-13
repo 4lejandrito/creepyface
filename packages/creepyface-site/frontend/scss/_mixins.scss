@@ -1,36 +1,52 @@
 $spacing: 1rem;
-
 $color-main: #1abc9c;
 $color-danger: #dc3545;
 $color-text: darken($color-main, 5%);
+$main-creepyface-width: 8.5em;
+$main-creepyface-height: $main-creepyface-width * 45 / 35;
 
-@mixin desktop {
-  @media (min-width: 900px) {
+@mixin horizontal {
+  @media (min-width: 680px) and (min-aspect-ratio: 4/3), (min-width: 1080px) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: 500px) {
+@mixin vertical {
+  @media (max-width: 680px), (max-aspect-ratio: 4/3) and (max-width: 1079px) {
     @content;
   }
 }
 
-@mixin phone {
-  @media (max-width: 500px) {
-    @content;
+@mixin s {
+  @include vertical {
+    @media (max-width: 263px), (max-height: 469px) {
+      @content;
+    }
+  }
+  @include horizontal {
+    @media (max-width: 767px), (max-height: 449px) {
+      @content;
+    }
   }
 }
 
-.hide-phone {
-  @include phone {
-    display: none;
+@mixin m {
+  @include vertical {
+    @media (min-width: 264px) and (max-width: 299px) and (min-height: 470px),
+      (min-height: 470px) and (max-height: 569px) and (min-width: 264px) {
+      @content;
+    }
+  }
+  @include horizontal {
+    @media (min-width: 768px) and (max-width: 1023px) and (min-height: 449px) {
+      @content;
+    }
   }
 }
 
-@mixin short {
-  @media (max-height: 480px) {
-    @content;
+.hide-s {
+  @include vertical {
+    display: none !important;
   }
 }
 
@@ -96,7 +112,6 @@ $color-text: darken($color-main, 5%);
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
 }
 
 %expand {
@@ -110,13 +125,6 @@ $color-text: darken($color-main, 5%);
   overflow: hidden;
   vertical-align: middle;
   display: inline-block;
-  width: 175px;
-  height: 225px;
-  img,
-  video {
-    @extend %expand;
-    object-fit: cover;
-  }
   &:not(.video) {
     .loader {
       color: white;
@@ -150,5 +158,22 @@ $color-text: darken($color-main, 5%);
 .danger {
   background: $color-danger;
   color: white;
-  border: solid 5px darken($color-danger, 5%);
+}
+
+@mixin fade-in-up($delay: 0.2s, $opacity: 1) {
+  $name: fade-in-up-#{$opacity * 100};
+  @keyframes #{$name} {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: $opacity;
+      transform: translateY(0);
+    }
+  }
+  opacity: 0;
+  animation: #{$name} 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+  animation-delay: 0s;
+  animation-delay: $delay;
 }

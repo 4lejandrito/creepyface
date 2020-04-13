@@ -1,0 +1,30 @@
+.player {
+  @extend %center;
+  position: absolute;
+  bottom: $spacing;
+  audio {
+    @extend %round;
+    max-width: 100%;
+    outline: none;
+  }
+  &.transition-enter-active,
+  &.transition-exit-active {
+    transition: all 200ms ease-out;
+  }
+  &.transition-enter {
+    opacity: 0.01;
+    transform: translateY($spacing);
+  }
+  &.transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.transition-exit-active {
+    opacity: 0.01;
+    transform: translateY($spacing);
+  }
+}

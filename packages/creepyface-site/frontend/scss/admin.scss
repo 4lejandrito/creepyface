@@ -77,13 +77,13 @@ ol {
     li {
       @include square(64px);
       margin: $spacing / 2.5;
-      @include tablet {
+      @include m {
         @include square(150px);
         margin: $spacing / 2;
       }
       .creepy {
         @include square(64px);
-        @include tablet {
+        @include m {
           @include square(150px);
         }
       }
@@ -93,13 +93,13 @@ ol {
     li {
       @include square(150px);
       margin: $spacing / 2.5;
-      @include tablet {
+      @include m {
         @include square(300px);
         margin: $spacing / 2;
       }
       .creepy {
         @include square(150px);
-        @include tablet {
+        @include m {
           @include square(300px);
         }
       }

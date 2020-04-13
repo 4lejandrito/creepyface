@@ -5,24 +5,28 @@ body,
 #root {
   height: 100%;
   width: 100%;
-  @include short {
-    height: auto;
-    min-height: 100%;
-  }
 }
 
 html {
-  @media (max-width: 320px) {
+  @include s {
+    font-size: 12px;
+  }
+  @include m {
     font-size: 14px;
   }
-  font-size: 16px;
-  @include tablet {
-    font-size: 18px;
+  min-width: 227px;
+  min-height: 419px;
+  @include horizontal {
+    min-height: 350px;
   }
 }
 
 body {
   @extend %center;
+  padding: $spacing $spacing $spacing $spacing;
+  @include horizontal {
+    padding: 4 * $spacing;
+  }
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   border-top: solid 4px darken($color-main, 10%);
@@ -35,18 +39,6 @@ body {
   @media (pointer: coarse) {
     overscroll-behavior: contain;
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  line-height: 1.2;
-  font-weight: normal;
-  font-family: 'Luckiest Guy', cursive;
 }
 
 kbd {
@@ -67,40 +59,5 @@ a {
   }
   .danger & {
     @include link(white);
-  }
-}
-
-#root {
-  @extend %center;
-  margin: 0 auto;
-  max-width: 1280px;
-  padding: $spacing;
-  @include short {
-    display: block;
-  }
-
-  > header {
-    padding: 2 * $spacing 0 $spacing 0;
-    h1 {
-      small {
-        font-size: (2em/3);
-        display: block;
-        text-transform: none;
-        color: darken($color-text, 10%);
-      }
-    }
-    @include tablet {
-      padding-top: 4 * $spacing;
-      h1 {
-        font-size: 2.5rem;
-      }
-      @media (max-height: 700px) {
-        padding: 3 * $spacing 0 0 0;
-      }
-    }
-  }
-
-  > footer {
-    opacity: 0.6;
   }
 }

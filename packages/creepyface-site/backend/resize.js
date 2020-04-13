@@ -5,7 +5,7 @@ const { uploads, thumbnails } = require('./storage')
 const getDimensions = size =>
   ({
     small: { width: 100, height: 100 },
-    medium: { width: null, height: 400 }
+    medium: { width: Math.floor((400 * 35) / 45), height: 400 }
   }[size] || { width: 0, height: 0 })
 
 module.exports = async (imagePath, size) => {

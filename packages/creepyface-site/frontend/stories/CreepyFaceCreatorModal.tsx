@@ -25,7 +25,7 @@ export const ReadyToDownload = () => {
   return (
     <State store={store}>
       <Router>
-        <CreepyFaceCreatorModal onClose={() => {}} />
+        <CreepyFaceCreatorModal isOpen onOpen={() => {}} onClose={() => {}} />
       </Router>
     </State>
   )

@@ -3,25 +3,34 @@ import Link from './Link'
 import Button from './Button'
 
 const username = '4lejandrito'
-const name = 'creepyface'
+const repo = 'creepyface'
 
 export const Author = () => (
   <Link href={`https://github.com/${username}`}>{username}</Link>
 )
 
 export const Code = ({ children }: { children: ReactNode | ReactNode[] }) => (
-  <Link href={`https://www.npmjs.com/package/${name}`}>{children}</Link>
+  <Link href={`https://www.npmjs.com/package/${repo}`}>{children}</Link>
 )
 
 export const Copyright = () => (
   <>
-    © {new Date().getFullYear()} <Author />
+    <Author /> © {new Date().getFullYear()}
   </>
 )
 
 export const Repo = () => (
-  <Button icon="github" href={`https://github.com/${username}/${name}`}>
+  <Button icon="github" href={`https://github.com/${username}/${repo}`}>
     GitHub
+  </Button>
+)
+
+export const Package = ({ name, text }: { name: string; text: string }) => (
+  <Button
+    type="link"
+    href={`https://github.com/${username}/${repo}/tree/master/packages/${name}`}
+  >
+    {text}
   </Button>
 )
 

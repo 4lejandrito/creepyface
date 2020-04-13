@@ -19,7 +19,7 @@ export const messages = {
   'Make your face alive!': '¡Dale vida a tu cara!',
   face: 'cara',
   A: 'Una',
-  'Javascript library': 'librería Javascript',
+  'JavaScript library': 'librería JavaScript',
   'that makes your': 'que hace que tu',
   'look at': 'mire',
   'the pointer': 'al puntero',
@@ -72,5 +72,8 @@ export const messages = {
     'Almacenaremos tus imágenes para los siguientes propósitos',
   'allow access to camera in': 'permitir acceso a la cámara en',
   code: 'código',
-  'Copy to clipboard': 'Copiar al portapapeles'
+  Copy: 'Copiar',
+  'Copy to clipboard': 'Copiar al portapapeles',
+  Copied: 'Copiado',
+  Supports: 'Soporta'
 }

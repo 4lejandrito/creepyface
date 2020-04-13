@@ -44,10 +44,9 @@ export const useTranslate = (): ((text: ValidMessage) => string) => {
 
 export function LanguageSelector() {
   const locale = useSelector(state => state.locale)
-  const translate = useTranslate()
   return (
     <span lang={locale.value === 'en' ? 'es' : 'en'}>
-      <span className="hide-phone">
+      <span className="hide-s">
         {locale.value === 'en' ? 'También en' : 'Also in'}{' '}
       </span>
       <Button type="link" action={toggleLocale}>

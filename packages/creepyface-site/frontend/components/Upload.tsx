@@ -53,94 +53,91 @@ export default function Upload() {
             {translate('these conditions')}
           </Button>
           .
-          {show && (
-            <Modal
-              id="permissions"
-              title={'Permissions'}
-              onClose={() => dispatch(showPermissions())}
-            >
-              <p>
+          <Modal
+            id="permissions"
+            isOpen={show}
+            title={'Permissions'}
+            onClose={() => dispatch(showPermissions())}
+          >
+            <p>
+              {translate(
+                'We will store your images for the following purposes'
+              )}
+              :
+            </p>
+            <fieldset>
+              <label>
+                <input
+                  disabled
+                  type="checkbox"
+                  checked={download}
+                  onChange={() =>
+                    dispatch({ type: 'toggleDownloadPermission' })
+                  }
+                />
+                <strong>{translate('Generate the download link')}</strong>
+                <p>
+                  <small>
+                    {translate(
+                      'They will be permanently deleted at any time without further notice'
+                    )}
+                    .
+                  </small>
+                </p>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  autoFocus
+                  checked={research}
+                  onChange={() =>
+                    dispatch({ type: 'toggleResearchPermission' })
+                  }
+                />
+                <strong>{translate('Use them for research')}</strong>
+                <p>
+                  <small>
+                    {translate(
+                      'We want to train an AI that can generate a creepyface based on just 1 image. For this to happen we need as many images as possible so please tick this box if you find it interesting'
+                    )}
+                    .
+                  </small>
+                </p>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={samples}
+                  onChange={() => dispatch({ type: 'toggleSamplesPermission' })}
+                />
+                <strong>
+                  {translate('Publish them as samples in the front page')}
+                </strong>
+                <p>
+                  <small>
+                    {translate(
+                      'The images will be stored and publicly served as reduced size thumbnails. They may be permanently deleted at any time without further notice'
+                    )}
+                    .
+                  </small>
+                </p>
+              </label>
+            </fieldset>
+            <p>
+              <small>
                 {translate(
-                  'We will store your images for the following purposes'
-                )}
-                :
-              </p>
-              <fieldset>
-                <label>
-                  <input
-                    disabled
-                    type="checkbox"
-                    checked={download}
-                    onChange={() =>
-                      dispatch({ type: 'toggleDownloadPermission' })
-                    }
-                  />
-                  <strong>{translate('Generate the download link')}</strong>
-                  <p>
-                    <small>
-                      {translate(
-                        'They will be permanently deleted at any time without further notice'
-                      )}
-                      .
-                    </small>
-                  </p>
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    autoFocus
-                    checked={research}
-                    onChange={() =>
-                      dispatch({ type: 'toggleResearchPermission' })
-                    }
-                  />
-                  <strong>{translate('Use them for research')}</strong>
-                  <p>
-                    <small>
-                      {translate(
-                        'We want to train an AI that can generate a creepyface based on just 1 image. For this to happen we need as many images as possible so please tick this box if you find it interesting'
-                      )}
-                      .
-                    </small>
-                  </p>
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={samples}
-                    onChange={() =>
-                      dispatch({ type: 'toggleSamplesPermission' })
-                    }
-                  />
-                  <strong>
-                    {translate('Publish them as samples in the front page')}
-                  </strong>
-                  <p>
-                    <small>
-                      {translate(
-                        'The images will be stored and publicly served as reduced size thumbnails. They may be permanently deleted at any time without further notice'
-                      )}
-                      .
-                    </small>
-                  </p>
-                </label>
-              </fieldset>
-              <p>
-                <small>
-                  {translate(
-                    'If at any time you change your mind and want your images to be permanently deleted please send us an email to'
-                  )}{' '}
-                  <Link href="mailto:privacy@creepyface.io">
-                    privacy@creepyface.io
-                  </Link>
-                  .
-                </small>
-              </p>
-              <Button icon="accept" action={showPermissions}>
-                {translate('Accept')}
-              </Button>
-            </Modal>
-          )}
+                  'If at any time you change your mind and want your images to be permanently deleted please send us an email to'
+                )}{' '}
+                <Link href="mailto:privacy@creepyface.io">
+                  privacy@creepyface.io
+                </Link>
+                .
+              </small>
+            </p>
+            <Button icon="accept" action={showPermissions}>
+              {translate('Accept')}
+            </Button>
+          </Modal>
         </small>
       )}
     </div>

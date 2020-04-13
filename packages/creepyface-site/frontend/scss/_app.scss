@@ -1,69 +1,85 @@
 #root {
-  & > .sample {
-    @extend %center;
-    margin: $spacing auto;
-    flex-grow: 1;
+  @extend %center;
+  @include horizontal {
+    flex-direction: row;
+  }
+  section.description {
+    text-align: center;
+    @include horizontal {
+      text-align: start;
+      flex: 0 0 22.5em;
+      margin-right: 3 * $spacing;
+    }
+    h1 {
+      @include fade-in-up(0.2s);
+      padding: 2 * $spacing 0 $spacing 0;
+      margin: 0;
+      line-height: 1.2;
+      font-weight: normal;
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2.5rem;
+      @include s {
+        font-size: 2rem;
+      }
+      @include horizontal {
+        font-size: 3.5rem;
+      }
+    }
+    p {
+      @include fade-in-up(0.4s);
+      max-width: 36 * $spacing;
+      margin: 0;
+      @include horizontal {
+        padding-bottom: $spacing;
+        font-size: 1.2em;
+      }
+    }
+    .actions {
+      @include fade-in-up(0.3s);
+      padding: $spacing 0;
+      margin-top: $spacing / 2;
+      @include horizontal {
+        margin-top: 0;
+      }
+      button,
+      a {
+        margin: 0;
+        &:first-child {
+          margin-right: $spacing;
+        }
+      }
+    }
+    footer {
+      display: none;
+      @include horizontal {
+        display: initial;
+      }
+    }
+  }
+  section.sample {
+    @include fade-in-up(0.4s);
+    height: 100%;
     width: 100%;
+    @extend %center;
+    flex-grow: 1;
     position: relative;
     flex-direction: row !important;
-    max-height: 400px;
-    & > .main {
-      z-index: 1;
-      position: relative;
-      .creepy {
-        @media (max-height: 700px) {
-          $width: 150px;
-          height: $width * 45 / 35;
-          width: $width;
-        }
-        $width: 180px;
-        display: block;
-        height: $width * 45 / 35;
-        width: $width;
-        margin: $spacing;
-        @include phone {
-          $width: 117px;
-          height: $width * 45 / 35;
-          width: $width;
-        }
-      }
-      > small {
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-        position: absolute;
-        left: 0;
-        bottom: -$spacing;
-      }
-      button {
-        margin: 0;
-        border: none;
-        @media (max-width: 900px) {
-          display: none;
-        }
-      }
-    }
-  }
-
-  & > .description {
-    padding: $spacing 0;
-    margin: 0;
-  }
-
-  & > .actions {
-    padding: $spacing 0;
-    button,
-    a {
+    margin: $spacing;
+    overflow: hidden;
+    max-height: 30 * $spacing;
+    @include horizontal {
       margin: 0;
-      &:first-child {
-        margin-right: $spacing;
-      }
+      max-width: 45 * $spacing;
+      flex-direction: row;
+    }
+    .creepy {
+      cursor: pointer;
     }
   }
-
-  @include tablet {
-    .description {
-      margin: 0 auto;
+  footer {
+    @include fade-in-up(0.6s, 0.6);
+    @include horizontal {
+      display: none;
     }
   }
 }

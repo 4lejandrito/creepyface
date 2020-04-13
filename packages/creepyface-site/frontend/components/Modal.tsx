@@ -2,30 +2,33 @@ import React, { ReactNode } from 'react'
 import Icon from './Icon'
 import Button from './Button'
 import ReactModal from 'react-modal'
-import { useDispatch } from './State'
-import { ActionCreator } from '../redux/util'
 
 ReactModal.setAppElement('#root')
 
 export default function Modal({
   children,
   id,
+  isOpen,
+  onOpen = () => {},
   onClose,
   title
 }: {
   children: ReactNode | ReactNode[]
   id: string
+  isOpen: boolean
+  onOpen?: () => void
   onClose: () => void
   title: string
 }) {
-  const dispatch = useDispatch()
   return (
     <ReactModal
       className={`light ${id}`}
-      isOpen={true}
+      isOpen={isOpen}
       contentLabel={title}
-      onRequestClose={onClose}
+      onAfterOpen={onOpen}
+      onAfterClose={onClose}
       shouldCloseOnOverlayClick={false}
+      closeTimeoutMS={200}
     >
       <Button className="cancel" onClick={onClose}>
         <Icon name="times" />

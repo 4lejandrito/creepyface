@@ -3,11 +3,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   & > header {
     padding: $spacing;
   }
   .creepy {
     margin: $spacing;
+    height: $main-creepyface-height;
+    width: $main-creepyface-width;
+    img,
+    video {
+      @extend %expand;
+      object-fit: cover;
+    }
   }
   .thumbnails > li {
     position: relative;
@@ -17,14 +25,10 @@
     margin: 0;
     background: none;
     @extend %media;
-    width: calc(3.5 * 12px);
-    height: calc(4.5 * 12px);
+    width: 3.5 * 0.75 * $spacing;
+    height: 4.5 * 0.75 * $spacing;
     background-size: cover;
     background-position: center center;
-    @include phone {
-      width: calc(3.5 * 10px);
-      height: calc(4.5 * 10px);
-    }
     &.active {
       box-shadow: 0 0 0 0.2rem $color-text;
     }

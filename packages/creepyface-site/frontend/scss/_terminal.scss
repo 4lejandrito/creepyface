@@ -1,0 +1,103 @@
+.terminal {
+  $duration: 200ms;
+  $minWidth: 550px;
+
+  @extend %center;
+  flex-direction: row;
+  border-radius: 4px;
+  z-index: 1;
+  padding: $spacing;
+  position: relative;
+  max-width: 100%;
+  transition: background-color $duration ease-in;
+  .code {
+    padding-left: $spacing;
+    padding-bottom: $spacing / 2;
+    @media (max-width: $minWidth - 1) {
+      display: none;
+    }
+    &.transition-enter-active,
+    &.transition-exit-active {
+      transition: all 200ms ease-out;
+    }
+    &.transition-enter {
+      opacity: 0.01;
+      max-width: 0;
+      overflow: hidden;
+    }
+    &.transition-enter-active {
+      opacity: 1;
+      max-width: 1000px;
+    }
+    &.transition-exit {
+      opacity: 1;
+      max-width: 1000px;
+      overflow: hidden;
+    }
+    &.transition-exit-active {
+      opacity: 0.01;
+      max-width: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  @media (min-width: $minWidth) {
+    &.open {
+      background: #2d3748;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      .top-bar {
+        display: flex;
+        position: absolute;
+        top: $spacing;
+        left: $spacing;
+        .ball {
+          @include square(0.8 * $spacing);
+          border-radius: 100%;
+          margin-right: $spacing / 2;
+          &.red {
+            background-color: #f56565;
+          }
+          &.orange {
+            background-color: #fbd38d;
+          }
+          &.green {
+            background-color: #48bb78;
+          }
+        }
+      }
+      .creepy-wrapper {
+        .creepy {
+          height: 9em;
+        }
+      }
+    }
+  }
+  .creepy-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    @extend %center;
+    .creepy {
+      transition: all $duration / 2 ease-in;
+      @include vertical {
+        @include s {
+          max-height: 80px;
+        }
+      }
+      height: $main-creepyface-height;
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+    button {
+      position: absolute;
+      bottom: -2 * $spacing;
+      margin: 0;
+      border: none;
+      @media (max-width: $minWidth) {
+        display: none;
+      }
+    }
+  }
+}
