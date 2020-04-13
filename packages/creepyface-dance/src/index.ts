@@ -19,6 +19,10 @@ function onBeat(
   const secondsPerBeat = 60 / bpm
   let timeout: NodeJS.Timeout
   const start = () => {
+    if (audio.readyState !== 4) {
+      audio.addEventListener('canplaythrough', start)
+      return
+    }
     let i =
       audio.currentTime <= firstBeat
         ? 0
@@ -31,13 +35,7 @@ function onBeat(
     }, 1000 * (nextBeatSeconds - audio.currentTime))
   }
   audio.addEventListener('pause', () => clearTimeout(timeout))
-  audio.addEventListener('playing', () => {
-    const listener = () => {
-      start()
-      audio.removeEventListener('timeupdate', listener)
-    }
-    audio.addEventListener('timeupdate', listener)
-  })
+  audio.addEventListener('playing', start)
   if (!audio.paused) {
     start()
   }
