@@ -48,7 +48,7 @@ creepyface.cancel = (img: HTMLImageElement) => {
 
 creepyface.registerPointProvider = registerPointProvider
 
-if (typeof window !== 'undefined') {
+if (typeof (window as any) !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const elements: NodeListOf<HTMLImageElement> = document.querySelectorAll(
       'img[data-creepy],img[data-creepyface]'
