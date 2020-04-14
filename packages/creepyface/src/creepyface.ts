@@ -48,14 +48,16 @@ creepyface.cancel = (img: HTMLImageElement) => {
 
 creepyface.registerPointProvider = registerPointProvider
 
-document.addEventListener('DOMContentLoaded', () => {
-  const elements: NodeListOf<HTMLImageElement> = document.querySelectorAll(
-    'img[data-creepy],img[data-creepyface]'
-  )
-  for (let i = 0; i < elements.length; i++) {
-    creepyface(elements[i])
-  }
-})
+if (typeof window !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements: NodeListOf<HTMLImageElement> = document.querySelectorAll(
+      'img[data-creepy],img[data-creepyface]'
+    )
+    for (let i = 0; i < elements.length; i++) {
+      creepyface(elements[i])
+    }
+  })
+}
 
 export default creepyface
 export { PointProvider, Consumer, Point } from './types'
