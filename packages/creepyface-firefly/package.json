@@ -1,6 +1,6 @@
 {
   "name": "creepyface-firefly",
-  "version": "7.3.8",
+  "version": "7.3.9",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
@@ -32,7 +32,7 @@
     "@babel/preset-typescript": "^7.7.4",
     "@rollup/plugin-node-resolve": "^6.0.0",
     "@types/raf": "^3.4.0",
-    "creepyface": "^7.3.8",
+    "creepyface": "^7.3.9",
     "present": "^1.0.0",
     "raf": "^3.4.1",
     "rollup": "^1.27.13",
