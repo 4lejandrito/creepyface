@@ -29,5 +29,5 @@ export default function Creepyface(
       .reduce((hash, [name, value]) => `${name}:${value} ${hash}`, '')
   ])
 
-  return <img ref={imageRef} {...imgProps} />
+  return <img src={src} ref={imageRef} {...imgProps} />
 }
