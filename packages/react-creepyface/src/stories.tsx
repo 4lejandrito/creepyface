@@ -1,6 +1,6 @@
 import React from 'react'
 import Creepyface from '.'
-import { withKnobs, number } from '@storybook/addon-knobs'
+import { withKnobs, number, boolean } from '@storybook/addon-knobs'
 
 export default {
   title: 'Creepyface',
@@ -11,6 +11,7 @@ export const WithOptions = () => {
   const id = number('Picture number', 0)
   return (
     <Creepyface
+      disabled={boolean('Disabled', false)}
       src={`https://creepyface.io/img/${id}/serious`}
       options={{
         hover: `https://creepyface.io/img/${id}/hover`,
@@ -35,6 +36,7 @@ export const WithDataAttributes = () => {
   const id = number('Picture number', 0)
   return (
     <Creepyface
+      disabled={boolean('Disabled', false)}
       src={`https://creepyface.io/img/${id}/serious`}
       data-src-hover={`https://creepyface.io/img/${id}/hover`}
       data-src-look-0={`https://creepyface.io/img/${id}/0`}

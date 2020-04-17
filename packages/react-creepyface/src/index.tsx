@@ -6,20 +6,22 @@ export default function Creepyface(
     React.ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   > & {
+    disabled?: boolean
     src: string
     options?: UserOptions
   }
 ) {
-  const { src, options, ...imgProps } = props
+  const { disabled, src, options, ...imgProps } = props
   const { looks, points, ...rest } = { ...options }
   const imageRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
-    if (imageRef.current) {
+    if (!disabled && imageRef.current) {
       if (src) imageRef.current.src = src
       return creepyface(imageRef.current, options)
     }
   }, [
+    disabled,
     src,
     points,
     ...(looks || []).map(({ angle, src }) => `${angle}-${src}`),
