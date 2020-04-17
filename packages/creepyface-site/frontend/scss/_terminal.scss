@@ -69,6 +69,7 @@
       .creepy-wrapper {
         .creepy {
           height: 9em;
+          width: 9em * ($main-creepyface-width / $main-creepyface-height);
         }
       }
     }
@@ -81,9 +82,11 @@
       transition: all $duration / 2 ease-in;
       @include vertical {
         @include s {
-          max-height: 80px;
+          height: 7em;
+          width: 7em * ($main-creepyface-width / $main-creepyface-height);
         }
       }
+      width: $main-creepyface-width;
       height: $main-creepyface-height;
       img {
         height: 100%;
