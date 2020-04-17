@@ -1,6 +1,6 @@
 {
   "name": "react-creepyface",
-  "version": "7.3.11",
+  "version": "7.4.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
