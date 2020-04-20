@@ -1,6 +1,9 @@
 .logo {
   text-transform: lowercase;
   position: relative;
+  line-height: 1.2;
+  font-weight: normal;
+  font-family: 'Luckiest Guy', cursive;
   .eye {
     @include square(0.33em);
     border-radius: 50%;

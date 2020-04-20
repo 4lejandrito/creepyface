@@ -1,16 +1,33 @@
 @import 'reboot';
 @import 'mixins';
 @import 'button';
-@import 'page';
 @import 'logo';
 
-#root,
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy|Open+Sans:400,700');
+
 html,
-body {
-  height: auto !important;
-  max-height: initial !important;
-  display: block !important;
+body,
+#root {
   min-height: 100%;
+}
+
+body {
+  padding: $spacing;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  background-image: linear-gradient(
+    to bottom,
+    $color-main,
+    darken($color-main, 5%)
+  );
+  color: white;
+  @media (pointer: coarse) {
+    overscroll-behavior: contain;
+  }
+}
+
+#root {
+  @extend %center;
 }
 
 .chart {
@@ -73,35 +90,28 @@ ol {
   list-style: none;
   padding: 0;
   margin: 0;
+  li {
+    .creepy {
+      img {
+        width: 100%;
+      }
+    }
+  }
   &.small {
     li {
-      @include square(64px);
-      margin: $spacing / 2.5;
-      @include m {
-        @include square(150px);
-        margin: $spacing / 2;
-      }
+      @include square(150px);
+      margin: $spacing / 2;
       .creepy {
-        @include square(64px);
-        @include m {
-          @include square(150px);
-        }
+        @include square(150px);
       }
     }
   }
   &.big {
     li {
-      @include square(150px);
-      margin: $spacing / 2.5;
-      @include m {
-        @include square(300px);
-        margin: $spacing / 2;
-      }
+      @include square(300px);
+      margin: $spacing / 2;
       .creepy {
-        @include square(150px);
-        @include m {
-          @include square(300px);
-        }
+        @include square(300px);
       }
     }
   }

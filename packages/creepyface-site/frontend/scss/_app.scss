@@ -14,9 +14,6 @@
       @include fade-in-up(0.2s);
       padding: 2 * $spacing 0 $spacing 0;
       margin: 0;
-      line-height: 1.2;
-      font-weight: normal;
-      font-family: 'Luckiest Guy', cursive;
       font-size: 2.5rem;
       @include s {
         font-size: 2rem;

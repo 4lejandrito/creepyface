@@ -243,7 +243,7 @@ class Admin extends React.Component {
     return (
       <>
         <header className="light">
-          <h1 onClick={() => (window.location = '/')}>
+          <h1 className="logo" onClick={() => (window.location = '/')}>
             {filteredCreepyfaces.length} <Logo hidePointer={true} />s
           </h1>
           <small className="filter">
