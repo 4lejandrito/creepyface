@@ -190,7 +190,7 @@ The following point providers are available out of the box:
 - `mouse` just for mouse events.
 - `finger` just for touch events.
 
-The are also external point providers:
+There are also external point providers:
 
 - 🎶 [dance](packages/creepyface-dance) to dance to the rythm of the music.
 - 🤳 [tilt](packages/creepyface-tilt) to stare at you when you tilt your phone.
