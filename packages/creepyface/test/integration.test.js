@@ -42,10 +42,12 @@ const describeCombination = fn => () => {
 describe(
   'Creepyface',
   describeCombination(driver => {
-    it('shows the default src by default', async () =>
+    it('shows the default src by default', async () => {
+      await driver.sleep(1001)
       expect(
         driver.findElement(By.css('img')).getAttribute('src')
-      ).resolves.toBe(url('img/serious.jpg')))
+      ).resolves.toBe(url('img/serious.jpg'))
+    })
 
     describe('when the mouse moves around creepyface', () => {
       const testLook = (getCoords, name) => async () => {
