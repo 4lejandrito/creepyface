@@ -27,7 +27,7 @@
     "@types/throttle-debounce": "^2.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.9.0",
-    "chromedriver": "^79.0.0",
+    "chromedriver": "^81.0.0",
     "eslint": "^5.11.1",
     "geckodriver": "^1.19.1",
     "jest": "^24.9.0",
