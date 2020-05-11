@@ -105,12 +105,12 @@ export const moves = {
   intercalate: (steps: Step[], step: Step) =>
     range(2 * steps.length).map(i => (i % 2 ? step : steps[Math.floor(i / 2)])),
 
-  circle: (from: Direction, backwards = false): Step[] =>
+  circle: (from: Direction, clockwise = false): Step[] =>
     range(directions.length).map(
       i =>
         directions[
           mod(
-            directions.indexOf(from) + (backwards ? i : -i),
+            directions.indexOf(from) + (clockwise ? i : -i),
             directions.length
           )
         ]
