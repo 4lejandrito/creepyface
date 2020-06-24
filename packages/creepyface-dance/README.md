@@ -56,7 +56,7 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 
 ### Available moves
 
-Moves are functions that return an array of steps. CreepyfaceSong provides [some of them out of the box](https://github.com/4lejandrito/creepyface/blob/master/packages/creepyface-dance/src/index.ts#L101-L118):
+Moves are functions that return an array of steps. CreepyfaceDance provides [some of them out of the box](https://github.com/4lejandrito/creepyface/blob/master/packages/creepyface-dance/src/index.ts#L101-L118):
 
 | Name          | Description                                                                                           | Example                            |
 | ------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
