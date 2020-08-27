@@ -19,5 +19,7 @@ export default () => (next: (action: Action) => void) => (action: Action) => {
   } else {
     track(action)
   }
+  const plausible = (window as any).plausible
+  plausible && plausible(action.type)
   next(action)
 }
