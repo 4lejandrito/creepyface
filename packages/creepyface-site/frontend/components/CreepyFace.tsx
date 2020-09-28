@@ -8,7 +8,7 @@ import { getAngles } from '../get-next'
 import { PointProvider } from 'creepyface/src/types'
 
 const noop = () => {}
-const url = (id: number, size?: string) => (name: string) =>
+const url = (id: number | string, size?: string) => (name: string) =>
   `${baseURL}${namespace ? '/' + namespace : ''}/img/${id}/${name}${
     size ? '/' + size : ''
   }`
@@ -19,7 +19,10 @@ export type Images = {
   looks: { angle: ValidAngle; src: string }[]
 }
 
-export const getHostedImages = (id = 0, size?: 'small'): Images => {
+export const getHostedImages = (
+  id: number | string = 0,
+  size?: 'small'
+): Images => {
   const getUrl = url(id, size)
   return {
     src: getUrl('serious'),
