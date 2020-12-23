@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { namespace } from '../url'
+import santaHat from '../img/santa-hat.png'
 
 const Pointer = () => (
   <svg
@@ -58,6 +59,7 @@ export default function Logo({
       <Eye />
       <Eye />
       {!hidePointer && (namespace === 'liferay' ? <Liferay /> : <Pointer />)}
+      <img className="hat" src={santaHat} />
       Creepyface
     </span>
   )
