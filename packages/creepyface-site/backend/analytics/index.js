@@ -20,10 +20,4 @@ module.exports = app => {
       next()
     }
   })
-
-  app.post('/event', (req, res) => {
-    const { type, payload } = req.body
-    track(req.cookies.uuid, type, payload)
-    res.sendStatus(200)
-  })
 }
