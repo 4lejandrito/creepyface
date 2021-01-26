@@ -137,7 +137,7 @@ export default combineReducers({
       case 'requestUpload':
         return null
       case 'receiveUpload':
-        return action.payload.view
+        return action.payload.view || null
       case 'uploadFailed':
         return null
       case 'restartCreation':
