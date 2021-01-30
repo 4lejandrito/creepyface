@@ -1,0 +1,82 @@
+#__next {
+  @extend %center;
+  @include horizontal {
+    flex-direction: row;
+  }
+  section.description {
+    text-align: center;
+    @include horizontal {
+      text-align: start;
+      flex: 0 0 22.5em;
+      margin-right: 3 * $spacing;
+    }
+    h1 {
+      @include fade-in-up(0.2s);
+      padding: 2 * $spacing 0 $spacing 0;
+      margin: 0;
+      font-size: 2.5rem;
+      @include s {
+        font-size: 2rem;
+      }
+      @include horizontal {
+        font-size: 3.5rem;
+      }
+    }
+    p {
+      @include fade-in-up(0.4s);
+      max-width: 36 * $spacing;
+      margin: 0;
+      @include horizontal {
+        padding-bottom: $spacing;
+        font-size: 1.2em;
+      }
+    }
+    .actions {
+      @include fade-in-up(0.3s);
+      padding: $spacing 0;
+      margin-top: $spacing / 2;
+      @include horizontal {
+        margin-top: 0;
+      }
+      button,
+      a {
+        margin: 0;
+        &:first-child {
+          margin-right: $spacing;
+        }
+      }
+    }
+    footer {
+      display: none;
+      @include horizontal {
+        display: initial;
+      }
+    }
+  }
+  section.sample {
+    @include fade-in-up(0.4s);
+    height: 100%;
+    width: 100%;
+    @extend %center;
+    flex-grow: 1;
+    position: relative;
+    flex-direction: row !important;
+    margin: $spacing;
+    overflow: hidden;
+    max-height: 30 * $spacing;
+    @include horizontal {
+      margin: 0;
+      max-width: 45 * $spacing;
+      flex-direction: row;
+    }
+    .creepy {
+      cursor: pointer;
+    }
+  }
+  footer {
+    @include fade-in-up(0.6s, 0.6);
+    @include horizontal {
+      display: none;
+    }
+  }
+}

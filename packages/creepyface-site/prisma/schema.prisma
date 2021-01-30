@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../.data/sqlite.db"
+}
+
+model Creepyface {
+  uuid              String    @id
+  timestamp         DateTime? @default(now())
+  canUseForResearch Boolean
+  canUseAsSample    Boolean
+  approved          Boolean
+  namespace         String?
+  exclusive         Boolean
+}
+
+model Usage {
+  script  String
+  referer String
+
+  @@id([script, referer])
+}

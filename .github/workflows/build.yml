@@ -38,10 +38,13 @@ jobs:
           path-to-lcov: ./packages/creepyface/coverage/lcov.info
         env:
           CI: true
-      - name: Deploy site
-        uses: idoberko2/dokku-deploy-github-action@v1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          dokku-host: creepyface.io
-          app-name: live
-          git-push-flags: --force
+      - name: Deploy
+        run: |
+          mkdir -p ~/.ssh
+          eval `ssh-agent -s`
+          ssh-add - <<< "$SSH_PRIVATE_KEY"
+          ssh-keyscan creepyface.io >> ~/.ssh/known_hosts
+          export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          yarn deploy
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}

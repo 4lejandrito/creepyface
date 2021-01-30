@@ -44,5 +44,5 @@ Check out [the stories](src/stories.tsx) for working examples.
 
 ## Developing
 
-- `yarn start` will spin up the storybook.
+- `yarn dev` will spin up the storybook.
 - `yarn build` will generate the production scripts under the `dist` folder.

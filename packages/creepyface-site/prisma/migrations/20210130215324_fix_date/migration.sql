@@ -1,0 +1,1 @@
+update creepyface set timestamp = strftime("%s", timestamp) * 1000;

@@ -28,5 +28,5 @@ Try to find the firefly on https://creepyface.io! If you give up here is a [code
 
 ## Developing
 
-- `yarn start` will spin up a test page.
+- `yarn dev` will spin up a test page.
 - `yarn build` will generate the production scripts under the `dist` folder.

@@ -30,5 +30,5 @@ See it in action at [creepyface.io](https://creepyface.io) and create your own o
 
 ## Developing
 
-- `yarn start` will spin up a test page.
+- `yarn dev` will spin up a test page.
 - `yarn build` will generate the production scripts under the `dist` folder.

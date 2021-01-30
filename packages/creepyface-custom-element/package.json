@@ -15,7 +15,7 @@
     "creepy"
   ],
   "scripts": {
-    "start": "start-storybook",
+    "dev": "start-storybook",
     "build": "NODE_ENV=production rollup -c",
     "prepublishOnly": "yarn build"
   },

@@ -199,7 +199,7 @@ There are also external point providers:
 ## Developing
 
 - `yarn && yarn build` will set up the packages (using workspaces and [Lerna](https://lerna.js.org/)) and run a required initial build.
-- `yarn start` will spin up local servers for each of the packages.
+- `yarn dev` will spin up local servers for each of the packages.
 - `yarn test` will run the tests.
 
 ## Contributing

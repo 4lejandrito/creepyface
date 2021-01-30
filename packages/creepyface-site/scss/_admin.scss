@@ -1,0 +1,128 @@
+.admin {
+  margin-top: 4 * $spacing;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .top-bar {
+    @extend %media;
+    padding: $spacing;
+    border-radius: 0;
+    border: none;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 4 * $spacing;
+    h1 {
+      margin-left: $spacing / 4;
+      display: inline-block;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    a,
+    button {
+      vertical-align: middle;
+      margin: 0 $spacing / 4;
+      padding: $spacing / 2;
+      border: none;
+      line-height: 1;
+    }
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    li {
+      .creepy {
+        img {
+          width: 100%;
+        }
+      }
+    }
+    &.small {
+      li {
+        @include square(150px);
+        margin: $spacing / 2;
+        .creepy {
+          @include square(150px);
+        }
+      }
+    }
+    &.big {
+      li {
+        @include square(300px);
+        margin: $spacing / 2;
+        .creepy {
+          @include square(300px);
+        }
+      }
+    }
+    li {
+      display: inline-block;
+      position: relative;
+      .creepy {
+        transition: all ease 0.1s;
+        cursor: pointer;
+      }
+      label {
+        position: relative;
+        margin: 0;
+        .badges {
+          position: absolute;
+          top: -$spacing / 2;
+          right: -$spacing / 2;
+          z-index: 2;
+          .badge {
+            padding: 0 $spacing / 4;
+            margin-left: $spacing / 4;
+            @extend %media;
+          }
+        }
+      }
+      input {
+        visibility: hidden;
+        position: absolute;
+        &:checked + .creepy {
+          border: solid 5px white;
+        }
+      }
+      .actions {
+        position: absolute;
+        bottom: $spacing / 2;
+        left: 0;
+        right: 0;
+        margin-top: $spacing / 2;
+        button {
+          margin: 0 $spacing / 4;
+        }
+      }
+    }
+  }
+
+  .selection {
+    .info {
+      float: left;
+      > span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .actions {
+      float: right;
+    }
+  }
+
+  .filter {
+    position: fixed;
+    right: $spacing;
+    top: $spacing;
+  }
+}
