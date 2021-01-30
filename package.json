@@ -36,6 +36,6 @@
     }
   },
   "resolutions": {
-    "@types/react": "^16.9.23"
+    "@types/react": "^17.0.0"
   }
 }
