@@ -45,6 +45,7 @@ jobs:
           ssh-add - <<< "$SSH_PRIVATE_KEY"
           ssh-keyscan creepyface.io >> ~/.ssh/known_hosts
           export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          cd packages/creepyface-site
           yarn deploy
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
