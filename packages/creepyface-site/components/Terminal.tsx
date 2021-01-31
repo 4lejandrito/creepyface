@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import CreepyFace, { Images } from './CreepyFace'
 
 export default function Terminal(props: {
+  alt: string
   src: string
   images: Images
   points: string
@@ -29,6 +30,7 @@ export default function Terminal(props: {
       )}
       <div className="creepy-wrapper">
         <CreepyFace
+          alt={props.alt}
           images={props.images}
           points={props.points}
           onChange={props.onChange}

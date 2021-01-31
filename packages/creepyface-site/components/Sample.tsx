@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from './State'
 import Terminal from './Terminal'
 import Player from './Player'
 import { useNamespace } from './Namespace'
+import { useTranslate } from './Language'
 
 export default function Sample() {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export default function Sample() {
     selectedCreepyface,
     namespace
   ])
+  const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
   const [mainSampleLoaded, setMainSampleLoaded] = useState(false)
   const select = useCallback(
@@ -35,6 +37,7 @@ export default function Sample() {
   return (
     <section className="sample">
       <Terminal
+        alt={translate('The main Creepyface')}
         src={src}
         images={images}
         points={pointProvider}
@@ -48,6 +51,7 @@ export default function Sample() {
       />
       {mainSampleLoaded && count != null && count > 0 && (
         <CreepyFaces
+          alt={translate("A stranger's Creepyface")}
           namespace={namespace}
           count={count}
           points={pointProvider}

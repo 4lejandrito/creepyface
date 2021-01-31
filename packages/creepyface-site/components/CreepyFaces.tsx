@@ -17,11 +17,13 @@ const getSize = (width: number, height: number) => {
 }
 
 export default memo(function CreepyFaces({
+  alt,
   namespace,
   count,
   points,
   onSelect
 }: {
+  alt: string
   namespace: string
   count: number
   points: string | PointProvider
@@ -52,6 +54,7 @@ export default memo(function CreepyFaces({
                 }}
               >
                 <CreepyFace
+                  alt={alt}
                   images={getHostedImages(id, namespace, 'small')}
                   points={points}
                   onSelect={() => onSelect(id)}

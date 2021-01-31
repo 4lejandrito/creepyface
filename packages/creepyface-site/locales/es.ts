@@ -75,5 +75,7 @@ export const messages = {
   Copy: 'Copiar',
   'Copy to clipboard': 'Copiar al portapapeles',
   Copied: 'Copiado',
-  Supports: 'Soporta'
+  Supports: 'Soporta',
+  'The main Creepyface': 'La Creepyface principal',
+  "A stranger's Creepyface": 'La Creepyface de un extraño'
 }
