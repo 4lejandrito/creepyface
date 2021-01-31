@@ -21,7 +21,7 @@ const tips: Tips = {
   [180]: 'down',
   [225]: 'down left',
   [270]: 'left',
-  [315]: 'up left'
+  [315]: 'up left',
 }
 
 export default tips

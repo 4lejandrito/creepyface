@@ -38,15 +38,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             images: [
               {
                 url: `${baseURL}/logo.png`,
-                alt: `Picture of a cat looking at the mouse pointer`
-              }
+                alt: `Picture of a cat looking at the mouse pointer`,
+              },
             ],
-            site_name: 'creepyface.io'
+            site_name: 'creepyface.io',
           }}
           twitter={{
             handle: '@4lejandrito',
             site: '@creepyface_io',
-            cardType: 'summary_large_image'
+            cardType: 'summary_large_image',
           }}
           additionalMetaTags={[{ name: 'theme-color', content: '#148f77' }]}
         />

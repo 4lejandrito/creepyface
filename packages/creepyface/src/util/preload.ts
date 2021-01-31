@@ -25,8 +25,8 @@ const loadImages = (
   consumer: Consumer<Array<HTMLImageElement>>
 ) => {
   const imgs: Array<HTMLImageElement> = []
-  srcs.forEach(src => {
-    loadImage(src, img => {
+  srcs.forEach((src) => {
+    loadImage(src, (img) => {
       imgs.push(img)
       if (imgs.length === srcs.length) consumer(imgs)
     })
@@ -42,14 +42,14 @@ export default function preload(
   let cancel: Cancel = () => {
     cancelled = true
   }
-  loadImages(getSrcs(options), imgs => {
+  loadImages(getSrcs(options), (imgs) => {
     img.__creepyfaceReachableImages = imgs
     const cancelCallback = callback()
     cancel = () => {
       cancelCallback()
       delete img.__creepyfaceReachableImages
     }
-    if (cancelled || imgs.some(img => !img.naturalWidth)) {
+    if (cancelled || imgs.some((img) => !img.naturalWidth)) {
       cancel()
     }
   })

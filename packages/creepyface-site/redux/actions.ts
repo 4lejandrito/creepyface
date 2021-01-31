@@ -5,7 +5,7 @@ import url from '../util/url'
 
 const receiveMessages = ({
   value,
-  messages
+  messages,
 }: {
   value: Language
   messages?: { [K: string]: string }
@@ -14,7 +14,7 @@ const receiveMessages = ({
   localStorage.setItem('locale', value)
   return {
     type: 'receiveMessages',
-    payload: { value, messages }
+    payload: { value, messages },
   }
 }
 
@@ -47,11 +47,11 @@ export const toggleLocale = makeActionCreator(() => (dispatch, getState) => {
   dispatch(loadLocaleValue(locale.value === 'en' ? 'es' : 'en'))
 })
 
-export const toggleShortcuts = makeActionCreator(() => dispatch =>
+export const toggleShortcuts = makeActionCreator(() => (dispatch) =>
   dispatch({ type: 'toggleShortcuts' })
 )
 
-export const restartCreation = makeActionCreator(() => dispatch =>
+export const restartCreation = makeActionCreator(() => (dispatch) =>
   dispatch({ type: 'restartCreation' })
 )
 
@@ -62,7 +62,7 @@ export const takePicture = makeActionCreator(
       const picture = shoot()
       dispatch({
         type: 'takePicture',
-        payload: picture
+        payload: picture,
       })
     }
   },
@@ -91,9 +91,9 @@ export const upload = (namespace: string) =>
           formData.append('namespace', namespace)
 
           return formData
-        })()
+        })(),
       })
-        .then(res => res.json())
+        .then((res) => res.json())
         .then((data: { download: string; view: string; count: number }) =>
           dispatch({ type: 'receiveUpload', payload: data })
         )
@@ -103,22 +103,22 @@ export const upload = (namespace: string) =>
   )
 
 export const requestCount = (namespace: string) =>
-  makeActionCreator(() => dispatch => {
+  makeActionCreator(() => (dispatch) => {
     fetch(`${url}/api/creepyfaces?namespace=${namespace}`, {
-      credentials: 'include'
+      credentials: 'include',
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(({ count }: { count: number }) =>
         dispatch({ type: 'receiveCount', payload: count })
       )
   })
 
 export const toggleCode = makeActionCreator(
-  () => dispatch => dispatch({ type: 'toggleCode' }),
+  () => (dispatch) => dispatch({ type: 'toggleCode' }),
   ({ pointProvider }) => pointProvider !== 'dance'
 )
 
-export const showPermissions = makeActionCreator(() => dispatch =>
+export const showPermissions = makeActionCreator(() => (dispatch) =>
   dispatch({ type: 'showPermissions' })
 )
 
@@ -131,7 +131,7 @@ export const nextPointProvider = makeActionCreator(
       payload:
         pointProviders[
           (pointProviders.indexOf(pointProvider) + 1) % pointProviders.length
-        ]
+        ],
     })
   }
 )
@@ -140,6 +140,6 @@ export const toggleDance = makeActionCreator(() => (dispatch, getState) => {
   const { pointProvider } = getState()
   dispatch({
     type: 'changePointProvider',
-    payload: pointProvider === 'dance' ? 'pointer' : 'dance'
+    payload: pointProvider === 'dance' ? 'pointer' : 'dance',
   })
 })

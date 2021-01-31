@@ -39,7 +39,7 @@ function Take({ next }: { next: keyof Pictures }) {
           />
         </span>
         <Video
-          onLoad={shoot => dispatch({ type: 'videoReady', payload: shoot })}
+          onLoad={(shoot) => dispatch({ type: 'videoReady', payload: shoot })}
           onUnload={() => dispatch({ type: 'videoNotReady' })}
         />
       </div>
@@ -64,10 +64,10 @@ function Download(props: { pictures: Pictures }) {
         images={{
           src: pictures.serious.src,
           hover: pictures.hover.src,
-          looks: getAngles().map(angle => ({
+          looks: getAngles().map((angle) => ({
             angle,
-            src: pictures[angle].src
-          }))
+            src: pictures[angle].src,
+          })),
         }}
       />
       <Upload />
@@ -80,7 +80,7 @@ export default function CreepyFaceCreatorModal(props: {
   onOpen: () => void
   onClose: () => void
 }) {
-  const pictures = useSelector(state => state.pictures)
+  const pictures = useSelector((state) => state.pictures)
   const translate = useTranslate()
   const shortcuts = useShortcuts()
   const next = getNext(pictures)

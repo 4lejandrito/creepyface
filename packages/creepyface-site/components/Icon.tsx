@@ -55,7 +55,7 @@ const icons = {
   clipboard: faClipboard,
   code: faCode,
   grid: faTh,
-  'grid-sm': faThLarge
+  'grid-sm': faThLarge,
 }
 const faces = [
   faGrinSquint,
@@ -67,7 +67,7 @@ const faces = [
   faLaugh,
   faGrinTongueWink,
   faSurprise,
-  faMehRollingEyes
+  faMehRollingEyes,
 ]
 
 export type IconType = keyof typeof icons
@@ -88,7 +88,7 @@ export const ImageIcon = memo(({ next }: { next: keyof Pictures }) => (
     fixedWidth
     icon={icons[faceIconName(next)]}
     style={{
-      transform: `rotate(${next >= 0 ? next : 0}deg)`
+      transform: `rotate(${next >= 0 ? next : 0}deg)`,
     }}
   />
 ))

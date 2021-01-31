@@ -11,8 +11,8 @@ function ListItem(props: {
   useEffect(() => {
     const node = ref.current
     if (node) {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
           setVisible(entry.intersectionRatio > 0)
         })
       })
@@ -36,11 +36,13 @@ export default function SelectableList<T extends { uuid: string }>(props: {
   const [selection, setSelection] = useState(new Set<string>())
   const [size, setSize] = useState('small')
   const selected = [...selection]
-    .map(uuid => items.find(c => c.uuid === uuid))
-    .filter(item => !!item) as T[]
+    .map((uuid) => items.find((c) => c.uuid === uuid))
+    .filter((item) => !!item) as T[]
   const actionIcons = (Object.keys(
     selected.map(actions).reduce(merge, {})
-  ) as IconType[]).filter(icon => selected.every(item => actions(item)[icon]))
+  ) as IconType[]).filter((icon) =>
+    selected.every((item) => actions(item)[icon])
+  )
 
   return (
     <>
@@ -59,12 +61,12 @@ export default function SelectableList<T extends { uuid: string }>(props: {
             </Button>
           </div>
           <div className="actions">
-            {actionIcons.map(icon => (
+            {actionIcons.map((icon) => (
               <Button
                 key={icon}
                 icon={icon}
                 onClick={() =>
-                  selected.forEach(item => {
+                  selected.forEach((item) => {
                     const fn = actions(item)[icon]
                     if (fn) fn()
                   })
@@ -82,7 +84,7 @@ export default function SelectableList<T extends { uuid: string }>(props: {
       <ol className={size}>
         {items.map((item, i) => (
           <ListItem key={item.uuid + i}>
-            {visible => (
+            {(visible) => (
               <label>
                 <input
                   type="checkbox"

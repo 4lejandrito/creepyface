@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 function Routes({ children }: { children: ReactNode | ReactNode[] }) {
   const router = useRouter()
-  const previousIsCreating = useSelector(state => state.isCreating)
+  const previousIsCreating = useSelector((state) => state.isCreating)
   const isCreating = router.asPath.endsWith('/create')
   const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ function Routes({ children }: { children: ReactNode | ReactNode[] }) {
 }
 
 export default function Router({
-  children
+  children,
 }: {
   children: ReactNode | ReactNode[]
 }) {

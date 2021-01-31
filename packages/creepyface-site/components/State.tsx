@@ -3,7 +3,7 @@ import {
   Provider as ReduxProvider,
   useDispatch as useReduxDispatch,
   useSelector as useReduxSelector,
-  TypedUseSelectorHook
+  TypedUseSelectorHook,
 } from 'react-redux'
 import createStore from '../redux/store'
 import { State, Action } from '../redux/types'

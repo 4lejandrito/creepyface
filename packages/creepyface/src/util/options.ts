@@ -26,7 +26,7 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
   throttle: getFloat(img.getAttribute('data-throttle')),
-  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision'))
+  fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
 })
 
 const getPoints = (userOptions: UserOptions): PointProvider => {
@@ -62,6 +62,6 @@ export default function getOptions(
     fieldOfVision: userOptions.fieldOfVision || 150,
     onDebug: userOptions.onDebug || noop,
     onAttach: userOptions.onAttach || noop,
-    onDetach: userOptions.onDetach || noop
+    onDetach: userOptions.onDetach || noop,
   }
 }

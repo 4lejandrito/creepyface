@@ -10,8 +10,8 @@ export default route(async (req, res) => {
           namespace,
           canUseAsSample: true,
           approved: true,
-          exclusive: !namespace ? false : undefined
-        }
-      })) + 1
+          exclusive: !namespace ? false : undefined,
+        },
+      })) + 1,
   })
 })

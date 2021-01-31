@@ -4,11 +4,11 @@ import prisma from '../../../../prisma'
 export default adminRoute(async (req, res) => {
   await prisma.creepyface.update({
     where: {
-      uuid: req.query.uuid as string
+      uuid: req.query.uuid as string,
     },
     data: {
-      namespace: 'liferay'
-    }
+      namespace: 'liferay',
+    },
   })
   res.redirect('/api/admin')
 })

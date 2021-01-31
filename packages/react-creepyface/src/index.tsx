@@ -28,7 +28,7 @@ export default function Creepyface(
     ...Object.values(rest),
     Object.entries(imgProps)
       .filter(([name]) => name.startsWith('data-'))
-      .reduce((hash, [name, value]) => `${name}:${value} ${hash}`, '')
+      .reduce((hash, [name, value]) => `${name}:${value} ${hash}`, ''),
   ])
 
   return <img src={src} ref={imageRef} {...imgProps} />

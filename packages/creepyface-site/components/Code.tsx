@@ -19,10 +19,12 @@ const node = (
   children = false
 ) => ({
   name,
-  attributes: attributes.filter(attribute => attribute !== null) as Attribute[],
+  attributes: attributes.filter(
+    (attribute) => attribute !== null
+  ) as Attribute[],
   close,
   margin,
-  children
+  children,
 })
 const attribute = (name: string, value: string) => ({ name, value })
 const code = (src: string, images: Images, showFirefly: boolean): Node[] =>
@@ -50,16 +52,16 @@ const code = (src: string, images: Images, showFirefly: boolean): Node[] =>
         attribute('data-src-hover', images.hover || ''),
         ...(images.looks || []).map(({ angle, src }) =>
           attribute(`data-src-look-${angle}`, src)
-        )
+        ),
       ],
       false
-    )
-  ].filter(node => node !== null) as Node[]
+    ),
+  ].filter((node) => node !== null) as Node[]
 
 const toText = (nodes: Node[]) =>
   nodes
     .map(
-      node =>
+      (node) =>
         `<${node.name} ${node.attributes
           .map(({ name, value }) =>
             value !== 'true' ? `${name}="${value.replace('/api', '')}"` : name
@@ -103,7 +105,7 @@ export const Line = (props: { children: ReactNode | ReactNode[] }) => (
 export default function Code({
   src,
   images,
-  points
+  points,
 }: {
   src: string
   images: Images
@@ -128,7 +130,7 @@ export default function Code({
               </>
             )}
           </Line>
-          {node.attributes.slice(1).map(attribute => (
+          {node.attributes.slice(1).map((attribute) => (
             <Line key={attribute.name}>
               <Tab />
               <Attribute {...attribute} />

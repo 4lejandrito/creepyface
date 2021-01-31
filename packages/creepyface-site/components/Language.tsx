@@ -6,12 +6,12 @@ import { loadLocale, toggleLocale } from '../redux/actions'
 import { ValidMessage } from '../locales/es'
 
 export default function Language({
-  children
+  children,
 }: {
   children: ReactNode | ReactNode[]
 }) {
   const dispatch = useDispatch()
-  const locale = useSelector(state => state.locale)
+  const locale = useSelector((state) => state.locale)
 
   useEffect(() => {
     dispatch(loadLocale())
@@ -21,7 +21,7 @@ export default function Language({
 }
 
 export const useTranslate = (): ((text: ValidMessage) => string) => {
-  const locale = useSelector(state => state.locale)
+  const locale = useSelector((state) => state.locale)
 
   return useCallback(
     (text: string) => {
@@ -39,7 +39,7 @@ export const useTranslate = (): ((text: ValidMessage) => string) => {
 }
 
 export function LanguageSelector() {
-  const locale = useSelector(state => state.locale)
+  const locale = useSelector((state) => state.locale)
   return (
     <span lang={locale.value === 'en' ? 'es' : 'en'}>
       <span className="hide-s">

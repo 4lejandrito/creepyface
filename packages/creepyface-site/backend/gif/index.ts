@@ -23,11 +23,11 @@ const generateFrame = async (
         180: 'South',
         225: 'SouthWest',
         270: 'West',
-        315: 'NorthWest'
+        315: 'NorthWest',
       }[angle],
       `backend/gif/pointer.png`,
       tmpPath,
-      tmpPath
+      tmpPath,
     ])
   }
   return tmpPath
@@ -38,10 +38,10 @@ export default async function toGif(uuid: string) {
   const outputFileName = `${folder}/creepyface.gif`
   const frames = await Promise.all([
     generateFrame('none', `${folder}/serious.jpeg`),
-    ...([0, 45, 90, 135, 180, 225, 270, 315] as const).map(angle =>
+    ...([0, 45, 90, 135, 180, 225, 270, 315] as const).map((angle) =>
       generateFrame(angle, `${folder}/${angle}.jpeg`)
     ),
-    generateFrame('center', `${folder}/serious.jpeg`)
+    generateFrame('center', `${folder}/serious.jpeg`),
   ])
   await execa('convert', [
     '-delay',
@@ -49,8 +49,8 @@ export default async function toGif(uuid: string) {
     '-loop',
     '0',
     ...frames,
-    outputFileName
+    outputFileName,
   ])
-  await Promise.all(frames.map(f => fs.unlink(f)))
+  await Promise.all(frames.map((f) => fs.unlink(f)))
   return outputFileName
 }

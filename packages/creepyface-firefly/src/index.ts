@@ -16,13 +16,13 @@ const getAngle = (v: Vector): number =>
   deg(mod(Math.atan2(v[1], v[0]), 2 * Math.PI))
 const rotate = (v: Vector, deg: number): Vector => [
   v[0] * Math.cos(rad(deg)) - v[1] * Math.sin(rad(deg)),
-  v[0] * Math.sin(rad(deg)) + v[1] * Math.cos(rad(deg))
+  v[0] * Math.sin(rad(deg)) + v[1] * Math.cos(rad(deg)),
 ]
 const rand = (x: number) => Math.floor(Math.random() * x)
 const sum = (x: number, y: number) => x + y
 const square = (x: number) => x * x
 const norm = (v: Vector) => Math.sqrt(v.map(square).reduce(sum, 0))
-const times = (v: Vector, n: number): Vector => v.map(x => x * n) as Vector
+const times = (v: Vector, n: number): Vector => v.map((x) => x * n) as Vector
 
 function loop(fn: (time: number) => void) {
   let last = now()
@@ -45,7 +45,7 @@ function firefly(props: { onMove: (position: Point) => void }) {
   let firefly: Firefly = {
     destination: [window.innerWidth / 2, window.innerHeight / 2],
     position: [rand(window.innerWidth), rand(window.innerHeight)],
-    vspeed: [0.3, 0.3]
+    vspeed: [0.3, 0.3],
   }
 
   const node = document.createElement('img')
@@ -68,7 +68,7 @@ function firefly(props: { onMove: (position: Point) => void }) {
   }
   document.addEventListener('touchmove', touchListener, true)
 
-  const cancel = loop(dt => {
+  const cancel = loop((dt) => {
     const { destination, position, vspeed } = firefly
     const direction = diff(destination, position)
     let angle = getAngle(direction) - getAngle(vspeed)
@@ -92,7 +92,7 @@ function firefly(props: { onMove: (position: Point) => void }) {
     } else {
       firefly.destination = [
         rand(window.innerWidth - 200) + 100,
-        rand(window.innerHeight - 200) + 100
+        rand(window.innerHeight - 200) + 100,
       ]
     }
   })
@@ -108,15 +108,15 @@ function firefly(props: { onMove: (position: Point) => void }) {
 let consumers: Consumer<Point>[] = []
 let cancel = () => {}
 
-const fireflyPointProvider: PointProvider = consumer => {
+const fireflyPointProvider: PointProvider = (consumer) => {
   if (consumers.length === 0) {
     cancel = firefly({
-      onMove: position => consumers.map(consumer => consumer(position))
+      onMove: (position) => consumers.map((consumer) => consumer(position)),
     })
   }
   consumers = [...consumers, consumer]
   return () => {
-    consumers = consumers.filter(o => o !== consumer)
+    consumers = consumers.filter((o) => o !== consumer)
     if (consumers.length === 0) {
       cancel()
     }

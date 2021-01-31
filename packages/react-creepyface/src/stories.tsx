@@ -4,7 +4,7 @@ import { withKnobs, number, boolean } from '@storybook/addon-knobs'
 
 export default {
   title: 'Creepyface',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
 }
 
 export const WithOptions = () => {
@@ -23,10 +23,10 @@ export const WithOptions = () => {
           { angle: 180, src: `https://creepyface.io/img/${id}/180` },
           { angle: 225, src: `https://creepyface.io/img/${id}/225` },
           { angle: 270, src: `https://creepyface.io/img/${id}/270` },
-          { angle: 315, src: `https://creepyface.io/img/${id}/315` }
+          { angle: 315, src: `https://creepyface.io/img/${id}/315` },
         ],
         timeToDefault: number('Time to default', 1000),
-        throttle: number('Throttle', 100)
+        throttle: number('Throttle', 100),
       }}
     />
   )

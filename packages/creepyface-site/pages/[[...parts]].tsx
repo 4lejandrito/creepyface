@@ -14,8 +14,8 @@ import Footer from '../components/Footer'
 import { useRouter } from 'next/router'
 import NamespaceProvider from '../components/Namespace'
 
-const CreepyFaceCreatorModal = lazy(() =>
-  import('../components/CreepyFaceCreatorModal')
+const CreepyFaceCreatorModal = lazy(
+  () => import('../components/CreepyFaceCreatorModal')
 )
 
 export default function Home({ namespace = '' }) {
@@ -23,8 +23,8 @@ export default function Home({ namespace = '' }) {
   useWindows()
   const [modalLoaded, setModalLoaded] = useState(false)
   const translate = useTranslate()
-  const pointProvider = useSelector(state => state.pointProvider)
-  const isCreating = useSelector(state => state.isCreating)
+  const pointProvider = useSelector((state) => state.pointProvider)
+  const isCreating = useSelector((state) => state.isCreating)
   const router = useRouter()
   return (
     <NamespaceProvider namespace={namespace}>

@@ -12,13 +12,13 @@ export default [
     output: {
       file: pkg.main,
       format: 'umd',
-      name: 'creepyface-custom-element'
+      name: 'creepyface-custom-element',
     },
     plugins: [
       resolve({ extensions, browser: true }),
       commonjs(),
       babel({ extensions }),
-      uglify()
-    ]
-  }
+      uglify(),
+    ],
+  },
 ]

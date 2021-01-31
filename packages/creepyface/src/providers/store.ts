@@ -6,7 +6,7 @@ import finger from './finger'
 const providers: { [K: string]: PointProvider } = {
   mouse,
   finger,
-  pointer: combined([mouse, finger])
+  pointer: combined([mouse, finger]),
 }
 
 export const register = (name: string, provider: PointProvider) => {

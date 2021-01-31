@@ -53,7 +53,7 @@ export default combineReducers({
         return next !== undefined
           ? {
               ...pictures,
-              [next]: action.payload
+              [next]: action.payload,
             }
           : pictures
       case 'restartCreation':
@@ -68,7 +68,7 @@ export default combineReducers({
       download: true,
       samples: true,
       research: false,
-      show: false
+      show: false,
     },
     action: Action
   ) => {
@@ -76,17 +76,17 @@ export default combineReducers({
       case 'toggleDownloadPermission':
         return {
           ...permissions,
-          download: !permissions.download
+          download: !permissions.download,
         }
       case 'toggleSamplesPermission':
         return {
           ...permissions,
-          samples: !permissions.samples
+          samples: !permissions.samples,
         }
       case 'toggleResearchPermission':
         return {
           ...permissions,
-          research: !permissions.research
+          research: !permissions.research,
         }
       case 'restartCreation':
       case 'stopCreation':
@@ -94,7 +94,7 @@ export default combineReducers({
           download: true,
           samples: true,
           research: false,
-          show: false
+          show: false,
         }
       case 'showPermissions':
         return { ...permissions, show: !permissions.show }
@@ -198,5 +198,5 @@ export default combineReducers({
       default:
         return isCreating
     }
-  }
+  },
 })

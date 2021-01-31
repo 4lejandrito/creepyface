@@ -8,7 +8,7 @@ export default (provider: PointProvider): PointProvider => {
     consumers.push(consumer)
     if (consumers.length === 1) {
       cancel = provider(
-        point => consumers.forEach(consumer => consumer(point)),
+        (point) => consumers.forEach((consumer) => consumer(point)),
         img
       )
     }

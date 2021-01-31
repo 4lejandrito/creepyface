@@ -11,7 +11,7 @@ export default function Modal({
   isOpen,
   onOpen = () => {},
   onClose,
-  title
+  title,
 }: {
   children: ReactNode | ReactNode[]
   id: string

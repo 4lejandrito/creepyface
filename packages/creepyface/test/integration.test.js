@@ -1,7 +1,7 @@
 const { By, Builder } = require('selenium-webdriver')
 const firefox = require('selenium-webdriver/firefox')
 const chrome = require('selenium-webdriver/chrome')
-const url = path => `file://${__dirname}/${path}`
+const url = (path) => `file://${__dirname}/${path}`
 
 jest.setTimeout(30000)
 
@@ -12,7 +12,7 @@ const browsers = [
       new Builder()
         .forBrowser('chrome')
         .setChromeOptions(new chrome.Options().headless())
-        .build()
+        .build(),
   },
   {
     name: 'firefox',
@@ -20,16 +20,16 @@ const browsers = [
       new Builder()
         .forBrowser('firefox')
         .setFirefoxOptions(new firefox.Options().headless())
-        .build()
-  }
+        .build(),
+  },
 ]
 
-const describeCombination = fn => () => {
-  browsers.forEach(browser => {
+const describeCombination = (fn) => () => {
+  browsers.forEach((browser) => {
     describe(`Running in ${browser.name}`, () => {
       let driver = browser.driver()
       afterAll(() => driver.quit())
-      ;['index.html', 'index-js.html'].forEach(fileName => {
+      ;['index.html', 'index-js.html'].forEach((fileName) => {
         describe(fileName, () => {
           beforeAll(() => driver.get(url(fileName)))
           fn(driver)
@@ -41,7 +41,7 @@ const describeCombination = fn => () => {
 
 describe(
   'Creepyface',
-  describeCombination(driver => {
+  describeCombination((driver) => {
     it('shows the default src by default', async () => {
       await driver.sleep(1001)
       expect(
@@ -67,9 +67,9 @@ describe(
       it(
         'goes crazy',
         testLook(
-          size => ({
+          (size) => ({
             x: 0,
-            y: 0
+            y: 0,
           }),
           `crazy.jpg`
         )
@@ -80,7 +80,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: 0,
-            y: -(Math.floor(height / 2) + 100)
+            y: -(Math.floor(height / 2) + 100),
           }),
           `n.jpg`
         )
@@ -91,7 +91,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: Math.floor(width / 2) + 1,
-            y: -(Math.floor(height / 2) + 1)
+            y: -(Math.floor(height / 2) + 1),
           }),
           `ne.jpg`
         )
@@ -102,7 +102,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: Math.floor(width / 2) + 10,
-            y: 0
+            y: 0,
           }),
           `e.jpg`
         )
@@ -113,7 +113,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: Math.floor(width / 2) + 10,
-            y: Math.floor(height / 2) + 10
+            y: Math.floor(height / 2) + 10,
           }),
           `se.jpg`
         )
@@ -124,7 +124,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: 0,
-            y: Math.floor(height / 2) + 2
+            y: Math.floor(height / 2) + 2,
           }),
           `s.jpg`
         )
@@ -135,7 +135,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: -(Math.floor(width / 2) + 1),
-            y: Math.floor(height / 2) + 1
+            y: Math.floor(height / 2) + 1,
           }),
           `sw.jpg`
         )
@@ -146,7 +146,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: -(Math.floor(width / 2) + 1),
-            y: 0
+            y: 0,
           }),
           `w.jpg`
         )
@@ -157,7 +157,7 @@ describe(
         testLook(
           ({ width, height }) => ({
             x: -(Math.floor(width / 2) + 1),
-            y: -(Math.floor(height / 2) + 1)
+            y: -(Math.floor(height / 2) + 1),
           }),
           `nw.jpg`
         )

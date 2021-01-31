@@ -5,7 +5,7 @@ const center = (node: HTMLElement): Point => {
   const { left, top, width, height } = node.getBoundingClientRect()
   return [
     left + window.pageXOffset + width / 2,
-    top + window.pageYOffset + height / 2
+    top + window.pageYOffset + height / 2,
   ]
 }
 

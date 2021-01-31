@@ -14,13 +14,13 @@ export default [
       file: pkg.main,
       format: 'umd',
       name: 'creepyface-firefly',
-      globals: { creepyface: 'creepyface' }
+      globals: { creepyface: 'creepyface' },
     },
     plugins: [
       resolve({ extensions, browser: true }),
       commonjs(),
       babel({ extensions }),
-      uglify()
-    ]
-  }
+      uglify(),
+    ],
+  },
 ]

@@ -33,7 +33,7 @@ export const getHostedImages = (
   return {
     src: getUrl('serious'),
     hover: getUrl('hover'),
-    looks: getAngles().map(angle => ({ angle, src: getUrl(`${angle}`) }))
+    looks: getAngles().map((angle) => ({ angle, src: getUrl(`${angle}`) })),
   }
 }
 
@@ -53,7 +53,7 @@ export default function CreepyFace(props: {
     points,
     onSelect = noop,
     onChange = noop,
-    onLoad = noop
+    onLoad = noop,
   } = props
   const [firstAttach, setFirstAttach] = useState(true)
   const [attached, setAttached] = useState(false)
@@ -79,7 +79,7 @@ export default function CreepyFace(props: {
             points,
             onAttach,
             onDetach,
-            onDebug
+            onDebug,
           }}
           onClick={onSelect}
           onLoad={() => setLoaded(true)}

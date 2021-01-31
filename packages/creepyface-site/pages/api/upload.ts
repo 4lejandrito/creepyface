@@ -33,17 +33,17 @@ const getOptions = (files: { [K: string]: [multiparty.File] }): Options => ({
   src: getFileName(files.serious[0]),
   hover: getFileName(files.hover[0]),
   looks: Object.keys(files)
-    .filter(k => !isNaN(parseFloat(k)))
-    .map(angle => ({
+    .filter((k) => !isNaN(parseFloat(k)))
+    .map((angle) => ({
       angle,
-      src: getFileName(files[angle][0])
-    }))
+      src: getFileName(files[angle][0]),
+    })),
 })
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 }
 
 export default route(async (req, res) => {
@@ -68,7 +68,7 @@ export default route(async (req, res) => {
     html({
       baseURL,
       url: `${baseURL}/content/${uuid}`,
-      options: getOptions(files)
+      options: getOptions(files),
     })
   )
   await prisma.creepyface.create({
@@ -78,8 +78,8 @@ export default route(async (req, res) => {
       canUseAsSample,
       namespace,
       approved: namespace === 'liferay',
-      exclusive: false
-    }
+      exclusive: false,
+    },
   })
   res.send({
     download: `${baseURL}/${uuid}/download`,
@@ -89,8 +89,8 @@ export default route(async (req, res) => {
         where: {
           namespace,
           canUseAsSample: true,
-          approved: true
-        }
-      })) + 1
+          approved: true,
+        },
+      })) + 1,
   })
 })

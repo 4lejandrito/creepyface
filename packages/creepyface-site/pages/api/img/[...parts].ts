@@ -71,8 +71,8 @@ export default route(async (req, res) => {
       canUseAsSample: true,
       approved: true,
       namespace,
-      exclusive: !namespace ? false : undefined
-    }
+      exclusive: !namespace ? false : undefined,
+    },
   })
 
   if (creepyfacesCount === 0) return res.status(404).end()
@@ -82,12 +82,12 @@ export default route(async (req, res) => {
       canUseAsSample: true,
       approved: true,
       exclusive: !namespace ? false : undefined,
-      namespace
+      namespace,
     },
     orderBy: {
-      timestamp: 'asc'
+      timestamp: 'asc',
     },
-    skip: i % creepyfacesCount
+    skip: i % creepyfacesCount,
   })
 
   if (!creepyface) {

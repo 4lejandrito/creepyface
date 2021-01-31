@@ -7,7 +7,7 @@ export default function Loader() {
 
   useEffect(() => {
     const interval = setInterval(
-      () => setTick(tick => (tick + 1) % chars.length),
+      () => setTick((tick) => (tick + 1) % chars.length),
       100
     )
     return () => clearInterval(interval)

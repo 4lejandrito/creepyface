@@ -9,7 +9,7 @@ export default function Admin() {
   const [creepyfaces, setCreepyfaces] = useState<Creepyface[]>()
   const [approved, setApproved] = useState(false)
   const filteredCreepyfaces = creepyfaces
-    ? creepyfaces.filter(cf => (approved ? cf.approved : true))
+    ? creepyfaces.filter((cf) => (approved ? cf.approved : true))
     : []
 
   const api = (path = '', method = 'GET') =>
@@ -17,10 +17,10 @@ export default function Admin() {
       credentials: 'include',
       method,
       headers: {
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setCreepyfaces)
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function Admin() {
               ? () => api(`${uuid}/unapprove`, 'POST')
               : undefined,
             trash: () => api(`${uuid}`, 'DELETE'),
-            code: () => api(`${uuid}/namespace`, 'POST')
+            code: () => api(`${uuid}/namespace`, 'POST'),
           })}
         >
           {(creepyface, visible, selected) => (

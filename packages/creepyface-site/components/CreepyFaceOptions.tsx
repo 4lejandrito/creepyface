@@ -7,7 +7,7 @@ import { Picture, Pictures } from '../redux/types'
 function Preview({
   pictureKey,
   picture,
-  active
+  active,
 }: {
   pictureKey: keyof Pictures
   picture: Picture | undefined
@@ -17,7 +17,7 @@ function Preview({
     <li
       className={classNames({ active })}
       style={{
-        backgroundImage: picture && `url(${picture.src})`
+        backgroundImage: picture && `url(${picture.src})`,
       }}
     >
       <span className="image-icon">
@@ -31,7 +31,7 @@ function Preview({
 
 export default function CreepyFaceOptions({
   pictures,
-  next
+  next,
 }: {
   pictures: Partial<Pictures>
   next: keyof Pictures | undefined
@@ -49,7 +49,7 @@ export default function CreepyFaceOptions({
           active={next === 'hover'}
           picture={pictures['hover']}
         />
-        {getAngles().map(angle => (
+        {getAngles().map((angle) => (
           <Preview
             key={angle}
             pictureKey={angle}

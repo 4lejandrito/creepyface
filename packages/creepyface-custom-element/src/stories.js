@@ -3,7 +3,7 @@ import { withKnobs, number } from '@storybook/addon-knobs'
 
 export default {
   title: 'Creepyface Custom Element',
-  decorators: [withKnobs]
+  decorators: [withKnobs],
 }
 
 export const CustomizedBuiltInElement = () => {

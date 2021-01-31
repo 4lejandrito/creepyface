@@ -8,7 +8,7 @@ export const getAngles = (): ValidAngle[] => [
   180,
   225,
   270,
-  315
+  315,
 ]
 
 export default function getNext(
@@ -16,5 +16,5 @@ export default function getNext(
 ): keyof Pictures | undefined {
   if (!pictures || !pictures.serious) return 'serious'
   if (!pictures.hover) return 'hover'
-  return getAngles().find(angle => !pictures[angle])
+  return getAngles().find((angle) => !pictures[angle])
 }

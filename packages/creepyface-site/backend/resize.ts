@@ -9,7 +9,7 @@ const getDimensions = (size: Size) =>
   ({
     small: { width: 100, height: 100 },
     medium: { width: Math.floor((400 * 35) / 45), height: 400 },
-    square: { width: 400, height: 400 }
+    square: { width: 400, height: 400 },
   }[size] || { width: 0, height: 0 })
 
 export default async function resize(
@@ -29,9 +29,7 @@ export default async function resize(
 
   if (!(await fs.pathExists(thumbnailPath))) {
     await fs.ensureFile(thumbnailPath)
-    await sharp(imagePath)
-      .resize(width, height)
-      .toFile(thumbnailPath)
+    await sharp(imagePath).resize(width, height).toFile(thumbnailPath)
   }
   return thumbnailPath
 }

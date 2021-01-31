@@ -15,7 +15,7 @@ export default [
       file: pkg.main,
       format: 'umd',
       sourcemap: true,
-      name: 'creepyface'
+      name: 'creepyface',
     },
     plugins: [
       resolve({ browser: true }),
@@ -23,7 +23,7 @@ export default [
       typescript(),
       babel({ extensions: ['.js', '.ts'] }),
       production && uglify(),
-      !production && browsersync({ server: ['test', '.'] })
-    ]
-  }
+      !production && browsersync({ server: ['test', '.'] }),
+    ],
+  },
 ]

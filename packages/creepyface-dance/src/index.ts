@@ -46,7 +46,7 @@ export function makePointProvider({
   audio,
   bpm,
   firstBeat,
-  choreography
+  choreography,
 }: {
   name: string
   audio: HTMLAudioElement
@@ -55,8 +55,8 @@ export function makePointProvider({
   choreography: Step[]
 }): PointProvider {
   const listeners: BeatListener[] = []
-  onBeat(audio, bpm, firstBeat, beat =>
-    listeners.forEach(listener => listener(beat))
+  onBeat(audio, bpm, firstBeat, (beat) =>
+    listeners.forEach((listener) => listener(beat))
   )
   const pointProvider: PointProvider = (consumer, img) => {
     const listener = (beat: number) =>
@@ -103,16 +103,18 @@ export const moves = {
     flatten(range(i).map(() => steps)),
 
   intercalate: (steps: Step[], step: Step) =>
-    range(2 * steps.length).map(i => (i % 2 ? step : steps[Math.floor(i / 2)])),
+    range(2 * steps.length).map((i) =>
+      i % 2 ? step : steps[Math.floor(i / 2)]
+    ),
 
   circle: (from: Direction, clockwise = false): Step[] =>
     range(directions.length).map(
-      i =>
+      (i) =>
         directions[
           mod(
             directions.indexOf(from) + (clockwise ? i : -i),
             directions.length
           )
         ]
-    )
+    ),
 }

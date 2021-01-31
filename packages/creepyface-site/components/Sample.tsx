@@ -10,20 +10,20 @@ import { useTranslate } from './Language'
 
 export default function Sample() {
   const dispatch = useDispatch()
-  const count = useSelector(state => state.count)
-  const selectedCreepyface = useSelector(state => state.selectedCreepyface)
-  const showCode = useSelector(state => state.showCode)
-  const pointProvider = useSelector(state => state.pointProvider)
+  const count = useSelector((state) => state.count)
+  const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
+  const showCode = useSelector((state) => state.showCode)
+  const pointProvider = useSelector((state) => state.pointProvider)
   const namespace = useNamespace()
   const images = useMemo(() => getHostedImages(selectedCreepyface, namespace), [
     selectedCreepyface,
-    namespace
+    namespace,
   ])
   const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
   const [mainSampleLoaded, setMainSampleLoaded] = useState(false)
   const select = useCallback(
-    id => {
+    (id) => {
       dispatch({ type: 'selectCreepyface', payload: id })
       setSrc(getHostedImages(id).src)
     },

@@ -114,7 +114,7 @@ creepyface.registerPointProvider('random', (consumer, img) => {
     () =>
       consumer([
         Math.random() * window.innerWidth,
-        Math.random() * window.innerHeight
+        Math.random() * window.innerHeight,
       ]),
     500
   )
@@ -160,7 +160,7 @@ creepyface(img, {
       () =>
         consumer([
           Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight
+          Math.random() * window.innerHeight,
         ]),
       500
     )
@@ -177,8 +177,8 @@ creepyface(img, {
     { angle: 180, src: 'https://creepyface.io/img/0/180' },
     { angle: 225, src: 'https://creepyface.io/img/0/225' },
     { angle: 270, src: 'https://creepyface.io/img/0/270' },
-    { angle: 315, src: 'https://creepyface.io/img/0/315' }
-  ]
+    { angle: 315, src: 'https://creepyface.io/img/0/315' },
+  ],
 })
 ```
 

@@ -38,9 +38,9 @@ export default function Button({
   showShortcut,
   href,
   download,
-  lang
+  lang,
 }: Props) {
-  const state = useSelector(state => state)
+  const state = useSelector((state) => state)
   const dispatch = useDispatch()
   const shortcuts = useShortcuts()
   const translate = useTranslate()

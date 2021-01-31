@@ -8,11 +8,11 @@ import Modal from './Modal'
 import { useNamespace } from './Namespace'
 
 export default function Upload() {
-  const downloadLink = useSelector(state => state.downloadLink)
-  const viewLink = useSelector(state => state.viewLink)
-  const uploading = useSelector(state => state.uploading)
+  const downloadLink = useSelector((state) => state.downloadLink)
+  const viewLink = useSelector((state) => state.viewLink)
+  const uploading = useSelector((state) => state.uploading)
   const { download, research, samples, show } = useSelector(
-    state => state.permissions
+    (state) => state.permissions
   )
   const dispatch = useDispatch()
   const translate = useTranslate()

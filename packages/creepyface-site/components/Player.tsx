@@ -40,7 +40,7 @@ export default function Player({ open }: { open: boolean }) {
       audio,
       bpm,
       firstBeat,
-      choreography
+      choreography,
     })
     setAudio(audio)
   }, [])

@@ -36,8 +36,8 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
       ...repeat(20)(['w', 'e', 'n', 's']),
       ...repeat(20)(['nw', 'ne', 'sw', 'se']),
       ...repeat(20)(circle('n')),
-      ...repeat(20)(circle('s', true))
-    ])
+      ...repeat(20)(circle('s', true)),
+    ]),
   })
 </script>
 ```

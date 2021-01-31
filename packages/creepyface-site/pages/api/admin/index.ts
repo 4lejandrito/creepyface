@@ -5,8 +5,8 @@ export default adminRoute(async (_, res) => {
   res.send(
     await prisma.creepyface.findMany({
       orderBy: {
-        timestamp: 'desc'
-      }
+        timestamp: 'desc',
+      },
     })
   )
 })

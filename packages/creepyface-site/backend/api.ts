@@ -35,10 +35,7 @@ export const fileRoute = (path: string) =>
   route(
     (req, res) =>
       new Promise((resolve, reject) =>
-        send(req, path)
-          .pipe(res)
-          .on('finish', resolve)
-          .on('error', reject)
+        send(req, path).pipe(res).on('finish', resolve).on('error', reject)
       )
   )
 
@@ -49,10 +46,10 @@ export const scriptRoute = (script: string) => {
     const referer = req.headers.referer || 'unknown'
     await prisma.usage.upsert({
       where: {
-        script_referer: { script, referer }
+        script_referer: { script, referer },
       },
       create: { referer, script },
-      update: { referer, script }
+      update: { referer, script },
     })
   })
 }

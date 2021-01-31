@@ -32,8 +32,8 @@ render(
         { angle: 180, src: `https://creepyface.io/img/0/180` },
         { angle: 225, src: `https://creepyface.io/img/0/225` },
         { angle: 270, src: `https://creepyface.io/img/0/270` },
-        { angle: 315, src: `https://creepyface.io/img/0/315` }
-      ]
+        { angle: 315, src: `https://creepyface.io/img/0/315` },
+      ],
     }}
   />,
   document.getElementById('root')

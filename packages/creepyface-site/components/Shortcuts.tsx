@@ -8,7 +8,7 @@ import {
   takePicture,
   toggleCode,
   nextPointProvider,
-  toggleDance
+  toggleDance,
 } from '../redux/actions'
 import { ActionCreator } from '../redux/util'
 
@@ -19,11 +19,11 @@ const shortcuts = {
   s: takePicture,
   c: toggleCode,
   f: nextPointProvider,
-  d: toggleDance
+  d: toggleDance,
 }
 
 export default function Shortcuts({
-  children
+  children,
 }: {
   children: ReactNode | ReactNode[]
 }) {
@@ -35,19 +35,19 @@ export default function Shortcuts({
     })
 
     return () =>
-      Object.keys(shortcuts).forEach(shortcut => Mousetrap.unbind(shortcut))
+      Object.keys(shortcuts).forEach((shortcut) => Mousetrap.unbind(shortcut))
   }, [])
 
   return <>{children}</>
 }
 
 export const useShortcuts = () => ({
-  show: useSelector(state => state.shortcuts),
+  show: useSelector((state) => state.shortcuts),
   shortcut: useMemo(
     () => (action: ActionCreator) => {
       const pair = Object.entries(shortcuts).find(([_, a]) => a === action)
       return pair ? pair[0] : null
     },
     []
-  )
+  ),
 })

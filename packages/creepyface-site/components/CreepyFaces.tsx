@@ -21,7 +21,7 @@ export default memo(function CreepyFaces({
   namespace,
   count,
   points,
-  onSelect
+  onSelect,
 }: {
   alt: string
   namespace: string
@@ -42,7 +42,7 @@ export default memo(function CreepyFaces({
       <ul>
         {width > 0 &&
           height > 0 &&
-          range(rows * cols).map(i => {
+          range(rows * cols).map((i) => {
             const id = permutation[i % (count - 1)] ?? 0
             return (
               <li
@@ -50,7 +50,7 @@ export default memo(function CreepyFaces({
                 style={{
                   width: size,
                   height: size,
-                  padding: margin
+                  padding: margin,
                 }}
               >
                 <CreepyFace

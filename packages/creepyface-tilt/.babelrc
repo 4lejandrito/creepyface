@@ -1,7 +1,3 @@
 {
-  "presets": [
-    "@babel/typescript",
-    "@babel/env"
-  ]
+  "presets": ["@babel/typescript", "@babel/env"]
 }
-

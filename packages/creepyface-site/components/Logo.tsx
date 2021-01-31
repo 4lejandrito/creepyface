@@ -37,7 +37,7 @@ export function Liferay() {
 }
 
 export default function Logo({
-  hidePointer = false
+  hidePointer = false,
 }: {
   hidePointer?: boolean
 }) {

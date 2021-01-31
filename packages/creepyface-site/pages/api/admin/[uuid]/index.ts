@@ -5,8 +5,8 @@ export default adminRoute(async (req, res) => {
   if (req.method === 'DELETE') {
     await prisma.creepyface.delete({
       where: {
-        uuid: req.query.uuid as string
-      }
+        uuid: req.query.uuid as string,
+      },
     })
   }
   res.redirect('/api/admin')

@@ -77,5 +77,5 @@ export const messages = {
   Copied: 'Copiado',
   Supports: 'Soporta',
   'The main Creepyface': 'La Creepyface principal',
-  "A stranger's Creepyface": 'La Creepyface de un extraño'
+  "A stranger's Creepyface": 'La Creepyface de un extraño',
 }

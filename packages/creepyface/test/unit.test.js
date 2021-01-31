@@ -1,13 +1,13 @@
 import simulateEvent from 'simulate-event'
 import creepyface from '../src/creepyface'
 
-const createElement = string => {
+const createElement = (string) => {
   const div = document.createElement('div')
   div.innerHTML = string
   return div.children[0]
 }
 
-const beforeAndAfter = fn => {
+const beforeAndAfter = (fn) => {
   let cancel
   beforeEach(() => {
     cancel = fn()
@@ -17,7 +17,7 @@ const beforeAndAfter = fn => {
   })
 }
 
-const withImage = getImage => {
+const withImage = (getImage) => {
   const img = createElement(getImage())
   beforeAndAfter(() => {
     document.body.appendChild(img)
@@ -26,13 +26,13 @@ const withImage = getImage => {
   return img
 }
 
-const createGetNewSrc = (img, providePoint) => point => {
+const createGetNewSrc = (img, providePoint) => (point) => {
   providePoint(point)
   jest.advanceTimersByTime(100)
   return img.src
 }
 
-const withCreepyfaceRegistered = registerCreepyface => {
+const withCreepyfaceRegistered = (registerCreepyface) => {
   beforeAndAfter(() => {
     const unregisterCreepyface = registerCreepyface()
     jest.advanceTimersByTime(1)
@@ -45,7 +45,7 @@ const isDeactivated = (img, providePointArray) => {
     expect(img.src).toBe('http://localhost/serious'))
 
   it('does not follow the points', () => {
-    providePointArray.forEach(providePoint => {
+    providePointArray.forEach((providePoint) => {
       const getNewSrc = createGetNewSrc(img, providePoint)
       expect(getNewSrc([0, 0])).toBe('http://localhost/serious')
       expect(getNewSrc([0, -1])).toBe('http://localhost/serious')
@@ -69,7 +69,7 @@ const testPoints = (img, providePoint, skipHover) => {
   const getNewSrc = createGetNewSrc(img, providePoint)
 
   it('preloads and caches every image to avoid flickering when they load', () => {
-    const preloadedSrcs = img.__creepyfaceReachableImages.map(img => img.src)
+    const preloadedSrcs = img.__creepyfaceReachableImages.map((img) => img.src)
     expect(preloadedSrcs).toContain('http://localhost/serious')
     if (!skipHover) {
       expect(preloadedSrcs).toContain('http://localhost/hover')
@@ -128,20 +128,20 @@ const testPoints = (img, providePoint, skipHover) => {
   })
 }
 
-const provideMousePoint = point =>
+const provideMousePoint = (point) =>
   simulateEvent.simulate(document, 'mousemove', {
     clientX: point[0],
-    clientY: point[1]
+    clientY: point[1],
   })
 const followsTheMouse = (img, skipHover) =>
   describe('follows the mouse pointer', () => {
     testPoints(img, provideMousePoint, skipHover)
   })
 
-const provideTouchPoint = point =>
+const provideTouchPoint = (point) =>
   document.dispatchEvent(
     new TouchEvent('touchmove', {
-      touches: [{ clientX: point[0], clientY: point[1] }]
+      touches: [{ clientX: point[0], clientY: point[1] }],
     })
   )
 const followsTheFinger = (img, skipHover) =>
@@ -155,13 +155,13 @@ const followsThePointer = (img, skipHover) => {
 }
 
 let testConsumer
-const customPointProvider = consumer => {
+const customPointProvider = (consumer) => {
   testConsumer = consumer
   return () => {}
 }
-const followsTheCustomPointProvider = img =>
+const followsTheCustomPointProvider = (img) =>
   describe('follows the custom point provider', () => {
-    testPoints(img, point => testConsumer(point))
+    testPoints(img, (point) => testConsumer(point))
 
     describe('when a null point is provided', () => {
       beforeAndAfter(() => {
@@ -228,7 +228,7 @@ describe('creepyface', () => {
     })
 
     describe('including the creepyface script', () => {
-      ;['data-creepyface', 'data-creepy'].forEach(attributeName => {
+      ;['data-creepyface', 'data-creepy'].forEach((attributeName) => {
         describe(`with an image with the ${attributeName} attribute`, () => {
           const img = withImage(
             () => `
@@ -252,7 +252,7 @@ describe('creepyface', () => {
             window.document.dispatchEvent(
               new Event('DOMContentLoaded', {
                 bubbles: true,
-                cancelable: true
+                cancelable: true,
               })
             )
             return () => creepyface.cancel(img)
@@ -300,7 +300,7 @@ describe('creepyface', () => {
             window.document.dispatchEvent(
               new Event('DOMContentLoaded', {
                 bubbles: true,
-                cancelable: true
+                cancelable: true,
               })
             )
             return () => {
@@ -396,8 +396,8 @@ describe('creepyface', () => {
                 { angle: 4 * 45, src: 'http://localhost/south' },
                 { angle: 5 * 45, src: 'http://localhost/southWest' },
                 { angle: 6 * 45, src: 'http://localhost/west' },
-                { angle: 7 * 45, src: 'http://localhost/northWest' }
-              ]
+                { angle: 7 * 45, src: 'http://localhost/northWest' },
+              ],
             })
           )
 

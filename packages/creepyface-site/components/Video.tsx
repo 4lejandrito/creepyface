@@ -46,14 +46,14 @@ export default function Video(props: {
     }
     navigator.mediaDevices
       .getUserMedia({ video: true })
-      .then(stream => {
+      .then((stream) => {
         if (videoRef.current) {
           videoRef.current.srcObject = streamRef.current = stream
         } else {
           stopMediaStream(stream)
         }
       })
-      .catch(error => videoRef.current && setError(error))
+      .catch((error) => videoRef.current && setError(error))
   }
 
   useLayoutEffect(() => {
@@ -78,7 +78,7 @@ export default function Video(props: {
         }}
         style={{
           transform: 'scaleX(-1)',
-          display: loaded ? 'initial' : 'none'
+          display: loaded ? 'initial' : 'none',
         }}
       />
       {!loaded && !error && <Loader />}

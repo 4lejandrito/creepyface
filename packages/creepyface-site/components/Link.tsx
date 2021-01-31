@@ -8,7 +8,7 @@ export default function Link({
   className,
   children,
   download,
-  title
+  title,
 }: {
   href: string
   className?: string
