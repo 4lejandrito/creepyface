@@ -14,8 +14,8 @@ const loadImage = (src: string, consumer: Consumer<HTMLImageElement>) => {
     if (!img.naturalWidth) {
       console.error(`Creepyface was unable to load ${src}`)
     }
-    delete img.onload
-    delete img.onerror
+    img.onload = null
+    img.onerror = null
     consumer(img)
   }
 }
