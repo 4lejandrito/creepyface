@@ -2,7 +2,7 @@ import { route } from '../../backend/api'
 import prisma from '../../prisma'
 
 export default route(async (req, res) => {
-  const namespace = (req.query.namespace as string) || null
+  const namespace = (req.query.namespace as string) || undefined
   res.send({
     count:
       (await prisma.creepyface.count({

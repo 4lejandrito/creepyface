@@ -49,7 +49,7 @@ export default route(async (req, res) => {
   const uuid = req.query.parts[0] ?? '0'
   const name = (req.query.parts[1] as string) || 'serious'
   const size = (req.query.parts[2] as Size) || 'medium'
-  const namespace = (req.query.namespace as string) || null
+  const namespace = (req.query.namespace as string) || undefined
 
   if (!uuid.match(/^\d+$/)) {
     await sendImage(req, res, { uuid, name, size })
