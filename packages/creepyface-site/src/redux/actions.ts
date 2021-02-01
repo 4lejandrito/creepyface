@@ -104,7 +104,7 @@ export const upload = (namespace: string) =>
 
 export const requestCount = (namespace: string) =>
   makeActionCreator(() => (dispatch) => {
-    fetch(`${url}/api/creepyfaces?namespace=${namespace}`, {
+    fetch(`${url}/api/count?namespace=${namespace}`, {
       credentials: 'include',
     })
       .then((res) => res.json())
