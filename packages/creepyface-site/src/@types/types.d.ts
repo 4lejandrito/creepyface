@@ -10,14 +10,6 @@ declare module 'stop-media-stream' {
   export default function stopMediaStream(stream: MediaStream): void
 }
 
-declare module 'bowser' {
-  let getParser: (
-    text: string
-  ) => {
-    getBrowserName: () => string
-  }
-}
-
 declare module 'no-bounce' {
   export default function noBounce(): void
 }
