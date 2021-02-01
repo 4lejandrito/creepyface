@@ -66,17 +66,6 @@ export default route(async (req, res) => {
     return
   }
 
-  const creepyfacesCount = await prisma.creepyface.count({
-    where: {
-      canUseAsSample: true,
-      approved: true,
-      namespace,
-      exclusive: !namespace ? false : undefined,
-    },
-  })
-
-  if (creepyfacesCount === 0) return res.status(404).end()
-
   const creepyface = await prisma.creepyface.findFirst({
     where: {
       canUseAsSample: true,
@@ -87,7 +76,7 @@ export default route(async (req, res) => {
     orderBy: {
       timestamp: 'asc',
     },
-    skip: i % creepyfacesCount,
+    skip: i - 1,
   })
 
   if (!creepyface) {
