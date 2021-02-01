@@ -1,3 +1,3 @@
-import { scriptRoute } from '../../backend/api'
+import { scriptRoute } from '../../src/backend/api'
 
 export default scriptRoute('creepyface')

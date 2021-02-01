@@ -1,4 +1,4 @@
-import { route } from '../../backend/api'
+import { route } from '../../src/backend/api'
 import prisma from '../../prisma'
 
 export default route(async (req, res) => {

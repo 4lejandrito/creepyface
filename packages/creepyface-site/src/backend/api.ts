@@ -2,7 +2,7 @@ import { NextApiHandler } from 'next'
 import send from 'send'
 import auth from 'basic-auth'
 import resolve from 'browser-resolve'
-import prisma from '../prisma'
+import prisma from '../../prisma'
 
 export const route = (handler: NextApiHandler): NextApiHandler => {
   return async (req, res) => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import CreepyFace, { getHostedImages } from '../components/CreepyFace'
-import Logo from '../components/Logo'
-import Icon from '../components/Icon'
-import SelectableList from '../components/SelectableList'
+import CreepyFace, { getHostedImages } from '../src/components/CreepyFace'
+import Logo from '../src/components/Logo'
+import Icon from '../src/components/Icon'
+import SelectableList from '../src/components/SelectableList'
 import { Creepyface } from '@prisma/client'
 
 export default function Admin() {

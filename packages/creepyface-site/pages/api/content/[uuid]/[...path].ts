@@ -1,5 +1,5 @@
-import { uploads } from '../../../../backend/storage'
-import { fileRoute, route } from '../../../../backend/api'
+import { uploads } from '../../../../src/backend/storage'
+import { fileRoute, route } from '../../../../src/backend/api'
 import path from 'path'
 
 export default route(async (req, res) =>

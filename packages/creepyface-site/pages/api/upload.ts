@@ -1,15 +1,15 @@
-import { route } from '../../backend/api'
+import { route } from '../../src/backend/api'
 import { v4 as getUuid } from 'uuid'
 import multiparty from 'multiparty'
-import { uploads } from '../../backend/storage'
+import { uploads } from '../../src/backend/storage'
 import fs from 'fs-extra'
 import mime from 'mime/lite'
-import html from '../../backend/template.hbs'
+import html from '../../src/backend/template.hbs'
 import prisma from '../../prisma'
-import baseURL from '../../util/url'
+import baseURL from '../../src/util/url'
 
 const getImagesPath = (uuid: string) =>
-  uuid === '0' ? 'img/nala' : `${uploads}/${uuid}/img`
+  uuid === '0' ? 'public/nala' : `${uploads}/${uuid}/img`
 
 const getFileName = (file: multiparty.File) =>
   `${file.fieldName}.${mime.getExtension(file.headers['content-type'])}`

@@ -1,15 +1,15 @@
-import { fileRoute, route } from '../../../backend/api'
+import { fileRoute, route } from '../../../src/backend/api'
 import { NextApiRequest, NextApiResponse } from 'next'
-import resize, { Size } from '../../../backend/resize'
-import { uploads } from '../../../backend/storage'
-import getCloudinaryURL from '../../../backend/cloudinary'
+import resize, { Size } from '../../../src/backend/resize'
+import { uploads } from '../../../src/backend/storage'
+import getCloudinaryURL from '../../../src/backend/cloudinary'
 import prisma from '../../../prisma'
 
 const getImagesPath = (uuid: string) =>
   uuid === '0'
-    ? 'img/nala'
+    ? 'public/nala'
     : uuid === 'ray'
-    ? 'img/ray'
+    ? 'public/ray'
     : `${uploads}/${uuid}/img`
 
 let useCloudinary = false

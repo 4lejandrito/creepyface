@@ -1,11 +1,11 @@
 import { AppProps } from 'next/app'
-import Language from '../components/Language'
-import StateProvider from '../components/State'
+import Language from '../src/components/Language'
+import StateProvider from '../src/components/State'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
 import PlausibleProvider from 'next-plausible'
-import baseURL from '../util/url'
-import '../scss/main.scss'
+import baseURL from '../src/util/url'
+import '../src/scss/main.scss'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const title = 'Creepyface'

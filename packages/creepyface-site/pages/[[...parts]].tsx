@@ -1,21 +1,21 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react'
-import Shortcuts from '../components/Shortcuts'
-import Router from '../components/Router'
-import Button from '../components/Button'
-import { Code, Repo, Package } from '../components/Project'
-import { useTranslate } from '../components/Language'
-import Logo from '../components/Logo'
-import Sample from '../components/Sample'
-import useWindows from '../hooks/windows'
+import Shortcuts from '../src/components/Shortcuts'
+import Router from '../src/components/Router'
+import Button from '../src/components/Button'
+import { Code, Repo, Package } from '../src/components/Project'
+import { useTranslate } from '../src/components/Language'
+import Logo from '../src/components/Logo'
+import Sample from '../src/components/Sample'
+import useWindows from '../src/hooks/windows'
 import noBounce from 'no-bounce'
-import { useSelector } from '../components/State'
-import { nextPointProvider } from '../redux/actions'
-import Footer from '../components/Footer'
+import { useSelector } from '../src/components/State'
+import { nextPointProvider } from '../src/redux/actions'
+import Footer from '../src/components/Footer'
 import { useRouter } from 'next/router'
-import NamespaceProvider from '../components/Namespace'
+import NamespaceProvider from '../src/components/Namespace'
 
 const CreepyFaceCreatorModal = lazy(
-  () => import('../components/CreepyFaceCreatorModal')
+  () => import('../src/components/CreepyFaceCreatorModal')
 )
 
 export default function Home({ namespace = '' }) {

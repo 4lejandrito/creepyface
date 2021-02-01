@@ -1,4 +1,4 @@
-import { route } from '../../../../backend/api'
+import { route } from '../../../../src/backend/api'
 import path from 'path'
 
 export default route(async (req, res) => {
