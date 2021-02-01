@@ -36,6 +36,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/creepyface/coverage/lcov.info
+          base-path: ./packages/creepyface
         env:
           CI: true
       - name: Deploy
