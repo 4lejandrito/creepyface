@@ -78,7 +78,7 @@ export default function Admin() {
                     <strong>{creepyface.namespace}</strong>
                   </small>
                 )}
-                {creepyface.canUseAsSample && !approved && (
+                {creepyface.canUseAsSample && !creepyface.approved && (
                   <small className="badge">
                     <strong>New!</strong>
                   </small>
