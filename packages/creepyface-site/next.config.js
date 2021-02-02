@@ -13,6 +13,11 @@ module.exports = (nextConfig) => ({
         permanent: true,
       },
       {
+        source: '/api/:uuid/download',
+        destination: '/api/content/:uuid/creepyface.zip',
+        permanent: true,
+      },
+      {
         source: '/content/:slug*',
         destination: '/api/content/:slug*',
         permanent: true,

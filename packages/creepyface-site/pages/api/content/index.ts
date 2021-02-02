@@ -1,12 +1,12 @@
-import { route } from '../../src/backend/api'
+import { route } from '../../../src/backend/api'
 import { v4 as getUuid } from 'uuid'
 import multiparty from 'multiparty'
-import { uploads } from '../../src/backend/storage'
+import { uploads } from '../../../src/backend/storage'
 import fs from 'fs-extra'
 import mime from 'mime/lite'
-import html from '../../src/backend/template.hbs'
-import prisma from '../../prisma'
-import baseURL from '../../src/util/url'
+import html from '../../../src/backend/template.hbs'
+import prisma from '../../../prisma'
+import baseURL from '../../../src/util/url'
 
 const getImagesPath = (uuid: string) =>
   uuid === '0' ? 'public/nala' : `${uploads}/${uuid}/img`
@@ -82,7 +82,7 @@ export default route(async (req, res) => {
     },
   })
   res.send({
-    download: `${baseURL}/${uuid}/download`,
+    download: `${baseURL}/api/content/${uuid}/creepyface.zip`,
     view: canUseAsSample ? `${baseURL}/content/${uuid}` : undefined,
     count:
       (await prisma.creepyface.count({

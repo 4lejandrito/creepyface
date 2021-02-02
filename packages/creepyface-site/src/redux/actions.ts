@@ -74,7 +74,7 @@ export const upload = (namespace: string) =>
     () => (dispatch, getState) => {
       dispatch({ type: 'requestUpload' })
       const { pictures, permissions } = getState()
-      fetch('/api/upload', {
+      fetch('/api/content', {
         credentials: 'include',
         method: 'POST',
         body: (() => {
