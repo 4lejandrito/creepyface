@@ -1,2 +1,3 @@
-User-agent: Googlebot-Image
+User-agent: *
 Disallow: /img/
+Disallow: /api/
