@@ -6,7 +6,7 @@ const username = '4lejandrito'
 const repo = 'creepyface'
 
 export const Author = () => (
-  <Link href={`https://github.com/${username}`}>{username}</Link>
+  <Link href={`https://4lejandrito.dev`}>{username}</Link>
 )
 
 export const Code = ({ children }: { children: ReactNode | ReactNode[] }) => (
