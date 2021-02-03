@@ -1,3 +1,4 @@
 .deploy
 .next
 .data
+.env.local
