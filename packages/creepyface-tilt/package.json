@@ -1,6 +1,6 @@
 {
   "name": "creepyface-tilt",
-  "version": "7.4.6",
+  "version": "7.4.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
@@ -34,7 +34,7 @@
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-typescript": "^7.12.13",
     "@rollup/plugin-node-resolve": "^11.1.1",
-    "creepyface": "^7.4.6",
+    "creepyface": "^7.4.7",
     "rollup": "^2.38.4",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
