@@ -34,8 +34,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "resolutions": {
-    "@types/react": "^17.0.0"
   }
 }
