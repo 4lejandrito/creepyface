@@ -23,3 +23,8 @@ model Usage {
 
   @@id([script, referer])
 }
+
+model Feature {
+  name    String  @id
+  enabled Boolean
+}
