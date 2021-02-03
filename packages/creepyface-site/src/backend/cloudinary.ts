@@ -1,13 +1,6 @@
-import pify from 'pify'
 import cloudinary from 'cloudinary'
 import { Size } from './resize'
 
-const upload = pify(
-  cloudinary.v2.uploader.upload.bind(cloudinary.v2.uploader),
-  {
-    multiArgs: true,
-  }
-)
 const cloudinaryURLs: { [K: string]: string | undefined } = {}
 
 export default async function getCloudinaryURL(options: {
@@ -19,7 +12,7 @@ export default async function getCloudinaryURL(options: {
   const { uuid, name, size, path } = options
   const url = cloudinaryURLs[path]
   if (url) return url
-  const [{ secure_url }] = await upload(path, {
+  const { secure_url } = await cloudinary.v2.uploader.upload(path, {
     public_id: `${
       process.env.NODE_ENV || 'development'
     }/${uuid}/${size}/${name}`,
