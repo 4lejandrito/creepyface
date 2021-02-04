@@ -25,6 +25,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
+    "@rollup/plugin-babel": "^5.2.3",
+    "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.1.1",
     "@storybook/addon-knobs": "^6.1.16",
     "@storybook/addon-storysource": "^6.1.16",
@@ -35,8 +37,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "rollup": "^2.38.4",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-uglify": "^6.0.4"
   }
 }
