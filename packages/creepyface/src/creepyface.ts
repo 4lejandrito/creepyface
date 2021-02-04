@@ -12,33 +12,45 @@ const creepyface: Creepyface = (
   userOptions?: UserOptions
 ): Cancel => {
   const options = getOptions(img, userOptions)
+  const cleanUp = () => delete img.__creepyfaceCancel
+  const cancel = preload(
+    img,
+    options,
+    () => {
+      const update = (src: string, point?: Point, angle?: Angle) => {
+        img.src = src
+        options.onDebug({ src, point, angle, options })
+      }
+      const backToDefault = debounce(options.timeToDefault, () =>
+        update(options.src)
+      )
+      const pointConsumer = throttle(
+        options.throttle,
+        (point: Point | null) => {
+          if (!point) return update(options.src)
+          const angle = getAngle(img, point)
+          const src = getSrc(img, point, angle, options)
+          update(src, point, angle)
+          if (options.timeToDefault > 0) backToDefault()
+        }
+      )
+      const stopPointProvider = options.pointProvider(pointConsumer, img)
+      options.onAttach()
+      return () => {
+        backToDefault.cancel()
+        pointConsumer.cancel()
+        stopPointProvider()
+        img.src = options.src
+        options.onDetach()
+      }
+    },
+    cleanUp
+  )
 
-  return (img.__creepyfaceCancel = preload(img, options, () => {
-    const update = (src: string, point?: Point, angle?: Angle) => {
-      img.src = src
-      options.onDebug({ src, point, angle, options })
-    }
-    const backToDefault = debounce(options.timeToDefault, () =>
-      update(options.src)
-    )
-    const pointConsumer = throttle(options.throttle, (point: Point | null) => {
-      if (!point) return update(options.src)
-      const angle = getAngle(img, point)
-      const src = getSrc(img, point, angle, options)
-      update(src, point, angle)
-      if (options.timeToDefault > 0) backToDefault()
-    })
-    const stopPointProvider = options.pointProvider(pointConsumer, img)
-    options.onAttach()
-    return () => {
-      backToDefault.cancel()
-      pointConsumer.cancel()
-      stopPointProvider()
-      img.src = options.src
-      delete img.__creepyfaceCancel
-      options.onDetach()
-    }
-  }))
+  return (img.__creepyfaceCancel = () => {
+    cancel()
+    cleanUp()
+  })
 }
 
 creepyface.cancel = (img: HTMLImageElement) => {

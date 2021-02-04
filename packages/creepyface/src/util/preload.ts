@@ -36,21 +36,23 @@ const loadImages = (
 export default function preload(
   img: HTMLImageElement,
   options: Options,
-  callback: () => Cancel
+  callback: () => Cancel,
+  onError: () => void
 ): Cancel {
   let cancelled = false
   let cancel: Cancel = () => {
     cancelled = true
   }
   loadImages(getSrcs(options), (imgs) => {
+    if (cancelled) return
+    if (imgs.some((img) => !img.naturalWidth)) {
+      return onError()
+    }
     img.__creepyfaceReachableImages = imgs
     const cancelCallback = callback()
     cancel = () => {
       cancelCallback()
       delete img.__creepyfaceReachableImages
-    }
-    if (cancelled || imgs.some((img) => !img.naturalWidth)) {
-      cancel()
     }
   })
   return () => cancel()
