@@ -37,7 +37,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             description,
             images: [
               {
-                url: `${baseURL}/logo.png`,
+                url: `${baseURL}/logo.jpg`,
                 alt: `Picture of a cat looking at the mouse pointer`,
               },
             ],
