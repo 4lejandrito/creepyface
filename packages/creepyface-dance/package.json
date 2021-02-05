@@ -1,6 +1,6 @@
 {
   "name": "creepyface-dance",
-  "version": "7.4.7",
+  "version": "7.4.8",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
@@ -36,7 +36,7 @@
     "@rollup/plugin-node-resolve": "^11.1.1",
     "@types/lodash.flatten": "^4.4.6",
     "@types/lodash.range": "^3.2.6",
-    "creepyface": "^7.4.7",
+    "creepyface": "^7.4.8",
     "lodash.flatten": "^4.4.0",
     "lodash.range": "^3.2.0",
     "rollup": "^2.38.4",
