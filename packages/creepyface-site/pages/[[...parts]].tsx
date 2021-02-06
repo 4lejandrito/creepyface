@@ -6,7 +6,6 @@ import { Code, Repo, Package } from '../src/components/Project'
 import { useTranslate } from '../src/components/Language'
 import Logo from '../src/components/Logo'
 import Sample from '../src/components/Sample'
-import useWindows from '../src/hooks/windows'
 import noBounce from 'no-bounce'
 import { useSelector } from '../src/components/State'
 import { nextPointProvider } from '../src/redux/actions'
@@ -20,7 +19,6 @@ const CreepyFaceCreatorModal = lazy(
 
 export default function Home({ namespace = '' }) {
   useEffect(noBounce, [])
-  useWindows()
   const [modalLoaded, setModalLoaded] = useState(false)
   const translate = useTranslate()
   const pointProvider = useSelector((state) => state.pointProvider)
@@ -31,9 +29,9 @@ export default function Home({ namespace = '' }) {
       <Router>
         <Shortcuts>
           <section className="description">
-            <h1>
+            <header>
               <Logo />
-            </h1>
+            </header>
             <p>
               {translate('A')} <Code>{translate('JavaScript library')}</Code>{' '}
               {translate('that makes your')} {translate('face')}{' '}

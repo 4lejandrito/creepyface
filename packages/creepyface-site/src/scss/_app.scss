@@ -10,9 +10,10 @@
       flex: 0 0 22.5em;
       margin-right: 3 * $spacing;
     }
-    h1 {
+    header {
       @include fade-in-up(0.2s);
-      padding: 2 * $spacing 0 $spacing 0;
+      padding-top: $spacing;
+      padding-bottom: 2 * $spacing;
       margin: 0;
       font-size: 2.5rem;
       @include s {
@@ -20,6 +21,13 @@
       }
       @include horizontal {
         font-size: 3.5rem;
+      }
+      .logo {
+        height: 1.4em;
+        margin: 0 auto;
+        @include horizontal {
+          margin: 0;
+        }
       }
     }
     p {

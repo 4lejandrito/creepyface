@@ -4,6 +4,7 @@ import Logo from '../src/components/Logo'
 import Icon from '../src/components/Icon'
 import SelectableList from '../src/components/SelectableList'
 import { Creepyface } from '@prisma/client'
+import Link from 'next/link'
 
 export default function Admin() {
   const [creepyfaces, setCreepyfaces] = useState<Creepyface[]>()
@@ -38,9 +39,12 @@ export default function Admin() {
         }
       `}</style>
       <header className="top-bar light">
-        <h1 className="logo" onClick={() => (window.location.href = '/')}>
-          {filteredCreepyfaces.length} <Logo hidePointer={true} />s
-        </h1>
+        <Link href="/">
+          <a className="light logo-wrapper">
+            <Logo />
+          </a>
+        </Link>
+        <h1>{filteredCreepyfaces.length}</h1>
         <small className="filter">
           <button onClick={() => setApproved(!approved)}>
             Show {approved ? 'all' : 'approved'}

@@ -18,18 +18,26 @@
     text-align: center;
     height: 4 * $spacing;
     h1 {
-      margin-left: $spacing / 4;
+      margin: 0;
+      line-height: 1;
       display: inline-block;
       font-size: 2rem;
-      cursor: pointer;
     }
-    a,
     button {
       vertical-align: middle;
       margin: 0 $spacing / 4;
       padding: $spacing / 2;
       border: none;
       line-height: 1;
+    }
+  }
+
+  .logo-wrapper {
+    position: fixed;
+    left: $spacing;
+    top: $spacing;
+    .logo {
+      height: 2rem;
     }
   }
 
