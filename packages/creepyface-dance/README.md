@@ -1,4 +1,4 @@
-# Creepyface Dance &middot; [![npm version](https://img.shields.io/npm/v/creepyface-dance.svg?style=flat)](https://www.npmjs.com/package/creepyface-dance)
+# Creepyface Dance 💃 &middot; [![npm version](https://img.shields.io/npm/v/creepyface-dance.svg?style=flat)](https://www.npmjs.com/package/creepyface-dance)
 
 A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to make your face dance.
 

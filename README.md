@@ -2,7 +2,7 @@
 
 ![The Creepyface logo with a background full of faces looking at the pointer](cover.jpg)
 
-Creepyface is a little JavaScript library that makes your face look at the pointer (or [dance](packages/creepyface-dance)!).
+Creepyface is a little JavaScript library that makes your face look at the pointer (or [dance 💃](packages/creepyface-dance)).
 
 See it in action at [creepyface.io](https://creepyface.io) and create your own one using [the wizard](https://creepyface.io/create).
 
@@ -194,7 +194,7 @@ The following point providers are available out of the box:
 
 There are also external point providers:
 
-- 🎶 [dance](packages/creepyface-dance) to dance to the rythm of the music.
+- 💃 [dance](packages/creepyface-dance) to dance to the rythm of the music.
 - 🤳 [tilt](packages/creepyface-tilt) to stare at you when you tilt your phone.
 - 🐝 [firefly](packages/creepyface-firefly) to follow a moving firefly on the screen.
 
