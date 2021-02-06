@@ -42,6 +42,7 @@ export default function CreepyFace(props: {
   images: Images
   hidden?: boolean
   points?: string | PointProvider
+  timeToDefault?: number
   onSelect?: () => void
   onChange?: (src: string) => void
   onLoad?: () => void
@@ -51,6 +52,7 @@ export default function CreepyFace(props: {
     images,
     hidden,
     points,
+    timeToDefault,
     onSelect = noop,
     onChange = noop,
     onLoad = noop,
@@ -77,6 +79,7 @@ export default function CreepyFace(props: {
             hover: images.hover,
             looks: images.looks,
             points,
+            timeToDefault,
             onAttach,
             onDetach,
             onDebug,

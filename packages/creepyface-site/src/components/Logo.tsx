@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import { Point } from 'creepyface'
+import React, { useEffect, useRef, useState } from 'react'
+import { useWindowSize } from 'react-use'
 import { useNamespace } from './Namespace'
 
-const Pointer = () => {
+const Pointer = (props: { onPositionChange?: (position: Point) => void }) => {
+  const ref = useRef<SVGGElement>(null)
+  const { width, height } = useWindowSize()
   const namespace = useNamespace()
+
+  useEffect(() => {
+    if (ref.current) {
+      const { left, top } = ref.current.getBoundingClientRect()
+      props.onPositionChange?.([left, top])
+    }
+  }, [props.onPositionChange, width, height])
+
   return (
-    <g className="pointer">
+    <g ref={ref} className="pointer">
       {namespace === 'liferay' ? <Liferay /> : <Arrow />}
     </g>
   )
@@ -27,7 +39,9 @@ export function Liferay() {
   )
 }
 
-export default function Logo() {
+export default function Logo(props: {
+  onPointerPositionChange?: (position: Point) => void
+}) {
   const [animating, setAnimating] = useState(false)
   const animate = () => {
     if (!animating) {
@@ -45,7 +59,7 @@ export default function Logo() {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>Creepyface</title>
-      <Pointer />
+      <Pointer onPositionChange={props.onPointerPositionChange} />
       <g className="eye">
         <circle className="pupil" cx="83" cy="46" r="3.7" />
       </g>

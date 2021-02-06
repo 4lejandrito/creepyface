@@ -21,11 +21,13 @@ export default memo(function CreepyFaces({
   namespace,
   count,
   points,
+  timeToDefault,
   onSelect,
 }: {
   alt: string
   namespace: string
   count: number
+  timeToDefault?: number
   points: string | PointProvider
   onSelect: (id: number) => void
 }) {
@@ -57,6 +59,7 @@ export default memo(function CreepyFaces({
                   alt={alt}
                   images={getHostedImages(id, namespace, 'small')}
                   points={points}
+                  timeToDefault={timeToDefault}
                   onSelect={() => onSelect(id)}
                 />
               </li>
