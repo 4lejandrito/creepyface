@@ -29,7 +29,7 @@ export default memo(function CreepyFaces({
   count: number
   timeToDefault?: number
   points: string | PointProvider
-  onSelect: (id: number) => void
+  onSelect?: (id: number) => void
 }) {
   const nodeRef = useRef(null as HTMLDivElement | null)
   const { width, height } = useDimensions(nodeRef)
@@ -60,7 +60,7 @@ export default memo(function CreepyFaces({
                   images={getHostedImages(id, namespace, 'small')}
                   points={points}
                   timeToDefault={timeToDefault}
-                  onSelect={() => onSelect(id)}
+                  onSelect={() => onSelect?.(id)}
                 />
               </li>
             )

@@ -1,19 +1,28 @@
 import { Point } from 'creepyface'
-import React, { useEffect, useRef, useState } from 'react'
-import { useWindowSize } from 'react-use'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useRafLoop, useWindowSize } from 'react-use'
 import { useNamespace } from './Namespace'
 
-const Pointer = (props: { onPositionChange?: (position: Point) => void }) => {
+const Pointer = (props: {
+  animating: boolean
+  onPositionChange?: (position: Point) => void
+}) => {
   const ref = useRef<SVGGElement>(null)
-  const { width, height } = useWindowSize()
   const namespace = useNamespace()
-
-  useEffect(() => {
+  const updatePosition = useCallback(() => {
     if (ref.current) {
       const { left, top } = ref.current.getBoundingClientRect()
-      props.onPositionChange?.([left, top])
+      props.onPositionChange?.([left - 1, top - 1])
     }
-  }, [props.onPositionChange, width, height])
+  }, [props.onPositionChange])
+
+  const { width, height } = useWindowSize()
+  useEffect(() => updatePosition(), [width, height, updatePosition])
+
+  const [stop, start] = useRafLoop(updatePosition, false)
+  useEffect(() => {
+    props.animating && props.onPositionChange ? start() : stop()
+  }, [props.animating, props.onPositionChange, stop, start])
 
   return (
     <g ref={ref} className="pointer">
@@ -45,7 +54,7 @@ export default function Logo(props: {
   const [animating, setAnimating] = useState(false)
   const animate = () => {
     if (!animating) {
-      setTimeout(() => setAnimating(false), 700)
+      setTimeout(() => setAnimating(false), 800)
       setAnimating(true)
     }
   }
@@ -59,7 +68,10 @@ export default function Logo(props: {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <title>Creepyface</title>
-      <Pointer onPositionChange={props.onPointerPositionChange} />
+      <Pointer
+        animating={animating}
+        onPositionChange={props.onPointerPositionChange}
+      />
       <g className="eye">
         <circle className="pupil" cx="83" cy="46" r="3.7" />
       </g>
