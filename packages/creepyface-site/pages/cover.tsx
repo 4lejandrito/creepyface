@@ -26,7 +26,7 @@ export default function Cover() {
         .logo {
           width: 56vw;
           position: relative;
-          transform: translateY(-25%);
+          transform: translateY(-24%);
         }
       `}</style>
       {count !== null && (
