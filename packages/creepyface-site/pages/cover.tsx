@@ -7,8 +7,7 @@ import { requestCount } from '../src/redux/actions'
 import useImperativePointProvider from '../src/hooks/imperative'
 
 // Use 1080 * 540
-export default function Cover() {
-  const namespace = ''
+export default function Cover({ namespace = '' }) {
   const count = useSelector((state) => state.count)
   const dispatch = useDispatch()
   const [pointProvider, setPoint] = useImperativePointProvider()
