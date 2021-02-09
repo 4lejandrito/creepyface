@@ -13712,6 +13712,11 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
+raf-throttle@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/raf-throttle/-/raf-throttle-2.0.5.tgz#8a466308a0ad7d98ec9b5ac59109515efb765908"
+  integrity sha512-0cRR3glc9bvdTW+mgw/DoSXkK7bnLZlWC+RtD3mubJhDSWKjPO5o2j/i7nOvIfmvAKgRtKPSwQcPI6MvYeDeYw==
+
 raf@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"

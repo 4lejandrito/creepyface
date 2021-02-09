@@ -29,7 +29,7 @@ export type Options = {
   looks: Array<Look>
   pointProvider: PointProvider
   timeToDefault: Millis
-  throttle: Millis
+  throttle: Millis | 'raf'
   fieldOfVision: Degrees
   onDebug: Consumer<CreepyData>
   onAttach: Consumer<void>
@@ -41,7 +41,7 @@ export type UserOptions = {
   looks?: Array<Look>
   points?: PointProvider | string
   timeToDefault?: Millis
-  throttle?: Millis
+  throttle?: Millis | 'raf'
   fieldOfVision?: Degrees
   onDebug?: Consumer<CreepyData>
   onAttach?: Consumer<void>

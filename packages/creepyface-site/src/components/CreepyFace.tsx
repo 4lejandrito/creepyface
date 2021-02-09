@@ -79,6 +79,7 @@ export default function CreepyFace(props: {
             hover: images.hover,
             looks: images.looks,
             points,
+            throttle: 'raf',
             timeToDefault,
             onAttach,
             onDetach,

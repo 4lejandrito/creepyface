@@ -20,12 +20,15 @@ const getFloat = (s: string | null): number | undefined => {
   return isNaN(float) ? undefined : float
 }
 
+const getThrottle = (throttle: string | null): number | 'raf' | undefined =>
+  throttle === 'raf' ? 'raf' : getFloat(throttle)
+
 const fromImage = (img: HTMLImageElement): UserOptions => ({
   hover: img.getAttribute('data-src-hover') || undefined,
   looks: getLooks(img),
   points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
-  throttle: getFloat(img.getAttribute('data-throttle')),
+  throttle: getThrottle(img.getAttribute('data-throttle')),
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
 })
 
