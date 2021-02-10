@@ -12,8 +12,12 @@ const rectContains = (
   { left, top, right, bottom }: ClientRect | DOMRect,
   point: Point
 ) => within(point[0], left, right) && within(point[1], top, bottom)
-const elementContains = (img: HTMLImageElement, point: Point) => {
-  if (document.elementFromPoint) {
+const elementContains = (
+  img: HTMLImageElement,
+  point: Point,
+  options: Options
+) => {
+  if (!options.optimizePerformance && document.elementFromPoint) {
     return document.elementFromPoint(point[0], point[1]) === img
   } else {
     return rectContains(img.getBoundingClientRect(), [point[0], point[1]])
@@ -28,7 +32,7 @@ export default (
 ): ImageURL => {
   const { looks, hover, fieldOfVision } = options
 
-  if (hover && elementContains(img, point)) {
+  if (hover && elementContains(img, point, options)) {
     return hover
   } else if (looks.length > 0) {
     const closestLook = closest(angle, looks)

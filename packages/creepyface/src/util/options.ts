@@ -63,6 +63,7 @@ export default function getOptions(
         : 1000,
     throttle: userOptions.throttle || 100,
     fieldOfVision: userOptions.fieldOfVision || 150,
+    optimizePerformance: userOptions.optimizePerformance,
     onDebug: userOptions.onDebug || noop,
     onAttach: userOptions.onAttach || noop,
     onDetach: userOptions.onDetach || noop,

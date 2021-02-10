@@ -31,6 +31,7 @@ export type Options = {
   timeToDefault: Millis
   throttle: Millis | 'raf'
   fieldOfVision: Degrees
+  optimizePerformance?: boolean
   onDebug: Consumer<CreepyData>
   onAttach: Consumer<void>
   onDetach: Consumer<void>
@@ -43,6 +44,7 @@ export type UserOptions = {
   timeToDefault?: Millis
   throttle?: Millis | 'raf'
   fieldOfVision?: Degrees
+  optimizePerformance?: boolean
   onDebug?: Consumer<CreepyData>
   onAttach?: Consumer<void>
   onDetach?: Consumer<void>

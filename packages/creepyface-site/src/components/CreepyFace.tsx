@@ -81,6 +81,7 @@ export default function CreepyFace(props: {
             points,
             throttle: 'raf',
             timeToDefault,
+            optimizePerformance: true,
             onAttach,
             onDetach,
             onDebug,
