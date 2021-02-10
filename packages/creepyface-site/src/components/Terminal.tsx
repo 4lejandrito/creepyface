@@ -33,7 +33,7 @@ export default function Terminal(props: {
           alt={props.alt}
           images={props.images}
           points={props.points}
-          onChange={props.onChange}
+          onChange={props.open ? props.onChange : undefined}
           onSelect={props.onSelect}
           onLoad={props.onLoad}
         />
