@@ -68,14 +68,13 @@
     @extend %center;
     flex-grow: 1;
     position: relative;
-    flex-direction: row !important;
+    flex-direction: row;
     margin: $spacing;
     overflow: hidden;
     max-height: 30 * $spacing;
     @include horizontal {
       margin: 0;
       max-width: 45 * $spacing;
-      flex-direction: row;
     }
     .creepy {
       cursor: pointer;
