@@ -4,6 +4,7 @@ import useDimensions from '../hooks/dimensions'
 import range from 'lodash.range'
 import shuffle from 'lodash.shuffle'
 import classNames from 'classnames'
+import { Namespace } from '../redux/types'
 
 const getSize = (
   width: number,
@@ -32,7 +33,7 @@ export default memo(function CreepyFaces({
   onSelect,
 }: {
   alt: string
-  namespace: string
+  namespace: Namespace
   count: number
   timeToDefault?: number
   points: string

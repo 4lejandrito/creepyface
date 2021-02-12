@@ -1,0 +1,53 @@
+.liferay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .sample {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    .creepyfaces ul {
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+  header {
+    position: absolute;
+    top: 5 * $spacing;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    @include fade-in-up(0.2s);
+    .logo {
+      font-size: 2.5rem;
+      @include s {
+        font-size: 2rem;
+      }
+      @include horizontal {
+        font-size: 3.5rem;
+      }
+      height: 1.4em;
+    }
+    .subtitle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: $spacing / 8;
+      svg {
+        margin-right: 0.2em;
+        vertical-align: middle;
+        height: 1em;
+      }
+    }
+  }
+  .create-button {
+    @include fade-in-up(0.3s);
+    position: absolute;
+    bottom: 5 * $spacing;
+  }
+}

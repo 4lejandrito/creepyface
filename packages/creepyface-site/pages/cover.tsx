@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import CreepyFaces from '../src/components/CreepyFaces'
 import Logo from '../src/components/Logo'
-import NamespaceProvider from '../src/components/Namespace'
 import { useDispatch, useSelector } from '../src/components/State'
 import { requestCount } from '../src/redux/actions'
 import useImperativePointProvider from '../src/hooks/imperative'
@@ -17,7 +16,7 @@ export default function Cover({ namespace = '' }) {
   }, [namespace])
 
   return (
-    <NamespaceProvider namespace={namespace}>
+    <>
       <style jsx global>{`
         body {
           border: none;
@@ -39,6 +38,6 @@ export default function Cover({ namespace = '' }) {
         />
       )}
       <Logo onPointerPositionChange={setPoint} />
-    </NamespaceProvider>
+    </>
   )
 }

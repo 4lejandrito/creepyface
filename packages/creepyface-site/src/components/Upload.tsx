@@ -5,9 +5,9 @@ import { useTranslate } from './Language'
 import { useSelector, useDispatch } from './State'
 import { upload, showPermissions } from '../redux/actions'
 import Modal from './Modal'
-import { useNamespace } from './Namespace'
+import { Namespace } from '../redux/types'
 
-export default function Upload() {
+export default function Upload({ namespace }: { namespace: Namespace }) {
   const downloadLink = useSelector((state) => state.downloadLink)
   const viewLink = useSelector((state) => state.viewLink)
   const uploading = useSelector((state) => state.uploading)
@@ -16,7 +16,6 @@ export default function Upload() {
   )
   const dispatch = useDispatch()
   const translate = useTranslate()
-  const namespace = useNamespace()
 
   return (
     <div className="upload">

@@ -126,13 +126,25 @@ $main-creepyface-height: $main-creepyface-width * 45 / 35;
   vertical-align: middle;
   display: inline-block;
   &:not(.video) {
-    .loader {
+    > .loader {
       color: white;
       position: absolute;
       bottom: $spacing / 2;
       right: $spacing / 2;
     }
-    .placeholder {
+    button,
+    a {
+      margin: 0;
+      border: none;
+      width: 100%;
+      &:hover {
+        background: darken($color-main, 10%) !important;
+        color: white !important;
+      }
+    }
+    .placeholder,
+    button,
+    a {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -142,7 +154,8 @@ $main-creepyface-height: $main-creepyface-width * 45 / 35;
       right: 0;
       bottom: 0;
       left: 0;
-
+    }
+    .placeholder {
       svg {
         @include square(60%);
       }

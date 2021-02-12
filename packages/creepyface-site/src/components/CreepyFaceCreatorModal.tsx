@@ -12,18 +12,22 @@ import Upload from './Upload'
 import Video from './Video'
 import { restartCreation, takePicture, toggleShortcuts } from '../redux/actions'
 import { useSelector, useDispatch } from './State'
-import { Pictures } from '../redux/types'
-import { useNamespace } from './Namespace'
+import { Namespace, Pictures } from '../redux/types'
 
 const getSrc = (next: keyof Pictures, images: Images) => {
   const look = images.looks.find(({ angle }) => angle === next)
   return look ? look.src : next === 'serious' ? images.src : images.hover
 }
 
-function Take({ next }: { next: keyof Pictures }) {
+function Take({
+  namespace,
+  next,
+}: {
+  namespace: Namespace
+  next: keyof Pictures
+}) {
   const dispatch = useDispatch()
   const translate = useTranslate()
-  const namespace = useNamespace()
   return (
     <>
       <header>
@@ -50,7 +54,7 @@ function Take({ next }: { next: keyof Pictures }) {
   )
 }
 
-function Download(props: { pictures: Pictures }) {
+function Download(props: { pictures: Pictures; namespace: Namespace }) {
   const { pictures } = props
   const translate = useTranslate()
   return (
@@ -70,12 +74,13 @@ function Download(props: { pictures: Pictures }) {
           })),
         }}
       />
-      <Upload />
+      <Upload namespace={props.namespace} />
     </>
   )
 }
 
 export default function CreepyFaceCreatorModal(props: {
+  namespace: Namespace
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -94,9 +99,9 @@ export default function CreepyFaceCreatorModal(props: {
       onClose={props.onClose}
     >
       {next !== undefined ? (
-        <Take next={next} />
+        <Take namespace={props.namespace} next={next} />
       ) : (
-        <Download pictures={pictures as Pictures} />
+        <Download namespace={props.namespace} pictures={pictures as Pictures} />
       )}
       <CreepyFaceOptions next={next} pictures={pictures} />
       <footer>

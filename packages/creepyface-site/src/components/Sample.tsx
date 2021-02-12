@@ -5,16 +5,21 @@ import CreepyFaces from './CreepyFaces'
 import { useSelector, useDispatch } from './State'
 import Terminal from './Terminal'
 import Player from './Player'
-import { useNamespace } from './Namespace'
 import { useTranslate } from './Language'
+import { Namespace } from '../redux/types'
 
-export default function Sample() {
+export default function Sample({
+  namespace,
+  fullscreen,
+}: {
+  namespace?: Namespace
+  fullscreen?: boolean
+}) {
   const dispatch = useDispatch()
   const count = useSelector((state) => state.count)
   const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
   const showCode = useSelector((state) => state.showCode)
   const pointProvider = useSelector((state) => state.pointProvider)
-  const namespace = useNamespace()
   const images = useMemo(() => getHostedImages(selectedCreepyface, namespace), [
     selectedCreepyface,
     namespace,
@@ -55,6 +60,7 @@ export default function Sample() {
           namespace={namespace}
           count={count}
           points={pointProvider}
+          fullscreen={fullscreen}
           onSelect={select}
         />
       )}

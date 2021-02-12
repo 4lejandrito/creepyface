@@ -1,14 +1,12 @@
 import { Point } from 'creepyface'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useRafLoop, useWindowSize } from 'react-use'
-import { useNamespace } from './Namespace'
 
 const Pointer = (props: {
   animating: boolean
   onPositionChange?: (position: Point) => void
 }) => {
   const ref = useRef<SVGGElement>(null)
-  const namespace = useNamespace()
   const updatePosition = useCallback(() => {
     if (ref.current) {
       const { left, top } = ref.current.getBoundingClientRect()
@@ -26,25 +24,8 @@ const Pointer = (props: {
 
   return (
     <g ref={ref} className="pointer">
-      {namespace === 'liferay' ? <Liferay /> : <Arrow />}
+      <polygon points="137.7,0 141.2,31.5 152.2,20 166.8,14.1" />
     </g>
-  )
-}
-
-const Arrow = () => <polygon points="137.7,0 141.2,31.5 152.2,20 166.8,14.1" />
-
-export function Liferay() {
-  const scale = 0.5
-  return (
-    <path
-      transform={`scale(${scale}) translate(${
-        (317.8 - 38.8) / (2 * scale)
-      }, ${-18})`}
-      clipRule="evenodd"
-      d="M2 22a4 4 0 0 1 4-4h46a4 4 0 0 1 4 4v46a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V22zm8 5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm11-1a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6zm9 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm-19 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6zm9 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm21-1a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6zM10 47a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm21-1a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6zm9 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm-19 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6zm9 1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-6zm11-1a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6z"
-      fill="white"
-      fillRule="evenodd"
-    />
   )
 }
 

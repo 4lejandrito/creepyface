@@ -1,6 +1,6 @@
 import { makeActionCreator } from './util'
 import getNext from '../util/get-next'
-import { Language, Action, Dispatch, State } from './types'
+import { Language, Action, Dispatch, State, Namespace } from './types'
 import url from '../util/url'
 
 const receiveMessages = ({
@@ -69,7 +69,7 @@ export const takePicture = makeActionCreator(
   ({ shoot }) => !!shoot
 )
 
-export const upload = (namespace: string) =>
+export const upload = (namespace: Namespace) =>
   makeActionCreator(
     () => (dispatch, getState) => {
       dispatch({ type: 'requestUpload' })
@@ -88,7 +88,9 @@ export const upload = (namespace: string) =>
             formData.append(name, `${enabled}`)
           })
 
-          formData.append('namespace', namespace)
+          if (namespace) {
+            formData.append('namespace', namespace)
+          }
 
           return formData
         })(),
@@ -102,9 +104,9 @@ export const upload = (namespace: string) =>
     ({ pictures }) => getNext(pictures) === undefined
   )
 
-export const requestCount = (namespace: string) =>
+export const requestCount = (namespace: Namespace) =>
   makeActionCreator(() => (dispatch) => {
-    fetch(`${url}/api/count?namespace=${namespace}`, {
+    fetch(`${url}/api/count${namespace ? '?namespace=' + namespace : ''}`, {
       credentials: 'include',
     })
       .then((res) => res.json())

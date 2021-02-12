@@ -107,3 +107,5 @@ export type Action =
     }
 
 export type Dispatch = ThunkDispatch<State, void, Action>
+
+export type Namespace = string | undefined
