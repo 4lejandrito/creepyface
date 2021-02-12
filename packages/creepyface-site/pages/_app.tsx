@@ -6,11 +6,16 @@ import { NextSeo } from 'next-seo'
 import PlausibleProvider from 'next-plausible'
 import baseURL from '../src/util/url'
 import '../src/scss/main.scss'
+import { useEffect } from 'react'
+import noBounce from 'no-bounce'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const title = 'Creepyface'
   const description =
     'The Javascript library that makes your face follow the pointer'
+
+  useEffect(noBounce, [])
+
   return (
     <PlausibleProvider domain="creepyface.io">
       <StateProvider>

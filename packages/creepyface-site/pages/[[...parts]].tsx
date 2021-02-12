@@ -6,19 +6,17 @@ import { Code, Repo, Package } from '../src/components/Project'
 import { useTranslate } from '../src/components/Language'
 import Logo from '../src/components/Logo'
 import Sample from '../src/components/Sample'
-import noBounce from 'no-bounce'
 import { useSelector } from '../src/components/State'
 import { nextPointProvider } from '../src/redux/actions'
 import Footer from '../src/components/Footer'
 import { useRouter } from 'next/router'
 import NamespaceProvider from '../src/components/Namespace'
 
-const CreepyFaceCreatorModal = lazy(
-  () => import('../src/components/CreepyFaceCreatorModal')
+const CreepyFaceCreatorModal = lazy(() =>
+  import('../src/components/CreepyFaceCreatorModal')
 )
 
 export default function Home({ namespace = '' }) {
-  useEffect(noBounce, [])
   const [modalLoaded, setModalLoaded] = useState(false)
   const translate = useTranslate()
   const pointProvider = useSelector((state) => state.pointProvider)
