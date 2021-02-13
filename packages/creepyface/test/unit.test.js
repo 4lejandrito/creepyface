@@ -569,6 +569,38 @@ describe('creepyface', () => {
             followsTheCustomPointProvider(img)
           })
         })
+
+        describe('and a custom point provider with the onAttach function', () => {
+          const img = withImage(() => '<img src="http://localhost/serious"/>')
+          let setPointProvider
+
+          withCreepyfaceRegistered(() =>
+            creepyface(img, {
+              hover: 'http://localhost/hover',
+              looks: [
+                { angle: 0 * 45, src: 'http://localhost/north' },
+                { angle: 1 * 45, src: 'http://localhost/northEast' },
+                { angle: 2 * 45, src: 'http://localhost/east' },
+                { angle: 3 * 45, src: 'http://localhost/southEast' },
+                { angle: 4 * 45, src: 'http://localhost/south' },
+                { angle: 5 * 45, src: 'http://localhost/southWest' },
+                { angle: 6 * 45, src: 'http://localhost/west' },
+                { angle: 7 * 45, src: 'http://localhost/northWest' },
+              ],
+              onAttach: (args) => (setPointProvider = args.setPointProvider),
+            })
+          )
+
+          followsThePointer(img)
+
+          describe('and a new point provider is set', () => {
+            beforeAndAfter(() => {
+              setPointProvider(customPointProvider)
+            })
+
+            followsTheCustomPointProvider(img)
+          })
+        })
       })
     })
 

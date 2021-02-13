@@ -1,4 +1,4 @@
-import getOptions from './util/options'
+import getOptions, { getPointProvider } from './util/options'
 import { Cancel, Creepyface, Point, UserOptions } from './types'
 import { register as registerPointProvider } from './providers/store'
 import preload from './util/preload'
@@ -35,8 +35,13 @@ const creepyface: Creepyface = (
           if (options.timeToDefault > 0) backToDefault()
         }
       )
-      const stopPointProvider = options.pointProvider(pointConsumer, img)
-      options.onAttach()
+      let stopPointProvider = options.pointProvider(pointConsumer, img)
+      options.onAttach({
+        setPointProvider: (points) => {
+          stopPointProvider()
+          stopPointProvider = getPointProvider(points)(pointConsumer, img)
+        },
+      })
       return () => {
         backToDefault.cancel()
         pointConsumer.cancel()

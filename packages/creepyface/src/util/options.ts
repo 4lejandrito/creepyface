@@ -32,14 +32,10 @@ const fromImage = (img: HTMLImageElement): UserOptions => ({
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
 })
 
-const getPoints = (userOptions: UserOptions): PointProvider => {
-  if (typeof userOptions.points === 'function') {
-    return userOptions.points
-  }
-  return combined(
-    (userOptions.points || 'pointer').split(',').map(retrievePointProvider)
-  )
-}
+export const getPointProvider = (points: string | PointProvider | undefined) =>
+  typeof points === 'function'
+    ? points
+    : combined((points || 'pointer').split(',').map(retrievePointProvider))
 
 const noop = (): void => undefined
 
@@ -55,7 +51,7 @@ export default function getOptions(
   return {
     src,
     hover: userOptions.hover || '',
-    pointProvider: getPoints(userOptions),
+    pointProvider: getPointProvider(userOptions.points),
     looks: userOptions.looks || [],
     timeToDefault:
       userOptions.timeToDefault !== undefined

@@ -23,6 +23,10 @@ export type CreepyData = {
   options: Options
 }
 
+export type AttachData = {
+  setPointProvider: (points: PointProvider | string | undefined) => void
+}
+
 export type Options = {
   src: ImageURL
   hover?: ImageURL
@@ -33,7 +37,7 @@ export type Options = {
   fieldOfVision: Degrees
   optimizePerformance?: boolean
   onDebug: Consumer<CreepyData>
-  onAttach: Consumer<void>
+  onAttach: Consumer<AttachData>
   onDetach: Consumer<void>
 }
 
@@ -46,7 +50,7 @@ export type UserOptions = {
   fieldOfVision?: Degrees
   optimizePerformance?: boolean
   onDebug?: Consumer<CreepyData>
-  onAttach?: Consumer<void>
+  onAttach?: Consumer<AttachData>
   onDetach?: Consumer<void>
 }
 
