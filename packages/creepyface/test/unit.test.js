@@ -28,7 +28,7 @@ const withImage = (getImage) => {
 
 const createGetNewSrc = (img, providePoint) => (point) => {
   providePoint(point)
-  jest.advanceTimersByTime(100)
+  jest.advanceTimersByTime(50)
   return img.src
 }
 
@@ -155,10 +155,15 @@ const followsThePointer = (img, skipHover) => {
 }
 
 let testConsumer
-const customPointProvider = (consumer) => {
-  testConsumer = consumer
-  return () => {}
-}
+creepyface.registerPointProvider('custom', (consumer) => {
+  testConsumer = (point) => {
+    consumer(point)
+    jest.advanceTimersByTime(50)
+  }
+  return () => {
+    testConsumer = () => {}
+  }
+})
 const followsTheCustomPointProvider = (img) =>
   describe('follows the custom point provider', () => {
     testPoints(img, (point) => testConsumer(point))
@@ -234,7 +239,6 @@ describe('creepyface', () => {
             () => `
               <img src="http://localhost/serious"
                 ${attributeName}
-                data-throttle="100"
                 data-src-hover="http://localhost/hover"
                 data-src-look-0="http://localhost/north"
                 data-src-look-45="http://localhost/northEast"
@@ -423,17 +427,13 @@ describe('creepyface', () => {
             )
 
             withCreepyfaceRegistered(() =>
-              creepyface(img, { points: customPointProvider })
+              creepyface(img, { points: 'custom' })
             )
 
             followsTheCustomPointProvider(img)
           })
 
           describe('as a string', () => {
-            beforeAndAfter(() => {
-              creepyface.registerPointProvider('custom', customPointProvider)
-            })
-
             describe('in the options argument', () => {
               const img = withImage(
                 () => `
@@ -509,7 +509,7 @@ describe('creepyface', () => {
 
           it('logs an error message', () => {
             expect(console.error).toHaveBeenCalledWith(
-              "No point provider registered as 'missing', defaulting to pointer."
+              "No point provider registered as 'missing'."
             )
           })
 
@@ -517,10 +517,6 @@ describe('creepyface', () => {
         })
 
         describe('and several point providers', () => {
-          beforeAndAfter(() => {
-            creepyface.registerPointProvider('custom', customPointProvider)
-          })
-
           describe('in the options argument', () => {
             const img = withImage(
               () => `
@@ -595,7 +591,7 @@ describe('creepyface', () => {
 
           describe('and a new point provider is set', () => {
             beforeAndAfter(() => {
-              setPointProvider(customPointProvider)
+              setPointProvider('custom')
             })
 
             followsTheCustomPointProvider(img)

@@ -1,9 +1,8 @@
-import getOptions, { getPointProvider } from './util/options'
+import getOptions from './util/options'
 import { Cancel, Creepyface, Point, UserOptions } from './types'
-import { register as registerPointProvider } from './providers/store'
+import { register as registerPointProvider, listen } from './providers'
 import preload from './util/preload'
 import { debounce } from 'throttle-debounce'
-import throttle from './util/throttle'
 import getAngle from './util/get-angle'
 import getSrc from './util/get-src'
 import { Angle } from './util/algebra'
@@ -25,27 +24,23 @@ const creepyface: Creepyface = (
       const backToDefault = debounce(options.timeToDefault, () =>
         update(options.src)
       )
-      const pointConsumer = throttle(
-        options.throttle,
-        (point: Point | null) => {
-          if (!point) return update(options.src)
-          const angle = getAngle(img, point)
-          const src = getSrc(img, point, angle, options)
-          update(src, point, angle)
-          if (options.timeToDefault > 0) backToDefault()
-        }
-      )
-      let stopPointProvider = options.pointProvider(pointConsumer, img)
+      const pointConsumer = (point: Point | null) => {
+        if (!point) return update(options.src)
+        const angle = getAngle(img, point)
+        const src = getSrc(img, point, angle, options)
+        update(src, point, angle)
+        if (options.timeToDefault > 0) backToDefault()
+      }
+      let stopListening = listen(img, pointConsumer, options.points)
       options.onAttach({
         setPointProvider: (points) => {
-          stopPointProvider()
-          stopPointProvider = getPointProvider(points)(pointConsumer, img)
+          stopListening()
+          stopListening = listen(img, pointConsumer, points)
         },
       })
       return () => {
         backToDefault.cancel()
-        pointConsumer.cancel()
-        stopPointProvider()
+        stopListening()
         img.src = options.src
         options.onDetach()
       }

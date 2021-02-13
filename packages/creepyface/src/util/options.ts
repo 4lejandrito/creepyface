@@ -1,6 +1,4 @@
-import { PointProvider, UserOptions, Options, Look } from '../types'
-import { retrieve as retrievePointProvider } from '../providers/store'
-import combined from '../providers/combined'
+import { UserOptions, Options, Look } from '../types'
 
 const getLooks = (img: HTMLElement): Array<Look> | undefined => {
   const regex = /data-src-look-(\d+)/i
@@ -20,22 +18,13 @@ const getFloat = (s: string | null): number | undefined => {
   return isNaN(float) ? undefined : float
 }
 
-const getThrottle = (throttle: string | null): number | 'raf' | undefined =>
-  throttle === 'raf' ? 'raf' : getFloat(throttle)
-
 const fromImage = (img: HTMLImageElement): UserOptions => ({
   hover: img.getAttribute('data-src-hover') || undefined,
   looks: getLooks(img),
   points: img.getAttribute('data-points') || undefined,
   timeToDefault: getFloat(img.getAttribute('data-timetodefault')),
-  throttle: getThrottle(img.getAttribute('data-throttle')),
   fieldOfVision: getFloat(img.getAttribute('data-fieldofvision')),
 })
-
-export const getPointProvider = (points: string | PointProvider | undefined) =>
-  typeof points === 'function'
-    ? points
-    : combined((points || 'pointer').split(',').map(retrievePointProvider))
 
 const noop = (): void => undefined
 
@@ -51,13 +40,12 @@ export default function getOptions(
   return {
     src,
     hover: userOptions.hover || '',
-    pointProvider: getPointProvider(userOptions.points),
+    points: userOptions.points,
     looks: userOptions.looks || [],
     timeToDefault:
       userOptions.timeToDefault !== undefined
         ? userOptions.timeToDefault
         : 1000,
-    throttle: userOptions.throttle || 100,
     fieldOfVision: userOptions.fieldOfVision || 150,
     optimizePerformance: userOptions.optimizePerformance,
     onDebug: userOptions.onDebug || noop,

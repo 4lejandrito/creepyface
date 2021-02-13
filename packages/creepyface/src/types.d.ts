@@ -3,10 +3,11 @@ export type Point = [number, number]
 export type Cancel = () => void
 export type Consumer<T> = (t: T) => void
 
-export type PointProvider = (
-  consumer: Consumer<Point | null>,
+export type PointProvider = (consumer: Consumer<Point | null>) => Cancel
+export type PointMapper = (
+  point: Point | null,
   img: HTMLImageElement
-) => Cancel
+) => Point | null
 
 export type Millis = number
 export type ImageURL = string
@@ -24,16 +25,15 @@ export type CreepyData = {
 }
 
 export type AttachData = {
-  setPointProvider: (points: PointProvider | string | undefined) => void
+  setPointProvider: (points: string | undefined) => void
 }
 
 export type Options = {
   src: ImageURL
   hover?: ImageURL
   looks: Array<Look>
-  pointProvider: PointProvider
+  points?: string
   timeToDefault: Millis
-  throttle: Millis | 'raf'
   fieldOfVision: Degrees
   optimizePerformance?: boolean
   onDebug: Consumer<CreepyData>
@@ -44,9 +44,8 @@ export type Options = {
 export type UserOptions = {
   hover?: ImageURL
   looks?: Array<Look>
-  points?: PointProvider | string
+  points?: string
   timeToDefault?: Millis
-  throttle?: Millis | 'raf'
   fieldOfVision?: Degrees
   optimizePerformance?: boolean
   onDebug?: Consumer<CreepyData>
@@ -57,7 +56,11 @@ export type UserOptions = {
 export type Creepyface = {
   (img: HTMLImageElement, userOptions?: UserOptions | undefined): Cancel
   cancel(img: HTMLImageElement): void
-  registerPointProvider: (name: string, provider: PointProvider) => void
+  registerPointProvider: (
+    name: string,
+    provider: PointProvider,
+    mapper?: PointMapper
+  ) => void
 }
 
 declare const creepyface: Creepyface

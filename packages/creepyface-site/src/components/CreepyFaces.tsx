@@ -3,7 +3,6 @@ import CreepyFace, { getHostedImages } from './CreepyFace'
 import useDimensions from '../hooks/dimensions'
 import range from 'lodash.range'
 import shuffle from 'lodash.shuffle'
-import { PointProvider } from 'creepyface'
 
 const getSize = (width: number, height: number) => {
   for (let rows = 4; rows <= 10; rows++) {
@@ -28,7 +27,7 @@ export default memo(function CreepyFaces({
   namespace: string
   count: number
   timeToDefault?: number
-  points: string | PointProvider
+  points: string
   onSelect?: (id: number) => void
 }) {
   const nodeRef = useRef(null as HTMLDivElement | null)

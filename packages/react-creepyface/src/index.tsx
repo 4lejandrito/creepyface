@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import creepyface, { UserOptions, PointProvider, Consumer } from 'creepyface'
+import creepyface, { UserOptions, Consumer } from 'creepyface'
 
 export default function Creepyface(
   props: React.DetailedHTMLProps<
@@ -14,9 +14,7 @@ export default function Creepyface(
   const { disabled, src, options, ...imgProps } = props
   const { looks, points, ...rest } = { ...options }
   const imageRef = useRef<HTMLImageElement>(null)
-  const setPointProviderRef = useRef<
-    Consumer<PointProvider | string | undefined>
-  >()
+  const setPointProviderRef = useRef<Consumer<string | undefined>>()
 
   useEffect(() => {
     if (!disabled && imageRef.current) {

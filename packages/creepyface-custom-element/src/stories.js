@@ -21,7 +21,6 @@ export const CustomizedBuiltInElement = () => {
       data-src-look-270="https://creepyface.io/img/${id}/270"
       data-src-look-315="https://creepyface.io/img/${id}/315"
       data-timeToDefault=${number('Time to default', 1000)}
-      data-throttle=${number('Throttle', 100)}
     />
   `
 }

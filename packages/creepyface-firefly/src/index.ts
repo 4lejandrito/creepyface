@@ -1,6 +1,5 @@
-import raf from 'raf'
-import now from 'present'
-import creepyface, { Point, Consumer, PointProvider } from 'creepyface'
+import creepyface, { Point } from 'creepyface'
+import sync, { cancelSync } from 'framesync'
 
 type Vector = [number, number]
 
@@ -24,24 +23,13 @@ const square = (x: number) => x * x
 const norm = (v: Vector) => Math.sqrt(v.map(square).reduce(sum, 0))
 const times = (v: Vector, n: number): Vector => v.map((x) => x * n) as Vector
 
-function loop(fn: (time: number) => void) {
-  let last = now()
-  let handle = raf(function update() {
-    let current = now()
-    fn(Math.min(current - last, 500))
-    last = current
-    handle = raf(update)
-  })
-  return () => raf.cancel(handle)
-}
-
 type Firefly = {
   destination: Point
   position: Point
   vspeed: Vector
 }
 
-function firefly(props: { onMove: (position: Point) => void }) {
+creepyface.registerPointProvider('firefly', (consumer) => {
   let firefly: Firefly = {
     destination: [window.innerWidth / 2, window.innerHeight / 2],
     position: [rand(window.innerWidth), rand(window.innerHeight)],
@@ -68,7 +56,7 @@ function firefly(props: { onMove: (position: Point) => void }) {
   }
   document.addEventListener('touchmove', touchListener, true)
 
-  const cancel = loop((dt) => {
+  const updateProcess = sync.update(({ delta: dt }) => {
     const { destination, position, vspeed } = firefly
     const direction = diff(destination, position)
     let angle = getAngle(direction) - getAngle(vspeed)
@@ -83,46 +71,26 @@ function firefly(props: { onMove: (position: Point) => void }) {
     if (norm(direction) > Math.random() * 20) {
       firefly.position = add(position, times(newVspeed, dt))
       firefly.vspeed = newVspeed
-
-      node.style.left = `${firefly.position[0]}px`
-      node.style.top = `${firefly.position[1]}px`
-      node.style.transform = `rotate(${getAngle(firefly.vspeed) + 90}deg)`
-
-      props.onMove(firefly.position)
     } else {
       firefly.destination = [
         rand(window.innerWidth - 200) + 100,
         rand(window.innerHeight - 200) + 100,
       ]
     }
-  })
+  }, true)
+
+  const renderProcess = sync.render(() => {
+    node.style.left = `${firefly.position[0]}px`
+    node.style.top = `${firefly.position[1]}px`
+    node.style.transform = `rotate(${getAngle(firefly.vspeed) + 90}deg)`
+    consumer(firefly.position)
+  }, true)
 
   return () => {
-    cancel()
+    cancelSync.update(updateProcess)
+    cancelSync.render(renderProcess)
     document.removeEventListener('mousemove', mouseListener, true)
     document.removeEventListener('touchmove', touchListener, true)
     node.remove()
   }
-}
-
-let consumers: Consumer<Point>[] = []
-let cancel = () => {}
-
-const fireflyPointProvider: PointProvider = (consumer) => {
-  if (consumers.length === 0) {
-    cancel = firefly({
-      onMove: (position) => consumers.map((consumer) => consumer(position)),
-    })
-  }
-  consumers = [...consumers, consumer]
-  return () => {
-    consumers = consumers.filter((o) => o !== consumer)
-    if (consumers.length === 0) {
-      cancel()
-    }
-  }
-}
-
-creepyface.registerPointProvider('firefly', fireflyPointProvider)
-
-export default fireflyPointProvider
+})

@@ -1,4 +1,4 @@
-import creepyface, { Point, PointProvider } from 'creepyface'
+import creepyface, { Point } from 'creepyface'
 import range from 'lodash.range'
 import flatten from 'lodash.flatten'
 
@@ -18,7 +18,13 @@ function onBeat(
 ) {
   const secondsPerBeat = 60 / bpm
   let timeout: NodeJS.Timeout
+  let interval: NodeJS.Timeout
+  const stop = () => {
+    clearTimeout(timeout)
+    clearInterval(interval)
+  }
   const start = () => {
+    stop()
     if (audio.readyState !== 4) {
       audio.addEventListener('canplaythrough', start)
       return
@@ -31,69 +37,59 @@ function onBeat(
     const beat = () => listener(i++)
     timeout = setTimeout(() => {
       beat()
-      timeout = setInterval(beat, 1000 * secondsPerBeat)
+      interval = setInterval(beat, 1000 * secondsPerBeat)
     }, 1000 * (nextBeatSeconds - audio.currentTime))
   }
-  audio.addEventListener('pause', () => clearTimeout(timeout))
+  audio.addEventListener('pause', stop)
   audio.addEventListener('playing', start)
   if (!audio.paused) {
     start()
   }
+  return () => {
+    audio.removeEventListener('canplaythrough', start)
+    audio.removeEventListener('pause', stop)
+    audio.removeEventListener('playing', start)
+    stop()
+  }
 }
 
-export function makePointProvider({
-  name,
-  audio,
-  bpm,
-  firstBeat,
-  choreography,
-}: {
+const pointMap: { [K in Step]: Point | null } = {
+  serious: null,
+  crazy: [0, 0],
+  n: [0, -1],
+  ne: [1, -1],
+  e: [1, 0],
+  se: [1, 1],
+  s: [0, 1],
+  sw: [-1, 1],
+  w: [-1, 0],
+  nw: [-1, -1],
+}
+
+export function makePointProvider(options: {
   name: string
   audio: HTMLAudioElement
   bpm: number
   firstBeat: number
   choreography: Step[]
-}): PointProvider {
-  const listeners: BeatListener[] = []
-  onBeat(audio, bpm, firstBeat, (beat) =>
-    listeners.forEach((listener) => listener(beat))
+}) {
+  const { name, audio, bpm, firstBeat, choreography } = options
+  creepyface.registerPointProvider(
+    name,
+    (consumer) =>
+      onBeat(audio, bpm, firstBeat, (beat) =>
+        consumer(pointMap[choreography[beat]])
+      ),
+    (point, img) => {
+      const { x, y, width, height } = img.getBoundingClientRect()
+      return point
+        ? [
+            x + width / 2 + (width / 2) * 2 * point[0],
+            y + height / 2 + (height / 2) * 2 * point[1],
+          ]
+        : null
+    }
   )
-  const pointProvider: PointProvider = (consumer, img) => {
-    const listener = (beat: number) =>
-      consumer(
-        ((): Point | null => {
-          const { x, y, width, height } = img.getBoundingClientRect()
-          switch (choreography[beat]) {
-            case 'serious':
-              return null
-            case 'crazy':
-              return [x + width / 2, y + width / 2]
-            case 'n':
-              return [x + width / 2, y - 1]
-            case 'ne':
-              return [x + width + 1, y - 1]
-            case 'e':
-              return [x + width + 1, y + height / 2]
-            case 'se':
-              return [x + width + 1, y + height + 1]
-            case 's':
-              return [x + width / 2, y + height + 1]
-            case 'sw':
-              return [x - 1, y + height + 1]
-            case 'w':
-              return [x - 1, y + height / 2]
-            case 'nw':
-              return [x - 1, y - 1]
-          }
-        })()
-      )
-    listeners.push(listener)
-    return () => listeners.splice(listeners.indexOf(listener), 1)
-  }
-
-  creepyface.registerPointProvider(name, pointProvider)
-
-  return pointProvider
 }
 
 const mod = (n: number, m: number) => (m + (n % m)) % m

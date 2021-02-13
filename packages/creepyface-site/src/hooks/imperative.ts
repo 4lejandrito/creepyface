@@ -1,27 +1,24 @@
-import { Consumer, Point, PointProvider } from 'creepyface/src/types'
+import creepyface, { Consumer, Point } from 'creepyface'
 import { useMemo } from 'react'
 
-function getImperativePointProvider() {
-  const consumers: Consumer<Point | null>[] = []
-  let lastPoint: Point | null = null
+const name = 'imperative'
+let lastPoint: Point | null = null
+let pointConsumer: Consumer<Point | null> | null = null
 
-  const pointProvider: PointProvider = (consumer) => {
-    consumers.push(consumer)
-    const timeout = setTimeout(() => consumer(lastPoint), 0)
-    return () => {
-      consumers.splice(consumers.indexOf(consumer), 1)
-      clearTimeout(timeout)
-    }
+creepyface.registerPointProvider(name, (consumer) => {
+  const timeout = setTimeout(() => consumer(lastPoint), 0)
+  pointConsumer = consumer
+  return () => {
+    clearTimeout(timeout)
+    pointConsumer = null
   }
+})
 
-  const setPoint = (point: Point) => {
-    lastPoint = point
-    consumers.forEach((consumer) => consumer(point))
-  }
-
-  return [pointProvider, setPoint] as const
+const setPoint = (point: Point) => {
+  lastPoint = point
+  pointConsumer?.(point)
 }
 
 export default function useImperativePointProvider() {
-  return useMemo(() => getImperativePointProvider(), [])
+  return useMemo(() => [name, setPoint] as const, [])
 }

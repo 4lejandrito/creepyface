@@ -57,7 +57,6 @@ creepyface.cancel(document.querySelector('img'))
 | `data-src-hover`        | The URL of the image to use when the pointer is over your image.                                                                                                                                                    |
 | `data-src-look-<angle>` | The URL of the image to use when the pointer forms the specified angle (in degrees) with the center of your image. Add as many as you want.                                                                         |
 | `data-timetodefault`    | The amount of time (in milliseconds) after which the default src is restored if no pointer events are received. 1 second by default. 0 means it will never be restored (the image will always look at the pointer). |
-| `data-throttle`         | The amount of time (in milliseconds) to wait between src changes. 100 by default.                                                                                                                                   |
 | `data-fieldofvision`    | The angle (in degrees) inside which the pointer will be detected by a given direction. 150 by default.                                                                                                              |
 | `data-points`           | Optionally, a comma-separated list of point provider names to make your face look at things other than the pointer. See [Super advanced usage](#super-advanced-usage) for more information.                         |
 
@@ -75,8 +74,6 @@ import creepyface from 'creepyface'
 const img = document.querySelector('img')
 
 const cancel = creepyface(img, {
-  // Time (in ms) to wait between src updates
-  throttle: 100,
   // Image URL to display on hover
   hover: 'https://creepyface.io/img/0/hover',
   // Each of the images looking at a given direction
@@ -111,7 +108,7 @@ For example, to make your face look at a random point every half a second you ne
 ```js
 import creepyface from 'creepyface'
 
-creepyface.registerPointProvider('random', (consumer, img) => {
+creepyface.registerPointProvider('random', (consumer) => {
   const interval = setInterval(
     () =>
       consumer([
@@ -157,19 +154,7 @@ or pass it programmatically:
 const img = document.querySelector('img')
 
 creepyface(img, {
-  points: (consumer, img) => {
-    const interval = setInterval(
-      () =>
-        consumer([
-          Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight,
-        ]),
-      500
-    )
-    return () => {
-      clearInterval(interval)
-    }
-  },
+  points: 'random',
   hover: 'https://creepyface.io/img/0/hover',
   looks: [
     { angle: 0, src: 'https://creepyface.io/img/0/0' },

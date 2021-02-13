@@ -1,8 +1,7 @@
-import { Point } from '../types'
+import { Point, PointProvider } from '../types'
 import { add } from '../util/algebra'
-import singleton from './singleton'
 
-export default singleton((consumer) => {
+const finger: PointProvider = (consumer) => {
   const listener = (event: TouchEvent) => {
     let point: Point = [0, 0]
     for (let i = 0; i < event.touches.length; i++) {
@@ -13,4 +12,6 @@ export default singleton((consumer) => {
   }
   window.addEventListener('touchmove', listener, true)
   return () => window.removeEventListener('touchmove', listener, true)
-})
+}
+
+export default finger

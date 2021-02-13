@@ -26,7 +26,6 @@ export const WithOptions = () => {
           { angle: 315, src: `https://creepyface.io/img/${id}/315` },
         ],
         timeToDefault: number('Time to default', 1000),
-        throttle: number('Throttle', 100),
       }}
     />
   )
@@ -48,7 +47,6 @@ export const WithDataAttributes = () => {
       data-src-look-270={`https://creepyface.io/img/${id}/270`}
       data-src-look-315={`https://creepyface.io/img/${id}/315`}
       data-timeToDefault={number('Time to default', 1000)}
-      data-throttle={number('Throttle', 100)}
     />
   )
 }
