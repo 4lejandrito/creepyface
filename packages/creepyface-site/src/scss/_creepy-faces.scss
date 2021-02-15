@@ -16,6 +16,8 @@
     .creepy {
       opacity: 0.3;
       border: none;
+      border-radius: 0;
+      box-shadow: none;
       transition: all ease-in-out 100ms;
       @include square(100%);
       img {

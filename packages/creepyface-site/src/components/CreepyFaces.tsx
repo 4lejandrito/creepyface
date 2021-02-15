@@ -33,7 +33,6 @@ export default memo(function CreepyFaces({
   const nodeRef = useRef(null as HTMLDivElement | null)
   const { width, height } = useDimensions(nodeRef)
   const size = getSize(width, height)
-  const margin = 2
   const cols = Math.floor(width / size)
   const rows = Math.floor(height / size)
   const permutation = useMemo(() => shuffle(range(1, count)), [count])
@@ -51,7 +50,6 @@ export default memo(function CreepyFaces({
                 style={{
                   width: size,
                   height: size,
-                  padding: margin,
                 }}
               >
                 <CreepyFace
