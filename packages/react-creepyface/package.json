@@ -21,7 +21,7 @@
     "prepublishOnly": "NODE_ENV=production yarn build"
   },
   "peerDependencies": {
-    "creepyface": "^7",
+    "creepyface": "^8",
     "react": "^16.8 || ^17.0",
     "react-dom": "^16.8 || ^17.0"
   },

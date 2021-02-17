@@ -27,7 +27,7 @@
     "prepublishOnly": "yarn build"
   },
   "peerDependencies": {
-    "creepyface": "^7"
+    "creepyface": "^8"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
