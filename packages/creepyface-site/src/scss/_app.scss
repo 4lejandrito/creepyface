@@ -70,7 +70,6 @@
     position: relative;
     flex-direction: row;
     margin: $spacing;
-    overflow: hidden;
     max-height: 30 * $spacing;
     @include horizontal {
       margin: 0;

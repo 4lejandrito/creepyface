@@ -39,7 +39,7 @@ export default memo(function CreepyFaces({
 
   return (
     <div ref={nodeRef} className="creepyfaces">
-      <ul>
+      <ul style={{ width: size * cols }}>
         {width > 0 &&
           height > 0 &&
           range(rows * cols).map((i) => {

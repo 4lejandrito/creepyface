@@ -27,6 +27,10 @@ export default function Cover({ namespace = '' }) {
           position: relative;
           transform: translateY(-24%);
         }
+        .creepyfaces ul {
+          border-radius: 0;
+          box-shadow: none;
+        }
       `}</style>
       {count !== null && (
         <CreepyFaces
