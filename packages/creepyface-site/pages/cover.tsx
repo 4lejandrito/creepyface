@@ -27,10 +27,6 @@ export default function Cover({ namespace = '' }) {
           position: relative;
           transform: translateY(-24%);
         }
-        .creepyfaces ul {
-          border-radius: 0;
-          box-shadow: none;
-        }
       `}</style>
       {count !== null && (
         <CreepyFaces
@@ -39,6 +35,7 @@ export default function Cover({ namespace = '' }) {
           count={count}
           timeToDefault={0}
           points={pointProvider}
+          fullscreen
         />
       )}
       <Logo onPointerPositionChange={setPoint} />

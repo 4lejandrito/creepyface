@@ -5,6 +5,14 @@
   bottom: 0;
   right: 0;
   left: 0;
+  &.fullscreen {
+    overflow: hidden;
+    ul {
+      border-radius: 0;
+      box-shadow: none;
+      overflow: initial;
+    }
+  }
   ul {
     list-style: none;
     padding: 0;
