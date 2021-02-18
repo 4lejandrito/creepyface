@@ -43,7 +43,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             images: [
               {
                 url: `${baseURL}/logo.jpg`,
-                alt: `Picture of a cat looking at the mouse pointer`,
+                alt: `Creepyface logo on a background full of faces looking at the pointer`,
               },
             ],
             site_name: 'creepyface.io',
