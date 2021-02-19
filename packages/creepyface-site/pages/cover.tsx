@@ -18,9 +18,6 @@ export default function Cover({ namespace = '' }) {
   return (
     <>
       <style jsx global>{`
-        body {
-          border: none;
-        }
         .logo {
           width: 56vw;
           position: relative;

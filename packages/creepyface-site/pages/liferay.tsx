@@ -8,11 +8,6 @@ export default function Liferay() {
   const namespace = 'liferay'
   return (
     <CreateProvider namespace={namespace}>
-      <style jsx global>{`
-        body {
-          border: none;
-        }
-      `}</style>
       <div className="liferay">
         <Sample namespace={namespace} fullscreen />
         <header>
