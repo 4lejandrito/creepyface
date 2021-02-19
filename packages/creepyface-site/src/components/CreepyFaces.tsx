@@ -5,11 +5,17 @@ import range from 'lodash.range'
 import shuffle from 'lodash.shuffle'
 import classNames from 'classnames'
 
-const getSize = (width: number, height: number) => {
-  for (let rows = 4; rows <= 10; rows++) {
-    const size = Math.floor(height / rows)
-    const cols = Math.floor(width / size)
-    if (size <= 90 && cols > 3 && rows * cols < 70) {
+const getSize = (
+  width: number,
+  height: number,
+  round: (number: number) => number
+) => {
+  const minSide = Math.min(width, height)
+  const maxSide = Math.max(width, height)
+  for (let x = 4; x <= 10; x++) {
+    const size = round(minSide / x)
+    const y = round(maxSide / size)
+    if (size <= 90 && y > 3) {
       return size
     }
   }
@@ -35,8 +41,8 @@ export default memo(function CreepyFaces({
 }) {
   const nodeRef = useRef(null as HTMLDivElement | null)
   const { width, height } = useDimensions(nodeRef)
-  const size = getSize(width, height)
   const round = fullscreen ? Math.ceil : Math.floor
+  const size = getSize(width, height, round)
   const cols = round(width / size)
   const rows = round(height / size)
   const permutation = useMemo(() => shuffle(range(1, count)), [count])
