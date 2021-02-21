@@ -14,6 +14,7 @@ import { Namespace } from '../redux/types'
 import Button from './Button'
 import { useTranslate } from './Language'
 import { useDispatch, useSelector } from './State'
+import { setIsCreating } from '../redux/actions'
 
 const CreepyFaceCreatorModal = lazy(() => import('./CreepyFaceCreatorModal'))
 const CreateContext = createContext({
@@ -35,7 +36,7 @@ export function CreateProvider(props: {
   const router = useRouter()
 
   useEffect(() => {
-    dispatch({ type: props.open ? 'startCreation' : 'stopCreation' })
+    dispatch(setIsCreating(!!props.open)())
   }, [props.open])
 
   return (

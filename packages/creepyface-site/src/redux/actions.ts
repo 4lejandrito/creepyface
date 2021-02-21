@@ -51,6 +51,15 @@ export const toggleShortcuts = makeActionCreator(() => (dispatch) =>
   dispatch({ type: 'toggleShortcuts' })
 )
 
+export const setIsCreating = (isCreating: boolean) =>
+  makeActionCreator(() => (dispatch, getState) => {
+    if (isCreating !== getState().isCreating) {
+      dispatch({
+        type: isCreating ? 'startCreation' : 'stopCreation',
+      })
+    }
+  })
+
 export const restartCreation = makeActionCreator(() => (dispatch) =>
   dispatch({ type: 'restartCreation' })
 )
