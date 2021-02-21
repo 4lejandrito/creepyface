@@ -23,20 +23,20 @@
     "creepyface": "^8.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@rollup/plugin-babel": "^5.2.3",
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^17.1.0",
-    "@rollup/plugin-node-resolve": "^11.1.1",
-    "@storybook/addon-knobs": "^6.1.16",
-    "@storybook/addon-storysource": "^6.1.16",
-    "@storybook/addons": "^6.1.16",
-    "@storybook/html": "^6.1.16",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@storybook/addon-knobs": "^6.1.18",
+    "@storybook/addon-storysource": "^6.1.18",
+    "@storybook/addons": "^6.1.18",
+    "@storybook/html": "^6.1.18",
     "@ungap/custom-elements-builtin": "^0.6.3",
     "babel-loader": "^8.2.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "rollup": "^2.38.4",
+    "rollup": "^2.39.0",
     "rollup-plugin-uglify": "^6.0.4"
   }
 }
