@@ -9,7 +9,7 @@ const beats = (steps: Step[]) =>
 
 export const url = stayingAliveMP3
 export const bpm = 104 * 2
-export const firstBeat = 0.536
+export const firstBeat = 0.4
 export const choreography = [
   ...repeat(2)([
     ...beats(['nw', 'ne', 'sw', 'se']),

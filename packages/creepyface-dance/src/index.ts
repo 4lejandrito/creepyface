@@ -17,40 +17,18 @@ function onBeat(
   listener: BeatListener
 ) {
   const secondsPerBeat = 60 / bpm
-  let timeout: NodeJS.Timeout
-  let interval: NodeJS.Timeout
-  const stop = () => {
-    clearTimeout(timeout)
-    clearInterval(interval)
-  }
-  const start = () => {
-    stop()
-    if (audio.readyState !== 4) {
-      audio.addEventListener('canplaythrough', start)
-      return
+  let lastBeat = -1
+  const update = () => {
+    if (audio.currentTime >= firstBeat) {
+      const beat = Math.floor((audio.currentTime - firstBeat) / secondsPerBeat)
+      if (beat !== lastBeat) {
+        listener((lastBeat = beat))
+      }
     }
-    let i =
-      audio.currentTime <= firstBeat
-        ? 0
-        : Math.ceil((audio.currentTime - firstBeat) / secondsPerBeat)
-    const nextBeatSeconds = firstBeat + i * secondsPerBeat
-    const beat = () => listener(i++)
-    timeout = setTimeout(() => {
-      beat()
-      interval = setInterval(beat, 1000 * secondsPerBeat)
-    }, 1000 * (nextBeatSeconds - audio.currentTime))
+    handle = requestAnimationFrame(update)
   }
-  audio.addEventListener('pause', stop)
-  audio.addEventListener('playing', start)
-  if (!audio.paused) {
-    start()
-  }
-  return () => {
-    audio.removeEventListener('canplaythrough', start)
-    audio.removeEventListener('pause', stop)
-    audio.removeEventListener('playing', start)
-    stop()
-  }
+  let handle = requestAnimationFrame(update)
+  return () => cancelAnimationFrame(handle)
 }
 
 const pointMap: { [K in Step]: Point | null } = {
