@@ -1,6 +1,6 @@
 {
   "name": "creepyface-dance",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
