@@ -1,6 +1,0 @@
-.gitignore
-backend/uploads
-node_modules
-npm-debug.log
-Dockerfile
-build
