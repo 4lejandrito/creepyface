@@ -8,29 +8,6 @@ type Direction = typeof directions[number]
 
 export type Step = Direction | 'serious' | 'crazy'
 
-type BeatListener = (beat: number) => void
-
-function onBeat(
-  audio: HTMLAudioElement,
-  bpm: number,
-  firstBeat: number,
-  listener: BeatListener
-) {
-  const secondsPerBeat = 60 / bpm
-  let lastBeat = -1
-  const update = () => {
-    if (audio.currentTime >= firstBeat) {
-      const beat = Math.floor((audio.currentTime - firstBeat) / secondsPerBeat)
-      if (beat !== lastBeat) {
-        listener((lastBeat = beat))
-      }
-    }
-    handle = requestAnimationFrame(update)
-  }
-  let handle = requestAnimationFrame(update)
-  return () => cancelAnimationFrame(handle)
-}
-
 const pointMap: { [K in Step]: Point | null } = {
   serious: null,
   crazy: [0, 0],
@@ -54,10 +31,23 @@ export function makePointProvider(options: {
   const { name, audio, bpm, firstBeat, choreography } = options
   creepyface.registerPointProvider(
     name,
-    (consumer) =>
-      onBeat(audio, bpm, firstBeat, (beat) =>
-        consumer(pointMap[choreography[beat]])
-      ),
+    (consumer) => {
+      const secondsPerBeat = 60 / bpm
+      let lastBeat = -1
+      const update = () => {
+        if (audio.currentTime >= firstBeat) {
+          const beat = Math.floor(
+            (audio.currentTime - firstBeat) / secondsPerBeat
+          )
+          if (beat !== lastBeat) {
+            consumer(pointMap[choreography[(lastBeat = beat)]])
+          }
+        }
+        handle = requestAnimationFrame(update)
+      }
+      let handle = requestAnimationFrame(update)
+      return () => cancelAnimationFrame(handle)
+    },
     (point, img) => {
       const { x, y, width, height } = img.getBoundingClientRect()
       return point
