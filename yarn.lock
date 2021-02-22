@@ -1210,6 +1210,11 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@fontsource/open-sans@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-4.2.1.tgz#5c8763a91eb2d0e1a3a4ef61eca3743e4224e9e3"
+  integrity sha512-CfvS4yIrZxBA9FoITkceFUM3HS9MYty8qZJ/Jq1m4NRqQlJX7Jc8KV4k/APG1h16jdp9ilU6VmZbdLwPxXr7Yw==
+
 "@fortawesome/fontawesome-common-types@^0.2.34":
   version "0.2.34"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.34.tgz#0a8c348bb23b7b760030f5b1d912e582be4ec915"
