@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react'
-
-const chars = '⣾⣽⣻⢿⡿⣟⣯⣷'
+import React from 'react'
+import Icon from './Icon'
 
 export default function Loader() {
-  const [tick, setTick] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => setTick((tick) => (tick + 1) % chars.length),
-      100
-    )
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <span className="loader" style={{ fontFamily: 'monospace' }}>
-      {chars.charAt(tick)}
+    <span className="loader">
+      <Icon name="spinner" spin />
     </span>
   )
 }

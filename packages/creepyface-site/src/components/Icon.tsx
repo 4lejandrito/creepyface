@@ -32,6 +32,7 @@ import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge'
 import { Pictures } from '../redux/types'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 config.autoAddCss = false
 
 const icons = {
@@ -56,6 +57,7 @@ const icons = {
   code: faCode,
   grid: faTh,
   'grid-sm': faThLarge,
+  spinner: faSpinner,
 }
 const faces = [
   faGrinSquint,
@@ -72,9 +74,16 @@ const faces = [
 
 export type IconType = keyof typeof icons
 
-export default memo((props: { name: IconType; style?: object }) => (
-  <FontAwesomeIcon fixedWidth icon={icons[props.name]} style={props.style} />
-))
+export default memo(
+  (props: { name: IconType; style?: object; spin?: boolean }) => (
+    <FontAwesomeIcon
+      fixedWidth
+      icon={icons[props.name]}
+      style={props.style}
+      pulse={props.spin}
+    />
+  )
+)
 export const FaceIcon = memo((props: { seed: number }) => (
   <FontAwesomeIcon fixedWidth icon={faces[props.seed % faces.length]} />
 ))
