@@ -40,22 +40,25 @@ const withCreepyfaceRegistered = (registerCreepyface) => {
   })
 }
 
-const isDeactivated = (img, providePointArray) => {
-  it('uses the original src', () =>
-    expect(img.src).toBe('http://localhost/serious'))
+const isDeactivated = (
+  img,
+  providePointArray,
+  expectedSrc = 'http://localhost/serious'
+) => {
+  it('uses the expected src', () => expect(img.src).toBe(expectedSrc))
 
   it('does not follow the points', () => {
     providePointArray.forEach((providePoint) => {
       const getNewSrc = createGetNewSrc(img, providePoint)
-      expect(getNewSrc([0, 0])).toBe('http://localhost/serious')
-      expect(getNewSrc([0, -1])).toBe('http://localhost/serious')
-      expect(getNewSrc([1, -1])).toBe('http://localhost/serious')
-      expect(getNewSrc([1, 0])).toBe('http://localhost/serious')
-      expect(getNewSrc([1, 1])).toBe('http://localhost/serious')
-      expect(getNewSrc([0, 1])).toBe('http://localhost/serious')
-      expect(getNewSrc([-1, 1])).toBe('http://localhost/serious')
-      expect(getNewSrc([-1, 0])).toBe('http://localhost/serious')
-      expect(getNewSrc([-1, -1])).toBe('http://localhost/serious')
+      expect(getNewSrc([0, 0])).toBe(expectedSrc)
+      expect(getNewSrc([0, -1])).toBe(expectedSrc)
+      expect(getNewSrc([1, -1])).toBe(expectedSrc)
+      expect(getNewSrc([1, 0])).toBe(expectedSrc)
+      expect(getNewSrc([1, 1])).toBe(expectedSrc)
+      expect(getNewSrc([0, 1])).toBe(expectedSrc)
+      expect(getNewSrc([-1, 1])).toBe(expectedSrc)
+      expect(getNewSrc([-1, 0])).toBe(expectedSrc)
+      expect(getNewSrc([-1, -1])).toBe(expectedSrc)
     })
   })
 
@@ -629,6 +632,43 @@ describe('creepyface', () => {
       })
 
       isDeactivated(img, [provideMousePoint, provideTouchPoint])
+    })
+
+    describe('when calling creepyface(img)', () => {
+      const img = withImage(
+        () => `
+          <img src="http://localhost/serious"
+            data-src-hover="http://localhost/hover"
+            data-src-look-0="http://localhost/north"
+            data-src-look-45="http://localhost/northEast"
+            data-src-look-90="http://localhost/east"
+            data-src-look-135="http://localhost/southEast"
+            data-src-look-180="http://localhost/south"
+            data-src-look-225="http://localhost/southWest"
+            data-src-look-270="http://localhost/west"
+            data-src-look-315="http://localhost/northWest"
+          />
+        `
+      )
+
+      let cancel
+      withCreepyfaceRegistered(() => (cancel = creepyface(img)))
+
+      describe('when the pointer moves', () => {
+        beforeAndAfter(() => {
+          createGetNewSrc(img, provideMousePoint)([0, -1])
+        })
+
+        it('looks at it', () => expect(img.src).toBe('http://localhost/north'))
+
+        describe('and the cancel function is called with keepCurrentSrc = true', () => {
+          beforeAndAfter(() => {
+            cancel(true)
+          })
+
+          isDeactivated(img, [provideMousePoint], 'http://localhost/north')
+        })
+      })
     })
 
     describe('when timeToDefault is 0', () => {
