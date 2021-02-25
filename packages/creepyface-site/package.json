@@ -1,7 +1,7 @@
 {
   "name": "creepyface-site",
   "private": true,
-  "version": "8.0.2",
+  "version": "8.0.3",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
   "homepage": "https://creepyface.io",
   "license": "MIT",
@@ -65,7 +65,7 @@
     "no-bounce": "^0.0.3",
     "prisma": "^2.17.0",
     "react": "17.0.1",
-    "react-creepyface": "^8.0.2",
+    "react-creepyface": "^8.0.3",
     "react-dom": "17.0.1",
     "react-modal": "3.12.1",
     "react-redux": "7.2.2",
