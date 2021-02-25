@@ -15,6 +15,7 @@ export default function Creepyface(
   const { looks, points, ...rest } = { ...options }
   const imageRef = useRef<HTMLImageElement>(null)
   const setPointProviderRef = useRef<Consumer<string | undefined>>()
+  const pointProviderRef = useRef<string | undefined>()
 
   useEffect(() => {
     if (!disabled && imageRef.current) {
@@ -22,12 +23,16 @@ export default function Creepyface(
       return creepyface(imageRef.current, {
         ...options,
         onAttach: (args) => {
-          options?.onAttach?.(args)
           setPointProviderRef.current = args.setPointProvider
+          if (pointProviderRef.current !== points) {
+            args.setPointProvider(pointProviderRef.current)
+          }
+          options?.onAttach?.(args)
         },
         onDetach: () => {
           options?.onDetach?.()
           setPointProviderRef.current = undefined
+          pointProviderRef.current = undefined
         },
       })
     }
@@ -41,7 +46,10 @@ export default function Creepyface(
       .reduce((hash, [name, value]) => `${name}:${value} ${hash}`, ''),
   ])
 
-  useEffect(() => setPointProviderRef.current?.(points), [points])
+  useEffect(() => {
+    pointProviderRef.current = points
+    setPointProviderRef.current?.(points)
+  }, [points])
 
   return <img src={src} ref={imageRef} {...imgProps} />
 }
