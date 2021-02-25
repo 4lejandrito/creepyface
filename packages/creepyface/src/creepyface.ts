@@ -1,5 +1,5 @@
 import getOptions from './util/options'
-import { Cancel, Creepyface, Point, UserOptions } from './types'
+import { CreepyCancel, Creepyface, Point, UserOptions } from './types'
 import { register as registerPointProvider, listen } from './providers'
 import preload from './util/preload'
 import { debounce } from 'throttle-debounce'
@@ -10,7 +10,7 @@ import { Angle } from './util/algebra'
 const creepyface: Creepyface = (
   img: HTMLImageElement,
   userOptions?: UserOptions
-): Cancel => {
+): CreepyCancel => {
   const options = getOptions(img, userOptions)
   const cleanUp = () => delete img.__creepyfaceCancel
   const cancel = preload(
@@ -38,18 +38,18 @@ const creepyface: Creepyface = (
           stopListening = listen(img, pointConsumer, points)
         },
       })
-      return () => {
+      return (keepCurrentSrc) => {
         backToDefault.cancel()
         stopListening()
-        img.src = options.src
+        if (!keepCurrentSrc) img.src = options.src
         options.onDetach()
       }
     },
     cleanUp
   )
 
-  return (img.__creepyfaceCancel = () => {
-    cancel()
+  return (img.__creepyfaceCancel = (keepCurrentSrc) => {
+    cancel(keepCurrentSrc)
     cleanUp()
   })
 }

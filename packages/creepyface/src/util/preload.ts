@@ -1,4 +1,4 @@
-import { Cancel, Consumer, Options, ImageURL } from '../types'
+import { Consumer, Options, ImageURL, CreepyCancel } from '../types'
 
 const getSrcs = (options: Options): Array<ImageURL> => {
   const srcs = options.looks.map(({ src }) => src)
@@ -36,11 +36,11 @@ const loadImages = (
 export default function preload(
   img: HTMLImageElement,
   options: Options,
-  callback: () => Cancel,
+  callback: () => CreepyCancel,
   onError: () => void
-): Cancel {
+): CreepyCancel {
   let cancelled = false
-  let cancel: Cancel = () => {
+  let cancel: CreepyCancel = () => {
     cancelled = true
   }
   loadImages(getSrcs(options), (imgs) => {
@@ -50,10 +50,10 @@ export default function preload(
     }
     img.__creepyfaceReachableImages = imgs
     const cancelCallback = callback()
-    cancel = () => {
-      cancelCallback()
+    cancel = (keepCurrentSrc) => {
+      cancelCallback(keepCurrentSrc)
       delete img.__creepyfaceReachableImages
     }
   })
-  return () => cancel()
+  return (keepCurrentSrc) => cancel(keepCurrentSrc)
 }

@@ -1,5 +1,6 @@
 export type Degrees = number
 export type Point = [number, number]
+export type CreepyCancel = (keepCurrentSrc?: boolean) => void
 export type Cancel = () => void
 export type Consumer<T> = (t: T) => void
 
@@ -54,7 +55,7 @@ export type UserOptions = {
 }
 
 export type Creepyface = {
-  (img: HTMLImageElement, userOptions?: UserOptions | undefined): Cancel
+  (img: HTMLImageElement, userOptions?: UserOptions | undefined): CreepyCancel
   cancel(img: HTMLImageElement): void
   registerPointProvider: (
     name: string,

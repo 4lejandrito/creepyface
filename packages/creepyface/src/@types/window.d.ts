@@ -1,8 +1,8 @@
-import { Cancel } from '../types'
+import { CreepyCancel } from '../types'
 
 declare global {
   interface HTMLImageElement {
-    __creepyfaceCancel?: Cancel
+    __creepyfaceCancel?: CreepyCancel
     __creepyfaceReachableImages?: Array<HTMLImageElement>
   }
 }
