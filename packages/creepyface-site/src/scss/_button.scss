@@ -6,6 +6,8 @@
       opacity: 0.5;
     }
     &:not(:disabled):hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
       background: $color;
       color: $background;
       text-decoration: none;
@@ -52,11 +54,6 @@ button,
   &.invert {
     background-color: white;
     color: $color-main;
-
-    &:not(:disabled):hover {
-      background-color: transparent;
-      color: white;
-    }
   }
 }
 
