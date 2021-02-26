@@ -1,8 +1,10 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch } from './State'
 import { makePointProvider } from 'creepyface-dance'
-import { url, bpm, firstBeat, choreography } from '../songs/staying-alive'
+import * as stayingAlive from '../songs/staying-alive'
+import * as vivaLaVida from '../songs/viva-la-vida'
 import { CSSTransition } from 'react-transition-group'
+import { Namespace } from '../redux/types'
 
 function PlayerDiv(props: { audio: HTMLAudioElement }) {
   const dispatch = useDispatch()
@@ -24,26 +26,27 @@ function PlayerDiv(props: { audio: HTMLAudioElement }) {
         node.removeChild(audio)
       }
     }
-  }, [])
+  }, [audio])
 
   return <div ref={ref} className="player" />
 }
 
-export default function Player({ open }: { open: boolean }) {
+export default function Player({
+  open,
+  namespace,
+}: {
+  open: boolean
+  namespace: Namespace
+}) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
+  const song = namespace === 'liferay' ? vivaLaVida : stayingAlive
 
   useEffect(() => {
-    const audio = new Audio(url)
+    const audio = new Audio(song.url)
     audio.controls = true
-    makePointProvider({
-      name: 'dance',
-      audio,
-      bpm,
-      firstBeat,
-      choreography,
-    })
+    makePointProvider({ name: 'dance', audio, ...song })
     setAudio(audio)
-  }, [])
+  }, [song])
 
   return (
     <CSSTransition

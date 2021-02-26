@@ -64,7 +64,7 @@ export default function Sample({
           onSelect={select}
         />
       )}
-      <Player open={pointProvider === 'dance'} />
+      <Player namespace={namespace} open={pointProvider === 'dance'} />
     </section>
   )
 }
