@@ -49,6 +49,15 @@ button,
     border: none;
     padding: $spacing / 6 $spacing / 3;
   }
+  &.invert {
+    background-color: white;
+    color: $color-main;
+
+    &:not(:disabled):hover {
+      background-color: transparent;
+      color: white;
+    }
+  }
 }
 
 .light button,
