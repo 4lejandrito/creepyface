@@ -81,7 +81,7 @@ export default function CreateButton() {
 
   return (
     <Button
-      className="button invert"
+      className="invert"
       loading={open && loading}
       icon="create"
       href={navigate ? '/create' : undefined}
