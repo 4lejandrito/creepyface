@@ -45,9 +45,10 @@
       }
     }
   }
-  .create-button {
+  .actions {
     @include fade-in-up(0.3s);
     position: absolute;
     bottom: 5 * $spacing;
+    text-align: center;
   }
 }

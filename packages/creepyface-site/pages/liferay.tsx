@@ -3,9 +3,14 @@ import Sample from '../src/components/Sample'
 import Logo from '../src/components/Logo'
 import CreateButton, { CreateProvider } from '../src/components/CreateButton'
 import Link from '../src/components/Link'
+import Button from '../src/components/Button'
+import { toggleDance } from '../src/redux/actions'
+import { useDispatch, useSelector } from '../src/components/State'
 
 export default function Liferay() {
   const namespace = 'liferay'
+  const pointProvider = useSelector((state) => state.pointProvider)
+  const dispatch = useDispatch()
   return (
     <CreateProvider namespace={namespace}>
       <div className="liferay">
@@ -32,7 +37,15 @@ export default function Liferay() {
             </span>
           </div>
         </header>
-        <CreateButton />
+        <div className="actions">
+          <CreateButton />
+          <Button
+            icon={pointProvider !== 'dance' ? 'music' : 'stop'}
+            onClick={() => dispatch(toggleDance())}
+          >
+            {pointProvider !== 'dance' ? "Let's dance" : 'Please, stop'}
+          </Button>
+        </div>
       </div>
     </CreateProvider>
   )

@@ -33,6 +33,8 @@ import { Pictures } from '../redux/types'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faMusic } from '@fortawesome/free-solid-svg-icons'
+import { faStop } from '@fortawesome/free-solid-svg-icons'
 config.autoAddCss = false
 
 const icons = {
@@ -58,6 +60,8 @@ const icons = {
   grid: faTh,
   'grid-sm': faThLarge,
   spinner: faSpinner,
+  music: faMusic,
+  stop: faStop,
 }
 const faces = [
   faGrinSquint,
