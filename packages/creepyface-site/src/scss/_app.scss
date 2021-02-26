@@ -13,7 +13,7 @@
     header {
       @include fade-in-up(0.2s);
       padding-top: $spacing;
-      padding-bottom: 2 * $spacing;
+      padding-bottom: 1.5 * $spacing;
       margin: 0;
       font-size: 2.5rem;
       @include s {
@@ -21,6 +21,7 @@
       }
       @include horizontal {
         font-size: 3.5rem;
+        padding-bottom: 2 * $spacing;
       }
       .logo {
         height: 1.4em;
@@ -70,10 +71,13 @@
     position: relative;
     flex-direction: row;
     margin: $spacing;
-    max-height: 30 * $spacing;
+    @include vertical {
+      max-height: 50 * $spacing;
+    }
     @include horizontal {
       margin: 0;
       max-width: 45 * $spacing;
+      max-height: 30 * $spacing;
     }
     .creepy {
       cursor: pointer;
