@@ -1,10 +1,11 @@
-import React, { memo, useRef, useMemo } from 'react'
-import CreepyFace, { getHostedImages } from './CreepyFace'
+import React, { memo, useRef } from 'react'
+import { AsyncCreepyFace } from './CreepyFace'
 import useDimensions from '../hooks/dimensions'
 import range from 'lodash.range'
-import shuffle from 'lodash.shuffle'
 import classNames from 'classnames'
 import { Namespace } from '../redux/types'
+import useSpritemap from '../hooks/spritemap'
+import usePermutation from '../hooks/permutation'
 
 const getSize = (
   width: number,
@@ -46,7 +47,8 @@ export default memo(function CreepyFaces({
   const size = getSize(width, height, round)
   const cols = round(width / size)
   const rows = round(height / size)
-  const permutation = useMemo(() => shuffle(range(1, count)), [count])
+  const permutation = usePermutation(rows * cols)
+  const [getId, getImages] = useSpritemap(namespace, Math.max(count - 1, 1))
 
   return (
     <div ref={nodeRef} className={classNames('creepyfaces', { fullscreen })}>
@@ -54,7 +56,7 @@ export default memo(function CreepyFaces({
         {width > 0 &&
           height > 0 &&
           range(rows * cols).map((i) => {
-            const id = permutation[i % (count - 1)] ?? 0
+            const id = getId(permutation[i])
             return (
               <li
                 key={i}
@@ -63,12 +65,13 @@ export default memo(function CreepyFaces({
                   height: size,
                 }}
               >
-                <CreepyFace
+                <AsyncCreepyFace
+                  id={id}
                   alt={alt}
-                  images={getHostedImages(id, namespace, 'small')}
                   points={points}
                   timeToDefault={timeToDefault}
-                  onSelect={() => onSelect?.(id)}
+                  getImages={getImages}
+                  onSelect={() => onSelect?.(id + (count > 1 ? 1 : 0))}
                 />
               </li>
             )

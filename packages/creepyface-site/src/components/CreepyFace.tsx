@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Creepyface from 'react-creepyface'
 import Loader from './Loader'
 import { FaceIcon } from './Icon'
@@ -8,6 +8,7 @@ import { getAngles } from '../util/get-next'
 import hash from 'string-hash'
 import 'creepyface-firefly'
 import { Size } from '../backend/resize'
+import { useMountedState } from 'react-use'
 
 const noop = () => {}
 const url = (id: number | string, namespace?: string, size?: string) => (
@@ -36,9 +37,42 @@ export const getHostedImages = (
   }
 }
 
+export function AsyncCreepyFace(props: {
+  id: number
+  alt: string
+  timeToDefault?: number
+  points: string
+  getImages: (id: number) => Promise<Images | null>
+  onSelect?: () => void
+}) {
+  const [images, setImages] = useState<Images | null>(null)
+  const isMounted = useMountedState()
+
+  useEffect(() => {
+    setImages(null)
+    props.getImages(props.id).then((images) => {
+      if (isMounted()) {
+        setImages(images)
+      }
+    })
+  }, [props.getImages, props.id])
+
+  return (
+    <CreepyFace
+      id={`${props.id}`}
+      alt={props.alt}
+      images={images}
+      points={props.points}
+      timeToDefault={props.timeToDefault}
+      onSelect={props.onSelect}
+    />
+  )
+}
+
 export default function CreepyFace(props: {
+  id?: string
   alt?: string
-  images: Images
+  images: Images | null
   hidden?: boolean
   points?: string
   timeToDefault?: number
@@ -47,6 +81,7 @@ export default function CreepyFace(props: {
   onLoad?: () => void
 }) {
   const {
+    id,
     alt,
     images,
     hidden,
@@ -70,7 +105,7 @@ export default function CreepyFace(props: {
   const onDebug = useCallback(({ src }) => onChange(src), [onChange])
   return (
     <span className="creepy">
-      {!hidden && (
+      {!hidden && images && (
         <Creepyface
           alt={alt}
           src={images.src}
@@ -88,9 +123,9 @@ export default function CreepyFace(props: {
           onLoad={() => setLoaded(true)}
         />
       )}
-      {(!loaded || firstAttach || hidden) && (
+      {(!loaded || firstAttach || hidden || !images) && (
         <div className="placeholder">
-          <FaceIcon seed={hash(images.src)} />
+          <FaceIcon seed={hash(id ?? images?.src ?? '')} />
         </div>
       )}
       {!hidden && (!attached || !loaded) && <Loader />}

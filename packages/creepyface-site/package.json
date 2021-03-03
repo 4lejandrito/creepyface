@@ -40,6 +40,7 @@
     "basic-auth": "^2.0.1",
     "bowser": "^2.11.0",
     "browser-resolve": "^2.0.0",
+    "canvas": "^2.6.1",
     "classnames": "^2.2.6",
     "clipbrd": "^1.0.2",
     "cloudinary": "^1.24.0",
@@ -79,6 +80,7 @@
     "sharp": "^0.27.0",
     "stop-media-stream": "^1.0.0",
     "string-hash": "^1.1.3",
+    "supports-webp": "^2.0.1",
     "typescript": "^4.1.5",
     "uuid": "^8.3.2",
     "webrtc-adapter": "^7.7.0"

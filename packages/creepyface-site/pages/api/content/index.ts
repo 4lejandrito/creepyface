@@ -7,6 +7,7 @@ import mime from 'mime/lite'
 import html from '../../../src/backend/template.hbs'
 import prisma from '../../../prisma'
 import baseURL from '../../../src/util/url'
+import { updateSpritemap } from '../../../src/backend/spritemap'
 
 const getImagesPath = (uuid: string) =>
   uuid === '0' ? 'public/nala' : `${uploads}/${uuid}/img`
@@ -71,7 +72,7 @@ export default route(async (req, res) => {
       options: getOptions(files),
     })
   )
-  await prisma.creepyface.create({
+  const creepyface = await prisma.creepyface.create({
     data: {
       uuid,
       canUseForResearch,
@@ -81,6 +82,10 @@ export default route(async (req, res) => {
       exclusive: false,
     },
   })
+  if (creepyface.approved) {
+    await updateSpritemap(namespace ?? undefined)
+    await updateSpritemap(undefined)
+  }
   res.send({
     download: `${baseURL}/api/content/${uuid}/creepyface.zip`,
     view: canUseAsSample ? `${baseURL}/content/${uuid}` : undefined,
