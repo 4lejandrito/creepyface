@@ -1,6 +1,6 @@
 import sharp from 'sharp'
 import fs from 'fs-extra'
-import { thumbnails } from './storage'
+import { thumbnails, uploads } from './storage'
 import path from 'path'
 
 export type Size = 'medium' | 'small' | 'square'
@@ -13,10 +13,15 @@ const getDimensions = (size: Size) =>
   }[size] || { width: 0, height: 0 })
 
 export default async function resize(
-  imagePath: string,
   uuid: string,
+  name: string | undefined,
   size?: Size
 ) {
+  const imagePath = `${
+    uuid === 'nala' || uuid === 'ray'
+      ? `public/${uuid}`
+      : `${uploads}/${uuid}/img`
+  }/${name || 'serious'}.jpeg`
   const { width, height } = getDimensions(size || 'medium')
 
   if (width === 0 && height === 0) {
