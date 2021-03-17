@@ -26,7 +26,6 @@ export default function Sample({
   ])
   const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
-  const [mainSampleLoaded, setMainSampleLoaded] = useState(false)
   const select = useCallback(
     (id) => {
       dispatch({ type: 'selectCreepyface', payload: id })
@@ -52,9 +51,8 @@ export default function Sample({
           () => count !== null && select(Math.floor(Math.random() * count)),
           [count, select]
         )}
-        onLoad={useCallback(() => setMainSampleLoaded(true), [])}
       />
-      {mainSampleLoaded && count != null && count > 0 && (
+      {count != null && count > 0 && (
         <CreepyFaces
           alt={translate("A stranger's Creepyface")}
           namespace={namespace}

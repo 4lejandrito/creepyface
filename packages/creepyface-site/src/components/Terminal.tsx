@@ -15,7 +15,6 @@ export default function Terminal(props: {
   open: boolean
   onChange: (src: string) => void
   onSelect: () => void
-  onLoad: () => void
 }) {
   const translate = useTranslate()
 
@@ -35,7 +34,6 @@ export default function Terminal(props: {
           points={props.points}
           onChange={props.open ? props.onChange : undefined}
           onSelect={props.onSelect}
-          onLoad={props.onLoad}
         />
         <Button type="tiny" action={toggleCode}>
           {translate(props.open ? 'Hide' : 'Show')} {translate('code')}
