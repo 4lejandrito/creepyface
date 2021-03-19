@@ -35,7 +35,7 @@ export default memo(function CreepyFaces({
 }: {
   alt: string
   namespace: Namespace
-  count: number
+  count: number | null
   timeToDefault?: number
   points: string
   fullscreen?: boolean
@@ -48,7 +48,10 @@ export default memo(function CreepyFaces({
   const cols = round(width / size)
   const rows = round(height / size)
   const permutation = usePermutation(rows * cols)
-  const [getId, getImages] = useSpritemap(namespace, Math.max(count - 1, 1))
+  const [getId, getImages] = useSpritemap(
+    namespace,
+    count === null ? 0 : Math.max(count - 1, 1)
+  )
 
   return (
     <div ref={nodeRef} className={classNames('creepyfaces', { fullscreen })}>
@@ -71,7 +74,11 @@ export default memo(function CreepyFaces({
                   points={points}
                   timeToDefault={timeToDefault}
                   getImages={getImages}
-                  onSelect={() => onSelect?.(id + (count > 1 ? 1 : 0))}
+                  onSelect={
+                    count === null
+                      ? undefined
+                      : () => onSelect?.(id + (count > 1 ? 1 : 0))
+                  }
                 />
               </li>
             )

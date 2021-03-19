@@ -52,16 +52,14 @@ export default function Sample({
           [count, select]
         )}
       />
-      {count != null && count > 0 && (
-        <CreepyFaces
-          alt={translate("A stranger's Creepyface")}
-          namespace={namespace}
-          count={count}
-          points={pointProvider}
-          fullscreen={fullscreen}
-          onSelect={select}
-        />
-      )}
+      <CreepyFaces
+        alt={translate("A stranger's Creepyface")}
+        namespace={namespace}
+        count={count}
+        points={pointProvider}
+        fullscreen={fullscreen}
+        onSelect={select}
+      />
       <Player namespace={namespace} open={pointProvider === 'dance'} />
     </section>
   )

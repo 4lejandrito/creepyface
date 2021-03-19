@@ -20,6 +20,7 @@ export default function useSpritemap(namespace: Namespace, count: number) {
   >(() => () => Promise.resolve(null))
 
   useEffect(() => {
+    if (count === 0) return
     const chunks: Partial<{ [K: number]: Promise<HTMLImageElement> }> = {}
     const getChunk = (i: number) => {
       const chunk = chunks[i]
