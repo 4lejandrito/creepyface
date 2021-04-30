@@ -1,5 +1,8 @@
 module.exports = (nextConfig) => ({
   ...nextConfig,
+  future: {
+    webpack5: true,
+  },
   async redirects() {
     return [
       {
