@@ -127,6 +127,7 @@ export default function Code({
             <Attribute {...node.attributes[0]} />
             {node.close && (
               <>
+                <span className="delimiter">{'>'}</span>
                 <span className="delimiter">{'</'}</span>
                 <span className="tag">{node.name}</span>
                 <span className="delimiter">{'>'}</span>
