@@ -13,6 +13,7 @@ If you use React, check out [\<Creepyface /\>](packages/react-creepyface). If yo
 Creepyface in the wild:
 
 - https://www.patrickcampbell.dev
+- https://atroshenkonikita.com
 - https://www.yitzi.dev
 - https://1aville.ch/about.html
 - https://github.com/reflog/mattermost-plugin-creepy
