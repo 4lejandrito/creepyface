@@ -1,4 +1,6 @@
-module.exports = (nextConfig) => ({
+const { withPlausibleProxy } = require('next-plausible')
+
+module.exports = (nextConfig) => withPlausibleProxy()(({
   ...nextConfig,
   future: {
     webpack5: true,
@@ -59,4 +61,4 @@ module.exports = (nextConfig) => ({
     config.module.rules.push({ test: /\.hbs$/, loader: 'handlebars-loader' })
     return config
   },
-})
+}))

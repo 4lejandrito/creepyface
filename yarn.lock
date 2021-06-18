@@ -11192,10 +11192,10 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
-next-plausible@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/next-plausible/-/next-plausible-1.6.1.tgz#0346a254c73fdac5bf3ac3f06f0028fede782c5a"
-  integrity sha512-eMVqZbzU6bJsBIHlC63lNKl0KLvx8NA+/YlUUqj2gvCviQ7C2X4PY59gEB+mO46JvKSy/IhAD8l85/YGFhCkDg==
+next-plausible@1.7.0-beta.6:
+  version "1.7.0-beta.6"
+  resolved "https://registry.yarnpkg.com/next-plausible/-/next-plausible-1.7.0-beta.6.tgz#81768237e183be2866bbb80cfc5e1fe0df28fc84"
+  integrity sha512-hSwhplrpd0uhmxwfanHe0TNKvYpboXFk34T0dcuZL0yPPyqM3WHoFswgM2RbCwsLYtRXqvWaBR3QUb0Oql+GVg==
 
 next-seo@^4.24.0:
   version "4.24.0"

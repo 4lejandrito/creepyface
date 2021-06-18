@@ -61,7 +61,7 @@
     "mousetrap": "^1.6.5",
     "multiparty": "^4.2.2",
     "next": "^10.2.0",
-    "next-plausible": "^1.6.1",
+    "next-plausible": "1.7.0-beta.6",
     "next-seo": "^4.24.0",
     "no-bounce": "^0.0.3",
     "prisma": "^2.21.2",
