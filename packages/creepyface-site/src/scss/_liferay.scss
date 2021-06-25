@@ -37,7 +37,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      margin-top: $spacing / 8;
+      margin-top: math.div($spacing, 8);
       svg {
         margin-right: 0.2em;
         vertical-align: middle;

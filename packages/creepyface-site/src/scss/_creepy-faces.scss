@@ -36,8 +36,8 @@
       }
       .loader {
         font-size: 0.7rem;
-        bottom: $spacing / 4;
-        right: $spacing / 4;
+        bottom: math.div($spacing, 4);
+        right: math.div($spacing, 4);
       }
       &:hover {
         opacity: 0.5;

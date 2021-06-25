@@ -31,8 +31,8 @@
   }
   button {
     position: absolute;
-    bottom: $spacing / 4;
-    right: $spacing / 4;
-    margin: $spacing / 4;
+    bottom: math.div($spacing, 4);
+    right: math.div($spacing, 4);
+    margin: math.div($spacing, 4);
   }
 }

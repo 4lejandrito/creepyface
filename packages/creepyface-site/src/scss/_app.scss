@@ -43,7 +43,7 @@
     .actions {
       @include fade-in-up(0.3s);
       padding: $spacing 0;
-      margin-top: $spacing / 2;
+      margin-top: math.div($spacing, 2);
       @include horizontal {
         margin-top: 0;
       }
