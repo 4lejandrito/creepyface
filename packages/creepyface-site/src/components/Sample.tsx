@@ -36,7 +36,7 @@ export default function Sample({
 
   useEffect(() => {
     dispatch(requestCount(namespace)())
-  }, [namespace])
+  }, [namespace, dispatch])
 
   return (
     <section className="sample">

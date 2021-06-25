@@ -78,8 +78,12 @@ const faces = [
 
 export type IconType = keyof typeof icons
 
-export default memo(
-  (props: { name: IconType; style?: object; spin?: boolean }) => (
+export default memo(function Icon(props: {
+  name: IconType
+  style?: object
+  spin?: boolean
+}) {
+  return (
     <FontAwesomeIcon
       fixedWidth
       icon={icons[props.name]}
@@ -87,21 +91,27 @@ export default memo(
       pulse={props.spin}
     />
   )
-)
-export const FaceIcon = memo((props: { seed: number }) => (
-  <FontAwesomeIcon fixedWidth icon={faces[props.seed % faces.length]} />
-))
+})
+export const FaceIcon = memo(function FaceIcon(props: { seed: number }) {
+  return <FontAwesomeIcon fixedWidth icon={faces[props.seed % faces.length]} />
+})
 const faceIconName = (next: keyof Pictures) => {
   if (next >= 0) return 'finger'
   if (next === 'hover') return 'crazy'
   return 'happy'
 }
-export const ImageIcon = memo(({ next }: { next: keyof Pictures }) => (
-  <FontAwesomeIcon
-    fixedWidth
-    icon={icons[faceIconName(next)]}
-    style={{
-      transform: `rotate(${next >= 0 ? next : 0}deg)`,
-    }}
-  />
-))
+export const ImageIcon = memo(function ImageIcon({
+  next,
+}: {
+  next: keyof Pictures
+}) {
+  return (
+    <FontAwesomeIcon
+      fixedWidth
+      icon={icons[faceIconName(next)]}
+      style={{
+        transform: `rotate(${next >= 0 ? next : 0}deg)`,
+      }}
+    />
+  )
+})

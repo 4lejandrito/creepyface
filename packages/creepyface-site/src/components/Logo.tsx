@@ -6,13 +6,14 @@ const Pointer = (props: {
   animating: boolean
   onPositionChange?: (position: Point) => void
 }) => {
+  const { onPositionChange } = props
   const ref = useRef<SVGGElement>(null)
   const updatePosition = useCallback(() => {
     if (ref.current) {
       const { left, top } = ref.current.getBoundingClientRect()
-      props.onPositionChange?.([left - 1, top - 1])
+      onPositionChange?.([left - 1, top - 1])
     }
-  }, [props.onPositionChange])
+  }, [onPositionChange])
 
   const { width, height } = useWindowSize()
   useEffect(() => updatePosition(), [width, height, updatePosition])

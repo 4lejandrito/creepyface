@@ -46,15 +46,16 @@ export function AsyncCreepyFace(props: {
 }) {
   const [images, setImages] = useState<Images | null>(null)
   const isMounted = useMountedState()
+  const { getImages, id } = props
 
   useEffect(() => {
     setImages(null)
-    props.getImages(props.id).then((images) => {
+    getImages(id).then((images) => {
       if (isMounted()) {
         setImages(images)
       }
     })
-  }, [props.getImages, props.id])
+  }, [getImages, id, isMounted])
 
   return (
     <CreepyFace

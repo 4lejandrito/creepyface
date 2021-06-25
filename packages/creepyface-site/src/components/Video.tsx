@@ -62,7 +62,7 @@ export default function Video(props: {
       if (streamRef.current) stopMediaStream(streamRef.current)
       onUnload()
     }
-  }, [])
+  }, [onUnload])
 
   return (
     <div className="creepy video">

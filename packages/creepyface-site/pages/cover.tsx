@@ -13,7 +13,7 @@ export default function Cover({ namespace = '' }) {
 
   useEffect(() => {
     dispatch(requestCount(namespace)())
-  }, [namespace])
+  }, [namespace, dispatch])
 
   return (
     <>

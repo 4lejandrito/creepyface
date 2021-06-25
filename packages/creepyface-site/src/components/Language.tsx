@@ -15,7 +15,7 @@ export default function Language({
 
   useEffect(() => {
     dispatch(loadLocale())
-  }, [])
+  }, [dispatch])
 
   return locale.value !== 'en' && !locale.messages ? null : <>{children}</>
 }
