@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import CreepyFace, { getHostedImages, Images } from './CreepyFace'
 import CreepyFaceOptions from './CreepyFaceOptions'
 import getNext, { getAngles } from '../util/get-next'
@@ -44,7 +44,10 @@ function Take({
         </span>
         <Video
           onLoad={(shoot) => dispatch({ type: 'videoReady', payload: shoot })}
-          onUnload={() => dispatch({ type: 'videoNotReady' })}
+          onUnload={useCallback(
+            () => dispatch({ type: 'videoNotReady' }),
+            [dispatch]
+          )}
         />
       </div>
       <Button icon="camera" showShortcut action={takePicture}>

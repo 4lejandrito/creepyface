@@ -11,12 +11,11 @@ import { Size } from '../backend/resize'
 import { useMountedState } from 'react-use'
 
 const noop = () => {}
-const url = (id: number | string, namespace?: string, size?: string) => (
-  name: string
-) =>
-  `${baseURL}/api/img/${id}/${name}${size ? '/' + size : ''}${
-    namespace ? '?namespace=' + namespace : ''
-  }`
+const url =
+  (id: number | string, namespace?: string, size?: string) => (name: string) =>
+    `${baseURL}/api/img/${id}/${name}${size ? '/' + size : ''}${
+      namespace ? '?namespace=' + namespace : ''
+    }`
 
 export type Images = {
   src: string
@@ -47,15 +46,16 @@ export function AsyncCreepyFace(props: {
 }) {
   const [images, setImages] = useState<Images | null>(null)
   const isMounted = useMountedState()
+  const { getImages, id } = props
 
   useEffect(() => {
     setImages(null)
-    props.getImages(props.id).then((images) => {
+    getImages(id).then((images) => {
       if (isMounted()) {
         setImages(images)
       }
     })
-  }, [props.getImages, props.id])
+  }, [getImages, id, isMounted])
 
   return (
     <CreepyFace

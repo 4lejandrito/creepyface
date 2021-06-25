@@ -20,7 +20,7 @@ export default function Link({
 
   useEffect(() => {
     if (download && anchorRef.current) anchorRef.current.click()
-  }, [])
+  }, [download])
 
   return !isExternal(href) ? (
     <NextLink href={href}>
@@ -35,7 +35,7 @@ export default function Link({
       href={href}
       download={download}
       target={download ? '_self' : '_blank'}
-      rel={download ? undefined : 'noopener'}
+      rel="noopener noreferrer"
     >
       {children}
     </a>

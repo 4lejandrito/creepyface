@@ -20,10 +20,10 @@ export default function Sample({
   const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
   const showCode = useSelector((state) => state.showCode)
   const pointProvider = useSelector((state) => state.pointProvider)
-  const images = useMemo(() => getHostedImages(selectedCreepyface, namespace), [
-    selectedCreepyface,
-    namespace,
-  ])
+  const images = useMemo(
+    () => getHostedImages(selectedCreepyface, namespace),
+    [selectedCreepyface, namespace]
+  )
   const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
   const select = useCallback(
@@ -36,7 +36,7 @@ export default function Sample({
 
   useEffect(() => {
     dispatch(requestCount(namespace)())
-  }, [namespace])
+  }, [namespace, dispatch])
 
   return (
     <section className="sample">

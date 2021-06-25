@@ -37,7 +37,7 @@ export function CreateProvider(props: {
 
   useEffect(() => {
     dispatch(setIsCreating(!!props.open)())
-  }, [props.open])
+  }, [props.open, dispatch])
 
   return (
     <Shortcuts>
@@ -52,7 +52,7 @@ export function CreateProvider(props: {
                 type: !isCreating ? 'startCreation' : 'stopCreation',
               }),
           }),
-          [modalLoaded, props.navigate, isCreating]
+          [modalLoaded, props.navigate, isCreating, dispatch]
         )}
       >
         {props.children}

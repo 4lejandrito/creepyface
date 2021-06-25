@@ -26,7 +26,7 @@ function PlayerDiv(props: { audio: HTMLAudioElement }) {
         node.removeChild(audio)
       }
     }
-  }, [audio])
+  }, [audio, dispatch])
 
   return <div ref={ref} className="player" />
 }

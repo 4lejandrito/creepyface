@@ -36,7 +36,7 @@ export default function Shortcuts({
 
     return () =>
       Object.keys(shortcuts).forEach((shortcut) => Mousetrap.unbind(shortcut))
-  }, [])
+  }, [dispatch])
 
   return <>{children}</>
 }
