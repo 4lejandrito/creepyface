@@ -3,9 +3,6 @@ const { withPlausibleProxy } = require('next-plausible')
 module.exports = (nextConfig) =>
   withPlausibleProxy()({
     ...nextConfig,
-    future: {
-      webpack5: true,
-    },
     async redirects() {
       return [
         {

@@ -1,4 +1,5 @@
 module.exports = {
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.jsx?$': '../../node_modules/babel-jest',
     '^.+\\.tsx?$': 'ts-jest',

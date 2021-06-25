@@ -1,6 +1,8 @@
 import simulateEvent from 'simulate-event'
 import creepyface from '../src/creepyface'
 
+jest.useFakeTimers()
+
 const createElement = (string) => {
   const div = document.createElement('div')
   div.innerHTML = string
@@ -181,11 +183,6 @@ const followsTheCustomPointProvider = (img) =>
   })
 
 describe('creepyface', () => {
-  beforeAndAfter(() => {
-    jest.useFakeTimers()
-    return () => jest.useRealTimers()
-  })
-
   describe('when an image fails to load', () => {
     beforeAndAfter(() => {
       jest.spyOn(global, 'Image').mockImplementation(() => {

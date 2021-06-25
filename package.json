@@ -12,10 +12,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "husky": "^4.3.8",
+    "husky": "^6.0.0",
     "lerna": "^4.0.0",
-    "lint-staged": ">=10.5.4",
-    "prettier": "^2.2.1"
+    "lint-staged": ">=11.0.0",
+    "prettier": "^2.3.1"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json,html,css,scss,webmanifest}": "prettier --write"
@@ -25,15 +25,12 @@
     "dev": "lerna run --parallel dev",
     "test": "lerna run test",
     "test:coverage": "lerna run test:coverage",
-    "publish:all": "lerna publish"
+    "publish:all": "lerna publish",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
