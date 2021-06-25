@@ -25,8 +25,8 @@
     }
     button {
       vertical-align: middle;
-      margin: 0 $spacing / 4;
-      padding: $spacing / 2;
+      margin: 0 math.div($spacing, 4);
+      padding: math.div($spacing, 2);
       border: none;
       line-height: 1;
     }
@@ -58,7 +58,7 @@
     &.small {
       li {
         @include square(150px);
-        margin: $spacing / 2;
+        margin: math.div($spacing, 2);
         .creepy {
           @include square(150px);
         }
@@ -67,7 +67,7 @@
     &.big {
       li {
         @include square(300px);
-        margin: $spacing / 2;
+        margin: math.div($spacing, 2);
         .creepy {
           @include square(300px);
         }
@@ -85,12 +85,12 @@
         margin: 0;
         .badges {
           position: absolute;
-          top: -$spacing / 2;
-          right: -$spacing / 2;
+          top: math.div(-$spacing, 2);
+          right: math.div(-$spacing, 2);
           z-index: 2;
           .badge {
-            padding: 0 $spacing / 4;
-            margin-left: $spacing / 4;
+            padding: 0 math.div($spacing, 4);
+            margin-left: math.div($spacing, 4);
             @extend %media;
           }
         }
@@ -104,12 +104,12 @@
       }
       .actions {
         position: absolute;
-        bottom: $spacing / 2;
+        bottom: math.div($spacing, 2);
         left: 0;
         right: 0;
-        margin-top: $spacing / 2;
+        margin-top: math.div($spacing, 2);
         button {
-          margin: 0 $spacing / 4;
+          margin: 0 math.div($spacing, 4);
         }
       }
     }

@@ -3,7 +3,7 @@ $color-main: #1abc9c;
 $color-danger: #dc3545;
 $color-text: darken($color-main, 5%);
 $main-creepyface-width: 8.5em;
-$main-creepyface-height: $main-creepyface-width * 45 / 35;
+$main-creepyface-height: math.div($main-creepyface-width * 45, 35);
 
 @mixin horizontal {
   @media (min-width: 680px) and (min-aspect-ratio: 4/3), (min-width: 1080px) {
@@ -129,8 +129,8 @@ $main-creepyface-height: $main-creepyface-width * 45 / 35;
     > .loader {
       color: white;
       position: absolute;
-      bottom: $spacing / 2;
-      right: $spacing / 2;
+      bottom: math.div($spacing, 2);
+      right: math.div($spacing, 2);
     }
     button,
     a {

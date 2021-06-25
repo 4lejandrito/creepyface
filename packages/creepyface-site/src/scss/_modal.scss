@@ -17,9 +17,9 @@
     margin: $spacing;
     .cancel {
       position: absolute;
-      padding: $spacing / 2;
-      top: $spacing / 2;
-      right: $spacing / 2;
+      padding: math.div($spacing, 2);
+      top: math.div($spacing, 2);
+      right: math.div($spacing, 2);
       margin: 0;
       background: none;
       border: none;
