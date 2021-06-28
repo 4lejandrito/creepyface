@@ -6,6 +6,7 @@ import Link from '../src/components/Link'
 import Button from '../src/components/Button'
 import { toggleDance } from '../src/redux/actions'
 import { useDispatch, useSelector } from '../src/components/State'
+import url from '../src/util/url'
 
 export default function Liferay() {
   const namespace = 'liferay'
@@ -16,7 +17,7 @@ export default function Liferay() {
       <div className="liferay">
         <Sample namespace={namespace} fullscreen />
         <header>
-          <Link href="/">
+          <Link href={url}>
             <Logo />
           </Link>
           <div className="subtitle">
