@@ -15,7 +15,7 @@
     "husky": "^6.0.0",
     "lerna": "^4.0.0",
     "lint-staged": ">=11.0.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json,html,css,scss,webmanifest}": "prettier --write"
