@@ -38,11 +38,9 @@ export default function SelectableList<T extends { uuid: string }>(props: {
   const selected = [...selection]
     .map((uuid) => items.find((c) => c.uuid === uuid))
     .filter((item) => !!item) as T[]
-  const actionIcons = (Object.keys(
-    selected.map(actions).reduce(merge, {})
-  ) as IconType[]).filter((icon) =>
-    selected.every((item) => actions(item)[icon])
-  )
+  const actionIcons = (
+    Object.keys(selected.map(actions).reduce(merge, {})) as IconType[]
+  ).filter((icon) => selected.every((item) => actions(item)[icon]))
 
   return (
     <>

@@ -1,14 +1,7 @@
 import { Pictures, ValidAngle } from '../redux/types'
 
 export const getAngles = (): ValidAngle[] => [
-  0,
-  45,
-  90,
-  135,
-  180,
-  225,
-  270,
-  315,
+  0, 45, 90, 135, 180, 225, 270, 315,
 ]
 
 export default function getNext(

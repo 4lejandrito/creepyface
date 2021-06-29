@@ -18,24 +18,22 @@ const receiveMessages = ({
   }
 }
 
-const loadLocaleValue = (value: Language) => (
-  dispatch: Dispatch,
-  getState: () => State
-) => {
-  const { locale } = getState()
-  dispatch({ type: 'requestMessages', payload: value })
-  if (value === 'es') {
-    if (!locale.messages) {
-      import('../locales/es').then(({ messages }) => {
-        dispatch(receiveMessages({ value, messages }))
-      })
+const loadLocaleValue =
+  (value: Language) => (dispatch: Dispatch, getState: () => State) => {
+    const { locale } = getState()
+    dispatch({ type: 'requestMessages', payload: value })
+    if (value === 'es') {
+      if (!locale.messages) {
+        import('../locales/es').then(({ messages }) => {
+          dispatch(receiveMessages({ value, messages }))
+        })
+      } else {
+        dispatch(receiveMessages({ value, messages: locale.messages }))
+      }
     } else {
       dispatch(receiveMessages({ value, messages: locale.messages }))
     }
-  } else {
-    dispatch(receiveMessages({ value, messages: locale.messages }))
   }
-}
 
 export const loadLocale = makeActionCreator(() => (dispatch, getState) => {
   const { locale } = getState()
@@ -47,8 +45,8 @@ export const toggleLocale = makeActionCreator(() => (dispatch, getState) => {
   dispatch(loadLocaleValue(locale.value === 'en' ? 'es' : 'en'))
 })
 
-export const toggleShortcuts = makeActionCreator(() => (dispatch) =>
-  dispatch({ type: 'toggleShortcuts' })
+export const toggleShortcuts = makeActionCreator(
+  () => (dispatch) => dispatch({ type: 'toggleShortcuts' })
 )
 
 export const setIsCreating = (isCreating: boolean) =>
@@ -60,8 +58,8 @@ export const setIsCreating = (isCreating: boolean) =>
     }
   })
 
-export const restartCreation = makeActionCreator(() => (dispatch) =>
-  dispatch({ type: 'restartCreation' })
+export const restartCreation = makeActionCreator(
+  () => (dispatch) => dispatch({ type: 'restartCreation' })
 )
 
 export const takePicture = makeActionCreator(
@@ -129,8 +127,8 @@ export const toggleCode = makeActionCreator(
   ({ pointProvider }) => pointProvider !== 'dance'
 )
 
-export const showPermissions = makeActionCreator(() => (dispatch) =>
-  dispatch({ type: 'showPermissions' })
+export const showPermissions = makeActionCreator(
+  () => (dispatch) => dispatch({ type: 'showPermissions' })
 )
 
 export const nextPointProvider = makeActionCreator(

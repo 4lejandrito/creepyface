@@ -63,8 +63,10 @@ export function makePointProvider(options: {
 const mod = (n: number, m: number) => (m + (n % m)) % m
 
 export const moves = {
-  repeat: (i: number) => (steps: Step[]): Step[] =>
-    flatten(range(i).map(() => steps)),
+  repeat:
+    (i: number) =>
+    (steps: Step[]): Step[] =>
+      flatten(range(i).map(() => steps)),
 
   intercalate: (steps: Step[], step: Step) =>
     range(2 * steps.length).map((i) =>

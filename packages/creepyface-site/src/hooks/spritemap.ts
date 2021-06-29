@@ -69,22 +69,26 @@ export default function useSpritemap(namespace: Namespace, count: number) {
       objectUrls.push(objectUrl)
       return objectUrl
     }
-    setGetImages(() => async (id: number): Promise<Images | null> =>
-      (cache[id] =
-        cache[id] ??
-        (async () => {
-          const spritemap = await getChunk(Math.floor(id / spritemapChunkSize))
-          return {
-            src: await getUrl(id, 0, spritemap),
-            hover: await getUrl(id, 1, spritemap),
-            looks: await Promise.all(
-              getAngles().map(async (angle, i) => ({
-                angle,
-                src: await getUrl(id, 2 + i, spritemap),
-              }))
-            ),
-          }
-        })())
+    setGetImages(
+      () =>
+        async (id: number): Promise<Images | null> =>
+          (cache[id] =
+            cache[id] ??
+            (async () => {
+              const spritemap = await getChunk(
+                Math.floor(id / spritemapChunkSize)
+              )
+              return {
+                src: await getUrl(id, 0, spritemap),
+                hover: await getUrl(id, 1, spritemap),
+                looks: await Promise.all(
+                  getAngles().map(async (angle, i) => ({
+                    angle,
+                    src: await getUrl(id, 2 + i, spritemap),
+                  }))
+                ),
+              }
+            })())
     )
     return () => objectUrls.forEach((url) => URL.revokeObjectURL(url))
   }, [namespace, count])
