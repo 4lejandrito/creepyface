@@ -20,6 +20,7 @@ export default function Creepyface(
   useEffect(() => {
     if (!disabled && imageRef.current) {
       if (src) imageRef.current.src = src
+      pointProviderRef.current = options?.points
       const cancel = creepyface(imageRef.current, {
         ...options,
         onAttach: (args) => {
