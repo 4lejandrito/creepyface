@@ -91,8 +91,5 @@
     "dev": "prisma migrate dev && next dev",
     "start": "prisma migrate deploy && next start",
     "deploy": "yarn build && rm -rf .deploy && mkdir -p .deploy && cp -r public prisma .env.production .next next.config.js public package.json ../../yarn.lock Dockerfile CHECKS .deploy/ && cd .deploy && git init && git add . && git -c \"user.name=Alejandro Tardín\" -c \"user.email=alejandro@tardin.com\" commit --allow-empty -m Deploying && git push -f dokku@creepyface.io:live master"
-  },
-  "devDependencies": {
-    "lerna": "^4.0.0"
   }
 }
