@@ -23,7 +23,7 @@ export default [
       typescript(),
       babel({ extensions: ['.js', '.ts'] }),
       production && uglify(),
-      !production && browsersync({ server: ['test', '.'] }),
+      !production && browsersync({ server: ['test', '.'], port: 4000 }),
     ],
   },
 ]
