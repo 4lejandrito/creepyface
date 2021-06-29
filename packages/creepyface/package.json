@@ -1,6 +1,6 @@
 {
   "name": "creepyface",
-  "version": "8.1.0",
+  "version": "8.1.2",
   "main": "dist/creepyface.umd.js",
   "types": "dist/creepyface.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
