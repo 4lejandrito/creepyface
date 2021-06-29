@@ -7,13 +7,16 @@ import Button from '../src/components/Button'
 import { toggleDance } from '../src/redux/actions'
 import { useDispatch, useSelector } from '../src/components/State'
 import url from '../src/util/url'
+import { NextSeo } from 'next-seo'
 
 export default function Liferay() {
   const namespace = 'liferay'
+  const title = 'Creepyface - Liferay Edition'
   const pointProvider = useSelector((state) => state.pointProvider)
   const dispatch = useDispatch()
   return (
     <CreateProvider namespace={namespace}>
+      <NextSeo title={title} openGraph={{ title }} />
       <div className="liferay">
         <Sample namespace={namespace} fullscreen />
         <header>
