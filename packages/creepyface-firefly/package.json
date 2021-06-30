@@ -1,6 +1,6 @@
 {
   "name": "creepyface-firefly",
-  "version": "8.1.2",
+  "version": "8.1.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
@@ -33,7 +33,7 @@
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
-    "creepyface": "^8.1.2",
+    "creepyface": "^8.1.3",
     "framesync": "^5.3.0",
     "rollup": "^2.52.3",
     "rollup-plugin-uglify": "^6.0.4",
