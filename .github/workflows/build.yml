@@ -31,14 +31,6 @@ jobs:
         run: yarn build
       - name: Test
         run: yarn test:coverage
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./packages/creepyface/coverage/lcov.info
-          base-path: ./packages/creepyface
-        env:
-          CI: true
       - name: Deploy
         run: |
           mkdir -p ~/.ssh
