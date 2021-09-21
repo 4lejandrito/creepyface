@@ -56,11 +56,11 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 
 ### Available moves
 
-Moves are functions that return an array of steps. CreepyfaceDance provides [some of them out of the box](https://github.com/4lejandrito/creepyface/blob/master/packages/creepyface-dance/src/index.ts#L101-L118):
+Moves are functions that return an array of steps. CreepyfaceDance provides [some of them out of the box](https://github.com/4lejandrito/creepyface/blob/master/packages/creepyface-dance/src/index.ts#L65-L86):
 
 | Name          | Description                                                                                           | Example                            |
 | ------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| `repeat`      | Repeats the given sequence a specified amouht of times.                                               | `repeat(10)(['s', 'n'])`           |
+| `repeat`      | Repeats the given sequence a specified amount of times.                                               | `repeat(10)(['s', 'n'])`           |
 | `circle`      | An 8 step move describing a counterclockwise circle looking to every direction from the one provided. | `circle('e')`                      |
 | `intercalate` | Constructs a secuence consisting of the itercalation of a given sequence and a step.                  | `intercalate(['n', 'w'], 'crazy')` |
 
