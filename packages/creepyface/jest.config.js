@@ -4,7 +4,7 @@ module.exports = {
     '^.+\\.jsx?$': '../../node_modules/babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
   },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.js$',
+  testRegex: '(/test/.*(\\.|/)(test|spec))\\.js$',
   moduleFileExtensions: ['ts', 'js'],
   coverageThreshold: {
     global: {
