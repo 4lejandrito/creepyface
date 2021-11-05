@@ -32,6 +32,11 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: packages/creepyface
+      - name: Site Test
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: packages/creepyface-site
+          start: yarn dev
       - name: Deploy
         if: github.ref == 'refs/heads/master'
         run: |

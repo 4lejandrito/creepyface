@@ -86,8 +86,16 @@
     "uuid": "^8.3.2",
     "webrtc-adapter": "^8.0.0"
   },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "cypress": "^8.7.0",
+    "start-server-and-test": "^1.14.0"
+  },
   "scripts": {
     "build": "next build",
+    "test": "start-test test:start 3000 test:run",
+    "test:start": "NODE_ENV=test yarn build && yarn start",
+    "test:run": "cypress run",
     "dev": "prisma migrate dev && next dev",
     "start": "prisma migrate deploy && next start",
     "deploy": "yarn build && rm -rf .deploy && mkdir -p .deploy && cp -r public prisma .env.production .next next.config.js public package.json ../../yarn.lock Dockerfile CHECKS .deploy/ && cd .deploy && git init && git add . && git -c \"user.name=Alejandro Tardín\" -c \"user.email=alejandro@tardin.com\" commit --allow-empty -m Deploying && git push -f dokku@creepyface.io:live master"
