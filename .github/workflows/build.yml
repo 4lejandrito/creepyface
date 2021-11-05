@@ -33,6 +33,7 @@ jobs:
         with:
           working-directory: packages/creepyface
       - name: Deploy
+        if: github.ref == 'refs/heads/master'
         run: |
           mkdir -p ~/.ssh
           eval `ssh-agent -s`
