@@ -26,8 +26,8 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
-      - name: Unit Test
-        run: yarn test:coverage
+      - name: Test
+        run: yarn test
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
@@ -36,15 +36,6 @@ jobs:
           base-path: ./packages/creepyface
         env:
           CI: true
-      - name: Integration Test
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: packages/creepyface
-      - name: Site Test
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: packages/creepyface-site
-          start: yarn dev
       - name: Deploy
         if: github.ref == 'refs/heads/master'
         run: |
