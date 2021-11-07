@@ -12,10 +12,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "husky": "^6.0.0",
+    "husky": "^7.0.4",
     "lerna": "^4.0.0",
-    "lint-staged": ">=11.0.0",
-    "prettier": "^2.3.2"
+    "lint-staged": ">=11.2.6",
+    "prettier": "^2.4.1"
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json,html,css,scss,webmanifest}": "prettier --write"

@@ -28,19 +28,19 @@
     "creepyface": "^8"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
-    "@babel/preset-typescript": "^7.14.5",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/lodash.flatten": "^4.4.6",
     "@types/lodash.range": "^3.2.6",
     "creepyface": "^8.1.3",
     "lodash.flatten": "^4.4.0",
     "lodash.range": "^3.2.0",
-    "rollup": "^2.52.3",
+    "rollup": "^2.59.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "typescript": "^4.3.4"
+    "typescript": "^4.4.4"
   }
 }
