@@ -4,7 +4,6 @@ import StateProvider from '../src/components/State'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
 import PlausibleProvider from 'next-plausible'
-import baseURL from '../src/util/url'
 import '../src/scss/main.scss'
 import { useEffect } from 'react'
 import noBounce from 'no-bounce'
@@ -13,6 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const title = 'Creepyface'
   const description =
     'The Javascript library that makes your face follow the pointer'
+  const baseURL = process.env.NEXT_PUBLIC_URL
 
   useEffect(noBounce, [])
 

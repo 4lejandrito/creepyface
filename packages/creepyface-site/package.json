@@ -62,6 +62,7 @@
     "mousetrap": "^1.6.5",
     "multiparty": "^4.2.2",
     "next": "^11.0.1",
+    "next-absolute-url": "^1.2.2",
     "next-plausible": "^2.1.2",
     "next-seo": "^4.26.0",
     "no-bounce": "^0.0.3",

@@ -1,5 +1,4 @@
 import React, { ReactNode, Fragment } from 'react'
-import baseURL from '../util/url'
 import Clipboard from './Clipboard'
 import { Images } from './CreepyFace'
 
@@ -27,6 +26,10 @@ const node = (
   children,
 })
 const attribute = (name: string, value: string) => ({ name, value })
+const baseURL =
+  typeof window !== 'undefined'
+    ? window.location.protocol + '//' + window.location.host
+    : ''
 const code = (src: string, images: Images, showFirefly: boolean): Node[] =>
   [
     node(

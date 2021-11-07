@@ -2,5 +2,6 @@
   "pluginsFile": false,
   "video": false,
   "supportFile": false,
-  "fixturesFolder": false
+  "fixturesFolder": false,
+  "baseUrl": "http://localhost:3000"
 }

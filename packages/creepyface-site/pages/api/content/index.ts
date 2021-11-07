@@ -6,7 +6,7 @@ import fs from 'fs-extra'
 import mime from 'mime/lite'
 import html from '../../../src/backend/template.hbs'
 import prisma from '../../../prisma'
-import baseURL from '../../../src/util/url'
+import absoluteUrl from 'next-absolute-url'
 import { updateSpritemap } from '../../../src/backend/spritemap'
 
 const getImagesPath = (uuid: string) =>
@@ -63,6 +63,7 @@ export default route(async (req, res) => {
   const canUseForResearch = fields.research?.[0] === 'true'
   const canUseAsSample = fields.samples?.[0] === 'true'
   const namespace = fields.namespace?.[0] || null
+  const { origin: baseURL } = absoluteUrl(req)
   await Promise.all(Object.values(files).map(([file]) => saveImage(file)))
   await save(
     'index.html',

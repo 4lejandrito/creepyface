@@ -6,7 +6,6 @@ import Link from '../src/components/Link'
 import Button from '../src/components/Button'
 import { toggleDance } from '../src/redux/actions'
 import { useDispatch, useSelector } from '../src/components/State'
-import url from '../src/util/url'
 import { NextSeo } from 'next-seo'
 
 export default function Liferay() {
@@ -20,7 +19,7 @@ export default function Liferay() {
       <div className="liferay">
         <Sample namespace={namespace} fullscreen />
         <header>
-          <Link href={url}>
+          <Link href="/">
             <Logo />
           </Link>
           <div className="subtitle">

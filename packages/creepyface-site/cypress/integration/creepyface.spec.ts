@@ -1,15 +1,13 @@
 /// <reference types="cypress" />
 import path from 'path'
 
-const url = 'http://localhost:3000'
-
 function mainCreepyface() {
   return cy.get('img[alt="The main Creepyface"')
 }
 
 describe(`creepyface.io`, () => {
-  before(() => {
-    cy.visit(url)
+  beforeEach(() => {
+    cy.visit('/')
   })
 
   it('renders the title', () => {
@@ -17,34 +15,31 @@ describe(`creepyface.io`, () => {
   })
 
   it('shows the main creepyface', () => {
-    mainCreepyface().should('have.attr', 'src', `${url}/api/img/0/serious`)
+    mainCreepyface().should('have.attr', 'src', '/api/img/0/serious')
   })
 
   it('shows the code', () => {
     cy.contains('Show code').click()
-    cy.contains('<script src="http://localhost:3000/creepyface.js">')
+    cy.contains(`<script src="${Cypress.config().baseUrl}/creepyface.js">`)
     cy.contains('Hide code').click()
   })
 
   describe('when the mouse moves around the main creepyface', () => {
-    const testLook =
-      (getCoords: (rect: DOMRect) => { x: number; y: number }, name: string) =>
-      () => {
-        mainCreepyface().then(($el) => {
-          const size = $el[0].getBoundingClientRect()
-          const coords = getCoords(size)
-          mainCreepyface().trigger('mousemove', {
-            clientX: size.x + size.width / 2 + coords.x,
-            clientY: size.y + size.height / 2 + coords.y,
-          })
-          cy.wait(100)
-          mainCreepyface().should(
-            'have.attr',
-            'src',
-            `${url}/api/img/0/${name}`
-          )
+    const testLook = (
+      getCoords: (rect: DOMRect) => { x: number; y: number },
+      name: string
+    ) => () => {
+      mainCreepyface().then(($el) => {
+        const size = $el[0].getBoundingClientRect()
+        const coords = getCoords(size)
+        mainCreepyface().trigger('mousemove', {
+          clientX: size.x + size.width / 2 + coords.x,
+          clientY: size.y + size.height / 2 + coords.y,
         })
-      }
+        cy.wait(100)
+        mainCreepyface().should('have.attr', 'src', `/api/img/0/${name}`)
+      })
+    }
 
     it(
       'goes crazy',
@@ -147,7 +142,7 @@ describe(`creepyface.io`, () => {
 
     it('goes back to the default src after 1 second', () => {
       cy.wait(1000)
-      mainCreepyface().should('have.attr', 'src', `${url}/api/img/0/serious`)
+      mainCreepyface().should('have.attr', 'src', '/api/img/0/serious')
     })
   })
 
@@ -159,15 +154,14 @@ describe(`creepyface.io`, () => {
     cy.contains('Download and publish').click()
     cy.readFile(
       path.join(Cypress.config('downloadsFolder'), 'creepyface.zip')
-    ).should((buffer) => expect(buffer.length).to.be.gt(90000))
+    ).should((buffer) => expect(buffer.length).to.be.gt(50000))
     cy.contains('Download again')
-    cy.visit(url + '/admin', {
+    cy.visit('/admin', {
       auth: {
         username: 'creepyface',
         password: '',
       },
     })
     cy.contains('New!')
-    cy.visit(url)
   })
 })

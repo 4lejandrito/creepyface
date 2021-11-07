@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Creepyface from 'react-creepyface'
 import Loader from './Loader'
 import { FaceIcon } from './Icon'
-import baseURL from '../util/url'
 import { ValidAngle } from '../redux/types'
 import { getAngles } from '../util/get-next'
 import hash from 'string-hash'
@@ -11,11 +10,12 @@ import { Size } from '../backend/resize'
 import { useMountedState } from 'react-use'
 
 const noop = () => {}
-const url =
-  (id: number | string, namespace?: string, size?: string) => (name: string) =>
-    `${baseURL}/api/img/${id}/${name}${size ? '/' + size : ''}${
-      namespace ? '?namespace=' + namespace : ''
-    }`
+const url = (id: number | string, namespace?: string, size?: string) => (
+  name: string
+) =>
+  `/api/img/${id}/${name}${size ? '/' + size : ''}${
+    namespace ? '?namespace=' + namespace : ''
+  }`
 
 export type Images = {
   src: string
