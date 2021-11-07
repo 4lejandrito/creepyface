@@ -2,7 +2,7 @@
 
 ;['index.html', 'index-js.html'].forEach((fileName) => {
   describe(`${fileName}`, () => {
-    beforeEach(() => {
+    before(() => {
       cy.visit(`./test/${fileName}`)
     })
 

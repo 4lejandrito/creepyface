@@ -9,26 +9,19 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '14'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          node-version: '16'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
       - name: Install
         run: yarn
       - name: Build
         run: yarn build
       - name: Test
-        run: yarn test
+        run: yarn workspace creepyface test
       - name: Coveralls
+        if: github.ref == 'refs/heads/master'
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -36,6 +29,42 @@ jobs:
           base-path: ./packages/creepyface
         env:
           CI: true
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: all
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: 4lejandrito
+          password: ${{ github.token }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/4lejandrito/creepyface.io
+          tags: |
+            type=sha
+            type=raw,value=latest
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: packages/creepyface-site
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Test Docker Image
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: packages/creepyface-site
+          start: docker run --rm -p 3000:5000 ghcr.io/4lejandrito/creepyface.io
+      - name: Push Docker Image
+        run: docker push --all-tags ghcr.io/4lejandrito/creepyface.io
       - name: Deploy
         if: github.ref == 'refs/heads/master'
         run: |
@@ -44,7 +73,12 @@ jobs:
           ssh-add - <<< "$SSH_PRIVATE_KEY"
           ssh-keyscan creepyface.io >> ~/.ssh/known_hosts
           export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-          cd packages/creepyface-site
-          yarn deploy
+          mkdir dokku
+          cd dokku
+          echo "FROM ghcr.io/4lejandrito/creepyface.io:sha-$(git rev-parse --short HEAD)" > Dockerfile
+          git init
+          git add .
+          git -c "user.name=Alejandro Tardín" -c "user.email=alejandro@tardin.com" commit -m "Deploying"
+          git push -f dokku@creepyface.io:live master
         env:
           SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
