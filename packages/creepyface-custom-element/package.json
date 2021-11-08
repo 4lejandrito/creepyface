@@ -23,19 +23,19 @@
     "creepyface": "^8.1.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@storybook/addon-knobs": "^6.3.0",
-    "@storybook/addons": "^6.3.1",
-    "@storybook/html": "^6.3.1",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "@storybook/addon-knobs": "^6.3.1",
+    "@storybook/addons": "^6.3.12",
+    "@storybook/html": "^6.3.12",
     "@ungap/custom-elements-builtin": "^0.6.5",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "rollup": "^2.52.3",
+    "rollup": "^2.59.0",
     "rollup-plugin-uglify": "^6.0.4"
   }
 }
