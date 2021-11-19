@@ -98,9 +98,11 @@
   "scripts": {
     "build": "next build",
     "test": "start-test dev 3000 test:run",
+    "test:docker": "start-test start:docker 3000 test:run",
     "test:run": "cypress run",
     "test:open": "cypress open",
     "dev": "prisma migrate dev && next dev",
-    "start": "prisma migrate deploy && next start"
+    "start": "prisma migrate deploy && next start",
+    "start:docker": "docker run --rm -p 3000:5000 ghcr.io/4lejandrito/creepyface.io"
   }
 }
