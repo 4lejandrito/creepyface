@@ -1,4 +1,4 @@
-import execa from 'execa'
+import { execa } from 'execa'
 import os from 'os'
 import { v4 as uuid } from 'uuid'
 import fs from 'fs-extra'

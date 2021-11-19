@@ -62,8 +62,8 @@ export default function useSpritemap(namespace: Namespace, count: number) {
         smallImageSize
       )
       const objectUrl = URL.createObjectURL(
-        await new Promise<Blob | null>((resolve) =>
-          canvas.toBlob((blob) => resolve(blob))
+        await new Promise<Blob | MediaSource>((resolve, reject) =>
+          canvas.toBlob((blob) => (blob ? resolve(blob) : reject()))
         )
       )
       objectUrls.push(objectUrl)
