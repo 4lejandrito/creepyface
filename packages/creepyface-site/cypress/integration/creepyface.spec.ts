@@ -18,6 +18,10 @@ describe(`creepyface.io`, () => {
     mainCreepyface().should('have.attr', 'src', '/api/img/0/serious')
   })
 
+  it('shows the mosaic with all the creepyfaces', () => {
+    cy.get('img[alt="A stranger\'s Creepyface"').should('have.length', 30)
+  })
+
   it('shows the code', () => {
     cy.contains('Show code').click()
     cy.contains(`<script src="${Cypress.config().baseUrl}/creepyface.js">`)
