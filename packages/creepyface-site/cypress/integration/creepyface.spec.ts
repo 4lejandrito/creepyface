@@ -25,21 +25,20 @@ describe(`creepyface.io`, () => {
   })
 
   describe('when the mouse moves around the main creepyface', () => {
-    const testLook = (
-      getCoords: (rect: DOMRect) => { x: number; y: number },
-      name: string
-    ) => () => {
-      mainCreepyface().then(($el) => {
-        const size = $el[0].getBoundingClientRect()
-        const coords = getCoords(size)
-        mainCreepyface().trigger('mousemove', {
-          clientX: size.x + size.width / 2 + coords.x,
-          clientY: size.y + size.height / 2 + coords.y,
+    const testLook =
+      (getCoords: (rect: DOMRect) => { x: number; y: number }, name: string) =>
+      () => {
+        mainCreepyface().then(($el) => {
+          const size = $el[0].getBoundingClientRect()
+          const coords = getCoords(size)
+          mainCreepyface().trigger('mousemove', {
+            clientX: size.x + size.width / 2 + coords.x,
+            clientY: size.y + size.height / 2 + coords.y,
+          })
+          cy.wait(100)
+          mainCreepyface().should('have.attr', 'src', `/api/img/0/${name}`)
         })
-        cy.wait(100)
-        mainCreepyface().should('have.attr', 'src', `/api/img/0/${name}`)
-      })
-    }
+      }
 
     it(
       'goes crazy',

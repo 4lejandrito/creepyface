@@ -10,12 +10,11 @@ import { Size } from '../backend/resize'
 import { useMountedState } from 'react-use'
 
 const noop = () => {}
-const url = (id: number | string, namespace?: string, size?: string) => (
-  name: string
-) =>
-  `/api/img/${id}/${name}${size ? '/' + size : ''}${
-    namespace ? '?namespace=' + namespace : ''
-  }`
+const url =
+  (id: number | string, namespace?: string, size?: string) => (name: string) =>
+    `/api/img/${id}/${name}${size ? '/' + size : ''}${
+      namespace ? '?namespace=' + namespace : ''
+    }`
 
 export type Images = {
   src: string
