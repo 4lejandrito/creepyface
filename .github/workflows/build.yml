@@ -33,6 +33,5 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: 4lejandrito/deploy-docker-image-action@main
         with:
-          app: live
           name: creepyface.io
           key: ${{ secrets.SSH_PRIVATE_KEY }}
