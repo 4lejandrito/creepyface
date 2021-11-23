@@ -12,7 +12,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const title = 'Creepyface'
   const description =
     'The Javascript library that makes your face follow the pointer'
-  const baseURL = process.env.NEXT_PUBLIC_URL
+  const baseURL =
+    process.env.NODE_ENV === 'production'
+      ? 'https://creepyface.io'
+      : 'http://localhost:3000'
 
   useEffect(noBounce, [])
 

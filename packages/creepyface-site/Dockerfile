@@ -16,7 +16,6 @@ RUN apk add libpng jpeg pango cairo giflib
 
 WORKDIR /usr/src/app
 
-COPY --from=compile /usr/src/app/.env.production ./
 COPY --from=compile /usr/src/app/next.config.js ./
 COPY --from=compile /usr/src/app/public ./public
 COPY --from=compile /usr/src/app/prisma ./prisma
