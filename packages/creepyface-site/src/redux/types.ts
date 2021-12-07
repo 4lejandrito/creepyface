@@ -5,8 +5,11 @@ export type Picture = {
   src: string
 }
 
-export type ValidAngle = 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315
-export type Pictures = { [K in 'serious' | 'hover' | ValidAngle]: Picture }
+export const angles = [0, 45, 90, 135, 180, 225, 270, 315] as const
+export const looks = ['serious', 'hover', ...angles] as const
+export type Angle = typeof angles[number]
+export type Look = typeof looks[number]
+export type Pictures = { [K in Look]: Picture }
 
 export type Language = 'en' | 'es'
 

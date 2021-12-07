@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Images } from '../components/CreepyFace'
-import { Namespace } from '../redux/types'
-import { getAngles } from '../util/get-next'
+import { angles, Namespace } from '../redux/types'
 import { smallImageSize, spritemapChunkSize } from '../util/constants'
 import supportsWebp from 'supports-webp'
 
@@ -82,7 +81,7 @@ export default function useSpritemap(namespace: Namespace, count: number) {
                 src: await getUrl(id, 0, spritemap),
                 hover: await getUrl(id, 1, spritemap),
                 looks: await Promise.all(
-                  getAngles().map(async (angle, i) => ({
+                  angles.map(async (angle, i) => ({
                     angle,
                     src: await getUrl(id, 2 + i, spritemap),
                   }))

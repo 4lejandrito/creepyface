@@ -2,8 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import Creepyface from 'react-creepyface'
 import Loader from './Loader'
 import { FaceIcon } from './Icon'
-import { ValidAngle } from '../redux/types'
-import { getAngles } from '../util/get-next'
+import { angles, Angle } from '../redux/types'
 import hash from 'string-hash'
 import 'creepyface-firefly'
 import { Size } from '../backend/resize'
@@ -19,7 +18,7 @@ const url =
 export type Images = {
   src: string
   hover: string
-  looks: { angle: ValidAngle; src: string }[]
+  looks: { angle: Angle; src: string }[]
 }
 
 export const getHostedImages = (
@@ -31,7 +30,7 @@ export const getHostedImages = (
   return {
     src: getUrl('serious'),
     hover: getUrl('hover'),
-    looks: getAngles().map((angle) => ({ angle, src: getUrl(`${angle}`) })),
+    looks: angles.map((angle) => ({ angle, src: getUrl(`${angle}`) })),
   }
 }
 

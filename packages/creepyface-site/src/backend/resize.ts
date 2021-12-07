@@ -4,7 +4,8 @@ import { thumbnails, uploads } from './storage'
 import path from 'path'
 import { smallImageSize } from '../util/constants'
 
-export type Size = 'medium' | 'small' | 'square'
+export const sizes = ['medium', 'small', 'square'] as const
+export type Size = typeof sizes[number]
 
 const getDimensions = (size: Size) =>
   ({
@@ -13,16 +14,12 @@ const getDimensions = (size: Size) =>
     square: { width: 400, height: 400 },
   }[size] || { width: 0, height: 0 })
 
-export default async function resize(
-  uuid: string,
-  name: string | undefined,
-  size?: Size
-) {
+export default async function resize(uuid: string, name: string, size?: Size) {
   const imagePath = `${
     uuid === 'nala' || uuid === 'ray'
       ? `public/${uuid}`
       : `${uploads}/${uuid}/img`
-  }/${name || 'serious'}.jpeg`
+  }/${name}.jpeg`
   const { width, height } = getDimensions(size || 'medium')
 
   if (width === 0 && height === 0) {

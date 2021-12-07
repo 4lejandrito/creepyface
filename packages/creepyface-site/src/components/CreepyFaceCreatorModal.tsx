@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import CreepyFace, { getHostedImages, Images } from './CreepyFace'
 import CreepyFaceOptions from './CreepyFaceOptions'
-import getNext, { getAngles } from '../util/get-next'
+import getNext from '../util/get-next'
 import tips from '../util/tips'
 import { ImageIcon } from './Icon'
 import Modal from './Modal'
@@ -12,7 +12,7 @@ import Upload from './Upload'
 import Video from './Video'
 import { restartCreation, takePicture, toggleShortcuts } from '../redux/actions'
 import { useSelector, useDispatch } from './State'
-import { Namespace, Pictures } from '../redux/types'
+import { angles, Namespace, Pictures } from '../redux/types'
 
 const getSrc = (next: keyof Pictures, images: Images) => {
   const look = images.looks.find(({ angle }) => angle === next)
@@ -71,7 +71,7 @@ function Download(props: { pictures: Pictures; namespace: Namespace }) {
         images={{
           src: pictures.serious.src,
           hover: pictures.hover.src,
-          looks: getAngles().map((angle) => ({
+          looks: angles.map((angle) => ({
             angle,
             src: pictures[angle].src,
           })),

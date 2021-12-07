@@ -1,8 +1,7 @@
 import React from 'react'
 import { ImageIcon } from './Icon'
 import classNames from 'classnames'
-import { getAngles } from '../util/get-next'
-import { Picture, Pictures } from '../redux/types'
+import { angles, Picture, Pictures } from '../redux/types'
 
 function Preview({
   pictureKey,
@@ -49,7 +48,7 @@ export default function CreepyFaceOptions({
           active={next === 'hover'}
           picture={pictures['hover']}
         />
-        {getAngles().map((angle) => (
+        {angles.map((angle) => (
           <Preview
             key={angle}
             pictureKey={angle}
