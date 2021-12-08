@@ -49,12 +49,12 @@ const code = (src: string, images: Images, showFirefly: boolean): Node[] =>
     node(
       'img',
       [
-        attribute('src', src),
+        attribute('src', baseURL + src),
         attribute('data-creepyface', 'true'),
         showFirefly ? attribute('data-points', 'firefly') : null,
-        attribute('data-src-hover', images.hover || ''),
+        attribute('data-src-hover', baseURL + images.hover),
         ...(images.looks || []).map(({ angle, src }) =>
-          attribute(`data-src-look-${angle}`, src)
+          attribute(`data-src-look-${angle}`, baseURL + src)
         ),
       ],
       false

@@ -25,6 +25,36 @@ describe(`creepyface.io`, () => {
   it('shows the code', () => {
     cy.contains('Show code').click()
     cy.contains(`<script src="${Cypress.config().baseUrl}/creepyface.js">`)
+    cy.contains('Copy').click()
+    cy.window().then((window) => {
+      window.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          `<script src="${
+            Cypress.config().baseUrl
+          }/creepyface.js"></script>\n\n<img src="${
+            Cypress.config().baseUrl
+          }/img/0/serious"\n  data-creepyface\n  data-src-hover="${
+            Cypress.config().baseUrl
+          }/img/0/hover"\n  data-src-look-0="${
+            Cypress.config().baseUrl
+          }/img/0/0"\n  data-src-look-45="${
+            Cypress.config().baseUrl
+          }/img/0/45"\n  data-src-look-90="${
+            Cypress.config().baseUrl
+          }/img/0/90"\n  data-src-look-135="${
+            Cypress.config().baseUrl
+          }/img/0/135"\n  data-src-look-180="${
+            Cypress.config().baseUrl
+          }/img/0/180"\n  data-src-look-225="${
+            Cypress.config().baseUrl
+          }/img/0/225"\n  data-src-look-270="${
+            Cypress.config().baseUrl
+          }/img/0/270"\n  data-src-look-315="${
+            Cypress.config().baseUrl
+          }/img/0/315"\n/>`
+        )
+      })
+    })
     cy.contains('Hide code').click()
   })
 
