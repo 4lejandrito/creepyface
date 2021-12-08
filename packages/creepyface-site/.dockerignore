@@ -2,3 +2,4 @@ node_modules
 cypress
 .data
 .next
+.env.local

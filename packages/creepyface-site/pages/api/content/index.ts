@@ -8,6 +8,8 @@ import html from '../../../src/backend/template.hbs'
 import prisma from '../../../prisma'
 import absoluteUrl from 'next-absolute-url'
 import { updateSpritemap } from '../../../src/backend/spritemap'
+import { sendAnimation } from '../../../src/util/admin'
+import toGif from '../../../src/backend/gif'
 
 const getImagesPath = (uuid: string) =>
   uuid === '0' ? 'public/nala' : `${uploads}/${uuid}/img`
@@ -99,4 +101,12 @@ export default route(async (req, res) => {
         },
       })) + 1,
   })
+  try {
+    sendAnimation(
+      `[New Creepyface](${baseURL}/content/${uuid})`,
+      await toGif(uuid)
+    )
+  } catch (err) {
+    console.error(err)
+  }
 })
