@@ -38,6 +38,16 @@ describe(`creepyface.io`, () => {
     })
   })
 
+  it('serves a gif of each creepyface', () => {
+    cy.request('/img/0.gif').then((response) => {
+      expect(response.status).to.eq(200)
+      expect(
+        parseInt(response.headers['content-length'] as string)
+      ).to.be.greaterThan(0)
+      expect(response.headers['content-type']).to.eq('image/gif')
+    })
+  })
+
   describe('when the mouse moves around the main creepyface', () => {
     const testLook =
       (getCoords: (rect: DOMRect) => { x: number; y: number }, name: string) =>

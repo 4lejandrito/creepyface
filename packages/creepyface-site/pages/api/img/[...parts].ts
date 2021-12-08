@@ -2,6 +2,7 @@ import { imageRoute, route } from '../../../src/backend/api'
 import { NextApiRequest } from 'next'
 import resize, { Size } from '../../../src/backend/resize'
 import prisma from '../../../prisma'
+import toGif from '../../../src/backend/gif'
 import { getDefaultUuid } from '../../../src/backend/storage'
 
 const getUuid = async (req: NextApiRequest) => {
@@ -40,6 +41,10 @@ export default route(async (req, res) => {
   if (!uuid) {
     res.status(404).end()
     return
+  }
+
+  if (req.query.format === 'gif') {
+    return imageRoute(await toGif(uuid))(req, res)
   }
 
   const name = (req.query.parts[1] as string) || 'serious'

@@ -33,13 +33,15 @@ const generateFrame = async (look: Look, path: string) => {
 }
 
 export default async function toGif(uuid: string) {
-  const folder = getThumbnailPath(uuid)
-  const outputFileName = `${folder}/creepyface.gif`
-  const looks: Look[] = ['serious', ...angles, 0, 'hover']
-  const frames = await Promise.all(
-    looks.map((look) => generateFrame(look, getImagePath(uuid, `${look}`)))
-  )
-  await execa('convert', ['-delay', '30', ...frames, outputFileName])
-  await Promise.all(frames.map((f) => fs.unlink(f)))
+  const outputFileName = getThumbnailPath(uuid, 'creepyface.gif')
+  if (!(await fs.pathExists(outputFileName))) {
+    const looks: Look[] = ['serious', ...angles, 0, 'hover']
+    const frames = await Promise.all(
+      looks.map((look) => generateFrame(look, getImagePath(uuid, `${look}`)))
+    )
+    await fs.ensureFile(outputFileName)
+    await execa('convert', ['-delay', '30', ...frames, outputFileName])
+    await Promise.all(frames.map((f) => fs.unlink(f)))
+  }
   return outputFileName
 }

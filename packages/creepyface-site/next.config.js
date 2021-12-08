@@ -6,6 +6,10 @@ module.exports = (nextConfig) =>
     async rewrites() {
       return [
         {
+          source: '/img/:slug*.gif',
+          destination: '/api/img/:slug*?format=gif',
+        },
+        {
           source: '/img/:slug*',
           destination: '/api/img/:slug*',
         },
