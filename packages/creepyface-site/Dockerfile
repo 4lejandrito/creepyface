@@ -12,7 +12,7 @@ RUN yarn install --production --ignore-scripts --prefer-offline
 
 FROM node:16-alpine AS runtime
 
-RUN apk add libpng jpeg pango cairo giflib
+RUN apk add libpng jpeg pango cairo giflib imagemagick
 
 WORKDIR /usr/src/app
 
