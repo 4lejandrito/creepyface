@@ -3,37 +3,31 @@ const { withPlausibleProxy } = require('next-plausible')
 module.exports = (nextConfig) =>
   withPlausibleProxy()({
     ...nextConfig,
-    async redirects() {
+    async rewrites() {
       return [
         {
           source: '/img/:slug*',
           destination: '/api/img/:slug*',
-          permanent: true,
         },
         {
           source: '/:uuid/download',
           destination: '/api/:uuid/download',
-          permanent: true,
         },
         {
           source: '/api/:uuid/download',
           destination: '/api/content/:uuid/creepyface.zip',
-          permanent: true,
         },
         {
           source: '/content/:slug*',
           destination: '/api/content/:slug*',
-          permanent: true,
         },
         {
           source: '/creepyface.js',
           destination: '/api/creepyface.js',
-          permanent: true,
         },
         {
           source: '/creepyface-firefly.js',
           destination: '/api/creepyface-firefly.js',
-          permanent: true,
         },
       ]
     },

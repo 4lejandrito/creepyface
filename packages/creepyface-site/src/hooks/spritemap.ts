@@ -28,7 +28,7 @@ export default function useSpritemap(namespace: Namespace, count: number) {
         supportsWebp.then((supportsWebp) => {
           const spritemap = new Image()
           spritemap.crossOrigin = 'anonymous'
-          spritemap.src = `/api/img/spritemap?chunk=${i}&count=${count}${
+          spritemap.src = `/img/spritemap?chunk=${i}&count=${count}${
             namespace ? '&namespace=' + namespace : ''
           }${supportsWebp ? '&format=webp' : ''}`
           spritemap.onload = () => resolve(spritemap)

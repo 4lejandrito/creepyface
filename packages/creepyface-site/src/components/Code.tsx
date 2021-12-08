@@ -67,7 +67,7 @@ const toText = (nodes: Node[]) =>
       (node) =>
         `<${node.name} ${node.attributes
           .map(({ name, value }) =>
-            value !== 'true' ? `${name}="${value.replace('/api', '')}"` : name
+            value !== 'true' ? `${name}="${value}"` : name
           )
           .join('\n  ')}${node.attributes.length > 1 ? '\n' : ''}${
           node.close ? '></' + node.name + '>' : '/>'
@@ -85,10 +85,7 @@ function Attribute({ name, value }: { name: string; value: string }) {
           <span className="delimiter">&quot;</span>
           <span className="base-url">{baseURL}</span>
           <span className="value" title={value}>
-            {value
-              .replace(baseURL, '')
-              .replace('/api', '')
-              .replace(/\?namespace=.+/, '')}
+            {value.replace(baseURL, '').replace(/\?namespace=.+/, '')}
           </span>
           <span className="delimiter">&quot;</span>
         </>

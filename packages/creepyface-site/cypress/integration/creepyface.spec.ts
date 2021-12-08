@@ -15,7 +15,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('shows the main creepyface', () => {
-    mainCreepyface().should('have.attr', 'src', '/api/img/0/serious')
+    mainCreepyface().should('have.attr', 'src', '/img/0/serious')
   })
 
   it('shows the mosaic with all the creepyfaces', () => {
@@ -26,6 +26,16 @@ describe(`creepyface.io`, () => {
     cy.contains('Show code').click()
     cy.contains(`<script src="${Cypress.config().baseUrl}/creepyface.js">`)
     cy.contains('Hide code').click()
+  })
+
+  it('serves the images of each creepyface', () => {
+    cy.request('/img/0/serious').then((response) => {
+      expect(response.status).to.eq(200)
+      expect(
+        parseInt(response.headers['content-length'] as string)
+      ).to.be.greaterThan(0)
+      expect(response.headers['content-type']).to.eq('image/jpeg')
+    })
   })
 
   describe('when the mouse moves around the main creepyface', () => {
@@ -40,7 +50,7 @@ describe(`creepyface.io`, () => {
             clientY: size.y + size.height / 2 + coords.y,
           })
           cy.wait(100)
-          mainCreepyface().should('have.attr', 'src', `/api/img/0/${name}`)
+          mainCreepyface().should('have.attr', 'src', `/img/0/${name}`)
         })
       }
 
@@ -145,7 +155,7 @@ describe(`creepyface.io`, () => {
 
     it('goes back to the default src after 1 second', () => {
       cy.wait(1000)
-      mainCreepyface().should('have.attr', 'src', '/api/img/0/serious')
+      mainCreepyface().should('have.attr', 'src', '/img/0/serious')
     })
   })
 
