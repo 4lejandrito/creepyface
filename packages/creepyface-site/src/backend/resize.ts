@@ -1,6 +1,6 @@
 import sharp from '../util/sharp'
 import fs from 'fs-extra'
-import { thumbnails, uploads } from './storage'
+import { getImagePath, getThumbnailPath } from './storage'
 import path from 'path'
 import { smallImageSize } from '../util/constants'
 
@@ -15,20 +15,19 @@ const getDimensions = (size: Size) =>
   }[size] || { width: 0, height: 0 })
 
 export default async function resize(uuid: string, name: string, size?: Size) {
-  const imagePath = `${
-    uuid === 'nala' || uuid === 'ray'
-      ? `public/${uuid}`
-      : `${uploads}/${uuid}/img`
-  }/${name}.jpeg`
+  const imagePath = getImagePath(uuid, name)
   const { width, height } = getDimensions(size || 'medium')
 
   if (width === 0 && height === 0) {
     return imagePath
   }
 
-  const thumbnailPath = `${thumbnails}/${uuid}/${path
-    .basename(imagePath)
-    .replace(/(\.[\w\d_-]+)$/i, `-${width || 'auto'}x${height || 'auto'}$1`)}`
+  const thumbnailPath = getThumbnailPath(
+    uuid,
+    path
+      .basename(imagePath)
+      .replace(/(\.[\w\d_-]+)$/i, `-${width || 'auto'}x${height || 'auto'}$1`)
+  )
 
   if (!(await fs.pathExists(thumbnailPath))) {
     await fs.ensureFile(thumbnailPath)

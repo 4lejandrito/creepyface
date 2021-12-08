@@ -2,6 +2,7 @@ import { imageRoute, route } from '../../../src/backend/api'
 import { NextApiRequest } from 'next'
 import resize, { Size } from '../../../src/backend/resize'
 import prisma from '../../../prisma'
+import { getDefaultUuid } from '../../../src/backend/storage'
 
 const getUuid = async (req: NextApiRequest) => {
   let uuid = req.query.parts[0] ?? '0'
@@ -14,7 +15,7 @@ const getUuid = async (req: NextApiRequest) => {
   const namespace = (req.query.namespace as string) || undefined
 
   if (i === 0) {
-    return namespace === 'liferay' ? 'ray' : 'nala'
+    return getDefaultUuid(namespace)
   }
 
   return (

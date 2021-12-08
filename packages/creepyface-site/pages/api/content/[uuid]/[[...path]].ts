@@ -1,4 +1,4 @@
-import { uploads } from '../../../../src/backend/storage'
+import { getUploadsPath } from '../../../../src/backend/storage'
 import { fileRoute, route } from '../../../../src/backend/api'
 import path from 'path'
 
@@ -9,5 +9,5 @@ export default route(async (req, res) => {
     res.redirect(`/api/content/${path.join(uuid, 'index.html')}`)
     return
   }
-  return fileRoute(path.join(...[uploads, uuid, ...pathParam]))(req, res)
+  return fileRoute(getUploadsPath(uuid, ...pathParam))(req, res)
 })

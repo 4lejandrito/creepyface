@@ -2,9 +2,9 @@ import { execa } from 'execa'
 import os from 'os'
 import { v4 as uuid } from 'uuid'
 import fs from 'fs-extra'
-import { uploads } from './storage'
 import { resolve } from 'path'
 import { Look, angles } from '../redux/types'
+import { getImagePath, getThumbnailPath } from './storage'
 
 const generateFrame = async (look: Look, path: string) => {
   const tmpPath = `${os.tmpdir()}/${look}-${uuid()}.jpeg`
@@ -33,11 +33,11 @@ const generateFrame = async (look: Look, path: string) => {
 }
 
 export default async function toGif(uuid: string) {
-  const folder = `${uploads}/${uuid}/img`
+  const folder = getThumbnailPath(uuid)
   const outputFileName = `${folder}/creepyface.gif`
   const looks: Look[] = ['serious', ...angles, 0, 'hover']
   const frames = await Promise.all(
-    looks.map((look) => generateFrame(look, `${folder}/${look}.jpeg`))
+    looks.map((look) => generateFrame(look, getImagePath(uuid, `${look}`)))
   )
   await execa('convert', ['-delay', '30', ...frames, outputFileName])
   await Promise.all(frames.map((f) => fs.unlink(f)))

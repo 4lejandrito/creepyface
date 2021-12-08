@@ -1,10 +1,9 @@
-import path from 'path'
 import { createCanvas, loadImage } from 'canvas'
 import { writeFile, pathExists } from 'fs-extra'
 import { looks, Namespace } from '../redux/types'
 import prisma from '../../prisma'
 import resize from './resize'
-import { thumbnails } from './storage'
+import { getDefaultUuid, getThumbnailPath } from './storage'
 import {
   smallImageSize,
   spritemapChunkCols,
@@ -13,8 +12,7 @@ import {
 import sharp from '../util/sharp'
 
 const getSpritemapPath = (namespace: Namespace, chunk: number, webp = false) =>
-  path.join(
-    thumbnails,
+  getThumbnailPath(
     'spritemap' +
       (namespace ? `-${namespace}` : '') +
       `-${smallImageSize}-${spritemapChunkSize}-${chunk}.${
@@ -63,7 +61,7 @@ export async function updateSpritemap(namespace: Namespace, chunk?: number) {
           looks.map((look) => ({ uuid: creepyface.uuid, look }))
         )
       : looks.map((look) => ({
-          uuid: namespace === 'liferay' ? 'ray' : 'nala',
+          uuid: getDefaultUuid(namespace),
           look,
         }))
     ).map(async ({ uuid, look }, i) => {

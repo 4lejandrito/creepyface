@@ -1,5 +1,5 @@
 import { route } from '../../../../src/backend/api'
-import { uploads } from '../../../../src/backend/storage'
+import { getUploadsPath } from '../../../../src/backend/storage'
 import archiver from 'archiver'
 
 export default route(async (req, res) => {
@@ -8,6 +8,6 @@ export default route(async (req, res) => {
 
   const archive = archiver('zip')
   archive.pipe(res)
-  archive.directory(`${uploads}/${req.query.uuid}`, false)
+  archive.directory(getUploadsPath(req.query.uuid as string), false)
   archive.finalize()
 })

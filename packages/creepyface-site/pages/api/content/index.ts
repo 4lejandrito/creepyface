@@ -1,9 +1,8 @@
 import { route } from '../../../src/backend/api'
 import { v4 as getUuid } from 'uuid'
 import multiparty from 'multiparty'
-import { uploads } from '../../../src/backend/storage'
+import { getImagePath, getUploadsPath } from '../../../src/backend/storage'
 import fs from 'fs-extra'
-import mime from 'mime/lite'
 import html from '../../../src/backend/template.hbs'
 import prisma from '../../../prisma'
 import absoluteUrl from 'next-absolute-url'
@@ -11,17 +10,13 @@ import { updateSpritemap } from '../../../src/backend/spritemap'
 import { sendAnimation } from '../../../src/util/admin'
 import toGif from '../../../src/backend/gif'
 
-const getImagesPath = (uuid: string) =>
-  uuid === '0' ? 'public/nala' : `${uploads}/${uuid}/img`
-
-const getFileName = (file: multiparty.File) =>
-  `${file.fieldName}.${mime.getExtension(file.headers['content-type'])}`
+const getFileName = (file: multiparty.File) => `${file.fieldName}.jpeg`
 
 const makeSave = (uuid: string) => (name: string, content: string) =>
-  fs.outputFile(`${uploads}/${uuid}/${name}`, content)
+  fs.outputFile(getUploadsPath(uuid, name), content)
 
 const makeSaveImage = (uuid: string) => (file: multiparty.File) =>
-  fs.move(file.path, `${getImagesPath(uuid)}/${getFileName(file)}`)
+  fs.move(file.path, getImagePath(uuid, file.fieldName))
 
 type Options = {
   src: string
