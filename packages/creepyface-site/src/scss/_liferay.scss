@@ -31,7 +31,9 @@
       @include horizontal {
         font-size: 3.5rem;
       }
-      height: 1.4em;
+      svg {
+        height: 1.4em;
+      }
     }
     .subtitle {
       display: inline-flex;

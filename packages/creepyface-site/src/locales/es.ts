@@ -78,4 +78,5 @@ export const messages = {
   Supports: 'Soporta',
   'The main Creepyface': 'La Creepyface principal',
   "A stranger's Creepyface": 'La Creepyface de un extraño',
+  'Santa hat': 'Gorro de Papá Noel',
 }

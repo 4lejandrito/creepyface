@@ -1,35 +1,49 @@
 .logo {
-  display: block;
-  fill: white;
-  .light & {
-    fill: $color-text;
-  }
-  .pointer {
-    pointer-events: none;
-  }
+  line-height: 0;
+  .wrapper {
+    position: relative;
+    display: inline-block;
+    svg {
+      display: block;
+      fill: white;
+      .light & {
+        fill: $color-text;
+      }
+      .pointer {
+        pointer-events: none;
+      }
 
-  &.animate {
-    $duration: 0.7s;
-    .pupil {
-      animation: pupil $duration cubic-bezier(0.02, 0.01, 0.21, 1);
-      @keyframes pupil {
-        10% {
-          transform: translateX(0);
+      &.animate {
+        $duration: 0.7s;
+        .pupil {
+          animation: pupil $duration cubic-bezier(0.02, 0.01, 0.21, 1);
+          @keyframes pupil {
+            10% {
+              transform: translateX(0);
+            }
+            65% {
+              animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+              transform: translateX(-1.7%);
+            }
+          }
         }
-        65% {
-          animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-          transform: translateX(-1.7%);
+        .pointer {
+          animation: pointer $duration cubic-bezier(0.02, 0.01, 0.21, 1);
+          @keyframes pointer {
+            50% {
+              animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+              transform: translateX(-32%);
+            }
+          }
         }
       }
     }
-    .pointer {
-      animation: pointer $duration cubic-bezier(0.02, 0.01, 0.21, 1);
-      @keyframes pointer {
-        50% {
-          animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-          transform: translateX(-32%);
-        }
-      }
+    .hat {
+      position: absolute;
+      top: 10%;
+      left: 92%;
+      transform: rotate(30deg);
+      width: 18%;
     }
   }
 }
