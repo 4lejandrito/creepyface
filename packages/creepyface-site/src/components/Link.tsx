@@ -9,12 +9,14 @@ export default function Link({
   children,
   download,
   title,
+  target,
 }: {
   href: string
   className?: string
   children?: ReactNode[] | ReactNode
   download?: boolean
   title?: string
+  target?: string
 }) {
   const anchorRef = useRef(null as HTMLAnchorElement | null)
 
@@ -24,7 +26,7 @@ export default function Link({
 
   return !isExternal(href) ? (
     <NextLink href={href}>
-      <a className={className} title={title}>
+      <a className={className} title={title} target={target}>
         {children}
       </a>
     </NextLink>
@@ -34,7 +36,7 @@ export default function Link({
       className={className}
       href={href}
       download={download}
-      target={download ? '_self' : '_blank'}
+      target={download ? '_self' : target ?? '_blank'}
       rel="noopener noreferrer"
     >
       {children}

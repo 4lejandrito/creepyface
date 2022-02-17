@@ -1,4 +1,4 @@
-.liferay {
+.namespace {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,29 +21,19 @@
     top: 5 * $spacing;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    max-width: 80%;
     @include fade-in-up(0.2s);
-    .logo {
-      font-size: 2.5rem;
-      @include s {
-        font-size: 2rem;
-      }
-      @include horizontal {
-        font-size: 3.5rem;
-      }
-      svg {
-        height: 1.4em;
-      }
+    img {
+      height: 4rem;
+      max-width: 100%;
     }
     .subtitle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-top: math.div($spacing, 8);
-      svg {
-        margin-right: 0.2em;
-        vertical-align: middle;
-        height: 1em;
+      text-transform: uppercase;
+      .logo {
+        svg {
+          height: 1.6em;
+        }
       }
     }
   }

@@ -76,7 +76,7 @@ export default route(async (req, res) => {
       canUseForResearch,
       canUseAsSample,
       namespace,
-      approved: namespace === 'liferay',
+      approved: !!namespace,
       exclusive: false,
     },
   })
