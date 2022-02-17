@@ -63,7 +63,6 @@ export default function Admin() {
               ? () => api(`${uuid}/unapprove`, 'POST')
               : undefined,
             trash: () => api(`${uuid}`, 'DELETE'),
-            code: () => api(`${uuid}/namespace`, 'POST'),
           })}
         >
           {(creepyface, visible, selected) => (

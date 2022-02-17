@@ -79,4 +79,7 @@ export const messages = {
   'The main Creepyface': 'La Creepyface principal',
   "A stranger's Creepyface": 'La Creepyface de un extraño',
   'Santa hat': 'Gorro de Papá Noel',
+  'powered by': 'hecho con',
+  'Page not found': 'Página no encontrada',
+  'Go back to Creepyface': 'Vuelve a Creepyface',
 }

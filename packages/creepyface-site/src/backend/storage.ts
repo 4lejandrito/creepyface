@@ -1,6 +1,7 @@
 import mkdir from 'mkdirp'
 import path from 'path'
 import { Namespace } from '../redux/types'
+import { namespaces } from '../util/namespaces'
 
 const base = path.resolve('.data')
 const uploads = base + '/uploads'
@@ -10,14 +11,12 @@ mkdir.sync(uploads)
 mkdir.sync(thumbnails)
 
 export const getDefaultUuid = (namespace: Namespace) =>
-  namespace === 'liferay' ? 'ray' : 'nala'
+  namespaces[namespace ?? '']?.defaultUuid ?? 'nala'
 export const getUploadsPath = (uuid: string, ...paths: string[]) =>
   path.join(uploads, uuid, ...paths)
 export const getImagePath = (uuid: string, name: string) =>
   path.join(
-    uuid === 'nala' || uuid === 'ray'
-      ? path.join('public', uuid)
-      : getUploadsPath(uuid, 'img'),
+    uuid.length < 10 ? path.join('public', uuid) : getUploadsPath(uuid, 'img'),
     `${name}.jpeg`
   )
 export const getThumbnailPath = (...paths: string[]) =>

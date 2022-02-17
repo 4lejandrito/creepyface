@@ -2,8 +2,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch } from './State'
 import { makePointProvider } from 'creepyface-dance'
 import * as stayingAlive from '../songs/staying-alive'
-import * as vivaLaVida from '../songs/viva-la-vida'
 import { CSSTransition } from 'react-transition-group'
+import { namespaces } from '../util/namespaces'
 import { Namespace } from '../redux/types'
 
 function PlayerDiv(props: { audio: HTMLAudioElement }) {
@@ -39,7 +39,7 @@ export default function Player({
   namespace: Namespace
 }) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
-  const song = namespace === 'liferay' ? vivaLaVida : stayingAlive
+  const song = namespaces[namespace ?? '']?.song ?? stayingAlive
 
   useEffect(() => {
     const audio = new Audio(song.url)

@@ -4,12 +4,14 @@ import Logo from '../src/components/Logo'
 import { useDispatch, useSelector } from '../src/components/State'
 import { requestCount } from '../src/redux/actions'
 import useImperativePointProvider from '../src/hooks/imperative'
+import { useTranslate } from '../src/components/Language'
 
 // Use 1080 * 540
 export default function Cover({ namespace = '' }) {
   const count = useSelector((state) => state.count)
   const dispatch = useDispatch()
   const [pointProvider, setPoint] = useImperativePointProvider()
+  const translate = useTranslate()
 
   useEffect(() => {
     dispatch(requestCount(namespace)())
@@ -26,7 +28,7 @@ export default function Cover({ namespace = '' }) {
       `}</style>
       {count !== null && (
         <CreepyFaces
-          alt="A stranger's Creepyface"
+          alt={translate("A stranger's Creepyface")}
           namespace={namespace}
           count={count}
           timeToDefault={0}

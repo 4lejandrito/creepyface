@@ -81,7 +81,7 @@
       max-width: 45 * $spacing;
       max-height: 30 * $spacing;
     }
-    .creepy {
+    .creepy:not(.disabled) {
       cursor: pointer;
     }
   }

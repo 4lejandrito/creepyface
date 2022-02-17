@@ -11,9 +11,11 @@ import { Namespace } from '../redux/types'
 export default function Sample({
   namespace,
   fullscreen,
+  navigate,
 }: {
   namespace?: Namespace
   fullscreen?: boolean
+  navigate?: boolean
 }) {
   const dispatch = useDispatch()
   const count = useSelector((state) => state.count)
@@ -58,6 +60,7 @@ export default function Sample({
         count={count}
         points={pointProvider}
         fullscreen={fullscreen}
+        navigate={navigate}
         onSelect={select}
       />
       <Player namespace={namespace} open={pointProvider === 'dance'} />

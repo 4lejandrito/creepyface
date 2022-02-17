@@ -35,6 +35,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faMusic } from '@fortawesome/free-solid-svg-icons'
 import { faStop } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 config.autoAddCss = false
 
 const icons = {
@@ -62,6 +64,8 @@ const icons = {
   spinner: faSpinner,
   music: faMusic,
   stop: faStop,
+  previous: faArrowLeft,
+  next: faArrowRight,
 }
 const faces = [
   faGrinSquint,

@@ -12,6 +12,19 @@
       box-shadow: none;
       overflow: initial;
     }
+    button.previous,
+    button.next {
+      position: absolute;
+      top: 50%;
+      margin: 0;
+      transform: translateY(-50%);
+    }
+    button.previous {
+      left: 2 * $spacing;
+    }
+    button.next {
+      right: 2 * $spacing;
+    }
   }
   ul {
     list-style: none;
@@ -39,7 +52,7 @@
         bottom: math.div($spacing, 4);
         right: math.div($spacing, 4);
       }
-      &:hover {
+      &:hover:not(.disabled) {
         opacity: 0.5;
       }
     }
