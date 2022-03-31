@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import { AsyncCreepyFace } from './CreepyFace'
 import useDimensions from '../hooks/dimensions'
 import range from 'lodash.range'
@@ -6,6 +6,9 @@ import classNames from 'classnames'
 import { Namespace } from '../redux/types'
 import useSpritemap from '../hooks/spritemap'
 import usePermutation from '../hooks/permutation'
+import { FaceIcon } from './Icon'
+import hash from 'string-hash'
+import Button from './Button'
 
 const getSize = (
   width: number,
@@ -47,19 +50,22 @@ export default memo(function CreepyFaces({
   const size = getSize(width, height, round)
   const cols = round(width / size)
   const rows = round(height / size)
-  const permutation = usePermutation(rows * cols)
+  const pageSize = rows * cols
+  const permutation = usePermutation(pageSize)
   const [getId, getImages] = useSpritemap(
     namespace,
     count === null ? 0 : Math.max(count - 1, 1)
   )
+  const pages = Math.ceil((count || 0) / pageSize)
+  const [page, setPage] = useState(0)
 
   return (
     <div ref={nodeRef} className={classNames('creepyfaces', { fullscreen })}>
       <ul style={{ width: size * cols }}>
         {width > 0 &&
           height > 0 &&
-          range(rows * cols).map((i) => {
-            const id = getId(permutation[i])
+          range(pageSize).map((i) => {
+            const id = fullscreen ? i + page * pageSize : getId(permutation[i])
             return (
               <li
                 key={i}
@@ -68,22 +74,44 @@ export default memo(function CreepyFaces({
                   height: size,
                 }}
               >
-                <AsyncCreepyFace
-                  id={id}
-                  alt={alt}
-                  points={points}
-                  timeToDefault={timeToDefault}
-                  getImages={getImages}
-                  onSelect={
-                    count === null
-                      ? undefined
-                      : () => onSelect?.(id + (count > 1 ? 1 : 0))
-                  }
-                />
+                {fullscreen && id >= (count || 0) - 1 ? (
+                  <span className="creepy disabled">
+                    <div className="placeholder">
+                      <FaceIcon seed={hash(`${i}`)} />
+                    </div>
+                  </span>
+                ) : (
+                  <AsyncCreepyFace
+                    id={id}
+                    alt={alt}
+                    points={points}
+                    timeToDefault={timeToDefault}
+                    getImages={getImages}
+                    onSelect={
+                      count === null
+                        ? undefined
+                        : () => onSelect?.(id + (count > 1 ? 1 : 0))
+                    }
+                  />
+                )}
               </li>
             )
           })}
       </ul>
+      {fullscreen && page > 0 && (
+        <Button
+          className="previous"
+          icon="previous"
+          onClick={() => setPage(page - 1)}
+        />
+      )}
+      {fullscreen && page < pages - 1 && (
+        <Button
+          className="next"
+          icon="next"
+          onClick={() => setPage(page + 1)}
+        />
+      )}
     </div>
   )
 })
