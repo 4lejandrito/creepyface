@@ -25,7 +25,6 @@ jobs:
       - name: Build Docker Image
         uses: 4lejandrito/build-docker-image-action@main
         with:
-          name: creepyface.io
           context: packages/creepyface-site
       - name: Test Docker Image
         run: yarn workspace creepyface-site test:docker
@@ -33,5 +32,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: 4lejandrito/deploy-docker-image-action@main
         with:
-          name: creepyface.io
           key: ${{ secrets.SSH_PRIVATE_KEY }}
