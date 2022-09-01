@@ -103,6 +103,6 @@
     "test:open": "cypress open",
     "dev": "prisma migrate dev && next dev",
     "start": "prisma migrate deploy && next start",
-    "start:docker": "docker run --rm -p 3000:5000 ghcr.io/4lejandrito/creepyface.io"
+    "start:docker": "docker run --rm -p 3000:5000 ghcr.io/4lejandrito/creepyface"
   }
 }
