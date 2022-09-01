@@ -6,7 +6,7 @@ import toGif from '../../../src/backend/gif'
 import { getDefaultUuid } from '../../../src/backend/storage'
 
 const getUuid = async (req: NextApiRequest) => {
-  let uuid = req.query.parts[0] ?? '0'
+  let uuid = req.query.parts?.[0] ?? '0'
 
   if (!uuid.match(/^\d+$/)) {
     return uuid
@@ -47,8 +47,8 @@ export default route(async (req, res) => {
     return imageRoute(await toGif(uuid))(req, res)
   }
 
-  const name = (req.query.parts[1] as string) || 'serious'
-  const size = (req.query.parts[2] as Size) || 'medium'
+  const name = (req.query.parts?.[1] as string) || 'serious'
+  const size = (req.query.parts?.[2] as Size) || 'medium'
   const path = await resize(uuid, name, size)
 
   return imageRoute(path)(req, res)

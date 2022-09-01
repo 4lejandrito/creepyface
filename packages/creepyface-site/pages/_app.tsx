@@ -34,8 +34,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             sizes="512x512"
             type="image/png"
           />
-          <script src="/creepyface.js" />
         </Head>
+        <script src="/creepyface.js" />
         <NextSeo
           title={title}
           description={description}

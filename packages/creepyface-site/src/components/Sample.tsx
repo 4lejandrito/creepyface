@@ -29,7 +29,7 @@ export default function Sample({
   const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
   const select = useCallback(
-    (id) => {
+    (id: number) => {
       dispatch({ type: 'selectCreepyface', payload: id })
       setSrc(getHostedImages(id).src)
     },

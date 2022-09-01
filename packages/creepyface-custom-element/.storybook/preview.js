@@ -1,2 +1,2 @@
-import '@ungap/custom-elements-builtin'
+import '@ungap/custom-elements'
 import './styles.css'

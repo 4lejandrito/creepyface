@@ -100,7 +100,10 @@ export default function CreepyFace(props: {
   const onDetach = useCallback(() => {
     setAttached(false)
   }, [])
-  const onDebug = useCallback(({ src }) => onChange(src), [onChange])
+  const onDebug = useCallback(
+    ({ src }: { src: string }) => onChange(src),
+    [onChange]
+  )
   return (
     <span className="creepy">
       {!hidden && images && (
