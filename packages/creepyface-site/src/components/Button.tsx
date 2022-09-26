@@ -22,7 +22,6 @@ type Props = {
   showShortcut?: boolean
   href?: string | null
   download?: boolean
-  lang?: Language
 }
 
 export default function Button({
@@ -38,7 +37,6 @@ export default function Button({
   showShortcut,
   href,
   download,
-  lang,
 }: Props) {
   const state = useSelector((state) => state)
   const dispatch = useDispatch()
@@ -64,7 +62,6 @@ export default function Button({
   } else {
     return (
       <button
-        lang={lang}
         disabled={
           disabled ||
           loading ||

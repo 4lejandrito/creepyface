@@ -1,48 +1,6 @@
 import { makeActionCreator } from './util'
 import getNext from '../util/get-next'
-import { Language, Action, Dispatch, State, Namespace } from './types'
-
-const receiveMessages = ({
-  value,
-  messages,
-}: {
-  value: Language
-  messages?: { [K: string]: string }
-}): Action => {
-  document.documentElement.lang = value
-  localStorage.setItem('locale', value)
-  return {
-    type: 'receiveMessages',
-    payload: { value, messages },
-  }
-}
-
-const loadLocaleValue =
-  (value: Language) => (dispatch: Dispatch, getState: () => State) => {
-    const { locale } = getState()
-    dispatch({ type: 'requestMessages', payload: value })
-    if (value === 'es') {
-      if (!locale.messages) {
-        import('../locales/es').then(({ messages }) => {
-          dispatch(receiveMessages({ value, messages }))
-        })
-      } else {
-        dispatch(receiveMessages({ value, messages: locale.messages }))
-      }
-    } else {
-      dispatch(receiveMessages({ value, messages: locale.messages }))
-    }
-  }
-
-export const loadLocale = makeActionCreator(() => (dispatch, getState) => {
-  const { locale } = getState()
-  dispatch(loadLocaleValue(locale.value))
-})
-
-export const toggleLocale = makeActionCreator(() => (dispatch, getState) => {
-  const { locale } = getState()
-  dispatch(loadLocaleValue(locale.value === 'en' ? 'es' : 'en'))
-})
+import { Namespace } from './types'
 
 export const toggleShortcuts = makeActionCreator(
   () => (dispatch) => dispatch({ type: 'toggleShortcuts' })

@@ -14,13 +14,6 @@ export type Pictures = { [K in Look]: Picture }
 export type Language = 'en' | 'es'
 
 export type State = {
-  locale: {
-    value: Language
-    loading: boolean
-    messages?: {
-      [T: string]: string
-    }
-  }
   shortcuts: boolean
   shoot: (() => Picture) | null
   pictures: Partial<Pictures>
@@ -36,14 +29,6 @@ export type State = {
 }
 
 export type Action =
-  | {
-      type: 'requestMessages'
-      payload: Language
-    }
-  | {
-      type: 'receiveMessages'
-      payload: { value: Language; messages?: { [K: string]: string } }
-    }
   | {
       type: 'toggleShortcuts'
     }

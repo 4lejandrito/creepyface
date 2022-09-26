@@ -1,55 +1,36 @@
-import React, { useEffect, useCallback, ReactNode } from 'react'
-import Button from './Button'
-import Loader from './Loader'
-import { useSelector, useDispatch } from './State'
-import { loadLocale, toggleLocale } from '../redux/actions'
+import React, { useCallback } from 'react'
 import { ValidMessage } from '../locales/es'
-
-export default function Language({
-  children,
-}: {
-  children: ReactNode | ReactNode[]
-}) {
-  const dispatch = useDispatch()
-  const locale = useSelector((state) => state.locale)
-
-  useEffect(() => {
-    dispatch(loadLocale())
-  }, [dispatch])
-
-  return locale.value !== 'en' && !locale.messages ? null : <>{children}</>
-}
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { messages } from '../locales/es'
 
 export const useTranslate = (): ((text: ValidMessage) => string) => {
-  const locale = useSelector((state) => state.locale)
+  const locale = useRouter().locale ?? 'en'
 
   return useCallback(
-    (text: string) => {
-      if (locale.value === 'en') return text
-      const messages = locale.messages
-      if (messages && messages[text]) {
+    (text: ValidMessage) => {
+      if (locale === 'en') return text
+      if (messages[text]) {
         return messages[text]
       } else {
         console.warn(`No translation found for '${text}'`)
       }
       return text
     },
-    [locale.value, locale.messages]
+    [locale]
   )
 }
 
 export function LanguageSelector() {
-  const locale = useSelector((state) => state.locale)
+  const locale = useRouter().locale ?? 'en'
   return (
-    <span lang={locale.value === 'en' ? 'es' : 'en'}>
+    <span lang={locale === 'en' ? 'es' : 'en'}>
       <span className="hide-s">
-        {locale.value === 'en' ? 'También en' : 'Also in'}{' '}
+        {locale === 'en' ? 'También en' : 'Also in'}{' '}
       </span>
-      <Button type="link" action={toggleLocale}>
-        {locale.value === 'en' ? 'español' : 'English'}
-      </Button>
-      {locale.loading && ' '}
-      {locale.loading && <Loader />}
+      <Link href="/" locale={locale === 'en' ? 'es' : 'en'}>
+        {locale === 'en' ? 'español' : 'English'}
+      </Link>
     </span>
   )
 }

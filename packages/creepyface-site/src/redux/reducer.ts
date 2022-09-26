@@ -1,29 +1,8 @@
 import { combineReducers } from 'redux'
 import getNext from '../util/get-next'
-import { State, Action, Language } from './types'
-
-const getLocale = (): Language => {
-  let locale = 'en'
-  if (typeof (window as any) !== 'undefined') {
-    ;(window.navigator.language || 'en').split('-')[0]
-  }
-  return locale === 'es' ? 'es' : 'en'
-}
+import { State, Action } from './types'
 
 export default combineReducers({
-  locale: (
-    locale: State['locale'] = { value: getLocale(), loading: false },
-    action: Action
-  ) => {
-    switch (action.type) {
-      case 'requestMessages':
-        return { ...locale, loading: true }
-      case 'receiveMessages':
-        return { ...action.payload, loading: false }
-      default:
-        return locale
-    }
-  },
   shortcuts: (shortcuts: boolean = false, action: Action) => {
     switch (action.type) {
       case 'toggleShortcuts':

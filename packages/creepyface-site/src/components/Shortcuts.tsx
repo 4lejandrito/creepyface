@@ -2,7 +2,6 @@ import React, { useEffect, ReactNode, useMemo } from 'react'
 import { useSelector, useDispatch } from './State'
 import Mousetrap from 'mousetrap'
 import {
-  toggleLocale,
   toggleShortcuts,
   restartCreation,
   takePicture,
@@ -13,7 +12,6 @@ import {
 import { ActionCreator } from '../redux/util'
 
 const shortcuts = {
-  l: toggleLocale,
   t: toggleShortcuts,
   o: restartCreation,
   s: takePicture,

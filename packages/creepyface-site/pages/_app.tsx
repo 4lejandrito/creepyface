@@ -1,5 +1,4 @@
 import { AppProps } from 'next/app'
-import Language from '../src/components/Language'
 import StateProvider from '../src/components/State'
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
@@ -58,9 +57,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           }}
           additionalMetaTags={[{ name: 'theme-color', content: '#148f77' }]}
         />
-        <Language>
-          <Component {...pageProps} />
-        </Language>
+        <Component {...pageProps} />
       </StateProvider>
     </PlausibleProvider>
   )
