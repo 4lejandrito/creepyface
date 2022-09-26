@@ -6,6 +6,9 @@ import PlausibleProvider from 'next-plausible'
 import '../src/scss/main.scss'
 import { useEffect } from 'react'
 import noBounce from 'no-bounce'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const title = 'Creepyface'
