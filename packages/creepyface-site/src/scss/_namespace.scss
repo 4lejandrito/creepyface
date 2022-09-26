@@ -23,7 +23,6 @@
     flex-direction: column;
     align-items: center;
     max-width: 80%;
-    @include fade-in-up(0.2s);
     img {
       height: 4rem;
       max-width: 100%;
@@ -38,7 +37,6 @@
     }
   }
   .actions {
-    @include fade-in-up(0.3s);
     position: absolute;
     bottom: 5 * $spacing;
     text-align: center;

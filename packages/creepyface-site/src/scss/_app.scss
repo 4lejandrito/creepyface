@@ -11,7 +11,6 @@
       margin-right: 3 * $spacing;
     }
     header {
-      @include fade-in-up(0.2s);
       padding-top: $spacing;
       padding-bottom: 1.5 * $spacing;
       margin: 0;
@@ -34,7 +33,6 @@
       }
     }
     p {
-      @include fade-in-up(0.4s);
       max-width: 36 * $spacing;
       margin: 0;
       @include horizontal {
@@ -43,7 +41,6 @@
       }
     }
     .actions {
-      @include fade-in-up(0.3s);
       padding: $spacing 0;
       margin-top: math.div($spacing, 2);
       @include horizontal {
@@ -65,7 +62,6 @@
     }
   }
   section.sample {
-    @include fade-in-up(0.4s);
     height: 100%;
     width: 100%;
     @extend %center;
@@ -86,7 +82,6 @@
     }
   }
   footer {
-    @include fade-in-up(0.6s, 0.6);
     @include horizontal {
       display: none;
     }

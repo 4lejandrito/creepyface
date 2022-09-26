@@ -172,21 +172,3 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   background: $color-danger;
   color: white;
 }
-
-@mixin fade-in-up($delay: 0.2s, $opacity: 1) {
-  $name: fade-in-up-#{$opacity * 100};
-  @keyframes #{$name} {
-    0% {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    100% {
-      opacity: $opacity;
-      transform: translateY(0);
-    }
-  }
-  opacity: 0;
-  animation: #{$name} 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
-  animation-delay: 0s;
-  animation-delay: $delay;
-}
