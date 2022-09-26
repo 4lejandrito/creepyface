@@ -1,17 +1,19 @@
 import React from 'react'
 import Button from '../src/components/Button'
-import { Code, Repo, Package } from '../src/components/Project'
+import { Repo, Package } from '../src/components/Project'
 import { useTranslate } from '../src/components/Language'
 import Logo from '../src/components/Logo'
 import Sample from '../src/components/Sample'
 import { useSelector } from '../src/components/State'
-import { nextPointProvider } from '../src/redux/actions'
+import { changePointProvider } from '../src/redux/actions'
 import Footer from '../src/components/Footer'
 import CreateButton, { CreateProvider } from '../src/components/CreateButton'
 
 export default function Home({ create = false }) {
   const translate = useTranslate()
   const pointProvider = useSelector((state) => state.pointProvider)
+  const pointProviderClassName = (name: string) =>
+    pointProvider === name ? 'selected' : undefined
   return (
     <CreateProvider open={create} navigate>
       <section className="description">
@@ -19,23 +21,36 @@ export default function Home({ create = false }) {
           <Logo />
         </header>
         <p>
-          {translate('A')} <Code>{translate('JavaScript library')}</Code>{' '}
+          {translate('A')} {translate('JavaScript library')}{' '}
           {translate('that makes your')} {translate('face')}{' '}
-          <Button type="link" action={nextPointProvider}>
-            {pointProvider === 'dance' ? (
-              translate('dance')
-            ) : (
-              <>
-                {translate('look at')}{' '}
-                {translate(
-                  pointProvider === 'pointer' ? 'the pointer' : 'a firefly'
-                )}
-              </>
-            )}
+          {translate('look at')}{' '}
+          <Button
+            type="link"
+            className={pointProviderClassName('pointer')}
+            disabled={pointProvider === 'pointer'}
+            action={changePointProvider('pointer')}
+          >
+            {translate('the pointer')}
           </Button>
-          .
+          ,{' '}
+          <Button
+            type="link"
+            className={pointProviderClassName('firefly')}
+            disabled={pointProvider === 'firefly'}
+            action={changePointProvider('firefly')}
+          >
+            {translate('a firefly')}
+          </Button>{' '}
+          {translate('or')}{' '}
+          <Button
+            type="link"
+            className={pointProviderClassName('dance')}
+            disabled={pointProvider === 'dance'}
+            action={changePointProvider('dance')}
+          >
+            {translate('dance!')}
+          </Button>
         </p>
-        <p>{translate('Ideal for resumes or team pages')}.</p>
         <p className="hide-s">
           {translate('Supports')}{' '}
           <Package name="react-creepyface" text="React" /> {translate('and')}{' '}

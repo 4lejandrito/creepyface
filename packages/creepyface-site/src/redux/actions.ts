@@ -88,19 +88,16 @@ export const showPermissions = makeActionCreator(
   () => (dispatch) => dispatch({ type: 'showPermissions' })
 )
 
-export const nextPointProvider = makeActionCreator(
-  () => (dispatch, getState) => {
-    const pointProviders = ['pointer', 'firefly', 'dance'] as const
-    const { pointProvider } = getState()
+export const changePointProvider = (
+  pointProvider: 'pointer' | 'firefly' | 'dance'
+) =>
+  makeActionCreator(() => (dispatch, getState) => {
     dispatch({
       type: 'changePointProvider',
       payload:
-        pointProviders[
-          (pointProviders.indexOf(pointProvider) + 1) % pointProviders.length
-        ],
+        getState().pointProvider === pointProvider ? 'pointer' : pointProvider,
     })
-  }
-)
+  })
 
 export const toggleDance = makeActionCreator(() => (dispatch, getState) => {
   const { pointProvider } = getState()

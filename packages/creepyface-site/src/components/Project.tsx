@@ -9,10 +9,6 @@ export const Author = () => (
   <Link href={`https://4lejandrito.dev`}>{username}</Link>
 )
 
-export const Code = ({ children }: { children: ReactNode | ReactNode[] }) => (
-  <Link href={`https://www.npmjs.com/package/${repo}`}>{children}</Link>
-)
-
 export const Copyright = () => (
   <>
     <Author /> © {new Date().getFullYear()}

@@ -7,7 +7,7 @@
     text-align: center;
     @include horizontal {
       text-align: start;
-      flex: 0 0 22.5em;
+      flex: 0 0 25em;
       margin-right: 3 * $spacing;
     }
     header {

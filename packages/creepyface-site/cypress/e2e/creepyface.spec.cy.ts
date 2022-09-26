@@ -19,7 +19,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('shows the mosaic with all the creepyfaces', () => {
-    cy.get('img[alt="A stranger\'s Creepyface"').should('have.length', 30)
+    cy.get('img[alt="A stranger\'s Creepyface"').should('have.length', 25)
   })
 
   it('shows the code', () => {
