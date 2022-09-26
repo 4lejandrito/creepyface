@@ -54,14 +54,14 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   color: $color;
   font-weight: bold;
   display: inline-block;
+  outline: 0 !important;
   @extend %round;
   &.selected {
     text-decoration-line: underline;
     text-decoration-thickness: 2px;
   }
-  &:focus {
+  &:focus-visible {
     box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
-    outline: 0 !important;
   }
   &:not(:disabled):hover {
     text-decoration-line: underline;
