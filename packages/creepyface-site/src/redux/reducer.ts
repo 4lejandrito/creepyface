@@ -5,9 +5,7 @@ import { State, Action, Language } from './types'
 const getLocale = (): Language => {
   let locale = 'en'
   if (typeof (window as any) !== 'undefined') {
-    locale =
-      localStorage.getItem('locale') ||
-      (window.navigator.language || 'en').split('-')[0]
+    ;(window.navigator.language || 'en').split('-')[0]
   }
   return locale === 'es' ? 'es' : 'en'
 }
