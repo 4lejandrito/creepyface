@@ -98,6 +98,7 @@ export default function CreepyFaceCreatorModal(props: {
       id="creator"
       isOpen={props.isOpen}
       title={translate('Creepyface creator')}
+      shouldCloseOnOverlayClick={false}
       onOpen={props.onOpen}
       onClose={props.onClose}
     >

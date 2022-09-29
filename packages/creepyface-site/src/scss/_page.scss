@@ -15,11 +15,6 @@ html {
   @include m {
     font-size: 14px;
   }
-  min-width: 227px;
-  min-height: 419px;
-  @include horizontal {
-    min-height: 350px;
-  }
 }
 
 body {

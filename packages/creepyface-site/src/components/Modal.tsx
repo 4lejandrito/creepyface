@@ -8,6 +8,7 @@ ReactModal.setAppElement('#__next')
 export default function Modal({
   children,
   id,
+  shouldCloseOnOverlayClick,
   isOpen,
   onOpen = () => {},
   onClose,
@@ -15,6 +16,7 @@ export default function Modal({
 }: {
   children: ReactNode | ReactNode[]
   id: string
+  shouldCloseOnOverlayClick?: boolean
   isOpen: boolean
   onOpen?: () => void
   onClose: () => void
@@ -27,7 +29,7 @@ export default function Modal({
       contentLabel={title}
       onAfterOpen={onOpen}
       onRequestClose={onClose}
-      shouldCloseOnOverlayClick={false}
+      shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       closeTimeoutMS={200}
     >
       <Button className="cancel" onClick={onClose}>

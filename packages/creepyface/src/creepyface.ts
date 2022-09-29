@@ -61,6 +61,18 @@ creepyface.cancel = (img: HTMLImageElement) => {
 
 creepyface.registerPointProvider = registerPointProvider
 
+creepyface.mosaic = (iframe) => {
+  const pointConsumer = (point: Point | null) => {
+    const { top, left } = iframe.getBoundingClientRect()
+    if (point) {
+      iframe.contentWindow?.postMessage([point[0] - left, point[1] - top], '*')
+    } else {
+      iframe.contentWindow?.postMessage(point, '*')
+    }
+  }
+  return listen(new Image(), pointConsumer)
+}
+
 if (typeof (window as any) !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     const elements: NodeListOf<HTMLImageElement> = document.querySelectorAll(
@@ -68,6 +80,12 @@ if (typeof (window as any) !== 'undefined') {
     )
     for (let i = 0; i < elements.length; i++) {
       creepyface(elements[i])
+    }
+    const iframes: NodeListOf<HTMLIFrameElement> = document.querySelectorAll(
+      'iframe[data-creepyface]'
+    )
+    for (let i = 0; i < iframes.length; i++) {
+      creepyface.mosaic(iframes[i])
     }
   })
 }

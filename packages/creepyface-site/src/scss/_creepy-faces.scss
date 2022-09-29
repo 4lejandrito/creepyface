@@ -44,6 +44,9 @@
       box-shadow: none;
       transition: all ease-in-out 100ms;
       @include square(100%);
+      &:not(.disabled) {
+        cursor: pointer;
+      }
       img {
         width: 100%;
       }
@@ -56,5 +59,8 @@
         opacity: 0.5;
       }
     }
+  }
+  &.embedded .creepy {
+    opacity: 1 !important;
   }
 }

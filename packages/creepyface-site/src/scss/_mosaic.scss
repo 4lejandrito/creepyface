@@ -1,0 +1,22 @@
+.powered-by {
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1rem;
+  .logo svg {
+    height: 1.6em;
+  }
+}
+
+.mosaic-selected {
+  padding: 0 !important;
+  .creepy {
+    height: 1.2 * $main-creepyface-height;
+    width: 1.2 * $main-creepyface-width;
+    img {
+      @extend %expand;
+      object-fit: cover;
+    }
+  }
+}

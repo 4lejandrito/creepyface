@@ -35,6 +35,7 @@ export default memo(function CreepyFaces({
   timeToDefault,
   fullscreen,
   navigate,
+  embedded,
   onSelect,
 }: {
   alt: string
@@ -44,6 +45,7 @@ export default memo(function CreepyFaces({
   points: string
   fullscreen?: boolean
   navigate?: boolean
+  embedded?: boolean
   onSelect?: (id: number) => void
 }) {
   const nodeRef = useRef(null as HTMLDivElement | null)
@@ -62,7 +64,10 @@ export default memo(function CreepyFaces({
   const [page, setPage] = useState(0)
 
   return (
-    <div ref={nodeRef} className={classNames('creepyfaces', { fullscreen })}>
+    <div
+      ref={nodeRef}
+      className={classNames('creepyfaces', { fullscreen, embedded })}
+    >
       <ul style={{ width: size * cols }}>
         {width > 0 &&
           height > 0 &&

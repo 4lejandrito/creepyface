@@ -57,6 +57,7 @@ export type UserOptions = {
 export type Creepyface = {
   (img: HTMLImageElement, userOptions?: UserOptions | undefined): CreepyCancel
   cancel(img: HTMLImageElement): void
+  mosaic(iframe: HTMLIFrameElement): CreepyCancel
   registerPointProvider: (
     name: string,
     provider: PointProvider,
