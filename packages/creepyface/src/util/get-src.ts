@@ -8,10 +8,8 @@ const compare = (angle: number) => (a: Look, b: Look) =>
 const closest = (angle: number, looks: Look[]) =>
   looks.slice(0).sort(compare(angle))[0]
 const within = (n: number, a: number, b: number) => n >= a && n <= b
-const rectContains = (
-  { left, top, right, bottom }: ClientRect | DOMRect,
-  point: Point
-) => within(point[0], left, right) && within(point[1], top, bottom)
+const rectContains = ({ left, top, right, bottom }: DOMRect, point: Point) =>
+  within(point[0], left, right) && within(point[1], top, bottom)
 const elementContains = (
   img: HTMLImageElement,
   point: Point,
