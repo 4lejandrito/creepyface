@@ -14,7 +14,6 @@ model Creepyface {
   canUseAsSample    Boolean
   approved          Boolean
   namespace         String?
-  exclusive         Boolean
 }
 
 model Usage {

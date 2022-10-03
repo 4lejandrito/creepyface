@@ -7,7 +7,6 @@ import { useShortcuts } from './Shortcuts'
 import { useDispatch, useSelector } from './State'
 import { useTranslate } from './Language'
 import { ActionCreator } from '../redux/util'
-import { Language } from '../redux/types'
 
 type Props = {
   type?: string

@@ -1,25 +1,47 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Images } from '../components/CreepyFace'
 import { angles, Namespace } from '../redux/types'
 import { smallImageSize, spritemapChunkSize } from '../util/constants'
 import supportsWebp from 'supports-webp'
 
-export default function useSpritemap(namespace: Namespace, count: number) {
-  const seed = useMemo(() => Math.random(), [])
-  const offset = useMemo(
-    () => Math.floor(seed * Math.ceil(count / spritemapChunkSize)),
-    [count, seed]
-  )
-  const getId = useCallback(
-    (i: number) => (offset * spritemapChunkSize + i) % count,
-    [count, offset]
-  )
+export default function useSpritemap(
+  namespace: Namespace,
+  pending?: boolean,
+  onCount?: (count: number) => void,
+  onReload?: (reload: () => void) => void
+) {
   const [getImages, setGetImages] = useState<
     (id: number) => Promise<Images | null>
   >(() => () => Promise.resolve(null))
+  const [count, setCount] = useState<number | null>(null)
+  const [hash, setHash] = useState<string>()
+  const reload = useCallback(
+    () =>
+      fetch(
+        `/api/spritemap?${new URLSearchParams({
+          namespace: namespace ?? '',
+          pending: pending ? 'true' : 'false',
+        })}`,
+        {
+          credentials: 'include',
+        }
+      )
+        .then((res) => res.json())
+        .then(({ count, hash }: { count: number; hash: string }) => {
+          setCount(count)
+          setHash(hash)
+          onCount?.(count)
+        }),
+    [namespace, pending, onCount]
+  )
 
   useEffect(() => {
-    if (count === 0) return
+    onReload?.(reload)
+    reload()
+  }, [reload, onReload])
+
+  useEffect(() => {
+    if (!hash) return
     const chunks: Partial<{ [K: number]: Promise<HTMLImageElement> }> = {}
     const getChunk = (i: number) => {
       const chunk = chunks[i]
@@ -28,9 +50,11 @@ export default function useSpritemap(namespace: Namespace, count: number) {
         supportsWebp.then((supportsWebp) => {
           const spritemap = new Image()
           spritemap.crossOrigin = 'anonymous'
-          spritemap.src = `/img/spritemap?chunk=${i}&count=${count}${
+          spritemap.src = `/img/spritemap?chunk=${i}${
             namespace ? '&namespace=' + namespace : ''
-          }${supportsWebp ? '&format=webp' : ''}`
+          }${pending ? '&pending=true' : ''}${hash ? '&t=' + hash : ''}${
+            supportsWebp ? '&format=webp' : ''
+          }`
           spritemap.onload = () => resolve(spritemap)
         })
       }))
@@ -89,8 +113,11 @@ export default function useSpritemap(namespace: Namespace, count: number) {
               }
             })())
     )
-    return () => objectUrls.forEach((url) => URL.revokeObjectURL(url))
-  }, [namespace, count])
+    return () => {
+      setGetImages(() => () => Promise.resolve(null))
+      objectUrls.forEach((url) => URL.revokeObjectURL(url))
+    }
+  }, [namespace, pending, hash])
 
-  return [getId, getImages] as const
+  return { getImages, count }
 }

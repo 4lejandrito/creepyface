@@ -77,9 +77,6 @@
       max-width: 45 * $spacing;
       max-height: 30 * $spacing;
     }
-    .creepy:not(.disabled) {
-      cursor: pointer;
-    }
   }
   footer {
     @include horizontal {

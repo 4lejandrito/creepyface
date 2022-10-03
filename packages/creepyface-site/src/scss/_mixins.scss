@@ -118,6 +118,12 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   flex-direction: column;
 }
 
+%center-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 %expand {
   width: 100%;
   height: 100%;
@@ -129,6 +135,9 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   overflow: hidden;
   vertical-align: middle;
   display: inline-block;
+  &:not(.video) {
+    background: darken($color-main, 10%);
+  }
   &:not(.video) {
     > .loader {
       color: white;
@@ -175,4 +184,17 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
 .danger {
   background: $color-danger;
   color: white;
+}
+
+.badge {
+  @extend %media;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing / 8 $spacing / 8;
+  font-weight: bold;
+  position: absolute;
+  line-height: 1;
+  top: -$spacing / 1.5;
+  right: -$spacing / 2;
 }

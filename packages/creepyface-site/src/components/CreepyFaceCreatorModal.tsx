@@ -39,7 +39,7 @@ function Take({
           <img
             className="example"
             alt={translate('Sample face')}
-            src={getSrc(next, getHostedImages(undefined, namespace))}
+            src={getSrc(next, getHostedImages(null, namespace))}
           />
         </span>
         <Video

@@ -38,15 +38,14 @@
   li {
     display: inline-block;
     .creepy {
-      opacity: 0.3;
       border: none;
       border-radius: 0;
       box-shadow: none;
-      transition: all ease-in-out 100ms;
-      @include square(100%);
-      &:not(.disabled) {
-        cursor: pointer;
+      &,
+      img {
+        transition: all ease-in-out 100ms;
       }
+      @include square(100%);
       img {
         width: 100%;
       }
@@ -55,12 +54,23 @@
         bottom: math.div($spacing, 4);
         right: math.div($spacing, 4);
       }
-      &:hover:not(.disabled) {
-        opacity: 0.5;
+      &:focus-visible {
+        padding: $spacing / 2;
+        img {
+          @extend %round;
+        }
       }
     }
   }
-  &.embedded .creepy {
-    opacity: 1 !important;
+  &.dim {
+    li:not(.selected) {
+      .creepy {
+        opacity: 0.3;
+      }
+      button.creepy:hover:not(:disabled),
+      button.creepy:focus-visible {
+        opacity: 0.5;
+      }
+    }
   }
 }

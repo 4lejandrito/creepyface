@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { requestCount } from '../redux/actions'
+import React, { useCallback, useMemo, useState } from 'react'
 import { getHostedImages } from './CreepyFace'
 import CreepyFaces from './CreepyFaces'
 import { useSelector, useDispatch } from './State'
@@ -11,14 +10,15 @@ import { Namespace } from '../redux/types'
 export default function Sample({
   namespace,
   fullscreen,
-  navigate,
+  shuffle,
+  showControls,
 }: {
   namespace?: Namespace
   fullscreen?: boolean
-  navigate?: boolean
+  shuffle?: boolean
+  showControls?: boolean
 }) {
   const dispatch = useDispatch()
-  const count = useSelector((state) => state.count)
   const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
   const showCode = useSelector((state) => state.showCode)
   const pointProvider = useSelector((state) => state.pointProvider)
@@ -28,6 +28,7 @@ export default function Sample({
   )
   const translate = useTranslate()
   const [src, setSrc] = useState(images.src)
+  const [count, setCount] = useState<number | null>(null)
   const select = useCallback(
     (id: number) => {
       dispatch({ type: 'selectCreepyface', payload: id })
@@ -35,10 +36,10 @@ export default function Sample({
     },
     [dispatch]
   )
-
-  useEffect(() => {
-    dispatch(requestCount(namespace)())
-  }, [namespace, dispatch])
+  const onReload = useCallback(
+    (reload: () => void) => dispatch({ type: 'setReload', payload: reload }),
+    [dispatch]
+  )
 
   return (
     <section className="sample">
@@ -49,19 +50,20 @@ export default function Sample({
         points={pointProvider}
         open={showCode}
         onChange={setSrc}
-        onSelect={useCallback(
-          () => count !== null && select(Math.floor(Math.random() * count)),
-          [count, select]
-        )}
+        onSelect={
+          count ? () => select(Math.floor(Math.random() * count)) : undefined
+        }
       />
       <CreepyFaces
-        alt={translate("A stranger's Creepyface")}
         namespace={namespace}
-        count={count}
         points={pointProvider}
         fullscreen={fullscreen}
-        navigate={navigate}
+        shuffle={shuffle}
+        showControls={showControls}
+        dim
         onSelect={select}
+        onCount={setCount}
+        onReload={onReload}
       />
       <Player namespace={namespace} open={pointProvider === 'dance'} />
     </section>

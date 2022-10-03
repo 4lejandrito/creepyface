@@ -1,123 +1,102 @@
-import React, { memo, useRef, useState } from 'react'
+import React, { memo } from 'react'
 import { AsyncCreepyFace } from './CreepyFace'
-import useDimensions from '../hooks/dimensions'
-import range from 'lodash.range'
 import classNames from 'classnames'
 import { Namespace } from '../redux/types'
 import useSpritemap from '../hooks/spritemap'
-import usePermutation from '../hooks/permutation'
 import { FaceIcon } from './Icon'
 import hash from 'string-hash'
 import Button from './Button'
+import usePagination, { Controls } from '../hooks/pagination'
+import { useTranslate } from './Language'
+import useSelection from '../hooks/selection'
+import useGrid from '../hooks/grid'
 
-const getSize = (
-  width: number,
-  height: number,
-  round: (number: number) => number
-) => {
-  const minSide = Math.min(width, height)
-  const maxSide = Math.max(width, height)
-  for (let x = 4; x <= 10; x++) {
-    const size = round(minSide / x)
-    const y = round(maxSide / size)
-    if (size <= 90 && y > 3) {
-      return size
-    }
-  }
-  return 90
-}
-
-export default memo(function CreepyFaces({
-  alt,
-  namespace,
-  count,
-  points,
-  timeToDefault,
-  fullscreen,
-  navigate,
-  embedded,
-  onSelect,
-}: {
-  alt: string
-  namespace: Namespace
-  count: number | null
-  timeToDefault?: number
-  points: string
+export default memo(function CreepyFaces(props: {
+  dim?: boolean
   fullscreen?: boolean
-  navigate?: boolean
-  embedded?: boolean
+  namespace?: Namespace
+  pending?: boolean
+  points?: string
+  selectedIds?: number[]
+  showControls?: boolean
+  shuffle?: boolean
+  timeToDefault?: number
+  onControls?: (controls?: Controls) => void
+  onCount?: (count: number) => void
+  onReload?: (reload: () => void) => void
   onSelect?: (id: number) => void
+  onSelectMany?: (ids: number[]) => void
 }) {
-  const nodeRef = useRef(null as HTMLDivElement | null)
-  const { width, height } = useDimensions(nodeRef)
-  const round = fullscreen ? Math.ceil : Math.floor
-  const size = getSize(width, height, round)
-  const cols = round(width / size)
-  const rows = round(height / size)
-  const pageSize = rows * cols
-  const permutation = usePermutation(pageSize)
-  const [getId, getImages] = useSpritemap(
-    namespace,
-    count === null ? 0 : Math.max(count - 1, 1)
+  const { cols, rows, size, ref } = useGrid(props.fullscreen)
+  const { getImages, count } = useSpritemap(
+    props.namespace,
+    props.pending,
+    props.onCount,
+    props.onReload
   )
-  const pages = Math.ceil((count || 0) / pageSize)
-  const [page, setPage] = useState(0)
-
+  const { ids, controls } = usePagination(
+    rows * cols,
+    count,
+    props.shuffle,
+    props.onControls
+  )
+  const selection = useSelection(ids, props.selectedIds, props.onSelectMany)
+  const translate = useTranslate()
   return (
     <div
-      ref={nodeRef}
-      className={classNames('creepyfaces', { fullscreen, embedded })}
+      ref={ref}
+      className={classNames('creepyfaces', {
+        fullscreen: props.fullscreen,
+        dim: props.dim || props.selectedIds?.length,
+      })}
     >
       <ul style={{ width: size * cols }}>
-        {width > 0 &&
-          height > 0 &&
-          range(pageSize).map((i) => {
-            const id = navigate ? i + page * pageSize : getId(permutation[i])
-            return (
-              <li
-                key={i}
-                style={{
-                  width: size,
-                  height: size,
-                }}
-              >
-                {navigate && id >= (count || 0) - 1 ? (
-                  <span className="creepy disabled">
-                    <div className="placeholder">
-                      <FaceIcon seed={hash(`${i}`)} />
-                    </div>
-                  </span>
-                ) : (
-                  <AsyncCreepyFace
-                    id={id}
-                    alt={alt}
-                    points={points}
-                    timeToDefault={timeToDefault}
-                    getImages={getImages}
-                    onSelect={
-                      count === null
-                        ? undefined
-                        : () => onSelect?.(id + (count > 1 ? 1 : 0))
-                    }
-                  />
-                )}
-              </li>
-            )
-          })}
+        {ids.map((id, i) => (
+          <li
+            key={i}
+            className={classNames({
+              selected: props.selectedIds?.includes(id),
+            })}
+            style={{
+              width: size,
+              height: size,
+            }}
+            onMouseDown={selection.onMouseDown(i)}
+            onMouseEnter={selection.onMouseEnter?.(i)}
+          >
+            {!count || id < 0 ? (
+              <span className="creepy">
+                <div className="placeholder">
+                  <FaceIcon seed={hash(`${i}`)} />
+                </div>
+              </span>
+            ) : (
+              <AsyncCreepyFace
+                id={id}
+                alt={translate("A stranger's Creepyface")}
+                points={props.points ?? 'pointer'}
+                draggable={!props.onSelectMany}
+                timeToDefault={props.timeToDefault}
+                getImages={getImages}
+                onClick={
+                  selection.onClick?.(id) ??
+                  (props.onSelect ? () => props.onSelect?.(id) : undefined)
+                }
+                onLongPress={selection.onLongPress?.(id)}
+              />
+            )}
+          </li>
+        ))}
       </ul>
-      {navigate && page > 0 && (
+      {props.showControls && controls?.previous && (
         <Button
           className="previous"
           icon="previous"
-          onClick={() => setPage(page - 1)}
+          onClick={controls.previous}
         />
       )}
-      {navigate && page < pages - 1 && (
-        <Button
-          className="next"
-          icon="next"
-          onClick={() => setPage(page + 1)}
-        />
+      {props.showControls && controls?.next && (
+        <Button className="next" icon="next" onClick={controls.next} />
       )}
     </div>
   )

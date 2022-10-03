@@ -127,22 +127,15 @@ export default combineReducers({
         return viewLink
     }
   },
-  selectedCreepyface: (selectedCreepyface: number = 0, action: Action) => {
+  selectedCreepyface: (
+    selectedCreepyface: number | null = null,
+    action: Action
+  ) => {
     switch (action.type) {
       case 'selectCreepyface':
         return action.payload
       default:
         return selectedCreepyface
-    }
-  },
-  count: (count: State['count'] = null, action: Action) => {
-    switch (action.type) {
-      case 'receiveCount':
-        return action.payload
-      case 'receiveUpload':
-        return action.payload.count
-      default:
-        return count
     }
   },
   showCode: (showCode: boolean = false, action: Action) => {
@@ -174,6 +167,14 @@ export default combineReducers({
         return false
       default:
         return isCreating
+    }
+  },
+  reload: (reload: (() => void) | null = null, action: Action) => {
+    switch (action.type) {
+      case 'setReload':
+        return action.payload
+      default:
+        return reload
     }
   },
 })
