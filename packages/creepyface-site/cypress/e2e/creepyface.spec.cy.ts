@@ -15,11 +15,11 @@ describe(`creepyface.io`, () => {
   })
 
   it('shows the main creepyface', () => {
-    mainCreepyface().should('have.attr', 'src', '/img/0/serious')
+    mainCreepyface().should('have.attr', 'src', '/img/nala/serious')
   })
 
-  it('shows the mosaic with all the creepyfaces', () => {
-    cy.get('img[alt="A stranger\'s Creepyface"').should('have.length', 25)
+  it('shows the mosaic with all the creepyface placeholders', () => {
+    cy.get('.placeholder').should('have.length', 25)
   })
 
   it('shows the code', () => {
@@ -33,25 +33,25 @@ describe(`creepyface.io`, () => {
             Cypress.config().baseUrl
           }/creepyface.js"></script>\n\n<img src="${
             Cypress.config().baseUrl
-          }/img/0/serious"\n  data-creepyface\n  data-src-hover="${
+          }/img/nala/serious"\n  data-creepyface\n  data-src-hover="${
             Cypress.config().baseUrl
-          }/img/0/hover"\n  data-src-look-0="${
+          }/img/nala/hover"\n  data-src-look-0="${
             Cypress.config().baseUrl
-          }/img/0/0"\n  data-src-look-45="${
+          }/img/nala/0"\n  data-src-look-45="${
             Cypress.config().baseUrl
-          }/img/0/45"\n  data-src-look-90="${
+          }/img/nala/45"\n  data-src-look-90="${
             Cypress.config().baseUrl
-          }/img/0/90"\n  data-src-look-135="${
+          }/img/nala/90"\n  data-src-look-135="${
             Cypress.config().baseUrl
-          }/img/0/135"\n  data-src-look-180="${
+          }/img/nala/135"\n  data-src-look-180="${
             Cypress.config().baseUrl
-          }/img/0/180"\n  data-src-look-225="${
+          }/img/nala/180"\n  data-src-look-225="${
             Cypress.config().baseUrl
-          }/img/0/225"\n  data-src-look-270="${
+          }/img/nala/225"\n  data-src-look-270="${
             Cypress.config().baseUrl
-          }/img/0/270"\n  data-src-look-315="${
+          }/img/nala/270"\n  data-src-look-315="${
             Cypress.config().baseUrl
-          }/img/0/315"\n/>`
+          }/img/nala/315"\n/>`
         )
       })
     })
@@ -59,7 +59,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('serves the images of each creepyface', () => {
-    cy.request('/img/0/serious').then((response) => {
+    cy.request('/img/nala/serious').then((response) => {
       expect(response.status).to.eq(200)
       expect(
         parseInt(response.headers['content-length'] as string)
@@ -69,7 +69,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('serves a gif of each creepyface', () => {
-    cy.request('/img/0.gif').then((response) => {
+    cy.request('/img/nala.gif').then((response) => {
       expect(response.status).to.eq(200)
       expect(
         parseInt(response.headers['content-length'] as string)
@@ -90,7 +90,7 @@ describe(`creepyface.io`, () => {
             clientY: size.y + size.height / 2 + coords.y,
           })
           cy.wait(100)
-          mainCreepyface().should('have.attr', 'src', `/img/0/${name}`)
+          mainCreepyface().should('have.attr', 'src', `/img/nala/${name}`)
         })
       }
 
@@ -195,7 +195,7 @@ describe(`creepyface.io`, () => {
 
     it('goes back to the default src after 1 second', () => {
       cy.wait(1000)
-      mainCreepyface().should('have.attr', 'src', '/img/0/serious')
+      mainCreepyface().should('have.attr', 'src', '/img/nala/serious')
     })
   })
 
@@ -215,6 +215,6 @@ describe(`creepyface.io`, () => {
         password: '',
       },
     })
-    cy.contains('New!')
+    cy.contains(/Pending: [1-9]+/)
   })
 })

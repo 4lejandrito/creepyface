@@ -21,11 +21,11 @@ export type State = {
   uploading: boolean
   downloadLink: string | null
   viewLink: string | null
-  selectedCreepyface: number
-  count: number | null
+  selectedCreepyface: number | null
   showCode: boolean
   pointProvider: 'pointer' | 'firefly' | 'dance'
   isCreating: boolean
+  reload: (() => void) | null
 }
 
 export type Action =
@@ -83,15 +83,15 @@ export type Action =
       payload: number
     }
   | {
-      type: 'receiveCount'
-      payload: number
-    }
-  | {
       type: 'toggleCode'
     }
   | {
       type: 'changePointProvider'
       payload: State['pointProvider']
+    }
+  | {
+      type: 'setReload'
+      payload: State['reload']
     }
 
 export type Dispatch = ThunkDispatch<State, void, Action>

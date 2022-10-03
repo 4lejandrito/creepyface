@@ -37,7 +37,7 @@ export const upload = (namespace: Namespace) =>
   makeActionCreator(
     () => (dispatch, getState) => {
       dispatch({ type: 'requestUpload' })
-      const { pictures, permissions } = getState()
+      const { pictures, permissions, reload } = getState()
       fetch('/api/content', {
         credentials: 'include',
         method: 'POST',
@@ -60,24 +60,14 @@ export const upload = (namespace: Namespace) =>
         })(),
       })
         .then((res) => res.json())
-        .then((data: { download: string; view: string; count: number }) =>
+        .then((data: { download: string; view: string; count: number }) => {
+          reload?.()
           dispatch({ type: 'receiveUpload', payload: data })
-        )
+        })
         .catch(() => dispatch({ type: 'uploadFailed' }))
     },
     ({ pictures }) => getNext(pictures) === undefined
   )
-
-export const requestCount = (namespace: Namespace) =>
-  makeActionCreator(() => (dispatch) => {
-    fetch(`/api/count${namespace ? '?namespace=' + namespace : ''}`, {
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then(({ count }: { count: number }) =>
-        dispatch({ type: 'receiveCount', payload: count })
-      )
-  })
 
 export const toggleCode = makeActionCreator(
   () => (dispatch) => dispatch({ type: 'toggleCode' }),

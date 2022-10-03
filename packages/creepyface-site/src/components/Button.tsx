@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import classNames from 'classnames'
 import Icon, { IconType } from './Icon'
 import Loader from './Loader'
@@ -7,7 +7,6 @@ import { useShortcuts } from './Shortcuts'
 import { useDispatch, useSelector } from './State'
 import { useTranslate } from './Language'
 import { ActionCreator } from '../redux/util'
-import { Language } from '../redux/types'
 
 type Props = {
   type?: string
@@ -16,12 +15,34 @@ type Props = {
   icon?: IconType
   loading?: boolean
   title?: string
+  badge?: string
   onClick?: () => void
   action?: ActionCreator
   disabled?: boolean
   showShortcut?: boolean
   href?: string | null
   download?: boolean
+}
+
+export function AsyncButton(
+  props: PropsWithChildren<
+    Omit<Props, 'onClick'> & { onClick: () => Promise<void> }
+  >
+) {
+  const [loading, setLoading] = useState(props.loading)
+  return (
+    <Button
+      {...props}
+      loading={loading}
+      onClick={async () => {
+        setLoading(true)
+        await props.onClick()
+        setLoading(false)
+      }}
+    >
+      {props.children}
+    </Button>
+  )
 }
 
 export default function Button({
@@ -31,6 +52,7 @@ export default function Button({
   icon,
   loading,
   title,
+  badge,
   onClick,
   action,
   disabled,
@@ -92,6 +114,7 @@ export default function Button({
                 </small>
               )
             ))}
+          {badge && !disabled && <small className="badge">{badge}</small>}
         </>
       </button>
     )

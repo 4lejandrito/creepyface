@@ -10,8 +10,6 @@ const thumbnails = base + '/thumbnails'
 mkdir.sync(uploads)
 mkdir.sync(thumbnails)
 
-export const getDefaultUuid = (namespace: Namespace) =>
-  namespaces[namespace ?? '']?.defaultUuid ?? 'nala'
 export const getUploadsPath = (uuid: string, ...paths: string[]) =>
   path.join(uploads, uuid, ...paths)
 export const getImagePath = (uuid: string, name: string) =>

@@ -1,136 +1,34 @@
 .admin {
-  margin-top: 4 * $spacing;
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .top-bar {
-    @extend %media;
-    padding: $spacing;
-    border-radius: 0;
-    border: none;
-    z-index: 100;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    height: 4 * $spacing;
-    h1 {
-      margin: 0;
-      line-height: 1;
-      display: inline-block;
-      font-size: 2rem;
-    }
-    button {
-      vertical-align: middle;
-      margin: 0 math.div($spacing, 4);
-      padding: math.div($spacing, 2);
-      border: none;
-      line-height: 1;
-    }
-  }
-
-  .logo-wrapper {
-    position: fixed;
-    left: $spacing;
-    top: $spacing;
-    .logo svg {
-      height: 2rem;
-    }
-  }
-
-  ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  height: 100vh;
+  width: 100%;
+  padding: 4rem 0;
+  .panel {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    li {
-      .creepy {
-        img {
-          width: 100%;
-        }
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    header {
+      @extend %center-row;
+      margin-bottom: $spacing / 2;
+      .title {
+        flex-grow: 1;
       }
-    }
-    &.small {
-      li {
-        @include square(150px);
-        margin: math.div($spacing, 2);
-        .creepy {
-          @include square(150px);
-        }
-      }
-    }
-    &.big {
-      li {
-        @include square(300px);
-        margin: math.div($spacing, 2);
-        .creepy {
-          @include square(300px);
-        }
-      }
-    }
-    li {
-      display: inline-block;
-      position: relative;
-      .creepy {
-        transition: all ease 0.1s;
-        cursor: pointer;
-      }
-      label {
-        position: relative;
-        margin: 0;
-        .badges {
-          position: absolute;
-          top: math.div(-$spacing, 2);
-          right: math.div(-$spacing, 2);
-          z-index: 2;
-          .badge {
-            padding: 0 math.div($spacing, 4);
-            margin-left: math.div($spacing, 4);
-            @extend %media;
-          }
-        }
-      }
-      input {
-        visibility: hidden;
-        position: absolute;
-        &:checked + .creepy {
-          border: solid 5px white;
-        }
-      }
-      .actions {
-        position: absolute;
-        bottom: math.div($spacing, 2);
-        left: 0;
-        right: 0;
-        margin-top: math.div($spacing, 2);
+      .controls {
+        @extend %center-row;
+        gap: $spacing / 2;
         button {
-          margin: 0 math.div($spacing, 4);
+          margin: 0;
         }
       }
     }
-  }
-
-  .selection {
-    .info {
-      float: left;
-      > span {
-        display: inline-block;
-        vertical-align: middle;
-      }
-    }
-    .actions {
-      float: right;
+    main {
+      position: relative;
+      flex-grow: 1;
     }
   }
-
-  .filter {
-    position: fixed;
-    right: $spacing;
-    top: $spacing;
+  .actions {
+    @extend %center;
+    padding: 0 1rem;
   }
 }

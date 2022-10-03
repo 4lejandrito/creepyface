@@ -1,110 +1,139 @@
-import React, { useState, useEffect } from 'react'
+import { GetServerSideProps } from 'next'
+import React, { useMemo, useState } from 'react'
+import Button, { AsyncButton } from '../src/components/Button'
 import CreepyFace, { getHostedImages } from '../src/components/CreepyFace'
-import Logo from '../src/components/Logo'
-import Icon from '../src/components/Icon'
-import SelectableList from '../src/components/SelectableList'
-import { Creepyface } from '@prisma/client'
-import Link from 'next/link'
+import CreepyFaces from '../src/components/CreepyFaces'
+import Modal from '../src/components/Modal'
+import Panel from '../src/components/Panel'
+import useFunctionState from '../src/hooks/function'
+import { Controls } from '../src/hooks/pagination'
 
-export default function Admin() {
-  const [creepyfaces, setCreepyfaces] = useState<Creepyface[]>()
-  const [approved, setApproved] = useState(false)
-  const filteredCreepyfaces = creepyfaces
-    ? creepyfaces.filter((cf) => (approved ? cf.approved : true))
-    : []
+export const getServerSideProps: GetServerSideProps<
+  React.ComponentProps<typeof Admin>
+> = async (context) => ({
+  props: {
+    namespace: (context.query.namespace as string) || '',
+  },
+})
 
-  const api = (path = '', method = 'GET') =>
-    fetch(`/api/admin/${path}`, {
-      credentials: 'include',
-      method,
-      headers: {
-        Accept: 'application/json',
-      },
+export default function Admin({ namespace }: { namespace: string }) {
+  const [selectedCreepyface, setSelectedCreepyface] = useState({
+    id: 0,
+    pending: false,
+  })
+  const [showSelected, setShowSelected] = useState(false)
+  const [ids, setIds] = useState<number[]>([])
+  const [pendingIds, setPendingIds] = useState<number[]>([])
+  const [count, setCount] = useState<number | null>(null)
+  const [pendingCount, setPendingCount] = useState<number | null>(null)
+  const [controls, setControls] = useState<Controls>()
+  const [pendingControls, setPendingControls] = useState<Controls>()
+  const [reload, setReload] = useFunctionState()
+  const [pendingReload, setPendingReload] = useFunctionState()
+  const images = useMemo(
+    () =>
+      getHostedImages(
+        selectedCreepyface.id,
+        namespace,
+        'medium',
+        selectedCreepyface.pending
+      ),
+    [selectedCreepyface, namespace]
+  )
+  const api = (method?: string) => () =>
+    fetch(
+      `/api/admin?${new URLSearchParams({
+        ids: ids.join(),
+        pendingIds: pendingIds.join(),
+        namespace,
+      })}`,
+      {
+        method,
+        credentials: 'include',
+      }
+    ).then(() => {
+      setIds([])
+      setPendingIds([])
+      reload?.()
+      pendingReload?.()
     })
-      .then((res) => res.json())
-      .then(setCreepyfaces)
-
-  useEffect(() => {
-    api()
-  }, [])
+  const post = api('POST')
+  const del = api('DELETE')
 
   return (
     <div className="admin">
-      <style jsx global>{`
-        html,
-        body,
-        #__next {
-          min-height: 100%;
-          height: auto;
-        }
-      `}</style>
-      <header className="top-bar light">
-        <Link href="/">
-          <a className="light logo-wrapper">
-            <Logo />
-          </a>
-        </Link>
-        <h1>{filteredCreepyfaces.length}</h1>
-        <small className="filter">
-          <button onClick={() => setApproved(!approved)}>
-            Show {approved ? 'all' : 'approved'}
-          </button>
-        </small>
-      </header>
-      {creepyfaces && (
-        <SelectableList
-          items={filteredCreepyfaces}
-          actions={({ uuid, approved, canUseAsSample }) => ({
-            'thumbs-up':
-              canUseAsSample && !approved
-                ? () => api(`${uuid}/approve`, 'POST')
-                : undefined,
-            'thumbs-down': approved
-              ? () => api(`${uuid}/unapprove`, 'POST')
-              : undefined,
-            trash: () => api(`${uuid}`, 'DELETE'),
-          })}
-        >
-          {(creepyface, visible, selected) => (
-            <>
-              <CreepyFace
-                images={getHostedImages(
-                  creepyface.uuid,
-                  undefined,
-                  selected ? 'square' : 'small'
-                )}
-                hidden={!visible}
-              />
-              <div className="badges">
-                {creepyface.namespace && (
-                  <small className="badge">
-                    <strong>{creepyface.namespace}</strong>
-                  </small>
-                )}
-                {creepyface.canUseAsSample && !creepyface.approved && (
-                  <small className="badge">
-                    <strong>New!</strong>
-                  </small>
-                )}
-                {creepyface.approved && !approved && (
-                  <small className="badge">
-                    <strong>
-                      <Icon name="accept" />
-                    </strong>
-                  </small>
-                )}
-                {creepyface.canUseForResearch && (
-                  <small className="badge">
-                    <strong>
-                      <Icon name="camera" />
-                    </strong>
-                  </small>
-                )}
-              </div>
-            </>
-          )}
-        </SelectableList>
-      )}
+      <Panel title="Approved" count={count} controls={controls}>
+        <CreepyFaces
+          namespace={namespace}
+          selectedIds={ids}
+          onControls={setControls}
+          onCount={setCount}
+          onReload={setReload}
+          onSelect={(id) => {
+            setSelectedCreepyface({ id, pending: false })
+            setShowSelected(true)
+          }}
+          onSelectMany={setIds}
+        />
+      </Panel>
+      <div className="actions">
+        <AsyncButton
+          badge={`${pendingIds.length}`}
+          disabled={!(ids.length === 0 && pendingIds.length > 0)}
+          icon="previous"
+          onClick={post}
+        />
+        <AsyncButton
+          badge={`${ids.length + pendingIds.length}`}
+          disabled={ids.length === 0 || pendingIds.length === 0}
+          icon="swap"
+          onClick={post}
+        />
+        <AsyncButton
+          badge={`${ids.length}`}
+          disabled={!(ids.length > 0 && pendingIds.length === 0)}
+          icon="next"
+          onClick={post}
+        />
+        <AsyncButton
+          badge={`${ids.length + pendingIds.length}`}
+          disabled={pendingIds.length === 0 && ids.length === 0}
+          icon="trash"
+          onClick={del}
+        />
+        <Button
+          disabled={pendingIds.length === 0 && ids.length === 0}
+          icon="times"
+          onClick={() => {
+            setIds([])
+            setPendingIds([])
+          }}
+        />
+      </div>
+      <Panel title="Pending" count={pendingCount} controls={pendingControls}>
+        <CreepyFaces
+          namespace={namespace}
+          pending
+          selectedIds={pendingIds}
+          onCount={setPendingCount}
+          onControls={setPendingControls}
+          onReload={setPendingReload}
+          onSelect={(id) => {
+            setSelectedCreepyface({ id, pending: true })
+            setShowSelected(true)
+          }}
+          onSelectMany={setPendingIds}
+        />
+      </Panel>
+      <Modal
+        id="mosaic-selected"
+        isOpen={showSelected}
+        title="Creepyface"
+        shouldCloseOnOverlayClick
+        onClose={() => setShowSelected(false)}
+      >
+        <CreepyFace id={`${selectedCreepyface}`} images={images} />
+      </Modal>
     </div>
   )
 }

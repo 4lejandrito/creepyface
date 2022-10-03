@@ -1,11 +1,11 @@
-import { imageRoute, route } from '../../../src/backend/api'
+import { imageRoute, pendingRoute } from '../../../src/backend/api'
 import { NextApiRequest } from 'next'
 import resize, { Size } from '../../../src/backend/resize'
-import prisma from '../../../prisma'
 import toGif from '../../../src/backend/gif'
-import { getDefaultUuid } from '../../../src/backend/storage'
+import { getUuid } from '../../../src/backend/spritemap'
 
-const getUuid = async (req: NextApiRequest) => {
+const getUuidFromRequest = async (req: NextApiRequest) => {
+  const namespace = (req.query.namespace as string) || undefined
   let uuid = req.query.parts?.[0] ?? '0'
 
   if (!uuid.match(/^\d+$/)) {
@@ -13,30 +13,13 @@ const getUuid = async (req: NextApiRequest) => {
   }
 
   const i = parseInt(uuid)
-  const namespace = (req.query.namespace as string) || undefined
+  const pending = req.query.pending === 'true'
 
-  if (i === 0) {
-    return getDefaultUuid(namespace)
-  }
-
-  return (
-    await prisma.creepyface.findFirst({
-      where: {
-        canUseAsSample: true,
-        approved: true,
-        exclusive: !namespace ? false : undefined,
-        namespace,
-      },
-      orderBy: {
-        timestamp: 'asc',
-      },
-      skip: i - 1,
-    })
-  )?.uuid
+  return await getUuid(i, namespace, pending)
 }
 
-export default route(async (req, res) => {
-  const uuid = await getUuid(req)
+export default pendingRoute(async (req, res) => {
+  const uuid = await getUuidFromRequest(req)
 
   if (!uuid) {
     res.status(404).end()

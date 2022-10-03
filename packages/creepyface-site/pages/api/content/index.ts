@@ -6,7 +6,7 @@ import fs from 'fs-extra'
 import html from '../../../src/backend/template.hbs'
 import prisma from '../../../prisma'
 import absoluteUrl from 'next-absolute-url'
-import { updateSpritemap } from '../../../src/backend/spritemap'
+import { clearCache } from '../../../src/backend/spritemap'
 import { sendAnimation } from '../../../src/util/admin'
 import toGif from '../../../src/backend/gif'
 
@@ -70,31 +70,19 @@ export default route(async (req, res) => {
       options: getOptions(files),
     })
   )
-  const creepyface = await prisma.creepyface.create({
+  await prisma.creepyface.create({
     data: {
       uuid,
       canUseForResearch,
       canUseAsSample,
       namespace,
       approved: !!namespace,
-      exclusive: false,
     },
   })
-  if (creepyface.approved) {
-    await updateSpritemap(namespace ?? undefined)
-    await updateSpritemap(undefined)
-  }
+  await clearCache(namespace ?? undefined, !namespace)
   res.send({
     download: `${baseURL}/api/content/${uuid}/creepyface.zip`,
     view: canUseAsSample ? `${baseURL}/content/${uuid}` : undefined,
-    count:
-      (await prisma.creepyface.count({
-        where: {
-          namespace,
-          canUseAsSample: true,
-          approved: true,
-        },
-      })) + 1,
   })
   try {
     sendAnimation(

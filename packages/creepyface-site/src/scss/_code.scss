@@ -33,6 +33,6 @@
     position: absolute;
     bottom: math.div($spacing, 4);
     right: math.div($spacing, 4);
-    margin: math.div($spacing, 4);
+    margin: math.div($spacing, 4) !important;
   }
 }

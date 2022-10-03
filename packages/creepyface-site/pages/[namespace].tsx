@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<
   const namespace = context.params?.['namespace'] as string
   if (namespace in namespaces) {
     return {
-      props: { namespace: namespace as Namespace },
+      props: { namespace },
     }
   }
   return {
@@ -26,9 +26,9 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-export default function Custom(props: { namespace: Namespace }) {
+export default function Custom(props: { namespace: string }) {
   const { name, key, color, color2, color3, url, logo } =
-    namespaces[props.namespace ?? ''] ?? {}
+    namespaces[props.namespace] ?? {}
   const title = `Creepyface - ${name} Edition`
   const pointProvider = useSelector((state) => state.pointProvider)
   const dispatch = useDispatch()
@@ -40,6 +40,14 @@ export default function Custom(props: { namespace: Namespace }) {
         body {
           background: ${color};
         }
+        .creepy:not(.video),
+        .placeholder {
+          background: ${color} !important;
+          color: ${color2} !important;
+        }
+        .placeholder svg {
+          opacity: 0.1;
+        }
         .namespace button.invert {
           color: ${color3} !important;
           border-color: ${color2} !important;
@@ -50,7 +58,7 @@ export default function Custom(props: { namespace: Namespace }) {
         }
       `}</style>
       <div className="namespace">
-        <Sample namespace={props.namespace} fullscreen navigate />
+        <Sample namespace={props.namespace} fullscreen showControls />
         <header>
           {url && (
             <Link href={url}>

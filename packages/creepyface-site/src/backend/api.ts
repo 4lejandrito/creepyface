@@ -1,4 +1,4 @@
-import { NextApiHandler } from 'next'
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import send from 'send'
 import auth from 'basic-auth'
 import resolve from 'browser-resolve'
@@ -17,12 +17,16 @@ export const route = (handler: NextApiHandler): NextApiHandler => {
   }
 }
 
-export const adminRoute = (handler: NextApiHandler): NextApiHandler => {
+export const adminRoute = (
+  handler: NextApiHandler,
+  allowGuest?: (req: NextApiRequest) => boolean
+): NextApiHandler => {
   return route(async (req, res) => {
     const credentials = auth(req)
     if (
-      credentials?.name !== 'creepyface' ||
-      credentials?.pass !== (process.env.SECRET || '')
+      (credentials?.name !== 'creepyface' ||
+        credentials?.pass !== (process.env.SECRET || '')) &&
+      !allowGuest?.(req)
     ) {
       res.setHeader('WWW-Authenticate', 'Basic realm=Secret')
       res.statusCode = 401
@@ -32,6 +36,9 @@ export const adminRoute = (handler: NextApiHandler): NextApiHandler => {
     }
   })
 }
+
+export const pendingRoute = (handler: NextApiHandler) =>
+  adminRoute(handler, (req) => req.query.pending !== 'true')
 
 export const fileRoute = (path: string) =>
   route(
@@ -51,7 +58,6 @@ export const imageRoute = (path: string) =>
         console.error(err)
       }
     }
-    res.setHeader('Cache-Control', `max-age=${24 * 60 * 60}, immutable`)
     return fileRoute(path)(req, res)
   })
 

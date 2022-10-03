@@ -30,7 +30,10 @@ import { faCode } from '@fortawesome/free-solid-svg-icons/faCode'
 import { faTh } from '@fortawesome/free-solid-svg-icons/faTh'
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge'
 import { Pictures } from '../redux/types'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRightArrowLeft,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons'
 import { faMusic } from '@fortawesome/free-solid-svg-icons'
 import { faStop } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
@@ -63,6 +66,7 @@ const icons = {
   stop: faStop,
   previous: faArrowLeft,
   next: faArrowRight,
+  swap: faArrowRightArrowLeft,
 }
 const faces = [
   faGrinSquint,

@@ -4,16 +4,37 @@ import Loader from './Loader'
 import { FaceIcon } from './Icon'
 import { angles, Angle } from '../redux/types'
 import hash from 'string-hash'
-import 'creepyface-firefly'
 import { Size } from '../backend/resize'
-import { useMountedState } from 'react-use'
+import { useLongPress, useMountedState } from 'react-use'
+import { namespaces } from '../util/namespaces'
+import 'creepyface-firefly'
 
-const noop = () => {}
+const now = Date.now()
 const url =
-  (id: number | string, namespace?: string, size?: string) => (name: string) =>
-    `/img/${id}/${name}${size ? '/' + size : ''}${
-      namespace ? '?namespace=' + namespace : ''
-    }`
+  (id: number | null, namespace?: string, size?: string, pending?: boolean) =>
+  (name: string) => {
+    const uuid =
+      id !== null ? id : namespace ? namespaces[namespace]?.defaultUuid : 'nala'
+    const url = `/img/${uuid}/${name}${size ? '/' + size : ''}`
+    const searchParams = new URLSearchParams()
+
+    if (namespace) {
+      searchParams.append('namespace', namespace)
+    }
+
+    if (pending) {
+      searchParams.append('pending', 'true')
+    }
+
+    if (id !== null) {
+      searchParams.append('t', `${now}`)
+    }
+
+    if (searchParams.toString()) {
+      return `${url}?${searchParams}`
+    }
+    return url
+  }
 
 export type Images = {
   src: string
@@ -22,11 +43,12 @@ export type Images = {
 }
 
 export const getHostedImages = (
-  id: number | string = 0,
+  id: number | null,
   namespace?: string,
-  size?: Size
+  size?: Size,
+  pending?: boolean
 ): Images => {
-  const getUrl = url(id, namespace, size)
+  const getUrl = url(id, namespace, size, pending)
   return {
     src: getUrl('serious'),
     hover: getUrl('hover'),
@@ -39,8 +61,10 @@ export function AsyncCreepyFace(props: {
   alt: string
   timeToDefault?: number
   points: string
+  draggable?: boolean
   getImages: (id: number) => Promise<Images | null>
-  onSelect?: () => void
+  onClick?: () => void
+  onLongPress?: () => void
 }) {
   const [images, setImages] = useState<Images | null>(null)
   const isMounted = useMountedState()
@@ -61,8 +85,10 @@ export function AsyncCreepyFace(props: {
       alt={props.alt}
       images={images}
       points={props.points}
+      draggable={props.draggable}
       timeToDefault={props.timeToDefault}
-      onSelect={props.onSelect}
+      onClick={props.onClick}
+      onLongPress={props.onLongPress}
     />
   )
 }
@@ -74,7 +100,9 @@ export default function CreepyFace(props: {
   hidden?: boolean
   points?: string
   timeToDefault?: number
-  onSelect?: () => void
+  draggable?: boolean
+  onClick?: () => void
+  onLongPress?: () => void
   onChange?: (src: string) => void
   onLoad?: () => void
 }) {
@@ -85,31 +113,46 @@ export default function CreepyFace(props: {
     hidden,
     points,
     timeToDefault,
-    onSelect = noop,
-    onChange = noop,
-    onLoad = noop,
+    onClick,
+    onLongPress,
+    onChange,
+    onLoad,
   } = props
   const [firstAttach, setFirstAttach] = useState(true)
   const [attached, setAttached] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const [longPressed, setLongPressed] = useState(false)
   const onAttach = useCallback(() => {
     setAttached(true)
     setFirstAttach(false)
-    onLoad()
+    onLoad?.()
   }, [onLoad])
   const onDetach = useCallback(() => {
     setAttached(false)
   }, [])
   const onDebug = useCallback(
-    ({ src }: { src: string }) => onChange(src),
+    ({ src }: { src: string }) => onChange?.(src),
     [onChange]
   )
+  const longPressProps = useLongPress(() => {
+    onLongPress?.()
+    setLongPressed(true)
+  })
   return (
-    <span className="creepy">
+    <button
+      className="creepy"
+      disabled={(!onClick && !onLongPress) || !loaded || !images}
+      {...(onLongPress ? longPressProps : {})}
+      onClick={() => {
+        if (!longPressed) onClick?.()
+        setLongPressed(false)
+      }}
+    >
       {!hidden && images && (
         <Creepyface
           alt={alt}
           src={images.src}
+          draggable={props.draggable}
           options={{
             hover: images.hover,
             looks: images.looks,
@@ -120,7 +163,6 @@ export default function CreepyFace(props: {
             onDetach,
             onDebug,
           }}
-          onClick={onSelect}
           onLoad={() => setLoaded(true)}
         />
       )}
@@ -130,6 +172,6 @@ export default function CreepyFace(props: {
         </div>
       )}
       {!hidden && (!attached || !loaded) && <Loader />}
-    </span>
+    </button>
   )
 }

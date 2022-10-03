@@ -25,16 +25,16 @@ Creepyface in the wild:
 
 <img
   data-creepyface
-  src="https://creepyface.io/img/0/serious"
-  data-src-hover="https://creepyface.io/img/0/hover"
-  data-src-look-0="https://creepyface.io/img/0/0"
-  data-src-look-45="https://creepyface.io/img/0/45"
-  data-src-look-90="https://creepyface.io/img/0/90"
-  data-src-look-135="https://creepyface.io/img/0/135"
-  data-src-look-180="https://creepyface.io/img/0/180"
-  data-src-look-225="https://creepyface.io/img/0/225"
-  data-src-look-270="https://creepyface.io/img/0/270"
-  data-src-look-315="https://creepyface.io/img/0/315"
+  src="https://creepyface.io/img/nala/serious"
+  data-src-hover="https://creepyface.io/img/nala/hover"
+  data-src-look-0="https://creepyface.io/img/nala/0"
+  data-src-look-45="https://creepyface.io/img/nala/45"
+  data-src-look-90="https://creepyface.io/img/nala/90"
+  data-src-look-135="https://creepyface.io/img/nala/135"
+  data-src-look-180="https://creepyface.io/img/nala/180"
+  data-src-look-225="https://creepyface.io/img/nala/225"
+  data-src-look-270="https://creepyface.io/img/nala/270"
+  data-src-look-315="https://creepyface.io/img/nala/315"
 />
 ```
 
@@ -66,7 +66,7 @@ creepyface.cancel(document.querySelector('img'))
 For more advanced use cases Creepyface can also be set up via a programmatic API:
 
 ```html
-<img src="https://creepyface.io/img/0/serious" />
+<img src="https://creepyface.io/img/nala/serious" />
 ```
 
 ```js
@@ -76,17 +76,17 @@ const img = document.querySelector('img')
 
 const cancel = creepyface(img, {
   // Image URL to display on hover
-  hover: 'https://creepyface.io/img/0/hover',
+  hover: 'https://creepyface.io/img/nala/hover',
   // Each of the images looking at a given direction
   looks: [
-    { angle: 0, src: 'https://creepyface.io/img/0/0' },
-    { angle: 45, src: 'https://creepyface.io/img/0/45' },
-    { angle: 90, src: 'https://creepyface.io/img/0/90' },
-    { angle: 135, src: 'https://creepyface.io/img/0/135' },
-    { angle: 180, src: 'https://creepyface.io/img/0/180' },
-    { angle: 225, src: 'https://creepyface.io/img/0/225' },
-    { angle: 270, src: 'https://creepyface.io/img/0/270' },
-    { angle: 315, src: 'https://creepyface.io/img/0/315' }
+    { angle: 0, src: 'https://creepyface.io/img/nala/0' },
+    { angle: 45, src: 'https://creepyface.io/img/nala/45' },
+    { angle: 90, src: 'https://creepyface.io/img/nala/90' },
+    { angle: 135, src: 'https://creepyface.io/img/nala/135' },
+    { angle: 180, src: 'https://creepyface.io/img/nala/180' },
+    { angle: 225, src: 'https://creepyface.io/img/nala/225' },
+    { angle: 270, src: 'https://creepyface.io/img/nala/270' },
+    { angle: 315, src: 'https://creepyface.io/img/nala/315' }
   ],
   // Time (in ms) to restore the default image after the last input
   timeToDefault: 1000
@@ -130,16 +130,16 @@ and consume it using the `data-points` attribute:
 <img
   data-creepyface
   data-points="random"
-  src="https://creepyface.io/img/0/serious"
-  data-src-hover="https://creepyface.io/img/0/hover"
-  data-src-look-0="https://creepyface.io/img/0/0"
-  data-src-look-45="https://creepyface.io/img/0/45"
-  data-src-look-90="https://creepyface.io/img/0/90"
-  data-src-look-135="https://creepyface.io/img/0/135"
-  data-src-look-180="https://creepyface.io/img/0/180"
-  data-src-look-225="https://creepyface.io/img/0/225"
-  data-src-look-270="https://creepyface.io/img/0/270"
-  data-src-look-315="https://creepyface.io/img/0/315"
+  src="https://creepyface.io/img/nala/serious"
+  data-src-hover="https://creepyface.io/img/nala/hover"
+  data-src-look-0="https://creepyface.io/img/nala/0"
+  data-src-look-45="https://creepyface.io/img/nala/45"
+  data-src-look-90="https://creepyface.io/img/nala/90"
+  data-src-look-135="https://creepyface.io/img/nala/135"
+  data-src-look-180="https://creepyface.io/img/nala/180"
+  data-src-look-225="https://creepyface.io/img/nala/225"
+  data-src-look-270="https://creepyface.io/img/nala/270"
+  data-src-look-315="https://creepyface.io/img/nala/315"
 />
 ```
 
@@ -148,7 +148,7 @@ and consume it using the `data-points` attribute:
 or pass it programmatically:
 
 ```html
-<img src="https://creepyface.io/img/0/serious" />
+<img src="https://creepyface.io/img/nala/serious" />
 ```
 
 ```js
@@ -156,16 +156,16 @@ const img = document.querySelector('img')
 
 creepyface(img, {
   points: 'random',
-  hover: 'https://creepyface.io/img/0/hover',
+  hover: 'https://creepyface.io/img/nala/hover',
   looks: [
-    { angle: 0, src: 'https://creepyface.io/img/0/0' },
-    { angle: 45, src: 'https://creepyface.io/img/0/45' },
-    { angle: 90, src: 'https://creepyface.io/img/0/90' },
-    { angle: 135, src: 'https://creepyface.io/img/0/135' },
-    { angle: 180, src: 'https://creepyface.io/img/0/180' },
-    { angle: 225, src: 'https://creepyface.io/img/0/225' },
-    { angle: 270, src: 'https://creepyface.io/img/0/270' },
-    { angle: 315, src: 'https://creepyface.io/img/0/315' },
+    { angle: 0, src: 'https://creepyface.io/img/nala/0' },
+    { angle: 45, src: 'https://creepyface.io/img/nala/45' },
+    { angle: 90, src: 'https://creepyface.io/img/nala/90' },
+    { angle: 135, src: 'https://creepyface.io/img/nala/135' },
+    { angle: 180, src: 'https://creepyface.io/img/nala/180' },
+    { angle: 225, src: 'https://creepyface.io/img/nala/225' },
+    { angle: 270, src: 'https://creepyface.io/img/nala/270' },
+    { angle: 315, src: 'https://creepyface.io/img/nala/315' },
   ],
 })
 ```

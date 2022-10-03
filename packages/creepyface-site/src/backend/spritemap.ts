@@ -3,46 +3,102 @@ import { writeFile, pathExists } from 'fs-extra'
 import { looks, Namespace } from '../redux/types'
 import prisma from '../../prisma'
 import resize from './resize'
-import { getDefaultUuid, getThumbnailPath } from './storage'
+import { getThumbnailPath } from './storage'
 import {
   smallImageSize,
   spritemapChunkCols,
   spritemapChunkSize,
 } from '../util/constants'
 import sharp from '../util/sharp'
+import { deleteAsync } from 'del'
+import computeHash from 'object-hash'
 
-const getSpritemapPath = (namespace: Namespace, chunk: number, webp = false) =>
+const getSpritemapPath = (options: {
+  namespace: Namespace
+  chunk: number
+  pending?: boolean
+  webp?: boolean
+}) =>
   getThumbnailPath(
-    'spritemap' +
-      (namespace ? `-${namespace}` : '') +
-      `-${smallImageSize}-${spritemapChunkSize}-${chunk}.${
-        webp ? 'webp' : 'jpeg'
-      }`
+    `spritemap-${options.namespace ?? 'default'}${
+      options.pending ? '-pending' : ''
+    }-${smallImageSize}-${spritemapChunkSize}-${options.chunk}.${
+      options.webp ? 'webp' : 'jpeg'
+    }`
   )
 
-export async function updateSpritemap(namespace: Namespace, chunk?: number) {
+function getWhere(namespace: Namespace, pending?: boolean) {
+  return {
+    namespace,
+    canUseAsSample: !namespace ? true : undefined,
+    approved: !pending,
+  }
+}
+
+function getKey(namespace: Namespace, pending: boolean) {
+  return `${namespace ?? 'default'}-${pending}`
+}
+
+const hashes: { [K in string]?: string } = {}
+
+async function deleteSpritemaps(namespace: Namespace, onlyPending?: boolean) {
+  await deleteAsync([
+    getThumbnailPath(
+      `spritemap-${namespace}-${onlyPending ? 'pending-' : ''}*`
+    ),
+  ])
+  delete hashes[getKey(namespace, true)]
+  if (!onlyPending) delete hashes[getKey(namespace, false)]
+}
+
+export async function clearCache(namespace: Namespace, onlyPending?: boolean) {
+  if (namespace) await deleteSpritemaps(namespace, onlyPending)
+  await deleteSpritemaps('default', onlyPending)
+}
+
+export const getUuid = async (
+  i: number,
+  namespace: Namespace,
+  pending?: boolean
+) =>
+  (
+    await prisma.creepyface.findFirst({
+      where: getWhere(namespace, pending),
+      orderBy: {
+        timestamp: 'asc',
+      },
+      skip: i,
+    })
+  )?.uuid
+
+export async function getCount(namespace: Namespace, pending?: boolean) {
+  return await prisma.creepyface.count({ where: getWhere(namespace, pending) })
+}
+
+export async function getHash(namespace: Namespace, pending: boolean) {
+  const key = getKey(namespace, pending)
+  return (hashes[key] =
+    hashes[key] ??
+    computeHash(
+      await prisma.creepyface.findMany({
+        where: getWhere(namespace, pending),
+      })
+    ))
+}
+
+export async function updateSpritemap(options: {
+  namespace: Namespace
+  chunk?: number
+  pending?: boolean
+}) {
+  let { namespace, chunk, pending } = options
   if (chunk === undefined) {
     chunk = Math.floor(
-      (await prisma.creepyface.count({
-        where: {
-          canUseAsSample: true,
-          approved: true,
-          exclusive: !namespace ? false : undefined,
-          namespace,
-        },
-        orderBy: {
-          timestamp: 'asc',
-        },
-      })) / spritemapChunkSize
+      (await getCount(namespace, pending)) / spritemapChunkSize
     )
   }
   const creepyfaces = await prisma.creepyface.findMany({
-    where: {
-      canUseAsSample: true,
-      approved: true,
-      exclusive: !namespace ? false : undefined,
-      namespace,
-    },
+    where: getWhere(namespace, pending),
     orderBy: {
       timestamp: 'asc',
     },
@@ -56,40 +112,41 @@ export async function updateSpritemap(namespace: Namespace, chunk?: number) {
   const ctx = canvas.getContext('2d')
 
   await Promise.all(
-    (creepyfaces.length > 0
-      ? creepyfaces.flatMap((creepyface) =>
-          looks.map((look) => ({ uuid: creepyface.uuid, look }))
-        )
-      : looks.map((look) => ({
-          uuid: getDefaultUuid(namespace),
-          look,
-        }))
-    ).map(async ({ uuid, look }, i) => {
-      ctx.drawImage(
-        await loadImage(await resize(uuid, `${look}`, 'small')),
-        (i % cols) * smallImageSize,
-        Math.floor(i / cols) * smallImageSize
+    creepyfaces
+      .flatMap((creepyface) =>
+        looks.map((look) => ({ uuid: creepyface.uuid, look }))
       )
-    })
+      .map(async ({ uuid, look }, i) => {
+        try {
+          ctx.drawImage(
+            await loadImage(await resize(uuid, `${look}`, 'small')),
+            (i % cols) * smallImageSize,
+            Math.floor(i / cols) * smallImageSize
+          )
+        } catch (err) {
+          console.log(err)
+        }
+      })
   )
 
   await writeFile(
-    getSpritemapPath(namespace, chunk),
+    getSpritemapPath({ namespace, chunk, pending }),
     canvas.toBuffer('image/jpeg')
   )
-  await sharp(getSpritemapPath(namespace, chunk))
+  await sharp(getSpritemapPath({ namespace, chunk, pending }))
     .toFormat('webp')
-    .toFile(getSpritemapPath(namespace, chunk, true))
+    .toFile(getSpritemapPath({ namespace, chunk, pending, webp: true }))
 }
 
-export async function getSpritemap(
-  namespace: Namespace,
-  chunk: number,
-  webp = false
-) {
-  const spritemap = getSpritemapPath(namespace, chunk, webp)
+export async function getSpritemap(options: {
+  namespace: Namespace
+  chunk: number
+  pending?: boolean
+  webp?: boolean
+}) {
+  const spritemap = getSpritemapPath(options)
   if (!(await pathExists(spritemap))) {
-    await updateSpritemap(namespace, chunk)
+    await updateSpritemap(options)
   }
   return spritemap
 }

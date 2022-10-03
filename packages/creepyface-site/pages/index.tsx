@@ -62,7 +62,7 @@ export default function Home({ create = false }) {
         </div>
         <Footer />
       </section>
-      <Sample />
+      <Sample shuffle />
       <Footer />
     </CreateProvider>
   )

@@ -85,7 +85,7 @@ function Attribute({ name, value }: { name: string; value: string }) {
           <span className="delimiter">&quot;</span>
           <span className="base-url">{baseURL}</span>
           <span className="value" title={value}>
-            {value.replace(baseURL, '').replace(/\?namespace=.+/, '')}
+            {value.replace(baseURL, '').replace(/\?.+/, '')}
           </span>
           <span className="delimiter">&quot;</span>
         </>

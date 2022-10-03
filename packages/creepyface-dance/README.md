@@ -10,16 +10,16 @@ A point provider for [Creepyface](https://github.com/4lejandrito/creepyface) to 
 <img
   data-creepyface
   data-points="bensound-buddy"
-  src="https://creepyface.io/img/0/serious"
-  data-src-hover="https://creepyface.io/img/0/hover"
-  data-src-look-0="https://creepyface.io/img/0/0"
-  data-src-look-45="https://creepyface.io/img/0/45"
-  data-src-look-90="https://creepyface.io/img/0/90"
-  data-src-look-135="https://creepyface.io/img/0/135"
-  data-src-look-180="https://creepyface.io/img/0/180"
-  data-src-look-225="https://creepyface.io/img/0/225"
-  data-src-look-270="https://creepyface.io/img/0/270"
-  data-src-look-315="https://creepyface.io/img/0/315"
+  src="https://creepyface.io/img/nala/serious"
+  data-src-hover="https://creepyface.io/img/nala/hover"
+  data-src-look-0="https://creepyface.io/img/nala/0"
+  data-src-look-45="https://creepyface.io/img/nala/45"
+  data-src-look-90="https://creepyface.io/img/nala/90"
+  data-src-look-135="https://creepyface.io/img/nala/135"
+  data-src-look-180="https://creepyface.io/img/nala/180"
+  data-src-look-225="https://creepyface.io/img/nala/225"
+  data-src-look-270="https://creepyface.io/img/nala/270"
+  data-src-look-315="https://creepyface.io/img/nala/315"
 />
 <audio
   src="https://www.bensound.com/bensound-music/bensound-buddy.mp3"

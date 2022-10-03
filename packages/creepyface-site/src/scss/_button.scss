@@ -1,6 +1,6 @@
 @mixin button($color, $background) {
   @include link($color);
-  &:not(.link) {
+  &:not(.link):not(.creepy) {
     border-color: $color;
     &:disabled {
       opacity: 0.5;
@@ -24,7 +24,7 @@ button,
   font-size: 1em;
   transition: all ease 0.2s;
 
-  &:not(.link) {
+  &:not(.link):not(.creepy) {
     text-decoration: none;
     text-align: center;
     border-style: solid;
@@ -46,7 +46,7 @@ button,
   &.link {
     border: none;
   }
-  &.tiny {
+  &:not(.creepy).tiny {
     font-size: 0.8em;
     border: none;
     padding: math.div($spacing, 6) math.div($spacing, 3);
@@ -54,6 +54,18 @@ button,
   &.invert {
     background-color: white;
     color: $color-main;
+  }
+  .badge {
+    @extend %media;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing / 8 $spacing / 8;
+    font-weight: bold;
+    position: absolute;
+    line-height: 1;
+    top: -$spacing / 1.5;
+    right: -$spacing / 2;
   }
 }
 
