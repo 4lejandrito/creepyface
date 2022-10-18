@@ -1,7 +1,9 @@
 $spacing: 1rem;
 $color-main: #1abc9c;
 $color-danger: #dc3545;
-$color-text: darken($color-main, 5%);
+$color-text: var(--color-custom-primary, #{darken($color-main, 5%)});
+$color-background: var(--color-custom-secondary, #{darken($color-main, 8%)});
+$color-gradient: var(--color-custom-secondary, #{darken($color-main, 5%)});
 $main-creepyface-width: 8.5em;
 $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
 
@@ -136,7 +138,7 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   vertical-align: middle;
   display: inline-block;
   &:not(.video) {
-    background: darken($color-main, 10%);
+    background: $color-background;
   }
   &:not(.video) {
     > .loader {
@@ -151,7 +153,7 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
       border: none;
       width: 100%;
       &:hover {
-        background: darken($color-main, 10%) !important;
+        background: $color-background !important;
         color: white !important;
       }
     }
@@ -161,7 +163,7 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: darken($color-main, 10%);
+      background: $color-background;
       position: absolute;
       top: 0;
       right: 0;
@@ -169,7 +171,9 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
       left: 0;
     }
     .placeholder {
+      color: white;
       svg {
+        opacity: 0.1;
         @include square(60%);
       }
     }

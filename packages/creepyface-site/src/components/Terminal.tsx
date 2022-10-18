@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { toggleCode } from '../redux/actions'
 import Code from './Code'
 import Button from './Button'
@@ -9,15 +9,14 @@ import CreepyFace, { Images } from './CreepyFace'
 
 export default function Terminal(props: {
   alt: string
-  src: string
   images: Images
   points: string
   open: boolean
-  onChange: (src: string) => void
   onSelect?: () => void
 }) {
   const translate = useTranslate()
-
+  const [src, setSrc] = useState(props.images.src)
+  useEffect(() => setSrc(props.images.src), [props.images])
   return (
     <div className={classNames('terminal', { open: props.open })}>
       {props.open && (
@@ -32,7 +31,7 @@ export default function Terminal(props: {
           alt={props.alt}
           images={props.images}
           points={props.points}
-          onChange={props.open ? props.onChange : undefined}
+          onChange={props.open ? setSrc : undefined}
           onClick={props.onSelect}
         />
         <Button type="tiny" action={toggleCode}>
@@ -45,7 +44,7 @@ export default function Terminal(props: {
         classNames="transition"
         unmountOnExit
       >
-        <Code src={props.src} images={props.images} points={props.points} />
+        <Code src={src} images={props.images} points={props.points} />
       </CSSTransition>
     </div>
   )

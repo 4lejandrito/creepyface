@@ -1,9 +1,12 @@
 /// <reference types="cypress" />
 import path from 'path'
+import { getTheme } from '../../src/util/theme'
 
 function mainCreepyface() {
   return cy.get('img[alt="The main Creepyface"')
 }
+
+const { defaultUuid } = getTheme()
 
 describe(`creepyface.io`, () => {
   beforeEach(() => {
@@ -15,7 +18,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('shows the main creepyface', () => {
-    mainCreepyface().should('have.attr', 'src', '/img/nala/serious')
+    mainCreepyface().should('have.attr', 'src', `/img/${defaultUuid}/serious`)
   })
 
   it('shows the mosaic with all the creepyface placeholders', () => {
@@ -33,25 +36,25 @@ describe(`creepyface.io`, () => {
             Cypress.config().baseUrl
           }/creepyface.js"></script>\n\n<img src="${
             Cypress.config().baseUrl
-          }/img/nala/serious"\n  data-creepyface\n  data-src-hover="${
+          }/img/${defaultUuid}/serious"\n  data-creepyface\n  data-src-hover="${
             Cypress.config().baseUrl
-          }/img/nala/hover"\n  data-src-look-0="${
+          }/img/${defaultUuid}/hover"\n  data-src-look-0="${
             Cypress.config().baseUrl
-          }/img/nala/0"\n  data-src-look-45="${
+          }/img/${defaultUuid}/0"\n  data-src-look-45="${
             Cypress.config().baseUrl
-          }/img/nala/45"\n  data-src-look-90="${
+          }/img/${defaultUuid}/45"\n  data-src-look-90="${
             Cypress.config().baseUrl
-          }/img/nala/90"\n  data-src-look-135="${
+          }/img/${defaultUuid}/90"\n  data-src-look-135="${
             Cypress.config().baseUrl
-          }/img/nala/135"\n  data-src-look-180="${
+          }/img/${defaultUuid}/135"\n  data-src-look-180="${
             Cypress.config().baseUrl
-          }/img/nala/180"\n  data-src-look-225="${
+          }/img/${defaultUuid}/180"\n  data-src-look-225="${
             Cypress.config().baseUrl
-          }/img/nala/225"\n  data-src-look-270="${
+          }/img/${defaultUuid}/225"\n  data-src-look-270="${
             Cypress.config().baseUrl
-          }/img/nala/270"\n  data-src-look-315="${
+          }/img/${defaultUuid}/270"\n  data-src-look-315="${
             Cypress.config().baseUrl
-          }/img/nala/315"\n/>`
+          }/img/${defaultUuid}/315"\n/>`
         )
       })
     })
@@ -59,7 +62,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('serves the images of each creepyface', () => {
-    cy.request('/img/nala/serious').then((response) => {
+    cy.request(`/img/${defaultUuid}/serious`).then((response) => {
       expect(response.status).to.eq(200)
       expect(
         parseInt(response.headers['content-length'] as string)
@@ -69,7 +72,7 @@ describe(`creepyface.io`, () => {
   })
 
   it('serves a gif of each creepyface', () => {
-    cy.request('/img/nala.gif').then((response) => {
+    cy.request(`/img/${defaultUuid}.gif`).then((response) => {
       expect(response.status).to.eq(200)
       expect(
         parseInt(response.headers['content-length'] as string)
@@ -90,7 +93,11 @@ describe(`creepyface.io`, () => {
             clientY: size.y + size.height / 2 + coords.y,
           })
           cy.wait(100)
-          mainCreepyface().should('have.attr', 'src', `/img/nala/${name}`)
+          mainCreepyface().should(
+            'have.attr',
+            'src',
+            `/img/${defaultUuid}/${name}`
+          )
         })
       }
 
@@ -195,7 +202,7 @@ describe(`creepyface.io`, () => {
 
     it('goes back to the default src after 1 second', () => {
       cy.wait(1000)
-      mainCreepyface().should('have.attr', 'src', '/img/nala/serious')
+      mainCreepyface().should('have.attr', 'src', `/img/${defaultUuid}/serious`)
     })
   })
 

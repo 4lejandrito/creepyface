@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import CreepyFace, { getHostedImages, Images } from './CreepyFace'
+import CreepyFace, { useHostedImages, Images } from './CreepyFace'
 import CreepyFaceOptions from './CreepyFaceOptions'
 import getNext from '../util/get-next'
 import tips from '../util/tips'
@@ -12,22 +12,18 @@ import Upload from './Upload'
 import Video from './Video'
 import { restartCreation, takePicture, toggleShortcuts } from '../redux/actions'
 import { useSelector, useDispatch } from './State'
-import { angles, Namespace, Pictures } from '../redux/types'
+import { angles, Pictures } from '../redux/types'
+import { useTheme } from './Theme'
 
 const getSrc = (next: keyof Pictures, images: Images) => {
   const look = images.looks.find(({ angle }) => angle === next)
   return look ? look.src : next === 'serious' ? images.src : images.hover
 }
 
-function Take({
-  namespace,
-  next,
-}: {
-  namespace: Namespace
-  next: keyof Pictures
-}) {
+function Take({ next }: { next: keyof Pictures }) {
   const dispatch = useDispatch()
   const translate = useTranslate()
+  const { defaultUuid } = useTheme()
   return (
     <>
       <header>
@@ -39,7 +35,7 @@ function Take({
           <img
             className="example"
             alt={translate('Sample face')}
-            src={getSrc(next, getHostedImages(null, namespace))}
+            src={getSrc(next, useHostedImages(defaultUuid))}
           />
         </span>
         <Video
@@ -57,7 +53,7 @@ function Take({
   )
 }
 
-function Download(props: { pictures: Pictures; namespace: Namespace }) {
+function Download(props: { pictures: Pictures }) {
   const { pictures } = props
   const translate = useTranslate()
   return (
@@ -77,13 +73,12 @@ function Download(props: { pictures: Pictures; namespace: Namespace }) {
           })),
         }}
       />
-      <Upload namespace={props.namespace} />
+      <Upload />
     </>
   )
 }
 
 export default function CreepyFaceCreatorModal(props: {
-  namespace: Namespace
   isOpen: boolean
   onOpen: () => void
   onClose: () => void
@@ -103,9 +98,9 @@ export default function CreepyFaceCreatorModal(props: {
       onClose={props.onClose}
     >
       {next !== undefined ? (
-        <Take namespace={props.namespace} next={next} />
+        <Take next={next} />
       ) : (
-        <Download namespace={props.namespace} pictures={pictures as Pictures} />
+        <Download pictures={pictures as Pictures} />
       )}
       <CreepyFaceOptions next={next} pictures={pictures} />
       <footer>

@@ -1,7 +1,5 @@
 import mkdir from 'mkdirp'
 import path from 'path'
-import { Namespace } from '../redux/types'
-import { namespaces } from '../util/namespaces'
 
 const base = path.resolve('.data')
 const uploads = base + '/uploads'

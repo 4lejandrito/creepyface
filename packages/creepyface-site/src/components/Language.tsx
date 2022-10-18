@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { messages } from '../locales/es'
 
+export const useLocale = () => useRouter().locale ?? 'en'
+
 export const useTranslate = (): ((text: ValidMessage) => string) => {
-  const locale = useRouter().locale ?? 'en'
+  const locale = useLocale()
 
   return useCallback(
     (text: ValidMessage) => {
@@ -22,7 +24,7 @@ export const useTranslate = (): ((text: ValidMessage) => string) => {
 }
 
 export function LanguageSelector() {
-  const locale = useRouter().locale ?? 'en'
+  const locale = useLocale()
   return (
     <span lang={locale === 'en' ? 'es' : 'en'}>
       <span className="hide-s">

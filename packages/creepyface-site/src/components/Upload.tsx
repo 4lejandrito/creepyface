@@ -5,9 +5,8 @@ import { useTranslate } from './Language'
 import { useSelector, useDispatch } from './State'
 import { upload, showPermissions } from '../redux/actions'
 import Modal from './Modal'
-import { Namespace } from '../redux/types'
 
-export default function Upload({ namespace }: { namespace: Namespace }) {
+export default function Upload() {
   const downloadLink = useSelector((state) => state.downloadLink)
   const viewLink = useSelector((state) => state.viewLink)
   const uploading = useSelector((state) => state.uploading)
@@ -26,7 +25,7 @@ export default function Upload({ namespace }: { namespace: Namespace }) {
           href={downloadLink}
           loading={uploading}
           download={!!downloadLink}
-          action={!downloadLink ? upload(namespace) : undefined}
+          action={!downloadLink ? upload() : undefined}
         >
           {translate(
             downloadLink

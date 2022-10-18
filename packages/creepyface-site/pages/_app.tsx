@@ -8,9 +8,13 @@ import { useEffect } from 'react'
 import noBounce from 'no-bounce'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
+import { Namespace } from '../src/util/namespaces'
 config.autoAddCss = false
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{ namespace: Namespace | null }>) {
   const title = 'Creepyface'
   const description =
     'The Javascript library that makes your face follow the pointer'
@@ -23,7 +27,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <PlausibleProvider domain="creepyface.io">
-      <StateProvider>
+      <StateProvider namespace={pageProps.namespace}>
         <Head>
           <meta
             name="viewport"

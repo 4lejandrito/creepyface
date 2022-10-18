@@ -1,6 +1,6 @@
 import { makeActionCreator } from './util'
 import getNext from '../util/get-next'
-import { Namespace } from './types'
+import { themes } from '../util/theme'
 
 export const toggleShortcuts = makeActionCreator(
   () => (dispatch) => dispatch({ type: 'toggleShortcuts' })
@@ -33,11 +33,11 @@ export const takePicture = makeActionCreator(
   ({ shoot }) => !!shoot
 )
 
-export const upload = (namespace: Namespace) =>
+export const upload = () =>
   makeActionCreator(
     () => (dispatch, getState) => {
       dispatch({ type: 'requestUpload' })
-      const { pictures, permissions, reload } = getState()
+      const { pictures, permissions, reload, namespace } = getState()
       fetch('/api/content', {
         credentials: 'include',
         method: 'POST',
@@ -53,7 +53,7 @@ export const upload = (namespace: Namespace) =>
           })
 
           if (namespace) {
-            formData.append('namespace', namespace)
+            formData.append('namespace', namespace.key)
           }
 
           return formData
@@ -94,5 +94,14 @@ export const toggleDance = makeActionCreator(() => (dispatch, getState) => {
   dispatch({
     type: 'changePointProvider',
     payload: pointProvider === 'dance' ? 'pointer' : 'dance',
+  })
+})
+
+export const nextTheme = makeActionCreator(() => (dispatch, getState) => {
+  const { theme } = getState()
+  const allThemes = Object.values(themes)
+  dispatch({
+    type: 'setTheme',
+    payload: allThemes[(allThemes.indexOf(theme) + 1) % allThemes.length],
   })
 })

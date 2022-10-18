@@ -1,6 +1,6 @@
 import { createCanvas, loadImage } from 'canvas'
 import { writeFile, pathExists } from 'fs-extra'
-import { looks, Namespace } from '../redux/types'
+import { looks } from '../redux/types'
 import prisma from '../../prisma'
 import resize from './resize'
 import { getThumbnailPath } from './storage'
@@ -14,7 +14,7 @@ import { deleteAsync } from 'del'
 import computeHash from 'object-hash'
 
 const getSpritemapPath = (options: {
-  namespace: Namespace
+  namespace: string | undefined
   chunk: number
   pending?: boolean
   webp?: boolean
@@ -27,7 +27,7 @@ const getSpritemapPath = (options: {
     }`
   )
 
-function getWhere(namespace: Namespace, pending?: boolean) {
+function getWhere(namespace: string | undefined, pending?: boolean) {
   return {
     namespace,
     canUseAsSample: !namespace ? true : undefined,
@@ -35,13 +35,16 @@ function getWhere(namespace: Namespace, pending?: boolean) {
   }
 }
 
-function getKey(namespace: Namespace, pending: boolean) {
+function getKey(namespace: string | undefined, pending: boolean) {
   return `${namespace ?? 'default'}-${pending}`
 }
 
 const hashes: { [K in string]?: string } = {}
 
-async function deleteSpritemaps(namespace: Namespace, onlyPending?: boolean) {
+async function deleteSpritemaps(
+  namespace: string | undefined,
+  onlyPending?: boolean
+) {
   await deleteAsync([
     getThumbnailPath(
       `spritemap-${namespace}-${onlyPending ? 'pending-' : ''}*`
@@ -51,14 +54,17 @@ async function deleteSpritemaps(namespace: Namespace, onlyPending?: boolean) {
   if (!onlyPending) delete hashes[getKey(namespace, false)]
 }
 
-export async function clearCache(namespace: Namespace, onlyPending?: boolean) {
+export async function clearCache(
+  namespace: string | undefined,
+  onlyPending?: boolean
+) {
   if (namespace) await deleteSpritemaps(namespace, onlyPending)
   await deleteSpritemaps('default', onlyPending)
 }
 
 export const getUuid = async (
   i: number,
-  namespace: Namespace,
+  namespace: string | undefined,
   pending?: boolean
 ) =>
   (
@@ -71,11 +77,14 @@ export const getUuid = async (
     })
   )?.uuid
 
-export async function getCount(namespace: Namespace, pending?: boolean) {
+export async function getCount(
+  namespace: string | undefined,
+  pending?: boolean
+) {
   return await prisma.creepyface.count({ where: getWhere(namespace, pending) })
 }
 
-export async function getHash(namespace: Namespace, pending: boolean) {
+export async function getHash(namespace: string | undefined, pending: boolean) {
   const key = getKey(namespace, pending)
   return (hashes[key] =
     hashes[key] ??
@@ -87,7 +96,7 @@ export async function getHash(namespace: Namespace, pending: boolean) {
 }
 
 export async function updateSpritemap(options: {
-  namespace: Namespace
+  namespace: string | undefined
   chunk?: number
   pending?: boolean
 }) {
@@ -139,7 +148,7 @@ export async function updateSpritemap(options: {
 }
 
 export async function getSpritemap(options: {
-  namespace: Namespace
+  namespace: string | undefined
   chunk: number
   pending?: boolean
   webp?: boolean

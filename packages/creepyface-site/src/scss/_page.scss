@@ -22,17 +22,24 @@ body {
   padding: $spacing $spacing $spacing $spacing;
   @include horizontal {
     padding: 4 * $spacing;
+    background-image: linear-gradient(
+      165deg,
+      $color-main 0%,
+      $color-gradient 55%
+    );
+  }
+  @include vertical {
+    background-image: linear-gradient(
+      180deg,
+      $color-main 0%,
+      $color-gradient 60%
+    );
   }
   font-family: 'Open Sans', sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
     Noto Color Emoji;
   margin: 0;
-  background-image: linear-gradient(
-    to bottom,
-    $color-main,
-    darken($color-main, 5%)
-  );
   color: white;
   @media (pointer: coarse) {
     overscroll-behavior: contain;

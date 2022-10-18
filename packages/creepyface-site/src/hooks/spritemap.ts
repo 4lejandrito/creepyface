@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Images } from '../components/CreepyFace'
-import { angles, Namespace } from '../redux/types'
+import { angles } from '../redux/types'
 import { smallImageSize, spritemapChunkSize } from '../util/constants'
 import supportsWebp from 'supports-webp'
+import { useNamespace } from '../components/State'
 
 export default function useSpritemap(
-  namespace: Namespace,
   pending?: boolean,
   onCount?: (count: number) => void,
   onReload?: (reload: () => void) => void
@@ -15,11 +15,12 @@ export default function useSpritemap(
   >(() => () => Promise.resolve(null))
   const [count, setCount] = useState<number | null>(null)
   const [hash, setHash] = useState<string>()
+  const namespace = useNamespace()
   const reload = useCallback(
     () =>
       fetch(
         `/api/spritemap?${new URLSearchParams({
-          namespace: namespace ?? '',
+          namespace: namespace?.key ?? '',
           pending: pending ? 'true' : 'false',
         })}`,
         {
@@ -51,7 +52,7 @@ export default function useSpritemap(
           const spritemap = new Image()
           spritemap.crossOrigin = 'anonymous'
           spritemap.src = `/img/spritemap?chunk=${i}${
-            namespace ? '&namespace=' + namespace : ''
+            namespace ? '&namespace=' + namespace.key : ''
           }${pending ? '&pending=true' : ''}${hash ? '&t=' + hash : ''}${
             supportsWebp ? '&format=webp' : ''
           }`

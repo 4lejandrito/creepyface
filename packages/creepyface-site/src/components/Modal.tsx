@@ -31,6 +31,12 @@ export default function Modal({
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       closeTimeoutMS={200}
+      overlayElement={(props, contentElement) => (
+        <div {...props}>
+          <div className="backdrop" />
+          {contentElement}
+        </div>
+      )}
     >
       <Button className="cancel" onClick={onClose}>
         <Icon name="times" />

@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import { AsyncCreepyFace } from './CreepyFace'
 import classNames from 'classnames'
-import { Namespace } from '../redux/types'
 import useSpritemap from '../hooks/spritemap'
 import { FaceIcon } from './Icon'
 import hash from 'string-hash'
@@ -14,7 +13,6 @@ import useGrid from '../hooks/grid'
 export default memo(function CreepyFaces(props: {
   dim?: boolean
   fullscreen?: boolean
-  namespace?: Namespace
   pending?: boolean
   points?: string
   selectedIds?: number[]
@@ -29,7 +27,6 @@ export default memo(function CreepyFaces(props: {
 }) {
   const { cols, rows, size, ref } = useGrid(props.fullscreen)
   const { getImages, count } = useSpritemap(
-    props.namespace,
     props.pending,
     props.onCount,
     props.onReload

@@ -10,11 +10,11 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { Namespace } from '../redux/types'
 import Button from './Button'
 import { useTranslate } from './Language'
 import { useDispatch, useSelector } from './State'
 import { setIsCreating } from '../redux/actions'
+import { useTheme } from './Theme'
 
 const CreepyFaceCreatorModal = lazy(() => import('./CreepyFaceCreatorModal'))
 const CreateContext = createContext({
@@ -25,7 +25,6 @@ const CreateContext = createContext({
 })
 
 export function CreateProvider(props: {
-  namespace?: Namespace
   open?: boolean
   navigate?: boolean
   children: ReactNode | ReactNode[]
@@ -59,7 +58,6 @@ export function CreateProvider(props: {
         {(isCreating || modalLoaded) && (
           <Suspense fallback={null}>
             <CreepyFaceCreatorModal
-              namespace={props.namespace}
               isOpen={isCreating}
               onOpen={() => setModalLoaded(true)}
               onClose={() =>
@@ -78,10 +76,10 @@ export function CreateProvider(props: {
 export default function CreateButton() {
   const { open, loading, navigate, toggleOpen } = useContext(CreateContext)
   const translate = useTranslate()
-
+  const theme = useTheme()
   return (
     <Button
-      className="invert"
+      className={theme.secondaryColor ? 'custom' : 'invert'}
       loading={open && loading}
       icon="create"
       href={navigate ? '/create' : undefined}

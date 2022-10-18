@@ -1,4 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk'
+import { Namespace } from '../util/namespaces'
+import { Theme } from '../util/theme'
 
 export type Picture = {
   blob: Blob
@@ -14,6 +16,7 @@ export type Pictures = { [K in Look]: Picture }
 export type Language = 'en' | 'es'
 
 export type State = {
+  namespace: Namespace | null
   shortcuts: boolean
   shoot: (() => Picture) | null
   pictures: Partial<Pictures>
@@ -25,6 +28,7 @@ export type State = {
   showCode: boolean
   pointProvider: 'pointer' | 'firefly' | 'dance'
   isCreating: boolean
+  theme: Theme
   reload: (() => void) | null
 }
 
@@ -93,7 +97,9 @@ export type Action =
       type: 'setReload'
       payload: State['reload']
     }
+  | {
+      type: 'setTheme'
+      payload: Theme
+    }
 
 export type Dispatch = ThunkDispatch<State, void, Action>
-
-export type Namespace = string | undefined
