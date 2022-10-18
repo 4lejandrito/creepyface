@@ -7,6 +7,7 @@ import {
   takePicture,
   toggleCode,
   toggleDance,
+  nextTheme,
 } from '../redux/actions'
 import { ActionCreator } from '../redux/util'
 
@@ -16,6 +17,7 @@ const shortcuts = {
   s: takePicture,
   c: toggleCode,
   d: toggleDance,
+  a: process.env.NODE_ENV === 'development' ? nextTheme : undefined,
 }
 
 export default function Shortcuts({
@@ -27,7 +29,7 @@ export default function Shortcuts({
 
   useEffect(() => {
     Object.entries(shortcuts).forEach(([shortcut, action]) => {
-      Mousetrap.bind(shortcut, () => dispatch(action()))
+      if (action) Mousetrap.bind(shortcut, () => dispatch(action()))
     })
 
     return () =>

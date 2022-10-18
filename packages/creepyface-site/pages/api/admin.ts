@@ -1,10 +1,9 @@
 import { adminRoute } from '../../src/backend/api'
 import prisma from '../../prisma'
 import { clearCache, getUuid } from '../../src/backend/spritemap'
-import { Namespace } from '../../src/redux/types'
 
 async function getUuids(
-  namespace: Namespace,
+  namespace: string | undefined,
   ids: string | undefined,
   pending?: boolean
 ) {

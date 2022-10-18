@@ -1,10 +1,16 @@
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  NextApiHandler,
+  NextApiRequest,
+} from 'next'
 import send from 'send'
 import auth from 'basic-auth'
 import resolve from 'browser-resolve'
 import prisma from '../../prisma'
 import isFeatureEnabled from './features'
 import getCloudinaryURL from './cloudinary'
+import { Namespace, namespaces } from '../util/namespaces'
 
 export const route = (handler: NextApiHandler): NextApiHandler => {
   return async (req, res) => {
@@ -74,4 +80,22 @@ export const scriptRoute = (script: string) => {
       update: { referer, script },
     })
   })
+}
+
+const getNamespace = (context: GetServerSidePropsContext) =>
+  namespaces[
+    (context.params?.['namespace'] ?? context.query?.['namespace']) as string
+  ] ?? null
+
+export const getMandatoryNamespaceServerSideProps: GetServerSideProps<{
+  namespace: Namespace
+}> = async (context) => {
+  const namespace = getNamespace(context)
+  return namespace ? { props: { namespace } } : { notFound: true }
+}
+
+export const getNamespaceServerSideProps: GetServerSideProps<{
+  namespace: Namespace | null
+}> = async (context) => {
+  return { props: { namespace: getNamespace(context) } }
 }

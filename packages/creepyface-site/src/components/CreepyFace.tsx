@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import Creepyface from 'react-creepyface'
 import Loader from './Loader'
 import { FaceIcon } from './Icon'
@@ -6,16 +6,14 @@ import { angles, Angle } from '../redux/types'
 import hash from 'string-hash'
 import { Size } from '../backend/resize'
 import { useLongPress, useMountedState } from 'react-use'
-import { namespaces } from '../util/namespaces'
+import { useNamespace } from './State'
 import 'creepyface-firefly'
 
 const now = Date.now()
 const url =
-  (id: number | null, namespace?: string, size?: string, pending?: boolean) =>
+  (id: number | string, namespace?: string, size?: string, pending?: boolean) =>
   (name: string) => {
-    const uuid =
-      id !== null ? id : namespace ? namespaces[namespace]?.defaultUuid : 'nala'
-    const url = `/img/${uuid}/${name}${size ? '/' + size : ''}`
+    const url = `/img/${id}/${name}${size ? '/' + size : ''}`
     const searchParams = new URLSearchParams()
 
     if (namespace) {
@@ -26,7 +24,7 @@ const url =
       searchParams.append('pending', 'true')
     }
 
-    if (id !== null) {
+    if (typeof id !== 'string') {
       searchParams.append('t', `${now}`)
     }
 
@@ -42,18 +40,20 @@ export type Images = {
   looks: { angle: Angle; src: string }[]
 }
 
-export const getHostedImages = (
-  id: number | null,
-  namespace?: string,
+export const useHostedImages = (
+  id: number | string,
   size?: Size,
   pending?: boolean
 ): Images => {
-  const getUrl = url(id, namespace, size, pending)
-  return {
-    src: getUrl('serious'),
-    hover: getUrl('hover'),
-    looks: angles.map((angle) => ({ angle, src: getUrl(`${angle}`) })),
-  }
+  const namespace = useNamespace()
+  return useMemo(() => {
+    const getUrl = url(id, namespace?.key, size, pending)
+    return {
+      src: getUrl('serious'),
+      hover: getUrl('hover'),
+      looks: angles.map((angle) => ({ angle, src: getUrl(`${angle}`) })),
+    }
+  }, [id, size, pending, namespace])
 }
 
 export function AsyncCreepyFace(props: {

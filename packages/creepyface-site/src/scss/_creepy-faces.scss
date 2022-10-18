@@ -64,12 +64,14 @@
   }
   &.dim {
     li:not(.selected) {
-      .creepy {
+      .creepy img {
         opacity: 0.3;
       }
       button.creepy:hover:not(:disabled),
       button.creepy:focus-visible {
-        opacity: 0.5;
+        img {
+          opacity: 0.5;
+        }
       }
     }
   }

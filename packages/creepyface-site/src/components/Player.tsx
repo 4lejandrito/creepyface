@@ -1,10 +1,15 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch } from './State'
 import { makePointProvider } from 'creepyface-dance'
-import * as stayingAlive from '../songs/staying-alive'
 import { CSSTransition } from 'react-transition-group'
-import { namespaces } from '../util/namespaces'
-import { Namespace } from '../redux/types'
+import { useTheme } from './Theme'
+import * as stayingAlive from '../songs/staying-alive'
+import * as addamsFamily from '../songs/addams-family'
+import * as vivaLaVida from '../songs/viva-la-vida'
+
+const songs = { stayingAlive, addamsFamily, vivaLaVida }
+
+export type SongName = keyof typeof songs
 
 function PlayerDiv(props: { audio: HTMLAudioElement }) {
   const dispatch = useDispatch()
@@ -31,15 +36,10 @@ function PlayerDiv(props: { audio: HTMLAudioElement }) {
   return <div ref={ref} className="player" />
 }
 
-export default function Player({
-  open,
-  namespace,
-}: {
-  open: boolean
-  namespace: Namespace
-}) {
+export default function Player({ open }: { open: boolean }) {
+  const theme = useTheme()
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
-  const song = namespaces[namespace ?? '']?.song ?? stayingAlive
+  const song = songs[theme.song]
 
   useEffect(() => {
     const audio = new Audio(song.url)

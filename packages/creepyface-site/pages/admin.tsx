@@ -1,22 +1,17 @@
-import { GetServerSideProps } from 'next'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
+import { getNamespaceServerSideProps } from '../src/backend/api'
 import Button, { AsyncButton } from '../src/components/Button'
-import CreepyFace, { getHostedImages } from '../src/components/CreepyFace'
+import CreepyFace, { useHostedImages } from '../src/components/CreepyFace'
 import CreepyFaces from '../src/components/CreepyFaces'
 import Modal from '../src/components/Modal'
 import Panel from '../src/components/Panel'
+import { useNamespace } from '../src/components/State'
 import useFunctionState from '../src/hooks/function'
 import { Controls } from '../src/hooks/pagination'
 
-export const getServerSideProps: GetServerSideProps<
-  React.ComponentProps<typeof Admin>
-> = async (context) => ({
-  props: {
-    namespace: (context.query.namespace as string) || '',
-  },
-})
+export const getServerSideProps = getNamespaceServerSideProps
 
-export default function Admin({ namespace }: { namespace: string }) {
+export default function Admin() {
   const [selectedCreepyface, setSelectedCreepyface] = useState({
     id: 0,
     pending: false,
@@ -30,22 +25,18 @@ export default function Admin({ namespace }: { namespace: string }) {
   const [pendingControls, setPendingControls] = useState<Controls>()
   const [reload, setReload] = useFunctionState()
   const [pendingReload, setPendingReload] = useFunctionState()
-  const images = useMemo(
-    () =>
-      getHostedImages(
-        selectedCreepyface.id,
-        namespace,
-        'medium',
-        selectedCreepyface.pending
-      ),
-    [selectedCreepyface, namespace]
+  const images = useHostedImages(
+    selectedCreepyface.id,
+    'medium',
+    selectedCreepyface.pending
   )
+  const namespace = useNamespace()
   const api = (method?: string) => () =>
     fetch(
       `/api/admin?${new URLSearchParams({
         ids: ids.join(),
         pendingIds: pendingIds.join(),
-        namespace,
+        namespace: namespace?.key ?? '',
       })}`,
       {
         method,
@@ -64,7 +55,6 @@ export default function Admin({ namespace }: { namespace: string }) {
     <div className="admin">
       <Panel title="Approved" count={count} controls={controls}>
         <CreepyFaces
-          namespace={namespace}
           selectedIds={ids}
           onControls={setControls}
           onCount={setCount}
@@ -112,7 +102,6 @@ export default function Admin({ namespace }: { namespace: string }) {
       </div>
       <Panel title="Pending" count={pendingCount} controls={pendingControls}>
         <CreepyFaces
-          namespace={namespace}
           pending
           selectedIds={pendingIds}
           onCount={setPendingCount}

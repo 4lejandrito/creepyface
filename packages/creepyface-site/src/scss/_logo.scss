@@ -38,11 +38,15 @@
         }
       }
     }
+    .subtitle {
+      position: absolute;
+      font-size: 22%;
+      right: 0;
+      bottom: -0.75em;
+      color: $color-text;
+    }
     .hat {
       position: absolute;
-      top: 10%;
-      left: 92%;
-      transform: rotate(30deg);
       width: 18%;
     }
   }

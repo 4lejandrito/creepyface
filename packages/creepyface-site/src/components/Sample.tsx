@@ -1,19 +1,17 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { getHostedImages } from './CreepyFace'
+import React, { useCallback, useState } from 'react'
+import { useHostedImages } from './CreepyFace'
 import CreepyFaces from './CreepyFaces'
 import { useSelector, useDispatch } from './State'
 import Terminal from './Terminal'
 import Player from './Player'
 import { useTranslate } from './Language'
-import { Namespace } from '../redux/types'
+import { useTheme } from './Theme'
 
 export default function Sample({
-  namespace,
   fullscreen,
   shuffle,
   showControls,
 }: {
-  namespace?: Namespace
   fullscreen?: boolean
   shuffle?: boolean
   showControls?: boolean
@@ -22,18 +20,12 @@ export default function Sample({
   const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
   const showCode = useSelector((state) => state.showCode)
   const pointProvider = useSelector((state) => state.pointProvider)
-  const images = useMemo(
-    () => getHostedImages(selectedCreepyface, namespace),
-    [selectedCreepyface, namespace]
-  )
+  const { defaultUuid } = useTheme()
+  const images = useHostedImages(selectedCreepyface ?? defaultUuid)
   const translate = useTranslate()
-  const [src, setSrc] = useState(images.src)
   const [count, setCount] = useState<number | null>(null)
   const select = useCallback(
-    (id: number) => {
-      dispatch({ type: 'selectCreepyface', payload: id })
-      setSrc(getHostedImages(id).src)
-    },
+    (id: number) => dispatch({ type: 'selectCreepyface', payload: id }),
     [dispatch]
   )
   const onReload = useCallback(
@@ -45,17 +37,14 @@ export default function Sample({
     <section className="sample">
       <Terminal
         alt={translate('The main Creepyface')}
-        src={src}
         images={images}
         points={pointProvider}
         open={showCode}
-        onChange={setSrc}
         onSelect={
           count ? () => select(Math.floor(Math.random() * count)) : undefined
         }
       />
       <CreepyFaces
-        namespace={namespace}
         points={pointProvider}
         fullscreen={fullscreen}
         shuffle={shuffle}
@@ -65,7 +54,7 @@ export default function Sample({
         onCount={setCount}
         onReload={onReload}
       />
-      <Player namespace={namespace} open={pointProvider === 'dance'} />
+      <Player open={pointProvider === 'dance'} />
     </section>
   )
 }

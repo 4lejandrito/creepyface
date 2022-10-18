@@ -7,62 +7,28 @@ import Button from '../src/components/Button'
 import { toggleDance } from '../src/redux/actions'
 import { useDispatch, useSelector } from '../src/components/State'
 import { NextSeo } from 'next-seo'
-import { GetServerSideProps } from 'next'
 import { useTranslate } from '../src/components/Language'
-import { namespaces } from '../src/util/namespaces'
-import { Namespace } from '../src/redux/types'
+import { getMandatoryNamespaceServerSideProps } from '../src/backend/api'
+import { InferGetServerSidePropsType } from 'next'
 
-export const getServerSideProps: GetServerSideProps<
-  React.ComponentProps<typeof Custom>
-> = async (context) => {
-  const namespace = context.params?.['namespace'] as string
-  if (namespace in namespaces) {
-    return {
-      props: { namespace },
-    }
-  }
-  return {
-    notFound: true,
-  }
-}
+export const getServerSideProps = getMandatoryNamespaceServerSideProps
 
-export default function Custom(props: { namespace: string }) {
-  const { name, key, color, color2, color3, url, logo } =
-    namespaces[props.namespace] ?? {}
-  const title = `Creepyface - ${name} Edition`
+export default function Custom({
+  namespace,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const title = `Creepyface - ${namespace.name} Edition`
   const pointProvider = useSelector((state) => state.pointProvider)
   const dispatch = useDispatch()
   const translate = useTranslate()
   return (
-    <CreateProvider namespace={key}>
+    <CreateProvider>
       <NextSeo title={title} openGraph={{ title }} />
-      <style jsx global>{`
-        body {
-          background: ${color};
-        }
-        .creepy:not(.video),
-        .placeholder {
-          background: ${color} !important;
-          color: ${color2} !important;
-        }
-        .placeholder svg {
-          opacity: 0.1;
-        }
-        .namespace button.invert {
-          color: ${color3} !important;
-          border-color: ${color2} !important;
-          background-color: ${color2} !important;
-        }
-        .namespace button:not(.invert):hover {
-          color: ${color} !important;
-        }
-      `}</style>
       <div className="namespace">
-        <Sample namespace={props.namespace} fullscreen showControls />
+        <Sample fullscreen showControls />
         <header>
-          {url && (
-            <Link href={url}>
-              <img alt={name} src={logo} />
+          {namespace.url && (
+            <Link href={namespace.url}>
+              <img alt={namespace.name} src={namespace.logo} />
             </Link>
           )}
           <small className="subtitle">

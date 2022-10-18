@@ -4,9 +4,8 @@ import Logo from '../src/components/Logo'
 import useImperativePointProvider from '../src/hooks/imperative'
 
 // Use 1080 * 540
-export default function Cover({ namespace = '' }) {
+export default function Cover() {
   const [pointProvider, setPoint] = useImperativePointProvider()
-
   return (
     <>
       <style jsx global>{`
@@ -16,13 +15,7 @@ export default function Cover({ namespace = '' }) {
           transform: translateY(-24%);
         }
       `}</style>
-      <CreepyFaces
-        namespace={namespace}
-        timeToDefault={0}
-        points={pointProvider}
-        fullscreen
-        dim
-      />
+      <CreepyFaces timeToDefault={0} points={pointProvider} fullscreen dim />
       <Logo onPointerPositionChange={setPoint} />
     </>
   )

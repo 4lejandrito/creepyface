@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose, Store } from 'redux'
 import thunk from 'redux-thunk'
+import { Namespace } from '../util/namespaces'
 import reducer from './reducer'
 import track from './track'
 import { State, Action } from './types'
@@ -11,6 +12,11 @@ if (typeof (window as any) !== 'undefined') {
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 }
 
-export default function store(): Store<State, Action> {
-  return createStore(reducer, composeEnhancers(applyMiddleware(thunk, track)))
+export default function store(
+  namespace: Namespace | null
+): Store<State, Action> {
+  return createStore(
+    reducer(namespace),
+    composeEnhancers(applyMiddleware(thunk, track))
+  )
 }

@@ -1,15 +1,8 @@
 import { Point } from 'creepyface'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useRafLoop, useWindowSize } from 'react-use'
-import santaHat from '../../public/santa-hat.png'
-import { useTranslate } from './Language'
-
-const isChristmas = () => {
-  const today = new Date()
-  const day = today.getDate()
-  const month = today.getMonth()
-  return (month === 11 && day >= 15) || (month === 0 && day <= 7)
-}
+import { useLocale, useTranslate } from './Language'
+import { useTheme } from './Theme'
 
 const Pointer = (props: {
   animating: boolean
@@ -50,6 +43,8 @@ export default function Logo(props: {
     }
   }
   const translate = useTranslate()
+  const locale = useLocale()
+  const theme = useTheme()
   return (
     <div className="logo">
       <div className="wrapper">
@@ -144,11 +139,25 @@ export default function Logo(props: {
             />
           </g>
         </svg>
-        {isChristmas() && (
+        {theme.name && (
+          <small className="subtitle">
+            {locale === 'es' && 'Edición '}
+            <strong>
+              <i>{theme.name}</i>
+            </strong>
+            {locale === 'en' && ' edition'}
+          </small>
+        )}
+        {theme.hat && (
           <img
+            style={{
+              top: `${theme.hat.top}%`,
+              left: `${theme.hat.left}%`,
+              transform: `rotate(${theme.hat.rotate}deg)`,
+            }}
             className="hat"
             alt={translate('Santa hat')}
-            src={santaHat.src}
+            src={theme.hat.url}
           />
         )}
       </div>

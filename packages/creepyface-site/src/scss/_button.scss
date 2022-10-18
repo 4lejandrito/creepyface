@@ -1,13 +1,18 @@
 @mixin button($color, $background) {
   @include link($color);
   &:not(.link):not(.creepy) {
-    border-color: $color;
+    &:not(.custom) {
+      border-color: $color;
+    }
     &:disabled {
       opacity: 0.5;
     }
     &:not(:disabled):hover {
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      &.custom {
+        border-color: $color;
+      }
       background: $color;
       color: $background;
       text-decoration: none;
@@ -17,7 +22,7 @@
 
 button,
 .button {
-  @include button(white, $color-main);
+  @include button(white, $color-text);
   position: relative;
   background: none;
   padding: 0;
@@ -53,7 +58,11 @@ button,
   }
   &.invert {
     background-color: white;
-    color: $color-main;
+    color: $color-text;
+  }
+  &.custom {
+    background-color: var(--color-custom-primary, white);
+    border-color: var(--color-custom-primary, white);
   }
   .badge {
     @extend %media;
