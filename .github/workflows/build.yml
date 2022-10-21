@@ -24,8 +24,6 @@ jobs:
           base-path: ./packages/creepyface
       - name: Build Docker Image
         uses: 4lejandrito/build-docker-image-action@main
-        with:
-          context: packages/creepyface-site
       - name: Test Docker Image
         run: yarn workspace creepyface-site test:docker
       - name: Deploy Docker Image

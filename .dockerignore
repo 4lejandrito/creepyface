@@ -1,0 +1,5 @@
+packages/creepyface-site/node_modules
+packages/creepyface-site/cypress*
+packages/creepyface-site/.data
+packages/creepyface-site/.next
+packages/creepyface-site/.env.local
