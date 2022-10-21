@@ -4,63 +4,76 @@ import Loader from './Loader'
 import { FaceIcon } from './Icon'
 import { angles, Angle } from '../redux/types'
 import hash from 'string-hash'
-import { Size } from '../backend/resize'
 import { useLongPress, useMountedState } from 'react-use'
 import { useNamespace } from './State'
+import { useTheme } from './Theme'
 import 'creepyface-firefly'
 
-const now = Date.now()
-const url =
-  (id: number | string, namespace?: string, size?: string, pending?: boolean) =>
-  (name: string) => {
-    const url = `/img/${id}/${name}${size ? '/' + size : ''}`
-    const searchParams = new URLSearchParams()
-
-    if (namespace) {
-      searchParams.append('namespace', namespace)
-    }
-
-    if (pending) {
-      searchParams.append('pending', 'true')
-    }
-
-    if (typeof id !== 'string') {
-      searchParams.append('t', `${now}`)
-    }
-
-    if (searchParams.toString()) {
-      return `${url}?${searchParams}`
-    }
-    return url
-  }
+const url = (id: string) => (name: string) => `/img/${id}/${name}.jpeg`
 
 export type Images = {
   src: string
   hover: string
   looks: { angle: Angle; src: string }[]
+  loading?: boolean
 }
 
-export const useHostedImages = (
-  id: number | string,
-  size?: Size,
-  pending?: boolean
-): Images => {
+export function getHostedImages(
+  uuid: string,
+  loading?: boolean
+): Images & { uuid: string } {
+  const getUrl = url(uuid)
+  return {
+    src: getUrl('serious'),
+    hover: getUrl('hover'),
+    looks: angles.map((angle) => ({ angle, src: getUrl(`${angle}`) })),
+    uuid,
+    loading,
+  }
+}
+
+function useUuid(id?: number | null, pending?: boolean) {
   const namespace = useNamespace()
-  return useMemo(() => {
-    const getUrl = url(id, namespace?.key, size, pending)
-    return {
-      src: getUrl('serious'),
-      hover: getUrl('hover'),
-      looks: angles.map((angle) => ({ angle, src: getUrl(`${angle}`) })),
-    }
-  }, [id, size, pending, namespace])
+  const { defaultUuid } = useTheme()
+  const [uuid, setUuid] = useState(
+    typeof id === 'number' ? undefined : defaultUuid
+  )
+  const [loading, setLoading] = useState(typeof id === 'number')
+  useEffect(() => {
+    if (id === null || id === undefined) return
+    setLoading(true)
+    fetch(
+      `/api/creepyface?${new URLSearchParams({
+        id: `${id}`,
+        pending: pending ? 'true' : 'false',
+        namespace: namespace?.key ?? '',
+      })}`
+    )
+      .then((res) => res.json())
+      .then(({ uuid }) => {
+        setUuid(uuid)
+        setLoading(false)
+      })
+  }, [id, pending, namespace?.key])
+  return [
+    id === undefined || id === null ? defaultUuid : uuid,
+    loading,
+  ] as const
+}
+
+export function useHostedImages(id?: number | null, pending?: boolean) {
+  const [uuid, loading] = useUuid(id, pending)
+  return useMemo(
+    () => (uuid ? getHostedImages(uuid, loading) : null),
+    [uuid, loading]
+  )
 }
 
 export function AsyncCreepyFace(props: {
   id: number
-  alt: string
+  alt?: string
   timeToDefault?: number
-  points: string
+  points?: string
   draggable?: boolean
   getImages: (id: number) => Promise<Images | null>
   onClick?: () => void
@@ -171,7 +184,7 @@ export default function CreepyFace(props: {
           <FaceIcon seed={hash(id ?? images?.src ?? '')} />
         </div>
       )}
-      {!hidden && (!attached || !loaded) && <Loader />}
+      {!hidden && (images?.loading || !attached || !loaded) && <Loader />}
     </button>
   )
 }

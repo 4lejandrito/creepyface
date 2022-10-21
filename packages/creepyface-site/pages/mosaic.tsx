@@ -5,19 +5,17 @@ import { Point } from 'creepyface'
 import useImperativePointProvider from '../src/hooks/imperative'
 import Link from '../src/components/Link'
 import Logo from '../src/components/Logo'
-import Modal from '../src/components/Modal'
-import CreepyFace, { useHostedImages } from '../src/components/CreepyFace'
 import { getNamespaceServerSideProps } from '../src/backend/api'
+import CreepyFaceModal from '../src/components/CreepyfaceModal'
 
 export const getServerSideProps = getNamespaceServerSideProps
 
 export default function Mosaic() {
   const translate = useTranslate()
   const [pointProvider, setPoint] = useImperativePointProvider()
-  const [selectedCreepyface, setSelectedCreepyface] = useState(0)
-  const [showSelected, setShowSelected] = useState(false)
+  const [selectedCreepyface, setSelectedCreepyface] = useState<number>()
   const points = `${pointProvider},mouse,finger`
-  const images = useHostedImages(selectedCreepyface, 'medium')
+
   useEffect(() => {
     const listener = (event: MessageEvent<Point>) => setPoint(event.data)
     window.addEventListener('message', listener)
@@ -31,10 +29,7 @@ export default function Mosaic() {
         fullscreen
         shuffle
         showControls
-        onSelect={(id) => {
-          setSelectedCreepyface(id)
-          setShowSelected(true)
-        }}
+        onSelect={setSelectedCreepyface}
       />
       <small className="powered-by">
         {translate('powered by')}{' '}
@@ -42,19 +37,13 @@ export default function Mosaic() {
           <Logo />
         </Link>
       </small>
-      <Modal
-        id="mosaic-selected"
-        isOpen={showSelected}
-        title="Creepyface"
-        shouldCloseOnOverlayClick
-        onClose={() => setShowSelected(false)}
-      >
-        <CreepyFace
-          id={`${selectedCreepyface}`}
-          images={images}
+      {selectedCreepyface !== undefined && (
+        <CreepyFaceModal
+          id={selectedCreepyface}
           points={points}
+          onClose={() => setSelectedCreepyface(undefined)}
         />
-      </Modal>
+      )}
     </>
   )
 }

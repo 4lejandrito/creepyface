@@ -1,11 +1,8 @@
 import React, { useCallback, useState } from 'react'
-import { useHostedImages } from './CreepyFace'
 import CreepyFaces from './CreepyFaces'
 import { useSelector, useDispatch } from './State'
 import Terminal from './Terminal'
 import Player from './Player'
-import { useTranslate } from './Language'
-import { useTheme } from './Theme'
 
 export default function Sample({
   fullscreen,
@@ -17,12 +14,8 @@ export default function Sample({
   showControls?: boolean
 }) {
   const dispatch = useDispatch()
-  const selectedCreepyface = useSelector((state) => state.selectedCreepyface)
   const showCode = useSelector((state) => state.showCode)
   const pointProvider = useSelector((state) => state.pointProvider)
-  const { defaultUuid } = useTheme()
-  const images = useHostedImages(selectedCreepyface ?? defaultUuid)
-  const translate = useTranslate()
   const [count, setCount] = useState<number | null>(null)
   const select = useCallback(
     (id: number) => dispatch({ type: 'selectCreepyface', payload: id }),
@@ -36,8 +29,6 @@ export default function Sample({
   return (
     <section className="sample">
       <Terminal
-        alt={translate('The main Creepyface')}
-        images={images}
         points={pointProvider}
         open={showCode}
         onSelect={

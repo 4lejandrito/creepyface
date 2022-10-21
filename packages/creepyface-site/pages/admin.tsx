@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { getNamespaceServerSideProps } from '../src/backend/api'
 import Button, { AsyncButton } from '../src/components/Button'
-import CreepyFace, { useHostedImages } from '../src/components/CreepyFace'
+import CreepyFaceModal from '../src/components/CreepyfaceModal'
 import CreepyFaces from '../src/components/CreepyFaces'
-import Modal from '../src/components/Modal'
 import Panel from '../src/components/Panel'
 import { useNamespace } from '../src/components/State'
 import useFunctionState from '../src/hooks/function'
@@ -12,11 +11,10 @@ import { Controls } from '../src/hooks/pagination'
 export const getServerSideProps = getNamespaceServerSideProps
 
 export default function Admin() {
-  const [selectedCreepyface, setSelectedCreepyface] = useState({
-    id: 0,
-    pending: false,
-  })
-  const [showSelected, setShowSelected] = useState(false)
+  const [selectedCreepyface, setSelectedCreepyface] = useState<{
+    id: number
+    pending: boolean
+  }>()
   const [ids, setIds] = useState<number[]>([])
   const [pendingIds, setPendingIds] = useState<number[]>([])
   const [count, setCount] = useState<number | null>(null)
@@ -25,29 +23,25 @@ export default function Admin() {
   const [pendingControls, setPendingControls] = useState<Controls>()
   const [reload, setReload] = useFunctionState()
   const [pendingReload, setPendingReload] = useFunctionState()
-  const images = useHostedImages(
-    selectedCreepyface.id,
-    'medium',
-    selectedCreepyface.pending
-  )
   const namespace = useNamespace()
-  const api = (method?: string) => () =>
-    fetch(
-      `/api/admin?${new URLSearchParams({
-        ids: ids.join(),
-        pendingIds: pendingIds.join(),
-        namespace: namespace?.key ?? '',
-      })}`,
-      {
-        method,
-        credentials: 'include',
-      }
-    ).then(() => {
-      setIds([])
-      setPendingIds([])
-      reload?.()
-      pendingReload?.()
-    })
+  const api =
+    (method?: string) => (ids: number[], pendingIds: number[]) => () =>
+      fetch(
+        `/api/admin?${new URLSearchParams({
+          ids: ids.join(),
+          pendingIds: pendingIds.join(),
+          namespace: namespace?.key ?? '',
+        })}`,
+        {
+          method,
+          credentials: 'include',
+        }
+      ).then(() => {
+        setIds([])
+        setPendingIds([])
+        reload?.()
+        pendingReload?.()
+      })
   const post = api('POST')
   const del = api('DELETE')
 
@@ -59,10 +53,7 @@ export default function Admin() {
           onControls={setControls}
           onCount={setCount}
           onReload={setReload}
-          onSelect={(id) => {
-            setSelectedCreepyface({ id, pending: false })
-            setShowSelected(true)
-          }}
+          onSelect={(id) => setSelectedCreepyface({ id, pending: false })}
           onSelectMany={setIds}
         />
       </Panel>
@@ -71,25 +62,25 @@ export default function Admin() {
           badge={`${pendingIds.length}`}
           disabled={!(ids.length === 0 && pendingIds.length > 0)}
           icon="previous"
-          onClick={post}
+          onClick={post(ids, pendingIds)}
         />
         <AsyncButton
           badge={`${ids.length + pendingIds.length}`}
           disabled={ids.length === 0 || pendingIds.length === 0}
           icon="swap"
-          onClick={post}
+          onClick={post(ids, pendingIds)}
         />
         <AsyncButton
           badge={`${ids.length}`}
           disabled={!(ids.length > 0 && pendingIds.length === 0)}
           icon="next"
-          onClick={post}
+          onClick={post(ids, pendingIds)}
         />
         <AsyncButton
           badge={`${ids.length + pendingIds.length}`}
           disabled={pendingIds.length === 0 && ids.length === 0}
           icon="trash"
-          onClick={del}
+          onClick={del(ids, pendingIds)}
         />
         <Button
           disabled={pendingIds.length === 0 && ids.length === 0}
@@ -107,22 +98,36 @@ export default function Admin() {
           onCount={setPendingCount}
           onControls={setPendingControls}
           onReload={setPendingReload}
-          onSelect={(id) => {
-            setSelectedCreepyface({ id, pending: true })
-            setShowSelected(true)
-          }}
+          onSelect={(id) => setSelectedCreepyface({ id, pending: true })}
           onSelectMany={setPendingIds}
         />
       </Panel>
-      <Modal
-        id="mosaic-selected"
-        isOpen={showSelected}
-        title="Creepyface"
-        shouldCloseOnOverlayClick
-        onClose={() => setShowSelected(false)}
-      >
-        <CreepyFace id={`${selectedCreepyface}`} images={images} />
-      </Modal>
+      {selectedCreepyface && (
+        <CreepyFaceModal
+          id={selectedCreepyface.id}
+          pending={selectedCreepyface.pending}
+          showDownload
+          actions={[
+            {
+              icon: selectedCreepyface.pending ? 'thumbs-up' : 'thumbs-down',
+              run: () =>
+                post(
+                  selectedCreepyface.pending ? [] : [selectedCreepyface.id],
+                  selectedCreepyface.pending ? [selectedCreepyface.id] : []
+                )(),
+            },
+            {
+              icon: 'trash',
+              run: () =>
+                del(
+                  selectedCreepyface.pending ? [] : [selectedCreepyface.id],
+                  selectedCreepyface.pending ? [selectedCreepyface.id] : []
+                )(),
+            },
+          ]}
+          onClose={() => setSelectedCreepyface(undefined)}
+        />
+      )}
     </div>
   )
 }

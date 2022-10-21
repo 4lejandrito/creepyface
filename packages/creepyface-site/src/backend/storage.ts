@@ -13,7 +13,7 @@ export const getUploadsPath = (uuid: string, ...paths: string[]) =>
 export const getImagePath = (uuid: string, name: string) =>
   path.join(
     uuid.length < 10 ? path.join('public', uuid) : getUploadsPath(uuid, 'img'),
-    `${name}.jpeg`
+    `${name.endsWith('.jpeg') ? name : name + '.jpeg'}`
   )
 export const getThumbnailPath = (...paths: string[]) =>
   path.join(thumbnails, ...paths)

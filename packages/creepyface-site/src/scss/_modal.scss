@@ -14,12 +14,14 @@
     }
   }
   .ReactModal__Content {
-    @extend %card;
+    &:not(.barebones) {
+      @extend %card;
+      background: white;
+      padding: $spacing;
+    }
     max-height: 100%;
     position: relative;
-    background: white;
     overflow: auto;
-    padding: $spacing;
     margin: $spacing;
     .cancel {
       position: absolute;

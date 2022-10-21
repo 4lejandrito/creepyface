@@ -1,0 +1,28 @@
+.creepyface-modal {
+  &.has-actions {
+    padding: $spacing;
+  }
+  main {
+    position: relative;
+    @extend %center;
+    .creepy {
+      height: 1.2 * $main-creepyface-height;
+      width: 1.2 * $main-creepyface-width;
+      img {
+        @extend %expand;
+        object-fit: cover;
+      }
+    }
+    .actions {
+      @extend %media;
+      position: absolute;
+      bottom: -$spacing;
+      display: flex;
+      padding: $spacing / 4;
+      gap: $spacing / 2;
+      .tiny {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { ReactNode, Fragment } from 'react'
 import Clipboard from './Clipboard'
 import { Images } from './CreepyFace'
@@ -76,6 +77,8 @@ const toText = (nodes: Node[]) =>
     .join('\n')
 
 function Attribute({ name, value }: { name: string; value: string }) {
+  const uuid = value.match(/.+\/img\/(.+)\/.+/)?.[1]
+  const urlPrefix = baseURL + (uuid ? `/img/${uuid}` : '')
   return (
     <>
       <span className="name">{name}</span>
@@ -83,9 +86,9 @@ function Attribute({ name, value }: { name: string; value: string }) {
         <>
           <span className="delimiter">=</span>
           <span className="delimiter">&quot;</span>
-          <span className="base-url">{baseURL}</span>
+          <span className="base-url">{urlPrefix}</span>
           <span className="value" title={value}>
-            {value.replace(baseURL, '').replace(/\?.+/, '')}
+            {value.replace(urlPrefix, '')}
           </span>
           <span className="delimiter">&quot;</span>
         </>

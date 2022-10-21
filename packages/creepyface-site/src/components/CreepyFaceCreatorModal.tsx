@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import CreepyFace, { useHostedImages, Images } from './CreepyFace'
+import CreepyFace, { Images, getHostedImages } from './CreepyFace'
 import CreepyFaceOptions from './CreepyFaceOptions'
 import getNext from '../util/get-next'
 import tips from '../util/tips'
@@ -35,7 +35,7 @@ function Take({ next }: { next: keyof Pictures }) {
           <img
             className="example"
             alt={translate('Sample face')}
-            src={getSrc(next, useHostedImages(defaultUuid))}
+            src={getSrc(next, getHostedImages(defaultUuid))}
           />
         </span>
         <Video
