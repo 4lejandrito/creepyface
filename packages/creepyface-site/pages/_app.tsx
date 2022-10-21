@@ -17,7 +17,7 @@ export default function MyApp({
 }: AppProps<{ namespace: Namespace | null }>) {
   const title = 'Creepyface'
   const description =
-    'The Javascript library that makes your face follow the pointer'
+    'The JavaScript library that makes your face look at the pointer'
   const baseURL =
     process.env.NODE_ENV === 'production'
       ? 'https://creepyface.io'

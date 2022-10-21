@@ -18,7 +18,7 @@ export const messages = {
     'Si en cualquier momento te arrepientes y quieres que eliminemos tus imagenes envíanos un correo a',
   'Make your face alive!': '¡Dale vida a tu cara!',
   face: 'cara',
-  A: 'Una',
+  The: 'La',
   'JavaScript library': 'librería JavaScript',
   'that makes your': 'que hace que tu',
   'look at': 'mire',

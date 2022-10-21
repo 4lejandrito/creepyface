@@ -21,7 +21,7 @@ export default function Home({ create = false }) {
           <Logo />
         </header>
         <p>
-          {translate('A')} {translate('JavaScript library')}{' '}
+          {translate('The')} {translate('JavaScript library')}{' '}
           {translate('that makes your')} {translate('face')}{' '}
           {translate('look at')}{' '}
           <Button
