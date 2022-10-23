@@ -14,6 +14,7 @@ export default function Mosaic() {
   const translate = useTranslate()
   const [pointProvider, setPoint] = useImperativePointProvider()
   const [selectedCreepyface, setSelectedCreepyface] = useState<number>()
+  const [count, setCount] = useState<number>()
   const points = `${pointProvider},mouse,finger`
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function Mosaic() {
         shuffle
         showControls
         onSelect={setSelectedCreepyface}
+        onCount={setCount}
       />
       <small className="powered-by">
         {translate('powered by')}{' '}
@@ -41,6 +43,11 @@ export default function Mosaic() {
         <CreepyFaceModal
           id={selectedCreepyface}
           points={points}
+          onClick={
+            count
+              ? () => setSelectedCreepyface(Math.floor(Math.random() * count))
+              : undefined
+          }
           onClose={() => setSelectedCreepyface(undefined)}
         />
       )}

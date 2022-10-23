@@ -14,6 +14,7 @@ export default function CreepyFaceModal(props: {
     icon: IconType
     run: () => Promise<void>
   }[]
+  onClick?: () => void
   onClose: () => void
 }) {
   const [open, setOpen] = useState(true)
@@ -30,7 +31,11 @@ export default function CreepyFaceModal(props: {
       onClose={() => setOpen(false)}
       onAfterClose={props.onClose}
     >
-      <CreepyFace images={images} points={props.points} />
+      <CreepyFace
+        images={images}
+        points={props.points}
+        onClick={props.onClick}
+      />
       {hasActions && (
         <div className="actions">
           {props.actions?.map((action, i) => (
