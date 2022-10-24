@@ -31,3 +31,4 @@ jobs:
         uses: 4lejandrito/deploy-docker-image-action@main
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          prune-gh-pat: ${{ secrets.PRUNE_GITHUB_TOKEN }}
