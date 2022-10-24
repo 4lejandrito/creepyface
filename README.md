@@ -14,8 +14,7 @@ Creepyface in the wild:
 
 - https://www.patrickcampbell.dev
 - https://atroshenkonikita.com
-- https://www.yitzi.dev
-- https://1aville.ch/about.html
+- https://noemivillegascalonge.com
 - https://github.com/reflog/mattermost-plugin-creepy
 
 ## Usage
