@@ -17,11 +17,8 @@ export const messages = {
   'If at any time you change your mind and want your images to be permanently deleted please send us an email to':
     'Si en cualquier momento te arrepientes y quieres que eliminemos tus imagenes envíanos un correo a',
   'Make your face alive!': '¡Dale vida a tu cara!',
-  face: 'cara',
-  The: 'La',
-  'JavaScript library': 'librería JavaScript',
-  'that makes your': 'que hace que tu',
-  'look at': 'mire',
+  'The JavaScript library that makes your face look at':
+    'La librería JavaScript que hace que tu cara mire',
   'the pointer': 'al puntero',
   'a firefly': 'a una luciérnaga',
   'dance!': '¡baile!',

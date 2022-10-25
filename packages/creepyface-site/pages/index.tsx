@@ -21,9 +21,7 @@ export default function Home({ create = false }) {
           <Logo />
         </header>
         <p>
-          {translate('The')} {translate('JavaScript library')}{' '}
-          {translate('that makes your')} {translate('face')}{' '}
-          {translate('look at')}{' '}
+          {translate('The JavaScript library that makes your face look at')}{' '}
           <Button
             type="link"
             className={pointProviderClassName('pointer')}
