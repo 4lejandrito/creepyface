@@ -21,7 +21,6 @@
     "canvas": "^2.9.3",
     "classnames": "^2.3.1",
     "clipbrd": "^1.0.2",
-    "cloudinary": "^1.31.0",
     "creepyface": "^8.2.0-alpha.1",
     "creepyface-dance": "^8.2.0-alpha.1",
     "creepyface-firefly": "^8.2.0-alpha.1",

@@ -1,8 +1,8 @@
-import { imageRoute, pendingRoute } from '../../../src/backend/api'
+import { fileRoute, pendingRoute } from '../../../src/backend/api'
 import { getSpritemap } from '../../../src/backend/spritemap'
 
 export default pendingRoute(async (req, res) =>
-  imageRoute(
+  fileRoute(
     await getSpritemap({
       namespace: (req.query.namespace as string) || undefined,
       chunk: parseInt(req.query.chunk as string),

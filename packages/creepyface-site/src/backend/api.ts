@@ -8,8 +8,6 @@ import send from 'send'
 import auth from 'basic-auth'
 import resolve from 'browser-resolve'
 import prisma from '../../prisma'
-import isFeatureEnabled from './features'
-import getCloudinaryURL from './cloudinary'
 import { Namespace, namespaces } from '../util/namespaces'
 
 export const route = (handler: NextApiHandler): NextApiHandler => {
@@ -53,19 +51,6 @@ export const fileRoute = (path: string) =>
         send(req, path).pipe(res).on('finish', resolve).on('error', reject)
       )
   )
-
-export const imageRoute = (path: string) =>
-  route(async (req, res) => {
-    if (await isFeatureEnabled('cloudinary')) {
-      try {
-        res.redirect(await getCloudinaryURL(path))
-        return
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    return fileRoute(path)(req, res)
-  })
 
 export const scriptRoute = (script: string) => {
   const path = resolve.sync(script)

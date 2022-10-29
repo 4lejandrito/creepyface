@@ -22,13 +22,3 @@ model Usage {
 
   @@id([script, referer])
 }
-
-model Feature {
-  name    String  @id
-  enabled Boolean
-}
-
-model CloudinaryURL {
-  path String @id
-  url  String
-}
