@@ -3,7 +3,7 @@ import path from 'path'
 import { getTheme } from '../../src/util/theme'
 
 function mainCreepyface() {
-  return cy.get('img[alt="The main Creepyface"')
+  return cy.get('img[alt="The main Creepyface"]')
 }
 
 const { defaultUuid } = getTheme()
