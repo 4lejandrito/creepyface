@@ -7,7 +7,7 @@ export default pendingRoute(async (req, res) =>
       namespace: (req.query.namespace as string) || undefined,
       chunk: parseInt(req.query.chunk as string),
       pending: req.query.pending === 'true',
-      webp: req.query.format === 'webp',
+      webp: req.headers.accept?.includes('image/webp'),
     })
   )(req, res)
 )

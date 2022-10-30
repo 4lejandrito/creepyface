@@ -63,7 +63,6 @@
     "sharp": "^0.30.7",
     "stop-media-stream": "^1.0.0",
     "string-hash": "^1.1.3",
-    "supports-webp": "^2.0.1",
     "uuid": "^8.3.2",
     "webrtc-adapter": "^8.1.2"
   },

@@ -6,6 +6,8 @@ export default pendingRoute(async (req, res) => {
   const pending = req.query.pending === 'true'
   res.send({
     count: await getCount(namespace, pending),
-    hash: await getHash(namespace, pending),
+    url: `/img/spritemap?chunk={chunk}${
+      namespace ? '&namespace=' + namespace : ''
+    }${pending ? '&pending=true' : ''}&t=${await getHash(namespace, pending)}`,
   })
 })
