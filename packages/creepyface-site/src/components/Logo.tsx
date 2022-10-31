@@ -36,22 +36,18 @@ export default function Logo(props: {
   onPointerPositionChange?: (position: Point) => void
 }) {
   const [animating, setAnimating] = useState(false)
-  const animate = () => {
-    if (!animating) {
-      setTimeout(() => setAnimating(false), 800)
-      setAnimating(true)
-    }
-  }
   const translate = useTranslate()
   const locale = useLocale()
   const theme = useTheme()
+
   return (
     <div className="logo">
       <div className="wrapper">
         <svg
           className={animating ? ' animate' : ''}
-          onMouseEnter={animate}
-          onClick={animate}
+          onMouseEnter={() => setAnimating(true)}
+          onClick={() => setAnimating(true)}
+          onAnimationEnd={() => setAnimating(false)}
           viewBox={`0 0 317.8 78`}
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
