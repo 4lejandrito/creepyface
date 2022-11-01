@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { smallImageSize } from '../util/constants'
 import useDimensions from './dimensions'
 
 const getSize = (
@@ -11,11 +12,11 @@ const getSize = (
   for (let x = 4; x <= 10; x++) {
     const size = round(minSide / x)
     const y = round(maxSide / size)
-    if (size <= 90 && y > 3) {
+    if (size <= smallImageSize && y > 3) {
       return size
     }
   }
-  return 90
+  return smallImageSize
 }
 
 export default function useGrid(fullscreen?: boolean) {
