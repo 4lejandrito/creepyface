@@ -110,7 +110,6 @@ export default function CreepyFace(props: {
   id?: string
   alt?: string
   images: Images | null
-  hidden?: boolean
   points?: string
   timeToDefault?: number
   draggable?: boolean
@@ -123,7 +122,6 @@ export default function CreepyFace(props: {
     id,
     alt,
     images,
-    hidden,
     points,
     timeToDefault,
     onClick,
@@ -161,7 +159,7 @@ export default function CreepyFace(props: {
         setLongPressed(false)
       }}
     >
-      {!hidden && images && (
+      {images && (
         <Creepyface
           alt={alt}
           src={images.src}
@@ -179,12 +177,12 @@ export default function CreepyFace(props: {
           onLoad={() => setLoaded(true)}
         />
       )}
-      {(!loaded || firstAttach || hidden || !images) && (
+      {(!loaded || firstAttach || !images) && (
         <div className="placeholder">
           <FaceIcon seed={hash(id ?? images?.src ?? '')} />
         </div>
       )}
-      {!hidden && (images?.loading || !attached || !loaded) && <Loader />}
+      {(images?.loading || !attached || !loaded) && <Loader />}
     </button>
   )
 }
