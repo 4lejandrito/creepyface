@@ -28,7 +28,7 @@ const getCheckRange =
   }
 
 const isChristmas = getCheckRange({ month: 11, day: 15 }, { month: 0, day: 7 })
-const isHalloween = getCheckRange({ month: 9, day: 15 }, { month: 10, day: 2 })
+const isHalloween = getCheckRange({ month: 9, day: 15 }, { month: 10, day: 4 })
 
 export const defaultTheme: Theme = { defaultUuid: 'nala', song: 'stayingAlive' }
 
