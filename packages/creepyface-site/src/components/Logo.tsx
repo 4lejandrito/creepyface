@@ -33,6 +33,7 @@ const Pointer = (props: {
 }
 
 export default function Logo(props: {
+  animate?: boolean
   onPointerPositionChange?: (position: Point) => void
 }) {
   const [animating, setAnimating] = useState(false)
@@ -45,8 +46,8 @@ export default function Logo(props: {
       <div className="wrapper">
         <svg
           className={animating ? ' animate' : ''}
-          onMouseEnter={() => setAnimating(true)}
-          onClick={() => setAnimating(true)}
+          onMouseEnter={props.animate ? () => setAnimating(true) : undefined}
+          onClick={props.animate ? () => setAnimating(true) : undefined}
           onAnimationEnd={() => setAnimating(false)}
           viewBox={`0 0 317.8 78`}
           xmlns="http://www.w3.org/2000/svg"

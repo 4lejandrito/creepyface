@@ -18,7 +18,7 @@ export default function Home({ create = false }) {
     <CreateProvider open={create} navigate>
       <section className="description">
         <header>
-          <Logo />
+          <Logo animate />
         </header>
         <p>
           {translate('The JavaScript library that makes your face look at')}{' '}
