@@ -3,6 +3,9 @@
   &:not(.link):not(.creepy) {
     &:not(.custom) {
       border-color: $color;
+      .light & {
+        border-color: currentColor;
+      }
     }
     &:disabled {
       opacity: 0.5;
@@ -16,6 +19,11 @@
       background: $color;
       color: $background;
       text-decoration: none;
+      .light & {
+        background: $color-text;
+        color: $color;
+        border-color: $color-text;
+      }
     }
   }
 }
@@ -76,13 +84,4 @@ button,
     top: -$spacing / 1.5;
     right: -$spacing / 2;
   }
-}
-
-.light button,
-.light .button {
-  @include button($color-text, white);
-}
-
-.danger button {
-  @include button(white, $color-danger);
 }

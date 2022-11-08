@@ -46,10 +46,12 @@ export default function Modal({
         </div>
       )}
     >
-      <Button className="cancel" onClick={onClose}>
-        <Icon name="times" />
-      </Button>
       <main id={id}>{children}</main>
+      {!barebones && (
+        <Button className="cancel" onClick={onClose}>
+          <Icon name="times" />
+        </Button>
+      )}
     </ReactModal>
   )
 }

@@ -67,6 +67,7 @@ export default function Video(props: {
   return (
     <div className="creepy video">
       <video
+        tabIndex={-1}
         playsInline
         ref={videoRef}
         autoPlay={true}

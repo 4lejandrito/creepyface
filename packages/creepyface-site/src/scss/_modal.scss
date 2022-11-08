@@ -1,5 +1,8 @@
 .ReactModalPortal {
   z-index: 1;
+  position: absolute;
+  height: 1px;
+  width: 1px;
   .ReactModal__Overlay {
     background-color: transparent !important;
     display: flex;

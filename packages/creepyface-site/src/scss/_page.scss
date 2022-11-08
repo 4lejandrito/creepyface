@@ -59,10 +59,4 @@ kbd {
 
 a {
   @include link;
-  .light & {
-    @include link($color-text);
-  }
-  .danger & {
-    @include link(white);
-  }
 }

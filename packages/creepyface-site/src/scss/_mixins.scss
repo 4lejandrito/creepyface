@@ -2,6 +2,7 @@ $spacing: 1rem;
 $color-main: #1abc9c;
 $color-danger: #dc3545;
 $color-text: var(--color-custom-primary, #{darken($color-main, 5%)});
+$color-shadow: var(--color-custom-primary, #{rgba($color-main, 0.5)});
 $color-background: var(--color-custom-secondary, #{darken($color-main, 8%)});
 $color-gradient: var(--color-custom-secondary, #{darken($color-main, 5%)});
 $main-creepyface-width: 8.5em;
@@ -54,6 +55,9 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
 
 @mixin link($color: white) {
   color: $color;
+  .light & {
+    color: currentColor;
+  }
   font-weight: bold;
   display: inline-block;
   outline: 0 !important;
@@ -64,15 +68,17 @@ $main-creepyface-height: math.div($main-creepyface-width * 45, 35);
   }
   &:focus-visible {
     box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
+    .light & {
+      box-shadow: 0 0 0 0.2rem $color-shadow;
+    }
+    .danger & {
+      box-shadow: 0 0 0 0.2rem rgba(white, 0.5) !important;
+    }
   }
   &:not(:disabled):hover {
     text-decoration-line: underline;
-    color: $color;
+    color: inherit;
   }
-}
-
-.danger a {
-  @include link(white);
 }
 
 %shadow {
