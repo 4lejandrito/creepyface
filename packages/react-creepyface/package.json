@@ -22,8 +22,8 @@
   },
   "peerDependencies": {
     "creepyface": "^8",
-    "react": "^16.8 || ^17.0",
-    "react-dom": "^16.8 || ^17.0"
+    "react": "^16.8 || ^17.0 || ^18.0",
+    "react-dom": "^16.8 || ^17.0 || ^18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
