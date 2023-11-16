@@ -60,7 +60,7 @@
     "resize-observer-polyfill": "^1.5.1",
     "sass": "^1.54.8",
     "send": "^0.18.0",
-    "sharp": "^0.30.7",
+    "sharp": "^0.32.6",
     "stop-media-stream": "^1.0.0",
     "string-hash": "^1.1.3",
     "uuid": "^8.3.2",
