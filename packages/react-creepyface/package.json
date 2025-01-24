@@ -1,6 +1,6 @@
 {
   "name": "react-creepyface",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Alejandro Tardín <alejandro@tardin.com>",
@@ -33,7 +33,7 @@
     "@types/events": "^3.0.0",
     "@types/react": "^18.0.18",
     "babel-loader": "^8.2.5",
-    "creepyface": "^8.2.0",
+    "creepyface": "^8.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "^4.8.4"
