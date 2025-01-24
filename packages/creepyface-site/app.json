@@ -1,0 +1,12 @@
+{
+  "healthchecks": {
+    "web": [
+      {
+        "type": "startup",
+        "name": "root",
+        "description": "Checking if the app contains the title",
+        "content": "Create yours"
+      }
+    ]
+  }
+}
