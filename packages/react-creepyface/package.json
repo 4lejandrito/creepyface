@@ -28,8 +28,8 @@
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@storybook/addon-knobs": "^6.4.0",
-    "@storybook/addons": "^6.5.10",
-    "@storybook/react": "^6.5.10",
+    "@storybook/addons": "^6.5.16",
+    "@storybook/react": "^6.5.16",
     "@types/events": "^3.0.0",
     "@types/react": "^18.0.18",
     "babel-loader": "^8.2.5",
