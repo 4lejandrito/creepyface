@@ -34,4 +34,5 @@ COPY --from=compile /usr/src/app/node_modules ./node_modules
 
 LABEL org.opencontainers.image.source https://github.com/4lejandrito/creepyface
 
-ENTRYPOINT yarn start --port 5000
+ENV PORT 5000
+ENTRYPOINT yarn start

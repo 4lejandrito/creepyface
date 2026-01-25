@@ -23,13 +23,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/creepyface/coverage/lcov.info
           base-path: ./packages/creepyface
-      - name: Build Docker Image
-        uses: 4lejandrito/build-docker-image-action@main
-      - name: Test Docker Image
-        run: yarn workspace creepyface-site test:docker
       - name: Deploy Docker Image
         if: github.ref == 'refs/heads/master'
-        uses: 4lejandrito/deploy-docker-image-action@main
+        uses: 4lejandrito/cloud-deploy-action@main
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          prune-gh-pat: ${{ secrets.PRUNE_GITHUB_TOKEN }}
+          test-command: yarn workspace creepyface-site test:docker
+          token: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
