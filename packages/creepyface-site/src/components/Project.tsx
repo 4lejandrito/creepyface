@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import Link from './Link'
 import Button from './Button'
+import { useTranslate } from './Language'
 
 const username = '4lejandrito'
 const repo = 'creepyface'
@@ -30,6 +31,11 @@ export const Package = ({ name, text }: { name: string; text: string }) => (
   </Button>
 )
 
-export const Twitter = () => (
-  <Link href={`https://twitter.com/creepyface_io`}>Twitter</Link>
-)
+export const X = () => {
+  const translate = useTranslate()
+  return (
+    <Link href="https://x.com/creepyface_io">
+      {translate('Follow us on X')}
+    </Link>
+  )
+}

@@ -37,12 +37,11 @@ export default function Upload() {
         </Button>
         {viewLink && (
           <Button
-            icon="twitter"
-            href={`http://twitter.com/share?text=${translate(
+            href={`http://x.com/share?text=${translate(
               'See my creepyface!'
             )}&url=${viewLink}&hashtags=creepyface_io`}
           >
-            {translate('Share on Twitter')}
+            {translate('Share on X')}
           </Button>
         )}
       </div>

@@ -21,7 +21,6 @@ import { faSurprise } from '@fortawesome/free-solid-svg-icons/faSurprise'
 import { faMehRollingEyes } from '@fortawesome/free-solid-svg-icons/faMehRollingEyes'
 import { faKeyboard } from '@fortawesome/free-regular-svg-icons/faKeyboard'
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
 import { faHandPointUp } from '@fortawesome/free-solid-svg-icons/faHandPointUp'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane'
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons/faUserEdit'
@@ -54,7 +53,6 @@ const icons = {
   times: faTimes,
   github: faGithub,
   accept: faCheckCircle,
-  twitter: faTwitter,
   trash: faTrash,
   create: faUserEdit,
   clipboard: faClipboard,
